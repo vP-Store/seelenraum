@@ -1099,6 +1099,22 @@ const ICONS={
 function icon(n){return '<svg class="ic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICONS[n]||'')+'</svg>';}
 function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(e){e.innerHTML=icon(e.getAttribute('data-icon'));});}
 
+/* ===== ZUGRIFF (Stripe-Abo-Check via Cloudflare Worker) ===== */
+const GATE_URL = "https://spring-sound-7125.service-vpstore.workers.dev"; /* <- nach Worker-Deploy hier die Worker-URL eintragen, dann ist das Schloss aktiv */
+const GATE_DAYS = 1;
+function gateState(){const g=store.get("access",null);if(!g||!g.email)return "locked";if(Date.now()-(g.ts||0) > GATE_DAYS*86400000)return "recheck";return "ok";}
+function startGate(){ if(!GATE_URL){ onboard(); return; } const st=gateState(); if(st==="ok"){ onboard(); return; } if(st==="recheck"){ const g=store.get("access",null); gateVerify(g.email,true); return; } showGate(); }
+function showGate(msg){ if(document.getElementById('gateOv'))return; const ov=document.createElement('div');ov.className='overlay';ov.id='gateOv';
+  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen zur\u00fcck</h2><p>Gib die E-Mail ein, mit der du dein Abo abgeschlossen hast.</p><input id="gateEmail" type="email" placeholder="deine@email.de" autocomplete="email"><div class="save-hint" id="gateMsg" style="color:var(--gold);min-height:18px">${msg||''}</div><button class="btn gold" onclick="gateSubmit()">Freischalten</button><p style="font-size:12px;color:var(--ink-fade);margin-top:10px">Noch kein Abo? <a href="index.html" style="color:var(--accent)">Hier Mitglied werden</a></p></div>`;
+  document.body.appendChild(ov);setTimeout(()=>{const e=document.getElementById('gateEmail');if(e)e.focus();},80);
+  const inp=document.getElementById('gateEmail'); if(inp)inp.addEventListener('keydown',function(ev){if(ev.key==='Enter')gateSubmit();}); }
+function gateMsg(t){const m=document.getElementById('gateMsg');if(m)m.textContent=t;}
+function gateSubmit(){const e=document.getElementById('gateEmail');const email=(e?e.value:'').trim();if(!email||email.indexOf('@')<0){gateMsg("Bitte g\u00fcltige E-Mail eingeben");return;}gateMsg("Pr\u00fcfe \u2026");gateVerify(email,false);}
+async function gateVerify(email,silent){
+  try{ const r=await fetch(GATE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})}); const d=await r.json();
+    if(d&&d.access){ store.set("access",{email:email.toLowerCase(),ts:Date.now()}); const o=document.getElementById('gateOv'); if(o)o.remove(); if(!document.getElementById('app').innerHTML.trim()) onboard(); }
+    else { if(silent){ store.set("access",null); showGate("Dein Abo ist nicht mehr aktiv. Bitte erneut anmelden."); } else gateMsg("Kein aktives Abo zu dieser E-Mail gefunden."); }
+  }catch(err){ if(silent){ onboard(); } else gateMsg("Verbindungsfehler \u2013 bitte nochmal versuchen."); } }
 /* ===== ROUTER ===== */
 let current='heute';
 function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
@@ -1127,8 +1143,8 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
   ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen.</h2><p>Dein ruhiger Ort für jeden Tag. Erzähl mir kurz von dir.</p><input id="nameIn" placeholder="Dein Vorname (optional)" maxlength="24"><input id="bdIn2" type="date" style="color:var(--ink-soft)"><input id="intIn" placeholder="Absicht für die Woche (optional)" maxlength="60"><button class="btn gold" onclick="finishOnboard()">Eintreten</button><button class="skip" onclick="finishOnboard()">überspringen</button></div>`;
   document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
-function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
-fillIcons();onboard();
+function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","access","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
+fillIcons();startGate();
 </script>
 </body>
 </html>
