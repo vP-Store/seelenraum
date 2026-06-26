@@ -201,7 +201,7 @@
         <div class="amt">59 €<small>/Jahr</small></div>
         <div class="note">Zwei Monate geschenkt gegenüber monatlich.</div>
         <ul><li>Alles aus Monatlich</li><li>Über 30 % gespart</li><li>Ein Jahr Begleitung</li></ul>
-        <a class="btn gold" href="#" onclick="goCheckout(event)">Jahr sichern</a>
+        <a class="btn gold" href="#" onclick="goTo(CHECKOUT_URL_YEAR,event)">Jahr sichern</a>
       </div>
       <div class="price">
         <div class="ribbon">Nur zum Start — limitiert</div>
@@ -209,7 +209,7 @@
         <div class="amt">5 €<small>/Monat</small></div>
         <div class="note">Dauerhaft dieser Preis für die ersten Mitglieder.</div>
         <ul><li>Lebenslang günstigster Preis</li><li>Du gestaltest mit</li><li>Nur begrenzte Plätze</li></ul>
-        <a class="btn" href="#" onclick="goCheckout(event)">Platz sichern</a>
+        <a class="btn" href="#" onclick="goTo(CHECKOUT_URL_FOUNDING,event)">Platz sichern</a>
       </div>
     </div>
   </section>
@@ -241,6 +241,8 @@
      Beispiel: const CHECKOUT_URL = "https://dein-shop.com/checkout";
      ==================================================================== */
   const CHECKOUT_URL = "https://buy.stripe.com/eVq9AL4eagmpeFWcXk2cg00";
+  const CHECKOUT_URL_YEAR = "https://buy.stripe.com/3cIaEP11Y8TXbtK0ay2cg01";
+  const CHECKOUT_URL_FOUNDING = "https://buy.stripe.com/4gMeV5h0WdadeFWg9w2cg02";
 
   function goCheckout(e){
     if(e && e.preventDefault) e.preventDefault();
@@ -249,6 +251,7 @@
     showCheckoutInfo();
     return false;
   }
+  function goTo(url,e){ if(e && e.preventDefault) e.preventDefault(); url=(url||"").trim(); if(/^https?:\/\//i.test(url)){ window.location.href=url; return false; } showCheckoutInfo(); return false; }
   function showCheckoutInfo(){
     if(document.getElementById('coOv')) return;
     var ov = document.createElement('div');
