@@ -275,6 +275,24 @@
   .corner svg{width:19px;height:19px}
   .ic-inline{display:inline-flex}.ic-inline svg{width:16px;height:16px}
   .kt-ic svg{width:23px;height:23px}
+  .companion{position:fixed;left:14px;bottom:90px;z-index:26;cursor:pointer;width:64px;height:64px;animation:floaty 4.5s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(80,60,90,.3))}
+  .companion:active{transform:scale(.92)}
+  .companion .comp-ph,.companion .comp-img{position:absolute;left:0;top:0;border-radius:50%}
+  .comp-ph{display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Georgia','Times New Roman',serif;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
+  .comp-img{object-fit:cover;box-shadow:0 0 0 2px var(--card);background:var(--card)}
+  @keyframes floaty{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}
+  .companion::after{content:"";position:absolute;inset:-5px;border-radius:50%;box-shadow:0 0 18px 4px rgba(189,167,221,.4);animation:compglow 4.5s ease-in-out infinite;z-index:-1}
+  @keyframes compglow{0%,100%{opacity:.45}50%{opacity:.85}}
+  .comp-bubble{position:fixed;left:14px;bottom:168px;max-width:230px;background:var(--card);border:1px solid var(--line);border-radius:18px 18px 18px 5px;padding:12px 16px;font-size:14px;color:var(--ink);box-shadow:var(--shadow);z-index:27;opacity:0;transform:translateY(8px);transition:.3s;line-height:1.5}
+  .comp-bubble.show{opacity:1;transform:none}
+  .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px}
+  .comp-pick{background:var(--field);border:1px solid var(--line);border-radius:16px;padding:12px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;transition:.2s;font-family:inherit}
+  .comp-pick:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .comp-pick.sel{border-color:var(--accent);background:var(--card);box-shadow:var(--shadow-sm)}
+  .comp-pick-img{position:relative;width:58px;height:58px;display:block}
+  .comp-pick-n{font-size:14px;color:var(--ink)}
+  .comp-pick-t{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-fade)}
+  @media(max-width:480px){.companion{width:58px;height:58px}}
 </style>
 </head>
 <body>
@@ -300,6 +318,7 @@
   <div id="app"></div>
   <footer>Seelenraum &middot; Mitglieder-Bereich &nbsp;&middot;&nbsp; <a class="reset" onclick="openSettings()">Einstellungen</a></footer>
 </div>
+<div id="companionHost"></div>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nach oben">&#8593;</button>
 <div id="klangBar"><span id="klangName"></span><button onclick="stopKlang()">&#10005; Stop</button></div>
 <div class="tabbar" id="tabbar">
@@ -501,7 +520,7 @@ function markDone(msg){
   state.streak=(state.lastDone===yesterdayKey())?state.streak+1:1; state.lastDone=todayKey;
   if(!state.days.includes(todayKey))state.days.push(todayKey);
   store.set("streak",state.streak);store.set("lastDone",state.lastDone);store.set("days",state.days);
-  updateHeader();toast(msg||"Schön, dass du heute da warst ✦");
+  updateHeader();toast(msg||"Schön, dass du heute da warst ✦");companionSay('streak');
 }
 function markPractice(msg){ // für Meditation/Ritual: zählt als Praxistag, ohne Streak-Logik zu doppeln
   if(!state.days.includes(todayKey)){state.days.push(todayKey);store.set("days",state.days);}
@@ -513,7 +532,7 @@ function toggleFav(id){state.favs=isFav(id)?state.favs.filter(x=>x!==id):[id,...
 function hasNote(id){return !!(state.journal[id]&&state.journal[id].text);}
 function saveJournal(id,val){if(val.trim()==="")delete state.journal[id];else state.journal[id]={text:val,ts:Date.now()};store.set("journal",state.journal);const h=document.getElementById("jhint-"+id);if(h)h.textContent="Gespeichert ✓";}
 function deleteJournal(id){delete state.journal[id];store.set("journal",state.journal);render('tagebuch');}
-function setMood(k){state.moods[todayKey]=k;store.set("moods",state.moods);toast("Eingetragen ✦");render(current);}
+function setMood(k){state.moods[todayKey]=k;store.set("moods",state.moods);toast("Eingetragen ✦");render(current);if(k<=1)setTimeout(function(){companionSay('tief');},300);}
 function moodRowHtml(){const cur=state.moods[todayKey];return `<div class="block-label" style="text-align:center;color:var(--accent)">Wie fühlst du dich gerade?</div><div class="mood-row">`+MOODS.map(m=>`<div class="mood ${cur===m.k?'sel':''}" tabindex="0" role="button" onclick="setMood(${m.k})"><span class="dot" style="background:${m.c}"></span>${m.l}</div>`).join('')+`</div>`;}
 function impulsCard(it,opts={}){
   const fav=isFav(it.id); const doneToday=state.lastDone===todayKey;
@@ -1060,7 +1079,7 @@ function openSettings(){const bd=store.get("birthdate","");const ov=document.cre
     <div class="block-label">Dein Name</div><input id="setName" class="search" value="${escHtml(state.name||'')}" placeholder="Vorname">
     <div class="block-label">Geburtsdatum <span style="text-transform:none;letter-spacing:0;color:var(--ink-fade)">(für Astrologie & Numerologie)</span></div><input id="setBd" type="date" class="search" value="${bd}">
     <div class="actions" style="margin-top:12px"><button class="btn solid" onclick="saveSettings()">Speichern</button><button class="btn" onclick="toggleThemeBtn()">Hell / Dunkel</button></div>
-    <div class="actions"><button class="btn" onclick="exportJournal()">Tagebuch exportieren</button><button class="btn" onclick="resetAll()">Alles zurücksetzen</button></div>
+    <div class="actions"><button class="btn" onclick="showCompanionPicker()">Begleiter wechseln</button><button class="btn" onclick="exportJournal()">Tagebuch exportieren</button><button class="btn" onclick="resetAll()">Alles zurücksetzen</button></div>
     <button class="skip" style="display:block;margin:8px auto 0" onclick="closeOverlay(this)">schließen</button></div>`;
   document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
 function saveSettings(){const n=document.getElementById('setName'),b=document.getElementById('setBd');if(n)state.name=n.value.trim();store.set("name",state.name);if(b&&b.value)store.set("birthdate",b.value);const ov=document.querySelector('.overlay');if(ov)ov.remove();updateHeader();toast("Gespeichert ✦");render('heute');}
@@ -1115,6 +1134,110 @@ async function gateVerify(email,silent){
     if(d&&d.access){ store.set("access",{email:email.toLowerCase(),ts:Date.now()}); const o=document.getElementById('gateOv'); if(o)o.remove(); if(!document.getElementById('app').innerHTML.trim()) onboard(); }
     else { if(silent){ store.set("access",null); showGate("Dein Abo ist nicht mehr aktiv. Bitte erneut anmelden."); } else gateMsg("Kein aktives Abo zu dieser E-Mail gefunden."); }
   }catch(err){ if(silent){ onboard(); } else gateMsg("Verbindungsfehler \u2013 bitte nochmal versuchen."); } }
+/* ===== BEGLEITER (Spirit Guide) ===== */
+const COMPANIONS = [
+  {id:"wolf",name:"Wolf",img:"tier-wolf.png",tint:"#6b7a99",thema:"Intuition & Freiheit",
+   morgen:"Guten Morgen. Spür heute deinem Instinkt nach – er kennt den Weg.",
+   streak:"Tag um Tag treu bei dir. Dein Rudel ist stolz auf dich.",
+   tief:"Auch der Wolf heult mal in die Nacht. Ich bleibe an deiner Seite.",
+   kosmos:"Komm, lass uns dem Ruf der Sterne folgen.",
+   tagebuch:"Schöne Worte. Deine innere Stimme wird klarer.",
+   vollmond:"Der Vollmond ruft. Heute heulen wir gemeinsam.",
+   tipp:"Vertrau dir. Du weißt mehr, als du denkst."},
+  {id:"eule",name:"Eule",img:"tier-eule.png",tint:"#8a76a8",thema:"Weisheit & Intuition",
+   morgen:"Ich habe über dich gewacht. Ein weiser Tag liegt vor dir.",
+   streak:"Beständigkeit ist stille Weisheit. Gut gemacht.",
+   tief:"Auch im Dunkeln sehe ich klar – und ich sehe dich.",
+   kosmos:"Die Nacht hält Antworten bereit. Schauen wir nach.",
+   tagebuch:"Du hast hingeschaut. Das ist der Anfang aller Weisheit.",
+   vollmond:"Mein liebster Mond. Lausche heute nach innen.",
+   tipp:"Eine ruhige Frage führt oft weiter als eine schnelle Antwort."},
+  {id:"hirsch",name:"Hirsch",img:"tier-hirsch.png",tint:"#b08d57",thema:"Sanftmut & Würde",
+   morgen:"Geh heute sanft, mit erhobenem Haupt. Ich gehe mit dir.",
+   streak:"Leise und stetig – so wächst echte Stärke.",
+   tief:"Sei sanft mit dir, so wie ich sanft mit dir bin.",
+   kosmos:"Tritt ein, ganz ruhig. Der Kosmos mag die Leisen.",
+   tagebuch:"Würdevoll, dass du dir zuhörst.",
+   vollmond:"Im Mondlicht ist alles weicher. Auch du darfst es sein.",
+   tipp:"Du musst nicht hart sein, um stark zu sein."},
+  {id:"schmetterling",name:"Schmetterling",img:"tier-schmetterling.png",tint:"#cf85a6",thema:"Wandlung & Leichtigkeit",
+   morgen:"Ein neuer Tag, ein neues Entfalten. Flieg leicht.",
+   streak:"Schau, wie du dich entfaltest – Tag für Tag.",
+   tief:"Auch die Raupe zweifelt, bevor sie fliegt. Es wird leichter.",
+   kosmos:"Lass uns ein bisschen schweben.",
+   tagebuch:"Jedes Wort ist ein kleiner Flügelschlag.",
+   vollmond:"Vollmond – Zeit, etwas Altes abzulegen.",
+   tipp:"Wandlung fühlt sich erst eng an. Dann kommen die Flügel."},
+  {id:"baer",name:"Bär",img:"tier-baer.png",tint:"#9a7b46",thema:"Kraft & Rückzug",
+   morgen:"Guten Morgen. Deine Kraft ist schon da – ruhig und tief.",
+   streak:"Stark und beständig wie ein Bär. Ich sehe dich.",
+   tief:"Zieh dich ruhig zurück. In der Höhle sammelt sich Kraft.",
+   kosmos:"Lass uns in die Weite schauen, ganz in Ruhe.",
+   tagebuch:"Gut, dass du nach innen gegangen bist.",
+   vollmond:"Auch der Bär spürt den Mond. Ruh dich heute gut aus.",
+   tipp:"Ruhe ist keine Schwäche. Sie ist deine Kraftquelle."},
+  {id:"rabe",name:"Rabe",img:"tier-rabe.png",tint:"#4a4a63",thema:"Magie & Geheimnis",
+   morgen:"Etwas Neues liegt in der Luft. Ich rieche es.",
+   streak:"Du webst still deine Magie. Beeindruckend.",
+   tief:"Im Dunkeln wohnt auch Magie. Vertrau dem Geheimnis.",
+   kosmos:"Komm, ich kenne die Wege zwischen den Welten.",
+   tagebuch:"Worte sind Zauber. Du hast gerade einen gewirkt.",
+   vollmond:"Vollmond – die Schwelle ist dünn. Spür genau hin.",
+   tipp:"Im Ungewissen liegt oft das größte Geschenk."},
+  {id:"schwan",name:"Schwan",img:"tier-schwan.png",tint:"#9aa6c4",thema:"Anmut & Selbstannahme",
+   morgen:"Guten Morgen, Schöne. Gleite heute durch den Tag.",
+   streak:"Mit jeder Praxis erkennst du deine Anmut mehr.",
+   tief:"Auch das kleine Entlein wurde ein Schwan. Du bist genug.",
+   kosmos:"Lass uns sanft über die Sterne gleiten.",
+   tagebuch:"Wie schön, dass du dich annimmst.",
+   vollmond:"Im Mondlicht spiegelt sich deine Anmut.",
+   tipp:"Du bist schöner, als du denkst."},
+  {id:"pferd",name:"Pferd",img:"tier-pferd.png",tint:"#b6863c",thema:"Freiheit & Lebenskraft",
+   morgen:"Auf geht's! Spür deine Lebenskraft. Ich galoppiere mit dir.",
+   streak:"So viel Schwung – du trägst dich selbst weit.",
+   tief:"Auch müde Pferde finden zurück zur Weide. Ruh dich aus.",
+   kosmos:"Komm, lass uns frei durch den Kosmos ziehen.",
+   tagebuch:"Du bewegst etwas in dir. Schön.",
+   vollmond:"Der Mond ruft die Wildnis. Spür deine Freiheit.",
+   tipp:"Beweg dich auf das zu, was dich ruft."},
+  {id:"fuchs",name:"Fuchs",img:"tier-fuchs.png",tint:"#d98a4e",thema:"Verspieltheit & Klugheit",
+   morgen:"Na, gut geschlafen? Heute findest du clevere kleine Wege.",
+   streak:"Schlau dranbleiben – das gefällt mir an dir.",
+   tief:"Komm, ein kleiner Trick: ein tiefer Atemzug. Schon besser?",
+   kosmos:"Oh, die Sterne! Lass uns neugierig stöbern.",
+   tagebuch:"Clever, dass du deine Gedanken sortierst.",
+   vollmond:"Vollmond-Streiche! Aber heute lieber sanft zu dir.",
+   tipp:"Manchmal ist der leichte Weg auch der kluge."},
+  {id:"katze",name:"Katze",img:"tier-katze.png",tint:"#9a8f7e",thema:"Unabhängigkeit & Sanftheit",
+   morgen:"Mmh, ein neuer Tag. Streck dich, atme, komm an.",
+   streak:"Auf deine ruhige Art bleibst du dran. Schön.",
+   tief:"Komm, kuschel dich ein. Du darfst es dir leicht machen.",
+   kosmos:"Sterne beobachten? Mein Lieblingsspiel.",
+   tagebuch:"Fein, dass du bei dir verweilst.",
+   vollmond:"Vollmondnächte sind unsere Nächte. Genieß die Stille.",
+   tipp:"Du darfst auf dich selbst hören – immer."}
+];
+function curCompanion(){const id=store.get("companion",null);return id?COMPANIONS.find(c=>c.id===id)||null:null;}
+function compInner(c,size){const s=size||64;return `<div class="comp-ph" style="background:radial-gradient(circle at 34% 28%, #ffffffcc, ${c.tint});width:${s}px;height:${s}px;font-size:${Math.round(s*0.42)}px">${c.name[0]}</div><img class="comp-img" src="${c.img}" alt="${c.name}" style="width:${s}px;height:${s}px" onerror="this.style.display='none'">`;}
+function updateCompanion(){const host=document.getElementById('companionHost');if(!host)return;const c=curCompanion();if(!c){host.innerHTML='';return;}
+  host.innerHTML=`<div class="companion" id="companion" onclick="companionTap()" title="${c.name}">${compInner(c,64)}</div>`;}
+let _lastSay=0,_greeted=false,_pickerShown=false;
+function companionBubble(text){const old=document.getElementById('compBubble');if(old)old.remove();const b=document.createElement('div');b.id='compBubble';b.className='comp-bubble';b.textContent=text;document.body.appendChild(b);requestAnimationFrame(()=>b.classList.add('show'));setTimeout(()=>{if(b){b.classList.remove('show');setTimeout(()=>b.remove(),300);}},6500);}
+function companionSay(context,force){const c=curCompanion();if(!c)return;const now=Date.now();if(!force&&now-_lastSay<18000)return;_lastSay=now;const text=c[context]||c.tipp;companionBubble(text);}
+function companionTap(){const c=curCompanion();if(!c)return;_lastSay=Date.now();companionBubble(c.tipp);}
+function companionOnRender(view){updateCompanion();
+  if(view==='heute'&&!curCompanion()){if(!_pickerShown){_pickerShown=true;setTimeout(showCompanionPicker,600);}return;}
+  const c=curCompanion();if(!c)return;
+  if(view==='heute'&&!_greeted){_greeted=true;const mi=moonInfo(heute);setTimeout(()=>companionSay(mi.idx===4?'vollmond':'morgen',true),700);}
+  else if(view==='kosmos'){setTimeout(()=>companionSay('kosmos'),400);}}
+function showCompanionPicker(){if(document.getElementById('compPickOv'))return;const cur=store.get("companion",null);
+  const ov=document.createElement('div');ov.className='overlay';ov.id='compPickOv';
+  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:22px">Seelen<span>raum</span></div><h2 style="font-size:22px">Wähle deinen Begleiter</h2><p>Ein Tier, das dich von nun an durch deine Praxis begleitet. Du kannst es später jederzeit wechseln.</p><div class="comp-grid">`+
+    COMPANIONS.map(c=>`<button class="comp-pick ${cur===c.id?'sel':''}" onclick="chooseCompanion('${c.id}')"><span class="comp-pick-img">${compInner(c,58)}</span><span class="comp-pick-n">${c.name}</span><span class="comp-pick-t">${c.thema.split(' ')[0]}</span></button>`).join('')+
+    `</div><button class="skip" onclick="closeOverlay(this)">${cur?'schließen':'später wählen'}</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
+function chooseCompanion(id){store.set("companion",id);const o=document.getElementById('compPickOv');if(o)o.remove();updateCompanion();const c=curCompanion();_lastSay=0;setTimeout(()=>companionBubble("Schön, dass du mich gewählt hast. Von nun an bin ich bei dir. ✦"),300);}
+
 /* ===== ROUTER ===== */
 let current='heute';
 function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
@@ -1125,7 +1248,7 @@ function render(view){
   current=view;const tb=tabFor(view);
   document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.view===tb));
   const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen}[view];
-  document.getElementById('app').innerHTML=v?v():viewHeute();
+  document.getElementById('app').innerHTML=v?v():viewHeute();companionOnRender(view);
   if(!['impulse','favoriten','tagebuch','meditationen','rituale'].includes(view))window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.view)));
@@ -1143,7 +1266,7 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
   ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen.</h2><p>Dein ruhiger Ort für jeden Tag. Erzähl mir kurz von dir.</p><input id="nameIn" placeholder="Dein Vorname (optional)" maxlength="24"><input id="bdIn2" type="date" style="color:var(--ink-soft)"><input id="intIn" placeholder="Absicht für die Woche (optional)" maxlength="60"><button class="btn gold" onclick="finishOnboard()">Eintreten</button><button class="skip" onclick="finishOnboard()">überspringen</button></div>`;
   document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
-function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","access","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
+function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
 fillIcons();startGate();
 </script>
 </body>
