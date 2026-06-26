@@ -2,8 +2,8 @@
   ============================================================
   SEELENRAUM — Datenschutzerklärung (DSGVO)
   ============================================================
-  BITTE ERSETZEN: Platzhalter durch deine echten Daten.
-  Nach Einrichtung von Memberstack/Stripe: Abschnitt 6 aktualisieren.
+  Stand: Live-Version mit Stripe (Zahlung) + Cloudflare Worker
+  (Zugangsprüfung). Keine Rechtsberatung – im Zweifel prüfen lassen.
   ============================================================
 -->
 <!DOCTYPE html>
@@ -47,8 +47,6 @@
   p,li{font-size:15px;color:var(--ink-soft);margin-bottom:10px}
   ul{padding-left:20px;margin-bottom:14px}
   li{margin-bottom:4px}
-  .placeholder{background:#fef0e0;border:1px dashed var(--gold);border-radius:8px;padding:12px 16px;color:var(--ink);font-size:14px;margin-bottom:16px}
-  .placeholder strong{color:var(--accent-deep)}
   .legal-note{font-family:Arial,sans-serif;font-size:12px;color:var(--ink-fade);margin-top:40px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:12px}
   footer{text-align:center;font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;color:var(--ink-fade);margin-top:50px;padding-top:20px;border-top:1px solid var(--line)}
 </style>
@@ -69,12 +67,11 @@
   </p>
 
   <h2>2. Überblick über die Datenverarbeitung</h2>
-  <p>Seelenraum ist eine spirituelle Praxis-App als Progressive Web App (PWA). Die App speichert deine persönlichen Daten <strong>ausschließlich lokal in deinem Browser</strong> (localStorage). Es findet keine automatische Übermittlung deiner Inhalte an einen Server statt.</p>
-  <p>Diese Datenschutzerklärung beschreibt, welche Daten beim Besuch der Website und bei der Nutzung der App verarbeitet werden.</p>
+  <p>Seelenraum ist eine spirituelle Praxis-App als Progressive Web App (PWA). Deine persönlichen App-Inhalte (z. B. Tagebuch) werden <strong>ausschließlich lokal in deinem Browser</strong> gespeichert. Personenbezogene Daten werden von uns nur dort verarbeitet, wo es für den Betrieb der Website und die kostenpflichtige Mitgliedschaft notwendig ist – insbesondere bei der Zahlungsabwicklung (Stripe) und der Zugangsprüfung (Cloudflare).</p>
 
   <h2>3. Hosting (GitHub Pages)</h2>
   <p>Diese Website wird über <strong>GitHub Pages</strong> gehostet. GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA, stellt die Infrastruktur bereit. Beim Aufruf der Seite erhebt GitHub automatisch technische Zugriffsdaten (IP-Adresse, Browsertyp, Betriebssystem, aufgerufene Seiten, Uhrzeit). Dies ist für den Betrieb der Website technisch erforderlich.</p>
-  <p>GitHub verarbeitet diese Daten auf Servern in den USA. GitHub ist nach dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener" style="color:var(--accent)">GitHub Privacy Statement</a>.</p>
+  <p>GitHub verarbeitet diese Daten auch auf Servern in den USA. Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener" style="color:var(--accent)">GitHub Privacy Statement</a>.</p>
   <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und effizienten Betrieb der Website).</p>
 
   <h2>4. Lokale Speicherung (localStorage)</h2>
@@ -86,44 +83,46 @@
     <li>Wochen-Intention</li>
     <li>Favoriten</li>
     <li>Name und Geburtsdatum (für Personalisierung)</li>
+    <li>E-Mail-Adresse zur Zugangsprüfung sowie der Zeitpunkt der letzten Prüfung</li>
     <li>App-Einstellungen (Hell/Dunkel-Modus)</li>
   </ul>
-  <p>Diese Daten werden <strong>nicht an uns oder Dritte übermittelt</strong>. Du kannst jederzeit in den App-Einstellungen unter „Alles zurücksetzen" alle lokal gespeicherten Daten löschen. Ein Export deiner Tagebuch-Einträge ist über die Einstellungen als .txt-Datei möglich.</p>
-  <p>Rechtsgrundlage: Die lokale Speicherung erfolgt auf deinem Endgerät und unterliegt nicht der DSGVO, da keine Datenverarbeitung durch uns stattfindet. Der Zugriff auf den localStorage dient der Bereitstellung der App-Funktionen und erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+  <p>Diese Daten werden – mit Ausnahme der für die Zugangsprüfung verwendeten E-Mail-Adresse (siehe Abschnitt 7) – <strong>nicht an uns oder Dritte übermittelt</strong>. Du kannst sie jederzeit in den App-Einstellungen unter „Alles zurücksetzen" löschen. Ein Export deiner Tagebuch-Einträge ist als .txt-Datei möglich.</p>
+  <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Bereitstellung der App-Funktionen).</p>
 
   <h2>5. Service Worker (Offline-Funktion)</h2>
-  <p>Die App nutzt einen Service Worker, um die App offline verfügbar zu machen. Der Service Worker speichert eine Kopie der App-Dateien (HTML, CSS, JavaScript, Icons) im Browser-Cache. Es werden keine personenbezogenen Daten durch den Service Worker verarbeitet.</p>
+  <p>Die App nutzt einen Service Worker, um offline verfügbar zu sein. Er speichert eine Kopie der App-Dateien (HTML, CSS, JavaScript, Icons) im Browser-Cache. Es werden dabei keine personenbezogenen Daten verarbeitet.</p>
 
-  <h2>6. Zahlungsabwicklung (Memberstack / Stripe)</h2>
-  <p><em>Dieser Abschnitt wird ergänzt, sobald die Mitgliedschafts-Verwaltung eingerichtet ist.</em></p>
-  <p>Für die Abwicklung von Zahlungen wird Stripe (Stripe Inc., 510 Townsend Street, San Francisco, CA 94103, USA) und Memberstack (Memberstack Inc.) zum Einsatz kommen. Die jeweils geltenden Datenschutzbestimmungen findest du unter:</p>
-  <ul>
-    <li><a href="https://stripe.com/de/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Stripe Privacy Policy</a></li>
-    <li><a href="https://www.memberstack.com/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Memberstack Privacy Policy</a></li>
-  </ul>
-  <p>Sobald diese Dienste aktiv sind, wird dieser Abschnitt um die konkreten Verarbeitungsvorgänge ergänzt.</p>
+  <h2>6. Zahlungsabwicklung (Stripe)</h2>
+  <p>Für die Abwicklung der kostenpflichtigen Mitgliedschaft nutzen wir <strong>Stripe</strong> (Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Dublin 2, Irland; verbundene Verarbeitung ggf. durch Stripe, Inc., 510 Townsend Street, San Francisco, CA 94103, USA). Wenn du ein Abo abschließt, verarbeitet Stripe die dafür notwendigen Daten – insbesondere deinen <strong>Namen, deine E-Mail-Adresse und deine Zahlungsdaten</strong> (z. B. Kreditkarten- oder Bankverbindungsdaten).</p>
+  <p>Die Zahlung erfolgt auf einer von Stripe gehosteten Seite (z. B. <em>buy.stripe.com</em> / <em>checkout.stripe.com</em>). Deine vollständigen Zahlungsdaten werden dabei direkt an Stripe übermittelt und <strong>nicht von uns gespeichert</strong>. Eine Übermittlung in die USA stützt sich auf geeignete Garantien (EU-US Data Privacy Framework bzw. Standardvertragsklauseln).</p>
+  <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Erfüllung des Mitgliedschaftsvertrags). Weitere Informationen: <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener" style="color:var(--accent)">Stripe Datenschutzerklärung</a>.</p>
 
-  <h2>7. Cookies</h2>
-  <p>Diese Website verwendet <strong>keine eigenen Cookies</strong> zu Analyse- oder Tracking-Zwecken. Der Service Worker und der localStorage arbeiten ohne Cookies. Sofern Memberstack/Stripe in Zukunft Cookies setzen (z. B. für Session-Verwaltung), werden wir diesen Abschnitt aktualisieren.</p>
+  <h2>7. Zugangsprüfung der App (Cloudflare)</h2>
+  <p>Der Mitglieder-Bereich der App ist zahlenden Mitgliedern vorbehalten. Zur Prüfung deines Zugangs gibst du beim Öffnen der App die E-Mail-Adresse ein, mit der du dein Abo abgeschlossen hast. Diese E-Mail-Adresse wird an einen von uns betriebenen Dienst auf der Plattform <strong>Cloudflare Workers</strong> (Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA) übermittelt.</p>
+  <p>Dieser Dienst fragt ausschließlich bei Stripe ab, ob zu dieser E-Mail-Adresse ein <strong>aktives Abonnement</strong> besteht, und gibt nur das Ergebnis („Zugang ja/nein") zurück. Es werden dort keine weiteren Daten dauerhaft gespeichert. Zur Vermeidung wiederholter Abfragen wird das Ergebnis lokal in deinem Browser gespeichert und in der Regel täglich erneut geprüft. Eine Übermittlung in die USA stützt sich auf geeignete Garantien (EU-US Data Privacy Framework bzw. Standardvertragsklauseln).</p>
+  <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Erfüllung des Mitgliedschaftsvertrags) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Schutz kostenpflichtiger Inhalte). Weitere Informationen: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" style="color:var(--accent)">Cloudflare Datenschutz</a>.</p>
 
-  <h2>8. Deine Rechte</h2>
+  <h2>8. Cookies</h2>
+  <p>Diese Website verwendet <strong>keine eigenen Cookies</strong> zu Analyse- oder Tracking-Zwecken. Service Worker und localStorage arbeiten ohne Cookies. Die Bezahlseite von Stripe (auf der Stripe-Domain) kann eigene, für die Zahlungsabwicklung und Betrugsprävention technisch notwendige Cookies setzen; hierfür gilt die Datenschutzerklärung von Stripe.</p>
+
+  <h2>9. Deine Rechte</h2>
   <p>Du hast nach der DSGVO folgende Rechte:</p>
   <ul>
-    <li><strong>Auskunft</strong> (Art. 15 DSGVO) — welche Daten über dich verarbeitet werden</li>
-    <li><strong>Berichtigung</strong> (Art. 16 DSGVO) — unrichtige Daten korrigieren zu lassen</li>
-    <li><strong>Löschung</strong> (Art. 17 DSGVO) — Daten löschen zu lassen, soweit keine Aufbewahrungspflicht besteht</li>
-    <li><strong>Einschränkung</strong> (Art. 18 DSGVO) — Verarbeitung einschränken zu lassen</li>
-    <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO) — Daten in einem maschinenlesbaren Format zu erhalten</li>
-    <li><strong>Widerspruch</strong> (Art. 21 DSGVO) — gegen die Verarbeitung zu widersprechen</li>
+    <li><strong>Auskunft</strong> (Art. 15 DSGVO)</li>
+    <li><strong>Berichtigung</strong> (Art. 16 DSGVO)</li>
+    <li><strong>Löschung</strong> (Art. 17 DSGVO)</li>
+    <li><strong>Einschränkung</strong> (Art. 18 DSGVO)</li>
+    <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+    <li><strong>Widerspruch</strong> (Art. 21 DSGVO)</li>
     <li><strong>Beschwerde</strong> bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
   </ul>
-  <p>Bei Fragen zur Verarbeitung deiner Daten wende dich an: info@vp-store.de</p>
+  <p>Zur Kündigung deiner Mitgliedschaft oder Löschung deiner Zahlungsdaten wende dich an: info@vp-store.de</p>
 
-  <h2>9. Änderungen</h2>
-  <p>Diese Datenschutzerklärung wird aktualisiert, wenn sich die Datenverarbeitung ändert (insbesondere nach Einrichtung von Memberstack/Stripe). Die jeweils aktuelle Version steht unter dieser Adresse zur Verfügung.</p>
+  <h2>10. Änderungen</h2>
+  <p>Diese Datenschutzerklärung wird aktualisiert, wenn sich die Datenverarbeitung ändert. Die jeweils aktuelle Version steht unter dieser Adresse zur Verfügung.</p>
 
   <div class="legal-note">
-    <strong>Hinweis:</strong> Diese Datenschutzerklärung wurde für Seelenraum erstellt und deckt den aktuellen Stand (Juni 2026) ab. Nach Einrichtung von Memberstack/Stripe muss Abschnitt 6 konkretisiert werden. Keine Rechtsberatung.
+    <strong>Hinweis:</strong> Diese Datenschutzerklärung bildet den aktuellen Stand ab (GitHub Pages, lokale Speicherung, Stripe-Zahlung, Cloudflare-Zugangsprüfung). Sie ersetzt keine Rechtsberatung – im Zweifel von einer fachkundigen Stelle prüfen lassen.
   </div>
 
   <footer>© Seelenraum</footer>
