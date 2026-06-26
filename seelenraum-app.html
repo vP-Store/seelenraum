@@ -1,0 +1,1134 @@
+<!--
+  ============================================================
+  SEELENRAUM  —  Membership-App  (Welt-Version)
+  Bereiche: Heute · Impulse · Praxis (Meditationen, Atem,
+  Rituale, Klangraum, Reisen) · Mond · Tagebuch · Mein Weg
+  Inhalte unten in den const-Arrays pflegbar.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Seelenraum — deine tägliche Praxis</title>
+<meta name="description" content="Seelenraum: dein ruhiger Ort für jeden Tag. Impulse, Meditationen, Rituale, Atem, Klangraum, Mondkalender, Tagebuch.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4ede7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1722" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Seelenraum">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23cdb4e6'/%3E%3Cstop offset='1' stop-color='%238a76a8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%23fff' stroke-opacity='.85' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#3b333f;--ink-soft:#6f6678;--ink-fade:#9a90a2;
+    --gold:#b08d57;--accent:#8a76a8;--accent-deep:#6f5d8e;
+    --card:#fffdfb;--line:#ece2d9;--good:#7fa98c;--field:#faf6f1;
+    --shadow:0 12px 34px rgba(80,60,90,.10);--shadow-sm:0 4px 14px rgba(80,60,90,.07);
+  }
+  html[data-theme="dark"]{
+    --ink:#ece6f0;--ink-soft:#b3a9bd;--ink-fade:#8a8094;
+    --gold:#d8b87e;--accent:#bda7dd;--accent-deep:#d3c2ea;
+    --card:#272231;--line:#3b3548;--good:#8fc1a0;--field:#221d2c;
+    --shadow:0 12px 34px rgba(0,0,0,.38);--shadow-sm:0 4px 14px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Georgia','Times New Roman',serif;color:var(--ink);
+    background:
+      radial-gradient(900px 500px at 12% -8%, #efe3f3 0%, transparent 60%),
+      radial-gradient(800px 480px at 100% 8%, #dcebe6 0%, transparent 55%),
+      radial-gradient(700px 600px at 50% 120%, #f3e7dc 0%, transparent 60%),
+      linear-gradient(160deg,#f7f1ec,#efe7f1 60%,#e6efec);
+    background-attachment:fixed;background-color:#f4ede7;
+    min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+  html[data-theme="dark"] body{background:
+      radial-gradient(900px 500px at 12% -8%, #2a2440 0%, transparent 60%),
+      radial-gradient(800px 480px at 100% 8%, #1f2b34 0%, transparent 55%),
+      radial-gradient(700px 600px at 50% 120%, #2c2533 0%, transparent 60%),
+      linear-gradient(160deg,#1c1822,#231d2e 60%,#1a2220);background-color:#1b1722}
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px}
+  header{text-align:center;padding:30px 0 4px}
+  .logo{font-size:28px;letter-spacing:7px;text-transform:uppercase;font-weight:normal}
+  .logo span{color:var(--gold)}
+  .tag{font-style:italic;color:var(--ink-soft);font-size:14px;margin-top:6px}
+  .greet{font-size:13px;letter-spacing:1px;color:var(--ink-soft);margin-top:14px}
+  .streak{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:7px 16px;box-shadow:var(--shadow-sm);font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;color:var(--ink-soft)}
+  .streak b{color:var(--gold);font-size:14px}
+  .corner{position:fixed;top:14px;z-index:30;background:var(--card);border:1px solid var(--line);border-radius:50%;width:42px;height:42px;cursor:pointer;font-size:17px;line-height:1;color:var(--ink-soft);box-shadow:var(--shadow-sm);transition:.2s;display:flex;align-items:center;justify-content:center}
+  .corner:hover{color:var(--accent);transform:scale(1.06)}
+  .corner.left{left:14px}.corner.right{right:14px}
+  /* Sektions-Farbwelten */
+  .view.sec-med{--accent:#5d6cc0;--accent-deep:#454f96}
+  .view.sec-ritual{--accent:#c2895a;--accent-deep:#9a6336}
+  .view.sec-mond{--accent:#7787bd;--accent-deep:#56638f}
+  .view.sec-atem{--accent:#56a59c;--accent-deep:#3c7a72}
+  .view.sec-klang{--accent:#c0789a;--accent-deep:#9a5475}
+  .view.sec-praxis{--accent:#8a76a8;--accent-deep:#6f5d8e}
+  .view{animation:fade .5s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  /* Hero-Köpfe je Bereich */
+  .hero{border-radius:24px;padding:34px 26px;text-align:center;color:#fff;margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero .he{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.85}
+  .hero h2{color:#fff;font-size:30px;font-weight:normal;margin:6px 0 4px}
+  .hero p{color:rgba(255,255,255,.88);font-size:15px;font-style:italic;max-width:30ch;margin:0 auto}
+  .hero .ornament{position:absolute;width:160px;height:160px;border-radius:50%;border:2px solid rgba(255,255,255,.25);top:-60px;right:-40px}
+  .hero-impulse{background:linear-gradient(135deg,#a48bc4,#6f5d8e)}
+  .hero-med{background:linear-gradient(135deg,#6273c4,#363c66)}
+  .hero-ritual{background:linear-gradient(135deg,#cf9c66,#9a6336)}
+  .hero-mond{background:linear-gradient(135deg,#8a98c8,#444c73)}
+  .hero-atem{background:linear-gradient(135deg,#5fb1a7,#3c7a72)}
+  .hero-klang{background:linear-gradient(135deg,#cf85a6,#8f4d6b)}
+  .hero-reisen{background:linear-gradient(135deg,#c2a36a,#7a6a44)}
+  .hero-weg{background:linear-gradient(135deg,#9a86bc,#5f5384)}
+  .hero-tagebuch{background:linear-gradient(135deg,#b59ac0,#6d5a7e)}
+  /* Discover-Tiles */
+  .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+  .tile{border-radius:18px;padding:18px 16px;color:#fff;cursor:pointer;min-height:104px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow-sm);transition:.2s;border:none;text-align:left;font-family:inherit}
+  .tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .tile .ti{font-size:22px;line-height:1}
+  .tile .tt{font-size:18px;margin-top:auto}
+  .tile .ts{font-family:Arial,sans-serif;font-size:11px;opacity:.88;letter-spacing:.4px;margin-top:2px}
+  .nav-top{display:flex;justify-content:center;gap:3px;margin:18px 0 6px;flex-wrap:wrap}
+  .nav-top button{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid transparent;border-radius:30px;padding:8px 13px;color:var(--ink-soft);cursor:pointer;transition:.2s}
+  .nav-top button:hover{color:var(--ink)}.nav-top button.active{background:var(--card);color:var(--accent-deep);box-shadow:var(--shadow-sm);border-color:var(--line)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:32px 28px;margin:16px 0}
+  .theme-pill{display:inline-block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:20px;padding:4px 12px;opacity:.9}
+  .badge-new{display:inline-block;background:var(--gold);color:#fff;font-family:Arial,sans-serif;font-size:9px;letter-spacing:1px;padding:3px 9px;border-radius:10px;margin-left:8px;vertical-align:middle}
+  h2{font-size:25px;font-weight:normal;margin:14px 0 6px;line-height:1.28}
+  .affirm{font-size:21px;font-style:italic;color:var(--accent-deep);margin:18px 0;line-height:1.55}
+  .block-label{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:22px 0 6px}
+  .section-title{text-align:center;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-soft);margin:26px 0 2px}
+  .section-sub{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:6px}
+  .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .btn{flex:1;min-width:120px;font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;border:1px solid var(--line);background:transparent;border-radius:30px;padding:12px;color:var(--ink-soft);cursor:pointer;transition:.2s}
+  .btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.gold:hover{background:var(--gold);border-color:var(--gold)}
+  .btn.done{background:var(--good);color:#fff;border-color:var(--good)}
+  .btn.fav-on{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .btn.solid{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .banner{background:linear-gradient(135deg,#efe6f4,#e7f0ec);border:1px solid var(--line);border-radius:18px;padding:14px 18px;margin:14px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow-sm)}
+  html[data-theme="dark"] .banner{background:linear-gradient(135deg,#322a42,#26303a)}
+  .banner .b-txt{font-size:14px}.banner .b-txt b{color:var(--accent-deep)}
+  .banner button{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;background:var(--accent);color:#fff;border:none;border-radius:20px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+  .mood-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 4px}
+  .mood{cursor:pointer;border:1px solid var(--line);background:var(--field);border-radius:16px;padding:10px 12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;letter-spacing:.5px;color:var(--ink-soft);transition:.2s;min-width:60px}
+  .mood:hover{border-color:var(--accent)}.mood .dot{display:block;width:14px;height:14px;border-radius:50%;margin:0 auto 6px}
+  .mood.sel{background:var(--accent);color:#fff;border-color:var(--accent)}
+  textarea.journal{width:100%;min-height:88px;font-family:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:14px;padding:14px 16px;resize:vertical;line-height:1.5}
+  textarea.journal:focus{outline:none;border-color:var(--accent)}
+  .save-hint{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;color:var(--good);height:16px;margin-top:6px}
+  .jentry{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:12px 0;box-shadow:var(--shadow-sm)}
+  .jentry .je-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .jentry .je-theme{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+  .jentry .je-date{font-family:Arial,sans-serif;font-size:10px;color:var(--ink-fade);letter-spacing:1px}
+  .jentry h3{font-size:18px;font-weight:normal;margin:3px 0 8px}
+  .jentry .je-text{color:var(--ink);white-space:pre-wrap;font-size:15px}
+  .jentry .je-del{font-family:Arial,sans-serif;font-size:11px;color:var(--ink-fade);background:none;border:none;cursor:pointer;margin-top:10px;text-decoration:underline}
+  .search{width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:30px;padding:11px 18px;margin:6px 0 4px}
+  .search:focus{outline:none;border-color:var(--accent)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+  .filters button{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;color:var(--ink-soft);cursor:pointer;transition:.2s}
+  .filters button.active,.filters button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .lib-item{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:12px 0;box-shadow:var(--shadow-sm);cursor:pointer;transition:.2s}
+  .lib-item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .lib-item .li-theme{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+  .lib-item h3{font-size:19px;font-weight:normal;margin:4px 0}
+  .lib-item .li-aff{font-style:italic;color:var(--ink-soft);font-size:15px}
+  .li-date{font-family:Arial,sans-serif;font-size:10px;color:var(--ink-fade);letter-spacing:1px;position:absolute;top:18px;right:20px}
+  .li-meta{font-family:Arial,sans-serif;font-size:10px;color:var(--ink-fade);letter-spacing:1px;position:absolute;top:18px;right:20px}
+  .li-fav{position:absolute;bottom:16px;right:18px;font-size:15px;color:var(--gold)}
+  .li-note{position:absolute;bottom:16px;right:42px;font-size:13px;color:var(--accent)}
+  .empty{text-align:center;color:var(--ink-soft);font-style:italic;padding:34px}
+  .journey{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;margin:16px 0;box-shadow:var(--shadow-sm)}
+  .journey h3{font-size:22px;font-weight:normal;margin-bottom:4px}.journey p{color:var(--ink-soft);font-size:15px;margin-bottom:14px}
+  .progress{height:7px;background:var(--line);border-radius:10px;overflow:hidden;margin:12px 0}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:10px;transition:width .4s}
+  .j-meta{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;color:var(--ink-fade);display:flex;justify-content:space-between;margin-top:6px}
+  .step-list{counter-reset:rs;margin:6px 0}
+  .step-list .rstep{position:relative;padding:12px 0 12px 46px;border-bottom:1px solid var(--line)}
+  .step-list .rstep:last-child{border-bottom:none}
+  .step-list .rstep::before{counter-increment:rs;content:counter(rs);position:absolute;left:0;top:10px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-family:Arial,sans-serif;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .need{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .need span{font-family:Arial,sans-serif;font-size:12px;background:var(--field);border:1px solid var(--line);border-radius:16px;padding:6px 12px;color:var(--ink-soft)}
+  /* Player (Meditation/Atem) */
+  .player{text-align:center;padding:24px 0 8px}
+  .orb{width:170px;height:170px;border-radius:50%;margin:22px auto;background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);box-shadow:0 0 50px rgba(138,118,168,.45);transition:transform 4s ease-in-out,box-shadow 4s ease-in-out}
+  .orb.expand{transform:scale(1.42);box-shadow:0 0 80px rgba(138,118,168,.6)}
+  .view.sec-atem .orb{background:radial-gradient(circle at 35% 30%,#a8e0d8,#56a59c)}
+  .view.sec-med .orb{background:radial-gradient(circle at 35% 30%,#b6c0ee,#5d6cc0)}
+  .player .pword{font-size:22px;font-style:italic;color:var(--accent-deep);min-height:32px;margin-top:4px}
+  .player .pstep{font-size:18px;color:var(--ink);max-width:30ch;margin:6px auto 0;line-height:1.5;min-height:54px}
+  .player .pcount{font-family:Arial,sans-serif;font-size:13px;letter-spacing:2px;color:var(--ink-soft)}
+  .pbar{height:6px;background:var(--line);border-radius:10px;overflow:hidden;margin:16px auto;max-width:320px}
+  .pbar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+  /* Klang-Tiles */
+  .sound-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+  .sound{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:20px 16px;cursor:pointer;text-align:center;transition:.2s;box-shadow:var(--shadow-sm)}
+  .sound:hover{transform:translateY(-2px)}
+  .sound.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sound .si{font-size:26px}.sound .sn{font-size:17px;margin-top:6px}.sound .sd{font-family:Arial,sans-serif;font-size:11px;color:var(--ink-fade);letter-spacing:.5px;margin-top:2px}
+  .sound.playing .sd{color:rgba(255,255,255,.85)}
+  /* Mond */
+  .moon-vis{width:150px;height:150px;border-radius:50%;margin:8px auto 14px;background:#dfd7ea;box-shadow:inset 0 0 0 1px var(--line),0 8px 30px rgba(80,60,90,.18);position:relative;overflow:hidden}
+  .moon-vis .shadow{position:absolute;top:0;height:100%;background:#2a2540;opacity:.92}
+  /* Stats */
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 10px;text-align:center;box-shadow:var(--shadow-sm)}
+  .stat .num{font-size:30px;color:var(--accent-deep)}.stat .lbl{font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-fade);margin-top:4px}
+  .heat{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0}
+  .heat .cell{aspect-ratio:1;border-radius:6px;background:var(--field);border:1px solid var(--line)}
+  .heat .cell.on{background:var(--accent);border-color:var(--accent)}.heat .cell.today{box-shadow:0 0 0 2px var(--gold)}
+  .heat-legend{font-family:Arial,sans-serif;font-size:11px;color:var(--ink-fade);text-align:center;letter-spacing:1px}
+  .moodtrend{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:8px 0}.moodtrend .md{width:13px;height:13px;border-radius:50%;border:1px solid var(--line)}
+  .badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:10px;margin-top:10px}
+  .badge{background:var(--field);border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center;opacity:.4;transition:.2s}
+  .badge.on{opacity:1;background:var(--card);box-shadow:var(--shadow-sm)}.badge .bi{font-size:22px;color:var(--gold)}.badge .bn{font-family:Arial,sans-serif;font-size:10px;letter-spacing:.3px;color:var(--ink-soft);margin-top:5px;line-height:1.3}
+  .intention{background:linear-gradient(135deg,#f3ecf6,#e9f1ed);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow-sm)}
+  html[data-theme="dark"] .intention{background:linear-gradient(135deg,#2c2640,#243029)}
+  .intention .il{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .intention .it{font-size:18px;font-style:italic;color:var(--accent-deep);margin-top:4px}
+  .intention .ie{font-family:Arial,sans-serif;font-size:11px;color:var(--ink-fade);background:none;border:none;cursor:pointer;text-decoration:underline;margin-top:6px;padding:0}
+  .intention input{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0}
+  .draw-card{width:230px;height:320px;margin:14px auto 4px;border-radius:20px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden}
+  .draw-back{background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);display:flex;align-items:center;justify-content:center}
+  .draw-back::after{content:"";width:116px;height:116px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
+  .draw-face{background:var(--card);border:1px solid var(--line);padding:26px 22px;display:flex;flex-direction:column;justify-content:center;text-align:center;animation:fade .55s ease}
+  .draw-face .dp{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .draw-face .dh{font-size:21px;margin-bottom:12px}.draw-face .da{font-size:18px;font-style:italic;color:var(--accent-deep)}
+  .style-chips{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+  .style-chips button{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;border:1px solid var(--line);background:transparent;border-radius:20px;padding:6px 14px;color:var(--ink-soft);cursor:pointer}
+  .style-chips button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .overlay{position:fixed;inset:0;background:rgba(58,51,64,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;animation:fade .3s ease}
+  .modal{background:var(--card);border-radius:24px;max-width:440px;width:100%;padding:30px 26px;text-align:center;box-shadow:var(--shadow);max-height:90vh;overflow:auto}
+  .modal h2{margin:6px 0 10px}.modal p{color:var(--ink-soft);font-size:15px;margin-bottom:18px}
+  .modal input{font-family:inherit;font-size:16px;width:100%;padding:12px 16px;border:1px solid var(--line);border-radius:14px;text-align:center;margin-bottom:14px;color:var(--ink);background:var(--field)}
+  .modal .btn{flex:none;width:100%;margin-bottom:8px}.modal .skip{background:none;border:none;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:12px;cursor:pointer}
+  .modal img.preview{width:100%;max-width:300px;border-radius:14px;box-shadow:var(--shadow-sm);margin:0 auto 16px;display:block}
+  .install-banner{display:none;background:linear-gradient(135deg,#efe6f4,#e7f0ec);border:1px solid var(--line);border-radius:18px;padding:14px 18px;margin:14px 0;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow-sm)}
+  html[data-theme="dark"] .install-banner{background:linear-gradient(135deg,#322a42,#26303a)}
+  .install-banner span{font-size:14px}.install-banner button{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;background:var(--gold);color:#fff;border:none;border-radius:20px;padding:9px 14px;cursor:pointer;white-space:nowrap}
+  .tabbar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,253,251,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:2px;padding:8px 4px;z-index:20}
+  html[data-theme="dark"] .tabbar{background:rgba(33,29,42,.92)}
+  .tabbar button{flex:1;max-width:120px;background:none;border:none;cursor:pointer;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;padding:4px}
+  .tabbar button .ico{display:block;font-size:18px;margin-bottom:2px;line-height:1}.tabbar button.active{color:var(--accent-deep)}
+  footer{text-align:center;color:var(--ink-fade);font-size:11px;margin:30px 0 10px;font-family:Arial,sans-serif;letter-spacing:1px}
+  a.reset{color:var(--ink-fade);text-decoration:underline;cursor:pointer}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}.orb{transition:none!important}}
+  @media(max-width:480px){.logo{font-size:24px;letter-spacing:5px}h2{font-size:22px}.affirm{font-size:19px}.nav-top{display:none}.card{padding:26px 20px}.hero h2{font-size:26px}}
+  .moon-svg{display:block;margin:8px auto 14px}
+  #klangBar{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border-radius:30px;padding:9px 10px 9px 18px;display:none;align-items:center;gap:12px;z-index:25;box-shadow:var(--shadow);font-family:Arial,sans-serif;font-size:12px;letter-spacing:.5px}
+  #klangBar button{background:rgba(255,255,255,.25);color:#fff;border:none;border-radius:20px;padding:6px 12px;cursor:pointer;font-family:Arial,sans-serif;font-size:12px}
+  .view.sec-med .lib-item,.view.sec-ritual .lib-item,.view.sec-atem .lib-item{border-left:3px solid var(--accent)}
+  .view.sec-med .player .orb{animation:mpulse 9s ease-in-out infinite}
+  @keyframes mpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .lib-item:focus-visible,.sound:focus-visible,.mood:focus-visible,.draw-back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tabbar button{max-width:104px}
+  .view.sec-astro{--accent:#7b6cc8;--accent-deep:#4a3f86}
+  .view.sec-num{--accent:#c2a14e;--accent-deep:#8a6e2c}
+  .view.sec-mani{--accent:#cf7fa6;--accent-deep:#a85878}
+  .view.sec-chakra{--accent:#8a76a8;--accent-deep:#6f5d8e}
+  .view.sec-kosmos{--accent:#7b6cc8;--accent-deep:#4a3f86}
+  .hero-kosmos{background:linear-gradient(135deg,#6b5fb0,#2a2356)}
+  .hero-astro{background:linear-gradient(135deg,#6b5fb0,#2e2658)}
+  .hero-num{background:linear-gradient(135deg,#c9a85a,#7a6326)}
+  .hero-mani{background:linear-gradient(135deg,#d98fb0,#9a4f72)}
+  .hero-chakra{background:linear-gradient(90deg,#c0392b,#e67e22,#f1c40f,#27ae60,#2980b9,#5b4f9e,#8e44ad)}
+  .zodiac{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .zsign{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 8px;cursor:pointer;text-align:center;transition:.2s;box-shadow:var(--shadow-sm);font-family:inherit}
+  .zsign:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .zsign .zs{display:block;font-size:26px;color:var(--accent-deep)}
+  .zsign .zn{display:block;font-size:13px;color:var(--ink-soft);margin-top:4px}
+  .numbig{font-size:64px;text-align:center;color:var(--accent-deep);line-height:1;margin-bottom:4px}
+  .numday{font-size:40px;color:var(--accent-deep)}
+  .view.sec-kristall{--accent:#5f9aa0;--accent-deep:#3f7280}
+  .view.sec-engel{--accent:#bf9a48;--accent-deep:#8a6f2e}
+  .view.sec-tier{--accent:#a9794e;--accent-deep:#6d4f30}
+  .view.sec-wissen{--accent:#6f7fb0;--accent-deep:#48527a}
+  .hero-kristall{background:linear-gradient(135deg,#7fb0a6,#3f6d7d)}
+  .hero-engel{background:linear-gradient(135deg,#d7b56a,#8a6f3a)}
+  .hero-tier{background:linear-gradient(135deg,#a9794e,#5d4730)}
+  .hero-wissen{background:linear-gradient(135deg,#7a8bbf,#3a4366)}
+  .card.erkl{background:var(--field);border-style:dashed;padding:22px 24px}
+  .card.erkl .block-label{color:var(--accent)}
+  .searchpill{display:inline-flex;align-items:center;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:9px 18px;color:var(--ink-soft);cursor:pointer;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.5px;box-shadow:var(--shadow-sm);transition:.2s}
+  .searchpill:hover{color:var(--accent);border-color:var(--accent)}
+  .kostag{background:linear-gradient(135deg,#6b5fb0,#3a3f72);border-radius:22px;padding:18px 16px 14px;margin:14px 0;box-shadow:var(--shadow);color:#fff}
+  .kt-head{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.9;text-align:center;margin-bottom:10px}
+  .kt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .kt-item{background:rgba(255,255,255,.13);border:none;border-radius:14px;padding:12px 6px;cursor:pointer;color:#fff;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.2s;font-family:inherit}
+  .kt-item:hover{background:rgba(255,255,255,.24);transform:translateY(-2px)}
+  .kt-ic{font-size:22px;line-height:1}.kt-v{font-size:14px;text-align:center}.kt-l{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.5px;text-transform:uppercase;opacity:.85}
+  .gs-item{padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+  .gs-item:hover{background:var(--field)}
+  .gs-t{font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
+  .gs-n{font-size:16px}
+  #gsRes{max-height:54vh;overflow:auto;margin-top:8px}
+  #toTop{position:fixed;bottom:88px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:20px;z-index:24;box-shadow:var(--shadow)}
+  .ic-svg{display:inline-block;vertical-align:middle}
+  .ti svg{width:27px;height:27px}
+  .ico svg{width:21px;height:21px;display:block;margin:0 auto}
+  .corner svg{width:19px;height:19px}
+  .ic-inline{display:inline-flex}.ic-inline svg{width:16px;height:16px}
+  .kt-ic svg{width:23px;height:23px}
+</style>
+</head>
+<body>
+<button class="corner left" id="favBtn" aria-label="Favoriten" title="Favoriten"><span class="ic-inline" data-icon="heart"></span></button>
+<button class="corner right" id="themeToggle" aria-label="Hell/Dunkel" title="Hell / Dunkel">&#9682;</button>
+<div class="wrap">
+  <header>
+    <div class="logo">Seelen<span>raum</span></div>
+    <div class="tag">deine tägliche Rückkehr zu dir</div>
+    <div class="greet" id="greet"></div>
+    <div class="streak" id="streakBox" style="display:none"></div>
+    <div><button id="globalSearchBtn" class="searchpill" onclick="openGlobalSearch()"><span class="ic-inline" data-icon="search"></span>&nbsp; Suche in allen Bereichen</button></div>
+  </header>
+  <div class="install-banner" id="installBanner"><span>Seelenraum als App installieren?</span><button id="installBtn">Installieren</button></div>
+  <nav class="nav-top" id="topnav">
+    <button data-view="heute" class="active">Heute</button>
+    <button data-view="impulse">Impulse</button>
+    <button data-view="praxis">Praxis</button>
+    <button data-view="kosmos">Kosmos</button>
+    <button data-view="tagebuch">Tagebuch</button>
+    <button data-view="weg">Mein Weg</button>
+  </nav>
+  <div id="app"></div>
+  <footer>Seelenraum &middot; Mitglieder-Bereich &nbsp;&middot;&nbsp; <a class="reset" onclick="openSettings()">Einstellungen</a></footer>
+</div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nach oben">&#8593;</button>
+<div id="klangBar"><span id="klangName"></span><button onclick="stopKlang()">&#10005; Stop</button></div>
+<div class="tabbar" id="tabbar">
+  <button data-view="heute" class="active"><span class="ico" data-icon="sun"></span>Heute</button>
+  <button data-view="impulse"><span class="ico" data-icon="spark"></span>Impulse</button>
+  <button data-view="praxis"><span class="ico" data-icon="lotus"></span>Praxis</button>
+  <button data-view="kosmos"><span class="ico" data-icon="stars"></span>Kosmos</button>
+  <button data-view="tagebuch"><span class="ico" data-icon="book"></span>Tagebuch</button>
+  <button data-view="weg"><span class="ico" data-icon="path"></span>Weg</button>
+</div>
+<script>
+/* ===== IMPULSE ===== */
+const INHALTE = [
+  {id:"i01",datum:"2026-06-26",thema:"Grenzen",titel:"Deine Grenzen sind heilig",affirmation:"Nein zu sagen ist auch ein Ja – zu mir.",praxis:"Denk an eine Sache, die dir Energie raubt. Stell dir eine sanfte goldene Linie zwischen dir und ihr vor.",frage:"Wo brauche ich gerade eine klarere Grenze?"},
+  {id:"i02",datum:"2026-06-25",thema:"Dankbarkeit",titel:"Die kleinen Dinge",affirmation:"In meinem Leben ist schon jetzt genug Schönes.",praxis:"Finde drei Dinge in deinem Sichtfeld, für die du dankbar sein kannst – egal wie klein.",frage:"Welcher unscheinbare Moment hat mir heute gutgetan?"},
+  {id:"i03",datum:"2026-06-23",thema:"Vertrauen",titel:"Der Boden trägt dich",affirmation:"Ich muss nicht alles wissen, um sicher zu sein.",praxis:"Spüre eine Minute deine Füße auf dem Boden. Er hält dich – ohne dass du etwas tun musst.",frage:"Wo darf ich heute ein wenig mehr loslassen und vertrauen?"},
+  {id:"i04",datum:"2026-06-21",thema:"Selbstliebe",titel:"Sanft mit dir",affirmation:"Ich darf mir selbst die Freundin sein, die ich brauche.",praxis:"Lege eine Hand auf dein Herz. Sag dir innerlich einen Satz, den du einem geliebten Menschen sagen würdest.",frage:"Wo war ich heute hart zu mir – und wie hätte ich es liebevoller sagen können?"},
+  {id:"i05",datum:"2026-06-19",thema:"Loslassen",titel:"Was du nicht mehr tragen musst",affirmation:"Ich lege ab, was nicht mehr zu mir gehört.",praxis:"Atme dreimal tief ein. Stell dir bei jedem Ausatmen vor, wie du einen schweren Stein aus deiner Tasche legst.",frage:"Was trage ich gerade mit mir, das eigentlich nicht mehr meins ist?"},
+  {id:"i06",datum:"2026-06-17",thema:"Fülle",titel:"Genug ist schon da",affirmation:"Ich empfange mit offenen Händen, was für mich bestimmt ist.",praxis:"Öffne für einen Moment beide Handflächen nach oben. Eine kleine Geste des Empfangens.",frage:"Wo halte ich aus Angst fest, statt mich öffnen zu dürfen?"},
+  {id:"i07",datum:"2026-06-15",thema:"Ruhe",titel:"Du darfst pausieren",affirmation:"Auch Ruhe ist Wachstum.",praxis:"Schließe für 30 Sekunden die Augen und tue absolut nichts. Nur atmen.",frage:"Wann habe ich mir zuletzt erlaubt, einfach nichts zu tun?"},
+  {id:"i08",datum:"2026-06-13",thema:"Mut",titel:"Ein kleiner Schritt",affirmation:"Ich brauche keinen Mut für alles – nur für das Nächste.",praxis:"Nenne eine winzige Handlung, die dich deinem Wunsch näherbringt. Nur eine.",frage:"Was ist der kleinstmögliche mutige Schritt, den ich morgen gehen kann?"},
+  {id:"i09",datum:"2026-06-11",thema:"Achtsamkeit",titel:"Zurück in den Moment",affirmation:"Genau hier, genau jetzt, ist alles in Ordnung.",praxis:"Benenne still fünf Dinge, die du siehst, vier die du hörst, drei die du fühlst.",frage:"Was nehme ich wahr, wenn ich kurz aufhöre zu denken?"},
+  {id:"i10",datum:"2026-06-09",thema:"Klarheit",titel:"Was wirklich zählt",affirmation:"Ich darf das Wichtige vom Lauten unterscheiden.",praxis:"Frag dich: Wenn heute nur eine Sache zählt – welche ist es?",frage:"Worauf lenke ich gerade zu viel Aufmerksamkeit?"},
+  {id:"i11",datum:"2026-06-07",thema:"Heilung",titel:"Dein Tempo ist richtig",affirmation:"Ich heile nicht zu langsam. Ich heile in meinem Tempo.",praxis:"Lege eine Hand auf eine Stelle, die sich angespannt anfühlt, und atme dort hinein.",frage:"Wofür darf ich heute geduldiger mit mir sein?"},
+  {id:"i12",datum:"2026-06-05",thema:"Freude",titel:"Erlaube dir Leichtigkeit",affirmation:"Ich darf mich freuen, auch wenn nicht alles gelöst ist.",praxis:"Tu für zwei Minuten etwas, das dich zum Lächeln bringt – ohne Grund.",frage:"Was hat mich zuletzt unerwartet zum Lächeln gebracht?"},
+  {id:"i13",datum:"2026-06-03",thema:"Annahme",titel:"So wie es ist",affirmation:"Ich muss diesen Moment nicht ändern, um ihn auszuhalten.",praxis:"Sag innerlich zu dem, was gerade ist: Auch das darf da sein.",frage:"Was versuche ich gerade wegzuschieben, statt es anzunehmen?"},
+  {id:"i14",datum:"2026-06-01",thema:"Verbindung",titel:"Du bist nicht allein",affirmation:"Ich bin Teil von etwas Größerem als meinen Sorgen.",praxis:"Schau kurz in den Himmel oder aus dem Fenster. Derselbe Himmel über allen.",frage:"Wem könnte ich heute zeigen, dass ich an ihn denke?"},
+  {id:"i15",datum:"2026-05-29",thema:"Geduld",titel:"Alles zu seiner Zeit",affirmation:"Ich darf werden, ohne mich zu hetzen.",praxis:"Denk an etwas, das in dir noch reift. Gönn ihm innerlich Zeit.",frage:"Wo will ich etwas erzwingen, das eigentlich wachsen will?"},
+  {id:"i16",datum:"2026-05-27",thema:"Selbstliebe",titel:"Dein Wert hängt an nichts",affirmation:"Ich bin wertvoll, auch wenn ich heute nichts leiste.",praxis:"Streiche dir sanft über den Unterarm, so wie man jemanden tröstet.",frage:"Woran mache ich meinen Wert fest – und stimmt das überhaupt?"},
+  {id:"i17",datum:"2026-05-25",thema:"Loslassen",titel:"Den Griff lockern",affirmation:"Ich darf aufhören, gegen das Unkontrollierbare zu kämpfen.",praxis:"Balle eine Faust, halte sie fünf Sekunden – und öffne sie ganz langsam.",frage:"Was würde leichter, wenn ich aufhöre, es festzuhalten?"},
+  {id:"i18",datum:"2026-05-23",thema:"Hoffnung",titel:"Ein Licht voraus",affirmation:"Auch nach langer Nacht kommt das Licht zurück.",praxis:"Erinnere dich an eine schwere Zeit, die vorbeigegangen ist. Du hast sie überstanden.",frage:"Worauf darf ich mich in der nächsten Zeit freuen?"},
+  {id:"i19",datum:"2026-05-21",thema:"Fülle",titel:"Empfangen dürfen",affirmation:"Gutes darf mühelos zu mir kommen.",praxis:"Denk an eine Sache, die dir zuletzt geschenkt wurde – und nimm sie innerlich noch einmal an.",frage:"Fällt mir Geben oder Empfangen schwerer – und warum?"},
+  {id:"i20",datum:"2026-05-19",thema:"Mut",titel:"Die leise Stimme",affirmation:"Ich darf meiner inneren Stimme glauben.",praxis:"Lege die Hand auf den Bauch und frag: Was weiß ich eigentlich längst?",frage:"Welche Wahrheit ignoriere ich gerade, weil sie unbequem ist?"},
+  {id:"i21",datum:"2026-05-17",thema:"Vergebung",titel:"Dich selbst entlasten",affirmation:"Ich darf mir verzeihen, was ich nicht besser wusste.",praxis:"Leg eine Hand aufs Herz und sag: Ich habe getan, was ich damals konnte.",frage:"Wofür trage ich noch Schuld, die ich ablegen darf?"},
+  {id:"i22",datum:"2026-05-15",thema:"Ruhe",titel:"Langsamer als nötig",affirmation:"Ich darf langsamer sein, als die Welt es verlangt.",praxis:"Mach die nächste kleine Handlung bewusst halb so schnell wie sonst.",frage:"Wo hetze ich, obwohl es gar keine Eile gibt?"},
+  {id:"i23",datum:"2026-05-13",thema:"Vertrauen",titel:"Der nächste Schritt reicht",affirmation:"Ich muss den ganzen Weg nicht sehen, um ihn zu gehen.",praxis:"Stell dir vor, ein Licht erhellt nur den nächsten Schritt – und das genügt.",frage:"Was würde ich heute tun, wenn ich dem Weg vertrauen würde?"},
+  {id:"i24",datum:"2026-05-11",thema:"Dankbarkeit",titel:"Dein Körper trägt dich",affirmation:"Mein Körper tut jeden Tag so viel für mich.",praxis:"Danke innerlich einem Körperteil für das, was es heute geleistet hat.",frage:"Wie spreche ich über meinen Körper – freundlich oder streng?"},
+  {id:"i25",datum:"2026-05-09",thema:"Heilung",titel:"Alte Wunden, neue Sanftheit",affirmation:"Ich begegne meinem jüngeren Ich mit Mitgefühl.",praxis:"Stell dir dich als Kind vor und sag ihm einen liebevollen Satz.",frage:"Was hätte mein jüngeres Ich damals gebraucht?"},
+  {id:"i26",datum:"2026-05-07",thema:"Klarheit",titel:"Raum zum Denken",affirmation:"In der Stille finde ich meine eigenen Antworten.",praxis:"Setz dich zwei Minuten ohne Ablenkung hin und lass die Gedanken sich setzen.",frage:"Welche Frage in mir wartet eigentlich auf Antwort?"},
+  {id:"i27",datum:"2026-05-05",thema:"Grenzen",titel:"Deine Energie gehört dir",affirmation:"Ich darf entscheiden, wer Zugang zu meiner Energie hat.",praxis:"Stell dir um dich herum eine sanfte, durchlässige Lichthülle vor.",frage:"Wer oder was zieht gerade zu viel von mir ab?"},
+  {id:"i28",datum:"2026-05-03",thema:"Achtsamkeit",titel:"Eine Sache zur Zeit",affirmation:"Ich darf ganz bei einer Sache sein.",praxis:"Trink dein nächstes Getränk ohne Handy, nur mit dem Geschmack.",frage:"Was entgeht mir, wenn ich ständig mehreres gleichzeitig tue?"},
+  {id:"i29",datum:"2026-05-01",thema:"Freude",titel:"Kleine Feste",affirmation:"Ich darf auch kleine Erfolge feiern.",praxis:"Erkenne eine Sache an, die du heute geschafft hast – und freu dich kurz bewusst.",frage:"Welchen kleinen Sieg habe ich heute übersehen?"},
+  {id:"i30",datum:"2026-04-29",thema:"Annahme",titel:"Auch das gehört dazu",affirmation:"Schwere Gefühle machen mich nicht kaputt.",praxis:"Benenne dein Gefühl innerlich: Das ist Traurigkeit. Sie darf da sein.",frage:"Welches Gefühl versuche ich gerade nicht zu fühlen?"},
+  {id:"i31",datum:"2026-04-27",thema:"Selbstliebe",titel:"Dein eigener sicherer Ort",affirmation:"Ich kann mir selbst Geborgenheit schenken.",praxis:"Umarme dich kurz selbst, eine Hand auf jeder Schulter.",frage:"Was lässt mich mich sicher fühlen – und kann ich mehr davon einbauen?"},
+  {id:"i32",datum:"2026-04-25",thema:"Verbindung",titel:"Wurzeln und Weite",affirmation:"Ich bin gehalten – von der Erde, von der Zeit, von mir.",praxis:"Stell dir Wurzeln vor, die von deinen Füßen tief in die Erde wachsen.",frage:"Was gibt mir Halt, wenn alles wackelt?"},
+  {id:"i33",datum:"2026-04-23",thema:"Geduld",titel:"Der Same im Dunkeln",affirmation:"Auch wenn ich nichts sehe, wächst etwas in mir.",praxis:"Erinnere dich: Ein Same keimt unsichtbar, lange bevor er sprießt.",frage:"Wo zweifle ich an Fortschritt, der längst geschieht?"},
+  {id:"i34",datum:"2026-04-21",thema:"Fülle",titel:"Es ist genug Zeit",affirmation:"Ich lebe in einem Tempo, das zu mir passt.",praxis:"Atme ein und sag innerlich: Ich habe Zeit. Atme aus: Es darf leicht sein.",frage:"Wo erzähle ich mir, ich hätte keine Zeit – stimmt das wirklich?"},
+  {id:"i35",datum:"2026-04-19",thema:"Mut",titel:"Sichtbar sein dürfen",affirmation:"Ich darf gesehen werden, so wie ich bin.",praxis:"Sprich heute einen Satz aus, den du sonst zurückhalten würdest.",frage:"Wo halte ich mich klein, um niemanden zu stören?"},
+  {id:"i36",datum:"2026-04-17",thema:"Hoffnung",titel:"Türen, die sich öffnen",affirmation:"Wenn sich eine Tür schließt, atme ich und warte auf die nächste.",praxis:"Denk an eine Enttäuschung, die später Platz für etwas Besseres gemacht hat.",frage:"Was darf ich loslassen, um Neuem Raum zu geben?"},
+  {id:"i37",datum:"2026-04-15",thema:"Loslassen",titel:"Nicht mein Gewicht",affirmation:"Ich lege die Erwartungen anderer ab.",praxis:"Stell dir vor, du nimmst einen schweren Mantel ab, der dir nie gehörte.",frage:"Wessen Erwartungen trage ich, die gar nicht meine sind?"},
+  {id:"i38",datum:"2026-04-13",thema:"Ruhe",titel:"Abend-Loslassen",affirmation:"Ich darf den Tag aus den Händen legen.",praxis:"Atme lang aus und stell dir vor, der Tag sinkt von deinen Schultern.",frage:"Was darf ich heute nicht mit in den Schlaf nehmen?"},
+  {id:"i39",datum:"2026-04-11",thema:"Vergebung",titel:"Frieden statt Recht",affirmation:"Ich darf Frieden wählen, auch ohne eine Entschuldigung.",praxis:"Denk an jemanden und wünsche ihm innerlich nur einen Moment Gutes.",frage:"Welcher Groll kostet mich mehr Kraft, als er mir nützt?"},
+  {id:"i40",datum:"2026-04-09",thema:"Klarheit",titel:"Weniger, aber wahr",affirmation:"Ich darf einfacher leben, als ich denke.",praxis:"Nenne eine Sache, die du streichen könntest – und spür, wie es leichter wird.",frage:"Was verkompliziere ich, das eigentlich einfach sein dürfte?"},
+  {id:"i41",datum:"2026-04-07",thema:"Dankbarkeit",titel:"Menschen, die bleiben",affirmation:"Ich bin umgeben von mehr Gutem, als ich oft sehe.",praxis:"Denk an einen Menschen, der für dich da ist. Spür kurz die Wärme.",frage:"Wem möchte ich heute innerlich danken?"},
+  {id:"i42",datum:"2026-04-05",thema:"Heilung",titel:"Narben sind Beweise",affirmation:"Was ich überlebt habe, hat mich nicht gebrochen.",praxis:"Lege eine Hand aufs Herz und würdige still, was du schon getragen hast.",frage:"Worauf darf ich stolz sein, das ich überstanden habe?"},
+  {id:"i43",datum:"2026-04-03",thema:"Achtsamkeit",titel:"Der Atem ist immer da",affirmation:"Ich kann jederzeit zu meinem Atem zurückkehren.",praxis:"Folge drei Atemzügen vollständig – vom ersten Einziehen bis zum letzten Hauch.",frage:"Wann heute war ich ganz präsent – und wann nicht?"},
+  {id:"i44",datum:"2026-04-01",thema:"Selbstliebe",titel:"Die Stimme in dir",affirmation:"Ich rede mit mir, wie ich mit einem Kind reden würde.",praxis:"Ersetze einen harten inneren Satz durch einen freundlichen.",frage:"Wie klingt mein innerer Ton heute?"},
+  {id:"i45",datum:"2026-03-30",thema:"Vertrauen",titel:"Getragen werden",affirmation:"Ich darf glauben, dass das Leben es gut mit mir meint.",praxis:"Lehn dich kurz zurück und überlass dein Gewicht ganz dem Stuhl.",frage:"Wo darf ich aufhören, alles allein stemmen zu wollen?"},
+  {id:"i46",datum:"2026-03-28",thema:"Freude",titel:"Sinne wecken",affirmation:"Schönheit ist überall, wenn ich hinschaue.",praxis:"Such bewusst eine schöne Farbe, einen guten Geruch, einen warmen Klang.",frage:"Was Schönes habe ich heute mit meinen Sinnen erlebt?"},
+  {id:"i47",datum:"2026-03-26",thema:"Grenzen",titel:"Ja zu mir",affirmation:"Jedes Nein nach außen ist ein Ja nach innen.",praxis:"Übe innerlich einmal klar: Das passt für mich gerade nicht.",frage:"Wo sage ich ja, obwohl mein Körper nein sagt?"},
+  {id:"i48",datum:"2026-03-24",thema:"Geduld",titel:"Sanft mit dem Prozess",affirmation:"Ich darf unfertig sein und trotzdem ganz.",praxis:"Erinnere dich: Auch der Mond ist schön, wenn er nur halb voll ist.",frage:"Wo verlange ich Vollkommenheit, wo Wachstum genügt?"},
+  {id:"i49",datum:"2026-03-22",thema:"Hoffnung",titel:"Morgen ist neu",affirmation:"Jeder Morgen ist eine zweite Chance.",praxis:"Nimm dir für morgen eine einzige kleine, gute Absicht vor.",frage:"Wie möchte ich morgen beginnen?"},
+  {id:"i50",datum:"2026-03-20",thema:"Verbindung",titel:"Teil des Ganzen",affirmation:"Ich gehöre dazu, einfach weil ich bin.",praxis:"Spür einen Herzschlag lang: Du bist hier, du bist Teil von allem.",frage:"Wo sehne ich mich nach Zugehörigkeit – und wie finde ich sie?"},
+  {id:"i51",datum:"2026-03-18",thema:"Mut",titel:"Der erste Schritt zählt",affirmation:"Ich muss nicht bereit sein, um zu beginnen.",praxis:"Tu eine winzige Sache, die du aufschiebst – jetzt, in den nächsten zwei Minuten.",frage:"Was schiebe ich auf, das eigentlich klein ist?"},
+  {id:"i52",datum:"2026-03-16",thema:"Selbstliebe",titel:"Du bist kein Projekt",affirmation:"Ich bin kein Problem, das gelöst werden muss.",praxis:"Lass heute eine Sache so, wie sie ist – ohne sie zu optimieren.",frage:"Wo behandle ich mich wie eine Baustelle statt wie einen Menschen?"},
+  {id:"i53",datum:"2026-03-14",thema:"Vertrauen",titel:"Das Leben antwortet",affirmation:"Ich werde geführt, auch wenn ich es nicht sehe.",praxis:"Stell eine ehrliche Frage in den Tag hinein und bleib offen für die Antwort.",frage:"Worauf warte ich gerade auf ein Zeichen?"},
+  {id:"i54",datum:"2026-03-12",thema:"Ruhe",titel:"Nichtstun ist erlaubt",affirmation:"Ich muss meinen Wert nicht durch Tun beweisen.",praxis:"Sitz fünf Minuten ohne Handy, ohne Ziel. Nur da sein.",frage:"Wie fühlt es sich an, einfach nichts zu tun?"},
+  {id:"i55",datum:"2026-03-10",thema:"Dankbarkeit",titel:"Das Gewöhnliche feiern",affirmation:"Das Alltägliche ist voller kleiner Wunder.",praxis:"Würdige eine ganz normale Sache: warmes Wasser, ein Dach, einen Atemzug.",frage:"Was Selbstverständliches ist eigentlich ein Geschenk?"},
+  {id:"i56",datum:"2026-03-08",thema:"Grenzen",titel:"Du darfst enttäuschen",affirmation:"Ich bin nicht dafür verantwortlich, alle glücklich zu machen.",praxis:"Sag heute einmal nein, ohne dich zu erklären.",frage:"Wessen Enttäuschung fürchte ich – und warum?"},
+  {id:"i57",datum:"2026-03-06",thema:"Heilung",titel:"Fühlen, um zu heilen",affirmation:"Ich darf fühlen, was da ist, ohne es zu reparieren.",praxis:"Leg eine Hand auf die Stelle, wo ein Gefühl sitzt, und atme dorthin.",frage:"Welches Gefühl möchte heute einfach gesehen werden?"},
+  {id:"i58",datum:"2026-03-04",thema:"Klarheit",titel:"Weniger ist Freiheit",affirmation:"Ich darf Dinge weglassen, die mich nicht nähren.",praxis:"Streiche heute eine Sache von deiner Liste, die nicht wirklich wichtig ist.",frage:"Was trage ich mit, das ich loslassen dürfte?"},
+  {id:"i59",datum:"2026-03-02",thema:"Freude",titel:"Spiel ohne Zweck",affirmation:"Ich darf Dinge tun, einfach weil sie schön sind.",praxis:"Tu zwei Minuten lang etwas Verspieltes – ohne Nutzen, nur aus Freude.",frage:"Wann habe ich zuletzt grundlos gespielt?"},
+  {id:"i60",datum:"2026-03-01",thema:"Verbindung",titel:"Reich aus die Hand",affirmation:"Verbindung beginnt mit einem kleinen Schritt.",praxis:"Schreib einem Menschen eine kurze, warme Nachricht – ohne Anlass.",frage:"Wen möchte ich heute wissen lassen, dass ich an ihn denke?"}
+
+];
+/* ===== REISEN ===== */
+const REISEN = [
+  {id:"r1",titel:"7 Tage Loslassen",beschreibung:"Eine Woche, um Schritt für Schritt leichter zu werden.",tage:[
+    {titel:"Tag 1 · Benennen",affirmation:"Ich darf ehrlich sehen, was mich beschwert.",praxis:"Schreibe eine Sache auf, die du loslassen möchtest.",frage:"Was wiegt gerade am schwersten?"},
+    {titel:"Tag 2 · Fühlen",affirmation:"Ich muss es nicht wegdrücken.",praxis:"Spüre, wo dieses Thema im Körper sitzt, und atme dorthin.",frage:"Wie fühlt sich das Festhalten an?"},
+    {titel:"Tag 3 · Verstehen",affirmation:"Auch Festhalten hatte einmal einen Sinn.",praxis:"Frag dich sanft: Wovor hat mich das bisher beschützt?",frage:"Was wollte mir das Festhalten Gutes tun?"},
+    {titel:"Tag 4 · Erlauben",affirmation:"Ich gebe mir die Erlaubnis loszulassen.",praxis:"Sag laut: Ich erlaube mir, das gehen zu lassen.",frage:"Was bräuchte ich, um wirklich loslassen zu dürfen?"},
+    {titel:"Tag 5 · Lösen",affirmation:"Ich öffne die Hand.",praxis:"Öffne langsam eine geballte Faust, als ließest du etwas frei.",frage:"Was wird leichter, sobald ich loslasse?"},
+    {titel:"Tag 6 · Raum",affirmation:"Wo etwas geht, entsteht Platz.",praxis:"Stell dir vor, welcher schöne Raum jetzt frei wird.",frage:"Womit möchte ich diesen neuen Raum füllen?"},
+    {titel:"Tag 7 · Danken",affirmation:"Ich bin dankbar für meinen Mut.",praxis:"Danke dir selbst für diese Woche.",frage:"Was hat sich in sieben Tagen in mir verändert?"}
+  ]},
+  {id:"r2",titel:"5 Tage Selbstliebe",beschreibung:"Fünf sanfte Schritte zurück zu einem freundlichen Verhältnis mit dir.",tage:[
+    {titel:"Tag 1 · Wahrnehmen",affirmation:"Ich darf da sein, ohne mich zu rechtfertigen.",praxis:"Schau dich freundlich im Spiegel an, nur zehn Sekunden.",frage:"Wie schaue ich normalerweise auf mich?"},
+    {titel:"Tag 2 · Sprechen",affirmation:"Meine Worte über mich formen mein Inneres.",praxis:"Ersetze heute einen harten Gedanken durch einen freundlichen.",frage:"Wie würde eine gute Freundin über mich reden?"},
+    {titel:"Tag 3 · Sorgen",affirmation:"Ich kümmere mich um mich wie um einen lieben Menschen.",praxis:"Tu dir bewusst eine kleine Freundlichkeit.",frage:"Was tut mir gut, das ich mir oft verweigere?"},
+    {titel:"Tag 4 · Grenzen",affirmation:"Mich zu schützen ist ein Akt der Selbstliebe.",praxis:"Sag einmal höflich nein, wo du sonst ja sagen würdest.",frage:"Wo sage ich ja, obwohl ich nein meine?"},
+    {titel:"Tag 5 · Annehmen",affirmation:"Ich bin genug – heute schon.",praxis:"Lege die Hand aufs Herz und atme: Ich bin genug.",frage:"Was würde sich ändern, wenn ich mir das wirklich glaube?"}
+  ]},
+  {id:"r3",titel:"7 Tage Dankbarkeit",beschreibung:"Eine Woche, die deinen Blick sanft auf das Gute lenkt.",tage:[
+    {titel:"Tag 1 · Der Anfang",affirmation:"Ich beginne, das Gute zu zählen.",praxis:"Nenne drei Dinge, für die du heute dankbar bist.",frage:"Was nehme ich oft als selbstverständlich?"},
+    {titel:"Tag 2 · Menschen",affirmation:"Ich bin nicht allein auf meinem Weg.",praxis:"Denk an einen Menschen, der dir gutgetan hat.",frage:"Wem habe ich lange nicht gedankt?"},
+    {titel:"Tag 3 · Körper",affirmation:"Mein Körper trägt mich treu durch jeden Tag.",praxis:"Danke deinem Körper für eine konkrete Sache.",frage:"Was kann mein Körper, das ich übersehe?"},
+    {titel:"Tag 4 · Schweres",affirmation:"Auch Schweres hat mich etwas gelehrt.",praxis:"Finde in einer schweren Erfahrung ein kleines Geschenk.",frage:"Was hat mich eine Krise gelehrt?"},
+    {titel:"Tag 5 · Kleines",affirmation:"Die kleinen Dinge sind die meisten.",praxis:"Würdige einen winzigen schönen Moment von heute.",frage:"Welcher kleine Moment hat mich berührt?"},
+    {titel:"Tag 6 · Selbst",affirmation:"Ich bin dankbar für mich.",praxis:"Nenne drei Dinge, die du an dir schätzt.",frage:"Wofür darf ich mir selbst dankbar sein?"},
+    {titel:"Tag 7 · Weitergeben",affirmation:"Dankbarkeit wächst, wenn ich sie teile.",praxis:"Sag einem Menschen heute ehrlich Danke.",frage:"Wie möchte ich Dankbarkeit in meinen Alltag tragen?"}
+  ]},
+  {id:"r4",titel:"5 Tage Mut",beschreibung:"Fünf kleine Schritte, dich mehr zu trauen.",tage:[
+    {titel:"Tag 1 · Wunsch",affirmation:"Mein Wunsch verdient es, ernst genommen zu werden.",praxis:"Schreibe einen Wunsch auf, den du dir kaum traust zu sagen.",frage:"Was will ich wirklich, hinter aller Vorsicht?"},
+    {titel:"Tag 2 · Angst",affirmation:"Meine Angst ist ein Wegweiser, kein Stoppschild.",praxis:"Benenne, wovor du Angst hast – und atme einmal hindurch.",frage:"Was wäre das Schlimmste – und würde ich es überleben?"},
+    {titel:"Tag 3 · Stimme",affirmation:"Ich darf für mich einstehen.",praxis:"Sag heute einmal höflich, aber klar, was du brauchst.",frage:"Wo schlucke ich meine Wahrheit herunter?"},
+    {titel:"Tag 4 · Schritt",affirmation:"Ein kleiner Schritt zählt mehr als ein perfekter Plan.",praxis:"Tu heute eine winzige Sache in Richtung deines Wunsches.",frage:"Was ist mein nächster kleiner mutiger Schritt?"},
+    {titel:"Tag 5 · Stolz",affirmation:"Ich bin stolz, dass ich es versuche.",praxis:"Würdige dich für jeden Mut dieser Woche.",frage:"Worauf bin ich stolz, das ich mich getraut habe?"}
+  ]},
+  {id:"r5",titel:"7 Tage Achtsamkeit",beschreibung:"Eine Woche, ganz im Hier anzukommen.",tage:[
+    {titel:"Tag 1 · Atem",affirmation:"Mein Atem holt mich immer zurück.",praxis:"Folge zehn Atemzügen, ohne etwas zu ändern.",frage:"Wie fühlt sich mein Atem gerade an?"},
+    {titel:"Tag 2 · Essen",affirmation:"Ich darf langsam genießen.",praxis:"Iss die ersten drei Bissen einer Mahlzeit ganz bewusst.",frage:"Was schmecke ich, wenn ich wirklich hinspüre?"},
+    {titel:"Tag 3 · Gehen",affirmation:"Jeder Schritt bringt mich in den Moment.",praxis:"Geh eine Minute und spüre nur deine Füße.",frage:"Was nehme ich wahr, wenn ich langsam gehe?"},
+    {titel:"Tag 4 · Hören",affirmation:"Die Welt klingt, wenn ich lausche.",praxis:"Schließe die Augen und zähle drei Geräusche.",frage:"Welche Klänge überhöre ich sonst?"},
+    {titel:"Tag 5 · Pause",affirmation:"Eine Pause ist immer möglich.",praxis:"Halte heute einmal bewusst inne, bevor du antwortest.",frage:"Was ändert sich, wenn ich kurz innehalte?"},
+    {titel:"Tag 6 · Dankbar",affirmation:"Der Moment hält oft ein Geschenk bereit.",praxis:"Finde im Jetzt eine Sache, die schön ist.",frage:"Was ist gerade, in diesem Moment, gut?"},
+    {titel:"Tag 7 · Da sein",affirmation:"Ich bin hier. Das genügt.",praxis:"Sitze eine Minute und sei einfach nur da.",frage:"Wie fühlt es sich an, einfach zu sein?"}
+  ]}
+];
+/* ===== MEDITATIONEN (geführter Player) ===== */
+const MEDITATIONEN = [
+  {id:"m1",titel:"Ankommen im Atem",thema:"Beruhigung",dauer:"5 Min",intro:"Eine kurze Reise zurück in deinen Körper und deinen Atem.",steps:["Setz dich bequem hin und schließe sanft die Augen.","Spüre, wie dein Körper vom Stuhl oder Boden getragen wird.","Lenke deine Aufmerksamkeit zu deinem Atem – ohne ihn zu verändern.","Atme ein und spüre, wie die Luft kühl hineinströmt.","Atme aus und lass die Schultern ein wenig sinken.","Wenn Gedanken kommen, lass sie ziehen wie Wolken.","Kehre immer wieder sanft zum Atem zurück.","Atme noch dreimal tief und öffne langsam die Augen."]},
+  {id:"m2",titel:"Body-Scan",thema:"Entspannung",dauer:"8 Min",intro:"Wandere mit deiner Aufmerksamkeit langsam durch den ganzen Körper.",steps:["Lege dich hin und schließe die Augen.","Spüre deine Füße – lass sie ganz schwer werden.","Wandere zu den Beinen und lass sie los.","Spüre deinen Bauch, der sich beim Atmen hebt und senkt.","Lass deine Schultern weich werden.","Spüre deine Arme bis in die Fingerspitzen.","Entspanne dein Gesicht, deine Stirn, deinen Kiefer.","Spüre für einen Moment deinen ganzen Körper als Ganzes.","Atme tief und komm sanft zurück."]},
+  {id:"m3",titel:"Herzraum öffnen",thema:"Selbstliebe",dauer:"6 Min",intro:"Eine Meditation, um dir selbst mit Wärme zu begegnen.",steps:["Lege eine Hand auf dein Herz.","Spüre die Wärme deiner Hand auf der Brust.","Atme in diesen Raum hinein.","Stell dir einen weichen, warmen Lichtschein in deinem Herzen vor.","Mit jedem Atemzug wird er ein wenig größer.","Sag innerlich: Möge ich freundlich zu mir sein.","Sag innerlich: Möge ich mir selbst genug sein.","Lass das Licht durch den ganzen Körper strömen.","Atme und ruhe in dieser Wärme."]},
+  {id:"m4",titel:"Sorgen loslassen",thema:"Loslassen",dauer:"7 Min",intro:"Lege ab, was dich gerade beschwert.",steps:["Schließe die Augen und atme ruhig.","Stell dir einen ruhigen Fluss vor dir vor.","Denk an eine Sorge, die dich beschäftigt.","Lege diese Sorge behutsam auf ein Blatt am Ufer.","Sieh zu, wie der Fluss das Blatt langsam forttragt.","Spüre, wie es ein wenig leichter wird.","Wiederhole es mit jeder Sorge, die kommt.","Atme die Weite des Flusses ein.","Kehre ruhig und leichter zurück."]},
+  {id:"m5",titel:"Erdung",thema:"Sicherheit",dauer:"5 Min",intro:"Finde festen Boden unter den Füßen.",steps:["Stell oder setz dich aufrecht hin.","Spüre den Kontakt deiner Füße mit dem Boden.","Stell dir Wurzeln vor, die aus deinen Füßen wachsen.","Sie reichen tief in die Erde hinein.","Mit jedem Ausatmen wachsen sie tiefer.","Spüre, wie die Erde dich hält und nährt.","Du bist verbunden, gehalten, sicher.","Atme die Kraft der Erde nach oben.","Stell dir vor, du stehst fest wie ein Baum.","Öffne langsam die Augen."]},
+  {id:"m6",titel:"Dankbarkeits-Meditation",thema:"Dankbarkeit",dauer:"6 Min",intro:"Lass dein Herz weit werden vor Dankbarkeit.",steps:["Schließe die Augen und atme sanft.","Denk an einen Menschen, der dir gutgetan hat.","Spüre die Wärme, die dabei aufsteigt.","Denk an etwas an deinem Körper, das gut funktioniert.","Danke ihm still.","Denk an einen schönen Moment der letzten Tage.","Lass das Gefühl von Fülle sich ausbreiten.","Atme die Dankbarkeit tief ein.","Komm mit einem Lächeln zurück."]},
+  {id:"m7",titel:"Innerer sicherer Ort",thema:"Geborgenheit",dauer:"8 Min",intro:"Erschaffe dir einen Ort, an den du immer zurückkehren kannst.",steps:["Schließe die Augen und atme ruhig.","Stell dir einen Ort vor, an dem du dich völlig sicher fühlst.","Vielleicht ein Strand, ein Wald, ein warmes Zimmer.","Sieh die Farben dieses Ortes.","Höre die Geräusche dort.","Spüre die Temperatur auf deiner Haut.","Atme die Sicherheit dieses Ortes ein.","Wisse: Du kannst jederzeit hierher zurückkehren.","Verabschiede dich sanft und öffne die Augen."]},
+  {id:"m8",titel:"Gedanken beruhigen",thema:"Klarheit",dauer:"6 Min",intro:"Lass den kreisenden Geist zur Ruhe kommen.",steps:["Setz dich aufrecht und schließe die Augen.","Stell dir deinen Geist als wirbelndes Wasser vor.","Atme langsam und tief.","Mit jedem Ausatmen setzt sich der Wirbel ein wenig.","Beobachte deine Gedanken, ohne ihnen zu folgen.","Sie kommen und gehen wie Wellen.","Du bist nicht deine Gedanken – du bist der weite Himmel darüber.","Ruhe in dieser Weite.","Atme klar und komm zurück."]},
+  {id:"m9",titel:"Abend-Ruhe",thema:"Schlaf",dauer:"7 Min",intro:"Lass den Tag los und gleite in die Ruhe.",steps:["Lege dich bequem hin und schließe die Augen.","Atme langsam aus, länger als ein.","Lass mit jedem Ausatmen den Tag ein Stück los.","Spüre, wie dein Körper schwer und warm wird.","Denk an drei schöne Momente des Tages.","Vergib dir alles, was heute nicht gelang.","Stell dir vor, wie eine warme Decke aus Ruhe dich bedeckt.","Dein Atem wird langsamer und tiefer.","Lass dich sanft in den Schlaf sinken."]},
+  {id:"m10",titel:"Liebevolle Güte",thema:"Mitgefühl",dauer:"8 Min",intro:"Sende Wärme – dir selbst und anderen.",steps:["Schließe die Augen und lege eine Hand aufs Herz.","Sag innerlich: Möge ich glücklich sein. Möge ich in Frieden sein.","Spüre, wie sich diese Worte anfühlen.","Denk an einen lieben Menschen.","Sag: Mögest du glücklich sein. Mögest du in Frieden sein.","Denk an einen neutralen Menschen und wünsche ihm dasselbe.","Weite es aus auf alle Wesen.","Möge alles, was lebt, in Frieden sein.","Ruhe in dieser Weite und atme."]}
+];
+/* ===== RITUALE ===== */
+const RITUALE = [
+  {id:"ri1",titel:"Morgenritual",anlass:"Für einen sanften Start",dauer:"5 Min",brauchst:["ein Glas Wasser","einen ruhigen Moment"],steps:["Trink vor allem anderen ein Glas Wasser, langsam und bewusst.","Atme dreimal tief, noch bevor du zum Handy greifst.","Lege eine Hand aufs Herz und sag: Heute darf leicht sein.","Nenne eine Sache, auf die du dich heute freust.","Setze eine kleine Absicht für den Tag."],schluss:"Geh in deinen Tag, als hättest du dich selbst eingeladen."},
+  {id:"ri2",titel:"Abendritual",anlass:"Den Tag loslassen",dauer:"6 Min",brauchst:["eine Kerze (optional)"],steps:["Dimme das Licht oder zünde eine Kerze an.","Atme dreimal lang aus und lass die Schultern sinken.","Lass den Tag wie einen Film vorbeiziehen – ohne zu werten.","Nenne drei Dinge, für die du heute dankbar bist.","Vergib dir eine Sache, die nicht gelang.","Sag dir: Ich habe genug getan für heute."],schluss:"Lösch die Kerze und nimm die Ruhe mit in die Nacht."},
+  {id:"ri3",titel:"Vollmond-Loslassen",anlass:"Bei Vollmond",dauer:"10 Min",brauchst:["Papier & Stift","eine sichere Schale (optional)"],steps:["Setz dich ans Fenster oder nach draußen, wenn möglich ins Mondlicht.","Schreibe auf, was du loslassen möchtest.","Lies es dir noch einmal leise vor.","Sag: Ich lasse dich gehen, mit Dank für das, was du mich gelehrt hast.","Zerreiße das Papier (oder verbrenne es sicher).","Atme die neue Leichtigkeit ein."],schluss:"Der Vollmond nimmt mit, was du nicht mehr brauchst."},
+  {id:"ri4",titel:"Neumond-Wünsche",anlass:"Bei Neumond",dauer:"10 Min",brauchst:["Papier & Stift"],steps:["Setz dich an einen ruhigen Ort.","Atme dich in eine offene, weite Stimmung.","Schreibe bis zu zehn Wünsche für den kommenden Zyklus auf.","Formuliere sie positiv, im Präsens, als wären sie schon da.","Lies sie dir mit Gefühl vor.","Falte das Blatt und leg es an einen besonderen Ort."],schluss:"Der Neumond ist eine leere Seite – beschreibe sie mit deinen Träumen."},
+  {id:"ri5",titel:"Reinigung & Klärung",anlass:"Wenn alles zu viel ist",dauer:"7 Min",brauchst:["frische Luft oder ein offenes Fenster"],steps:["Öffne ein Fenster und lass frische Luft herein.","Streiche mit den Händen sanft über deinen Körper, von oben nach unten.","Stell dir vor, du streifst alles Schwere ab.","Wasche dir bewusst die Hände, als spültest du Altes fort.","Atme dreimal tief die frische Luft ein.","Sag: Ich bin klar. Ich bin bei mir."],schluss:"Du hast Raum geschaffen – für dich."},
+  {id:"ri6",titel:"Erdungs-Ritual",anlass:"Wenn du im Kopf feststeckst",dauer:"5 Min",brauchst:["deine nackten Füße"],steps:["Stell dich barfuß auf den Boden, am besten auf die Erde.","Spüre den Kontakt deiner Fußsohlen.","Atme tief in den Bauch.","Stell dir Wurzeln vor, die dich mit der Erde verbinden.","Sag: Ich bin hier. Ich bin gehalten.","Spüre, wie der Kopf ruhiger wird."],schluss:"Du bist zurück im Körper, zurück im Jetzt."},
+  {id:"ri7",titel:"Herz-Dankbarkeit",anlass:"Um das Gute zu nähren",dauer:"5 Min",brauchst:["ein kleines Notizbuch (optional)"],steps:["Lege eine Hand aufs Herz.","Denk an drei Dinge, die heute schön waren.","Spüre bei jedem kurz die Wärme nach.","Schreibe sie auf, wenn du magst.","Sag: Mein Leben hält mehr Gutes, als ich oft sehe.","Atme die Dankbarkeit tief ein."],schluss:"Was wir würdigen, wächst."},
+  {id:"ri8",titel:"Selbstliebe-Ritual",anlass:"Für sanftere Tage",dauer:"8 Min",brauchst:["eine Creme oder ein Öl (optional)"],steps:["Nimm dir ungestörte Zeit.","Creme deine Hände oder Arme bewusst und langsam ein.","Berühre dich, als wärst du dir kostbar.","Sag dir im Spiegel: Ich bin willkommen, so wie ich bin.","Nenne eine Sache, die du heute an dir magst.","Atme tief und lächle dir zu."],schluss:"Du bist ein Mensch, der Fürsorge verdient – auch deine eigene."},
+  {id:"ri9",titel:"Schutz-Ritual",anlass:"Vor schweren Begegnungen",dauer:"4 Min",brauchst:["einen Moment Stille"],steps:["Schließe die Augen und atme ruhig.","Stell dir eine warme, goldene Lichthülle um dich vor.","Sie ist durchlässig für Liebe, undurchlässig für Schweres.","Sag: Ich bleibe bei mir, was auch kommt.","Spüre, wie diese Hülle dich umgibt.","Öffne die Augen und nimm sie mit."],schluss:"Du gehst geschützt und bei dir in die Begegnung."},
+  {id:"ri10",titel:"Wochen-Rückblick",anlass:"Sonntags",dauer:"10 Min",brauchst:["Papier & Stift"],steps:["Setz dich mit einem warmen Getränk hin.","Schreibe: Was hat mir diese Woche gutgetan?","Schreibe: Was hat mich gefordert?","Schreibe: Wofür bin ich dankbar?","Setze eine sanfte Absicht für die neue Woche.","Schließe mit einem tiefen Atemzug."],schluss:"Du gehst bewusst und klar in die neue Woche."}
+];
+/* ===== ATEM-PROGRAMME ===== */
+const ATEM = [
+  {id:"a1",name:"Beruhigung · 4-7-8",beschreibung:"Längeres Ausatmen beruhigt das Nervensystem.",phases:[["Einatmen",4000,"expand"],["Halten",7000,"expand"],["Ausatmen",8000,""]]},
+  {id:"a2",name:"Box-Atem · 4-4-4-4",beschreibung:"Gleichmäßig – für Fokus und Klarheit.",phases:[["Einatmen",4000,"expand"],["Halten",4000,"expand"],["Ausatmen",4000,""],["Halten",4000,""]]},
+  {id:"a3",name:"Erdung · 4-6",beschreibung:"Sanft und einfach, um anzukommen.",phases:[["Einatmen",4000,"expand"],["Ausatmen",6000,""]]},
+  {id:"a4",name:"Energie · 6-2",beschreibung:"Längeres Einatmen für frische Wachheit.",phases:[["Einatmen",6000,"expand"],["Ausatmen",2000,""]]}
+];
+/* ===== KLANGWELTEN (live erzeugt) ===== */
+const KLANG = [
+  {id:"k1",name:"Om · Drone",icon:"&#9737;",beschreibung:"Warmer, tragender Grundton",typ:"drone"},
+  {id:"k2",name:"Regen",icon:"&#9730;",beschreibung:"Sanftes Prasseln",typ:"regen"},
+  {id:"k3",name:"Ozean",icon:"&#9780;",beschreibung:"Wellen, die kommen und gehen",typ:"ozean"},
+  {id:"k4",name:"Wald",icon:"&#127794;",beschreibung:"Wind und ferne Vögel",typ:"wald"},
+  {id:"k5",name:"Herzschlag",icon:"&#9829;",beschreibung:"Ruhiger, langsamer Puls",typ:"herz"}
+];
+/* ===== MONDPHASEN (Bedeutung) ===== */
+const MOND_PHASEN = [
+  {name:"Neumond",bedeutung:"Ein Neuanfang. Die Seite ist leer. Zeit für Absichten und neue Wünsche.",praxis:"Schreibe auf, was du dir für den kommenden Zyklus wünschst.",ritual:"ri4"},
+  {name:"Zunehmende Sichel",bedeutung:"Erste Schritte. Die Energie wächst – setze sanft Dinge in Bewegung.",praxis:"Tu eine kleine konkrete Sache in Richtung deines Wunsches.",ritual:"ri1"},
+  {name:"Zunehmender Halbmond",bedeutung:"Entscheidung & Handlung. Bleib dran, auch wenn es fordert.",praxis:"Triff eine kleine Entscheidung, die du aufgeschoben hast.",ritual:"ri6"},
+  {name:"Zunehmender Mond",bedeutung:"Verfeinern & Vertrauen. Dein Vorhaben nimmt Gestalt an.",praxis:"Halte inne und würdige, was schon gewachsen ist.",ritual:"ri7"},
+  {name:"Vollmond",bedeutung:"Fülle & Klarheit. Höhepunkt der Energie – auch Zeit zum Loslassen.",praxis:"Lass los, was du nicht mehr brauchst. Feiere, was reif ist.",ritual:"ri3"},
+  {name:"Abnehmender Mond",bedeutung:"Dankbarkeit & Teilen. Lass Erkenntnisse setzen.",praxis:"Danke für das, was dieser Zyklus dir gebracht hat.",ritual:"ri7"},
+  {name:"Abnehmender Halbmond",bedeutung:"Loslassen & Vergeben. Räume innerlich auf.",praxis:"Vergib dir oder einem anderen eine Sache.",ritual:"ri5"},
+  {name:"Abnehmende Sichel",bedeutung:"Ruhe & Rückzug. Erlaube dir Stille vor dem Neubeginn.",praxis:"Ruhe bewusst. Tu weniger, sei mehr.",ritual:"ri2"}
+];
+/* ===== KERN ===== */
+const MONATE=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const MOODS=[{k:0,l:"Schwer",c:"#9a8fb0"},{k:1,l:"Gedämpft",c:"#b0a0c2"},{k:2,l:"Neutral",c:"#cdb4d6"},{k:3,l:"Leicht",c:"#d3c08f"},{k:4,l:"Friedlich",c:"#9ec3a6"}];
+const heute=new Date();
+const todayKey=heute.toISOString().slice(0,10);
+const store={get(k,d){try{const v=localStorage.getItem("sr_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem("sr_"+k,JSON.stringify(v));}catch(e){}}};
+let state={name:store.get("name",""),favs:store.get("favs",[]),streak:store.get("streak",0),lastDone:store.get("lastDone",""),journey:store.get("journey",{}),journal:store.get("journal",{}),moods:store.get("moods",{}),days:store.get("days",[]),intention:store.get("intention",null)};
+function fmtShort(d){const p=d.split('-');return parseInt(p[2])+". "+MONATE[parseInt(p[1])-1];}
+function yesterdayKey(){const y=new Date(heute);y.setDate(y.getDate()-1);return y.toISOString().slice(0,10);}
+function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+/* Mondphase */
+function moonInfo(d){
+  const lp=2551443, now=d.getTime()/1000, newMoon=947182440; // bekannter Neumond
+  let phase=((now-newMoon)%lp)/lp; if(phase<0)phase+=1;
+  const idx=Math.floor(phase*8+0.5)%8;
+  const illum=Math.round((1-Math.cos(phase*2*Math.PI))/2*100);
+  return {idx, illum, frac:phase};
+}
+function updateHeader(){
+  const h=heute.getHours(); const teil=h<11?"Guten Morgen":h<17?"Schön, dass du da bist":"Guten Abend";
+  const g=document.getElementById('greet'); if(g)g.textContent=state.name?(teil+", "+state.name+"."):(teil+".");
+  const box=document.getElementById('streakBox');
+  if(box){if(state.streak>0){box.style.display="inline-flex";box.innerHTML="✦ <b>"+state.streak+"</b> "+(state.streak===1?"Tag":"Tage")+" deiner Praxis";}else box.style.display="none";}
+}
+function markDone(msg){
+  if(state.lastDone===todayKey){ if(!state.days.includes(todayKey)){state.days.push(todayKey);store.set("days",state.days);} if(msg)toast(msg); return; }
+  state.streak=(state.lastDone===yesterdayKey())?state.streak+1:1; state.lastDone=todayKey;
+  if(!state.days.includes(todayKey))state.days.push(todayKey);
+  store.set("streak",state.streak);store.set("lastDone",state.lastDone);store.set("days",state.days);
+  updateHeader();toast(msg||"Schön, dass du heute da warst ✦");
+}
+function markPractice(msg){ // für Meditation/Ritual: zählt als Praxistag, ohne Streak-Logik zu doppeln
+  if(!state.days.includes(todayKey)){state.days.push(todayKey);store.set("days",state.days);}
+  if(state.lastDone!==todayKey){state.streak=(state.lastDone===yesterdayKey())?state.streak+1:1;state.lastDone=todayKey;store.set("streak",state.streak);store.set("lastDone",state.lastDone);updateHeader();}
+  if(msg)toast(msg);
+}
+function isFav(id){return state.favs.includes(id);}
+function toggleFav(id){state.favs=isFav(id)?state.favs.filter(x=>x!==id):[id,...state.favs];store.set("favs",state.favs);render(current);}
+function hasNote(id){return !!(state.journal[id]&&state.journal[id].text);}
+function saveJournal(id,val){if(val.trim()==="")delete state.journal[id];else state.journal[id]={text:val,ts:Date.now()};store.set("journal",state.journal);const h=document.getElementById("jhint-"+id);if(h)h.textContent="Gespeichert ✓";}
+function deleteJournal(id){delete state.journal[id];store.set("journal",state.journal);render('tagebuch');}
+function setMood(k){state.moods[todayKey]=k;store.set("moods",state.moods);toast("Eingetragen ✦");render(current);}
+function moodRowHtml(){const cur=state.moods[todayKey];return `<div class="block-label" style="text-align:center;color:var(--accent)">Wie fühlst du dich gerade?</div><div class="mood-row">`+MOODS.map(m=>`<div class="mood ${cur===m.k?'sel':''}" tabindex="0" role="button" onclick="setMood(${m.k})"><span class="dot" style="background:${m.c}"></span>${m.l}</div>`).join('')+`</div>`;}
+function impulsCard(it,opts={}){
+  const fav=isFav(it.id); const doneToday=state.lastDone===todayKey;
+  const jv=hasNote(it.id)?state.journal[it.id].text:"";
+  const journalBlock=(opts.heute||opts.journal)?`<div class="block-label">Dein Tagebuch</div><textarea class="journal" id="jrnl-${it.id}" placeholder="Schreib, was in dir aufkommt …" oninput="saveJournal('${it.id}',this.value)">${escHtml(jv)}</textarea><div class="save-hint" id="jhint-${it.id}">${jv?'Gespeichert ✓':''}</div>`:"";
+  return `<div class="card"><span class="theme-pill">${it.thema}</span>${opts.neu?'<span class="badge-new">NEU</span>':''}
+    <h2>${it.titel}</h2><div class="affirm">„${it.affirmation}"</div>
+    <div class="block-label">Sanfte Praxis</div><div>${it.praxis}</div>
+    <div class="block-label">Frage für dich</div><div style="font-style:italic">${it.frage}</div>
+    ${opts.heute?moodRowHtml():""}${journalBlock}
+    <div class="actions">
+      ${opts.heute?`<button class="btn ${doneToday?'done':'gold'}" onclick="markDone()">${doneToday?'✓ Heute gelebt':'Heute abschließen'}</button>`:''}
+      <button class="btn ${fav?'fav-on':''}" onclick="toggleFav('${it.id}')">${fav?'♥ Gemerkt':'♡ Merken'}</button>
+      <button class="btn" onclick="openShareImage('${esc(it.affirmation)}','${esc(it.thema)}')">Als Bild teilen</button>
+    </div></div>`;
+}
+function copyAff(t){const s="„"+t+"\"\n— Seelenraum";if(navigator.share){navigator.share({text:s}).catch(()=>{});return;}if(navigator.clipboard){navigator.clipboard.writeText(s);toast("Affirmation kopiert ✦");return;}toast("„"+t+"\"");}
+function toast(msg){let t=document.createElement('div');t.textContent=msg;t.style.cssText="position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:#3b333f;color:#fff;font-family:Arial;font-size:13px;letter-spacing:1px;padding:10px 18px;border-radius:30px;z-index:60;opacity:0;transition:.3s;max-width:80%;text-align:center";document.body.appendChild(t);requestAnimationFrame(()=>t.style.opacity=1);setTimeout(()=>{t.style.opacity=0;setTimeout(()=>t.remove(),300);},1700);}
+/* ===== Wochen-Intention / Meilensteine / Helfer ===== */
+function getWeekKey(d){const dt=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));const day=dt.getUTCDay()||7;dt.setUTCDate(dt.getUTCDate()+4-day);const ys=new Date(Date.UTC(dt.getUTCFullYear(),0,1));const wk=Math.ceil((((dt-ys)/86400000)+1)/7);return dt.getUTCFullYear()+"-W"+wk;}
+const weekKey=getWeekKey(heute);
+let editingIntent=false;
+function intentionHtml(){const cur=state.intention;
+  if(cur&&cur.week===weekKey&&!editingIntent)return `<div class="intention"><div class="il">Deine Absicht diese Woche</div><div class="it">„${escHtml(cur.text)}"</div><button class="ie" onclick="editIntention()">ändern</button></div>`;
+  return `<div class="intention"><div class="il">Absicht für diese Woche</div><input id="intentIn" placeholder="Diese Woche möchte ich …" value="${cur?escHtml(cur.text):''}" onkeydown="if(event.key==='Enter')setIntention()"><button class="ie" onclick="setIntention()">Absicht setzen ✦</button></div>`;}
+function setIntention(){const el=document.getElementById('intentIn');if(el&&el.value.trim()){state.intention={text:el.value.trim(),week:weekKey};store.set("intention",state.intention);editingIntent=false;toast("Absicht gesetzt ✦");render('heute');}}
+function editIntention(){editingIntent=true;render('heute');setTimeout(()=>{const el=document.getElementById('intentIn');if(el)el.focus();},30);}
+function computeLongest(days){if(!days.length)return 0;const s=[...new Set(days)].sort();let best=1,cur=1;for(let i=1;i<s.length;i++){const p=new Date(s[i-1]);p.setDate(p.getDate()+1);if(p.toISOString().slice(0,10)===s[i]){cur++;best=Math.max(best,cur);}else cur=1;}return best;}
+function tile(view,icon,title,sub,grad){return `<button class="tile" style="background:${grad}" onclick="render('${view}')"><span class="ti">${icon}</span><span class="tt">${title}</span><span class="ts">${sub}</span></button>`;}
+function tilesHtml(){return `<div class="tiles">
+  ${tile('meditationen',icon('person'),'Meditationen','10 geführte Reisen','linear-gradient(135deg,#6273c4,#363c66)')}
+  ${tile('atem',icon('breath'),'Atempausen','4 Atem-Programme','linear-gradient(135deg,#5fb1a7,#3c7a72)')}
+  ${tile('rituale',icon('candle'),'Rituale','10 sanfte Rituale','linear-gradient(135deg,#cf9c66,#9a6336)')}
+  ${tile('klang',icon('sound'),'Klangraum','5 Klangwelten','linear-gradient(135deg,#cf85a6,#8f4d6b)')}
+  ${tile('reisen',icon('flag'),'Reisen','5 mehrtägige Wege','linear-gradient(135deg,#c2a36a,#7a6a44)')}
+  ${tile('mond',icon('moon'),'Mond','Phase & Ritual','linear-gradient(135deg,#8a98c8,#444c73)')}
+</div>`;}
+function moonMiniHtml(){const mi=moonInfo(heute);const ph=MOND_PHASEN[mi.idx];
+  return `<div class="banner" onclick="render('mond')" style="cursor:pointer"><div class="b-txt"><b>&#9789; ${ph.name}</b> · ${mi.illum}% beleuchtet</div><button onclick="render('mond')">Mehr</button></div>`;}
+/* ===== HEUTE (Dashboard) ===== */
+function viewHeute(){
+  const start=new Date(heute.getFullYear(),0,0);const tag=Math.floor((heute-start)/86400000);
+  const it=INHALTE[tag%INHALTE.length];
+  const m=heute.getMonth(),j=heute.getFullYear();
+  const neuCount=INHALTE.filter(x=>{const p=x.datum.split('-');return parseInt(p[1])-1===m&&parseInt(p[0])===j;}).length;
+  const banner=neuCount?`<div class="banner"><div class="b-txt"><b>${neuCount} neue Impulse</b> im ${MONATE[m]}.</div><button onclick="render('neu')">Ansehen</button></div>`:'';
+  return `<div class="view">${banner}${kosmischerTagHtml()}${intentionHtml()}
+    <div class="section-title">Dein Impuls für heute</div><div class="section-sub">nimm dir einen ruhigen Moment</div>
+    ${impulsCard(it,{heute:true})}
+    <div class="banner"><div class="b-txt">Magst du eine Karte ziehen?</div><button onclick="openDrawCard()">Tageskarte ✦</button></div>
+    <div class="section-title">Entdecke deinen Raum</div><div class="section-sub">für jede Stimmung das Richtige</div>
+    ${tilesHtml()}
+    <div class="section-title">Entdecke den Kosmos</div><div class="section-sub">Mond, Sterne, Zahlen, Manifestation</div>
+    ${tilesKosmosHtml()}</div>`;
+}
+function viewNeu(){const m=heute.getMonth(),j=heute.getFullYear();
+  const neu=INHALTE.filter(it=>{const p=it.datum.split('-');return parseInt(p[1])-1===m&&parseInt(p[0])===j;}).sort((a,b)=>b.datum.localeCompare(a.datum));
+  let html=`<div class="view"><div class="section-title">Neu im ${MONATE[m]}</div><div class="section-sub">frisch für dich hinzugefügt</div>`;
+  html+=neu.length?neu.map(it=>impulsCard(it,{neu:true})).join(''):`<div class="empty">Diesen Monat kommen bald neue Impulse dazu. ✦</div>`;return html+`</div>`;}
+/* ===== IMPULSE (Bibliothek) ===== */
+let libSearch="",aktiverFilter="Alle";
+function viewImpulse(){
+  const themen=["Alle",...Array.from(new Set(INHALTE.map(i=>i.thema)))];
+  const q=libSearch.trim().toLowerCase();
+  const liste=[...INHALTE].sort((a,b)=>b.datum.localeCompare(a.datum)).filter(i=>aktiverFilter==="Alle"||i.thema===aktiverFilter).filter(i=>!q||(i.titel+i.affirmation+i.thema+i.praxis+i.frage).toLowerCase().includes(q));
+  let html=`<div class="view"><div class="hero hero-impulse"><div class="ornament"></div><div class="he">Bibliothek</div><h2>Impulse</h2><p>${INHALTE.length} Karten – such dir, was dich heute berührt</p></div>${erkl('impulse')}
+    <input class="search" id="libSearch" placeholder="Suchen … (z. B. Loslassen, Mut)" value="${escHtml(libSearch)}" oninput="onSearch(this.value)">
+    <div class="filters">`+themen.map(t=>`<button class="${t===aktiverFilter?'active':''}" onclick="setFilter('${t}')">${t}</button>`).join('')+`</div>`;
+  html+=liste.length?liste.map(libItem).join(''):`<div class="empty">Nichts gefunden. Versuch ein anderes Wort.</div>`;return html+`</div>`;}
+function onSearch(v){libSearch=v;render('impulse');const el=document.getElementById('libSearch');if(el){el.focus();try{el.setSelectionRange(el.value.length,el.value.length);}catch(e){}}}
+function setFilter(t){aktiverFilter=t;render('impulse');}
+function libItem(it){return `<div class="lib-item" tabindex="0" role="button" onclick="openImpuls('${it.id}')"><span class="li-date">${fmtShort(it.datum)}</span><div class="li-theme">${it.thema}</div><h3>${it.titel}</h3><div class="li-aff">„${it.affirmation}"</div>${hasNote(it.id)?'<span class="li-note">✎</span>':''}${isFav(it.id)?'<span class="li-fav">♥</span>':''}</div>`;}
+function openImpuls(id){const it=INHALTE.find(i=>i.id===id);current='detail';document.getElementById('app').innerHTML=`<div class="view"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('impulse')">← zurück</button></div>${impulsCard(it,{journal:true})}</div>`;window.scrollTo({top:0,behavior:'smooth'});}
+function viewFavoriten(){const favItems=state.favs.map(id=>INHALTE.find(i=>i.id===id)).filter(Boolean);
+  let html=`<div class="view"><div class="section-title">Deine Favoriten</div><div class="section-sub">Impulse, die dich berührt haben</div>`;
+  html+=favItems.length?favItems.map(libItem).join(''):`<div class="empty">Noch nichts gemerkt.<br>Tippe bei einem Impuls auf ♡ Merken.</div>`;return html+`</div>`;}
+function viewTagebuch(){const entries=Object.keys(state.journal).map(id=>({id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp).sort((a,b)=>b.ts-a.ts);
+  let html=`<div class="view sec-praxis"><div class="hero hero-tagebuch"><div class="ornament"></div><div class="he">Nur für dich</div><h2>Tagebuch</h2><p>${entries.length} ${entries.length===1?'Eintrag':'Einträge'} · lokal & privat gespeichert</p></div>`;
+  if(!entries.length)html+=`<div class="empty">Noch keine Einträge.<br>Schreib bei einem Impuls in das Tagebuch-Feld – er erscheint hier.</div>`;
+  else html+=entries.map(e=>`<div class="jentry"><div class="je-top"><span class="je-theme">${e.imp.thema}</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div><h3>${e.imp.titel}</h3><div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">„${e.imp.affirmation}"</div><div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="openImpuls('${e.id}')">öffnen</button> &nbsp; <button class="je-del" onclick="deleteJournal('${e.id}')">löschen</button></div>`).join('');
+  return html+`</div>`;}
+function milestonesHtml(){const d=state.days.length,st=computeLongest(state.days),notes=Object.keys(state.journal).length,rd=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length,fav=state.favs.length;
+  const M=[{on:d>=1,i:"✦",n:"Erster Tag"},{on:d>=3,i:"✦",n:"3 Tage"},{on:st>=7,i:"✶",n:"7 Tage Serie"},{on:st>=14,i:"✷",n:"14 Tage Serie"},{on:d>=30,i:"❂",n:"30 Praxis-Tage"},{on:d>=100,i:"☀",n:"100 Tage"},{on:notes>=1,i:"✎",n:"Erstes Tagebuch"},{on:notes>=10,i:"❖",n:"10 Einträge"},{on:rd>=1,i:"➶",n:"Erste Reise"},{on:fav>=10,i:"♥",n:"10 Favoriten"}];
+  return `<div class="card"><div class="block-label" style="text-align:center">Deine Meilensteine</div><div class="badges">`+M.map(m=>`<div class="badge ${m.on?'on':''}"><div class="bi">${m.on?m.i:'◌'}</div><div class="bn">${m.n}</div></div>`).join('')+`</div></div>`;}
+function viewWeg(){const daysSet=new Set(state.days);const longest=computeLongest(state.days);const notes=Object.keys(state.journal).length;const reisenDone=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length;
+  let cells="";const start=new Date(heute);start.setDate(start.getDate()-34);
+  for(let i=0;i<35;i++){const dd=new Date(start);dd.setDate(dd.getDate()+i);const k=dd.toISOString().slice(0,10);cells+=`<div class="cell ${daysSet.has(k)?'on':''} ${k===todayKey?'today':''}" title="${k}"></div>`;}
+  let md="";const ms=new Date(heute);ms.setDate(ms.getDate()-13);
+  for(let i=0;i<14;i++){const dd=new Date(ms);dd.setDate(dd.getDate()+i);const k=dd.toISOString().slice(0,10);const mm=state.moods[k];md+=`<div class="md" style="background:${mm!==undefined?MOODS[mm].c:'transparent'}" title="${k}"></div>`;}
+  return `<div class="view sec-praxis"><div class="hero hero-weg"><div class="ornament"></div><div class="he">Dein Fortschritt</div><h2>Mein Weg</h2><p>ganz ohne Druck – jeder Tag zählt</p></div>
+    <div class="stat-grid"><div class="stat"><div class="num">${state.streak}</div><div class="lbl">Aktuelle Serie</div></div><div class="stat"><div class="num">${longest}</div><div class="lbl">Längste Serie</div></div><div class="stat"><div class="num">${state.days.length}</div><div class="lbl">Praxis-Tage</div></div><div class="stat"><div class="num">${notes}</div><div class="lbl">Tagebuch</div></div><div class="stat"><div class="num">${reisenDone}</div><div class="lbl">Reisen</div></div><div class="stat"><div class="num">${state.favs.length}</div><div class="lbl">Favoriten</div></div></div>
+    <div class="card"><div class="block-label" style="text-align:center">Deine letzten 5 Wochen</div><div class="heat">${cells}</div><div class="heat-legend">jedes gefüllte Feld ist ein Tag, an dem du da warst</div><div class="block-label" style="text-align:center;margin-top:24px">Stimmung (14 Tage)</div><div class="moodtrend">${md}</div><div class="heat-legend">${MOODS.map(m=>m.l).join(' · ')}</div></div>
+    ${milestonesHtml()}</div>`;}
+/* ===== PRAXIS-HUB ===== */
+function viewPraxis(){
+  return `<div class="view sec-praxis"><div class="hero hero-impulse"><div class="ornament"></div><div class="he">Dein Übungsraum</div><h2>Praxis</h2><p>Meditationen, Atem, Rituale, Klang und Reisen</p></div>
+  ${tilesHtml()}</div>`;
+}
+/* ===== MEDITATIONEN ===== */
+let med=null;
+function viewMeditationen(){
+  let html=`<div class="view sec-med"><div class="hero hero-med"><div class="ornament"></div><div class="he">${MEDITATIONEN.length} geführte Reisen</div><h2>Meditationen</h2><p>schließ die Augen und lass dich führen</p></div>${erkl('meditationen')}`;
+  html+=MEDITATIONEN.map(m=>`<div class="lib-item" tabindex="0" role="button" onclick="openMeditation('${m.id}')"><span class="li-meta">${m.dauer}</span><div class="li-theme">${m.thema}</div><h3>${m.titel}</h3><div class="li-aff">${m.intro}</div></div>`).join('');
+  return html+`</div>`;
+}
+function openMeditation(id){current='medplay';med={id:id,idx:-1,timer:null,auto:false};renderMed();window.scrollTo({top:0,behavior:'smooth'});}
+function medBack(){medStop();render('meditationen');}
+function renderMed(){
+  const m=MEDITATIONEN.find(x=>x.id===med.id);const app=document.getElementById('app');
+  if(med.idx<0){
+    app.innerHTML=`<div class="view sec-med"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="medBack()">← Meditationen</button></div>
+      <div class="hero hero-med"><div class="he">${m.thema} · ${m.dauer}</div><h2>${m.titel}</h2><p>${m.intro}</p></div>
+      <div class="card player"><div class="orb" id="orb"></div><div class="pstep">Wenn du bereit bist, beginne. Du kannst jederzeit pausieren.</div><div class="actions" style="justify-content:center"><button class="btn solid" style="flex:none;min-width:180px" onclick="medBegin()">Beginnen</button></div></div></div>`;
+    return;
+  }
+  const step=m.steps[med.idx];const pct=Math.round((med.idx+1)/m.steps.length*100);const last=med.idx>=m.steps.length-1;
+  app.innerHTML=`<div class="view sec-med"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="medBack()">← beenden</button></div>
+    <div class="card player"><div class="orb expand" id="orb"></div>
+      <div class="pcount">Schritt ${med.idx+1} / ${m.steps.length}</div>
+      <div class="pstep">${step}</div>
+      <div class="pbar"><i style="width:${pct}%"></i></div>
+      <div class="actions" style="justify-content:center">
+        ${med.idx>0?`<button class="btn" style="flex:none" onclick="medPrev()">← Zurück</button>`:''}
+        <button class="btn" style="flex:none" onclick="medToggleAuto()">${med.auto?'❚❚ Pause':'▶ Auto'}</button>
+        <button class="btn ${last?'solid':''}" style="flex:none" onclick="${last?'medFinish()':'medNext(false)'}">${last?'Abschließen ✦':'Weiter →'}</button>
+      </div></div></div>`;
+}
+function medBegin(){med.idx=0;med.auto=true;renderMed();medSchedule();}
+function medSchedule(){if(med&&med.timer){clearTimeout(med.timer);med.timer=null;}if(med&&med.auto)med.timer=setTimeout(()=>medNext(true),13000);}
+function medNext(auto){const m=MEDITATIONEN.find(x=>x.id===med.id);if(med.idx>=m.steps.length-1){if(auto)medFinish();return;}med.idx++;renderMed();medSchedule();}
+function medPrev(){if(med.idx>0){med.idx--;renderMed();medSchedule();}}
+function medToggleAuto(){med.auto=!med.auto;if(med.auto)medSchedule();else if(med.timer){clearTimeout(med.timer);med.timer=null;}renderMed();}
+function medFinish(){medStop();markPractice("Meditation abgeschlossen ✦");render('meditationen');}
+function medStop(){if(med&&med.timer)clearTimeout(med.timer);med=null;}
+/* ===== RITUALE ===== */
+function viewRituale(){
+  let html=`<div class="view sec-ritual"><div class="hero hero-ritual"><div class="ornament"></div><div class="he">${RITUALE.length} sanfte Rituale</div><h2>Rituale</h2><p>kleine Handlungen mit großer Wirkung</p></div>${erkl('rituale')}`;
+  html+=RITUALE.map(r=>`<div class="lib-item" tabindex="0" role="button" onclick="openRitual('${r.id}')"><span class="li-meta">${r.dauer}</span><div class="li-theme">${r.anlass}</div><h3>${r.titel}</h3></div>`).join('');
+  return html+`</div>`;
+}
+function openRitual(id){const r=RITUALE.find(x=>x.id===id);current='ritualview';
+  const need=r.brauchst&&r.brauchst.length?`<div class="block-label">Du brauchst</div><div class="need">${r.brauchst.map(n=>`<span>${n}</span>`).join('')}</div>`:'';
+  document.getElementById('app').innerHTML=`<div class="view sec-ritual"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('rituale')">← Rituale</button></div>
+    <div class="hero hero-ritual"><div class="he">${r.anlass} · ${r.dauer}</div><h2>${r.titel}</h2></div>
+    <div class="card">${need}<div class="block-label">So geht's</div><div class="step-list">${r.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div>
+    <div class="affirm" style="text-align:center;margin-top:18px">„${r.schluss}"</div>
+    <div class="actions"><button class="btn solid" onclick="ritualDone()">Ritual abgeschlossen ✦</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function ritualDone(){markPractice("Ritual abgeschlossen ✦");render('rituale');}
+/* ===== ATEM ===== */
+let atemSel=null,breatheTimer=null;
+function viewAtem(){
+  if(!atemSel){
+    let html=`<div class="view sec-atem"><div class="hero hero-atem"><div class="ornament"></div><div class="he">${ATEM.length} Atem-Programme</div><h2>Atempausen</h2><p>finde deinen Rhythmus zurück</p></div>${erkl('atem')}`;
+    html+=ATEM.map(a=>`<div class="lib-item" tabindex="0" role="button" onclick="selectAtem('${a.id}')"><div class="li-theme">Atem</div><h3>${a.name}</h3><div class="li-aff">${a.beschreibung}</div></div>`).join('');
+    return html+`</div>`;
+  }
+  const prog=ATEM.find(a=>a.id===atemSel);
+  return `<div class="view sec-atem"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="atemSel=null;render('atem')">← Programme</button></div>
+    <div class="hero hero-atem"><h2>${prog.name}</h2><p>${prog.beschreibung}</p></div>
+    <div class="card player"><div class="orb" id="orb"></div><div class="player"><div class="pword" id="bword">Bereit?</div></div>
+      <div class="actions" style="justify-content:center"><button class="btn solid" id="bstart" style="flex:none;min-width:150px" onclick="toggleBreathe()">Beginnen</button><button class="btn" id="soundBtn" style="flex:none;min-width:130px" onclick="toggleBreathSound()">Klang an</button></div></div></div>`;
+}
+function selectAtem(id){atemSel=id;render('atem');}
+function toggleBreathe(){const b=document.getElementById('bstart');if(breatheTimer){stopBreathe();if(b)b.textContent="Beginnen";return;}if(b)b.textContent="Stopp";runBreathe();}
+function runBreathe(){const prog=ATEM.find(a=>a.id===atemSel)||ATEM[2];const phases=prog.phases;const orb=document.getElementById('orb'),word=document.getElementById('bword');if(!orb)return;let p=0;
+  (function step(){if(!document.getElementById('orb')){stopBreathe();return;}const ph=phases[p%phases.length];if(word)word.textContent=ph[0];orb.className="orb"+(ph[2]?" "+ph[2]:"");breatheTimer=setTimeout(()=>{p++;step();},ph[1]);})();}
+function stopBreathe(){if(breatheTimer){clearTimeout(breatheTimer);breatheTimer=null;}const orb=document.getElementById('orb'),w=document.getElementById('bword');if(orb)orb.className="orb";if(w&&w.textContent!=="Bereit?")w.textContent="Schön. ✦";}
+/* Atem-Klang (einfacher Drone) */
+let breathSound=null;
+function toggleBreathSound(){const btn=document.getElementById('soundBtn');if(breathSound){breathSound.stop();breathSound=null;if(btn)btn.textContent="Klang an";return;}breathSound=makeKlang('drone');if(btn)btn.textContent="Klang aus";}
+/* ===== KLANGRAUM ===== */
+let audioCtx=null,audioNodes=null,playingKlang=null;
+function ensureAudio(){audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx;}
+function noiseBuffer(ctx){const b=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;return b;}
+function makeKlang(typ){
+  const ctx=ensureAudio();const out=ctx.createGain();out.gain.value=0;out.connect(ctx.destination);const stops=[];let alive={v:true};
+  if(typ==='drone'){[110,165,220].forEach((f,i)=>{const o=ctx.createOscillator();o.type='sine';o.frequency.value=f;o.detune.value=i*3;const g=ctx.createGain();g.gain.value=0.3;o.connect(g);g.connect(out);o.start();stops.push(o);});out.gain.linearRampToValueAtTime(0.06,ctx.currentTime+2);}
+  else if(typ==='regen'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=1400;s.connect(hp);hp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.10,ctx.currentTime+1.5);}
+  else if(typ==='ozean'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=480;s.connect(lp);lp.connect(out);s.start();stops.push(s);const lfo=ctx.createOscillator();lfo.frequency.value=0.12;const lg=ctx.createGain();lg.gain.value=0.07;lfo.connect(lg);lg.connect(out.gain);lfo.start();stops.push(lfo);out.gain.value=0.10;}
+  else if(typ==='wald'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=820;bp.Q.value=0.7;s.connect(bp);bp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.07,ctx.currentTime+1.5);
+    const bird=()=>{if(!alive.v)return;const o=ctx.createOscillator();o.type='sine';o.frequency.value=1700+Math.random()*1300;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;g.gain.linearRampToValueAtTime(0.05,t+0.05);g.gain.linearRampToValueAtTime(0,t+0.22);o.start(t);o.stop(t+0.26);setTimeout(bird,1800+Math.random()*2600);};setTimeout(bird,1500);}
+  else if(typ==='herz'){out.gain.value=0.5;const beat=()=>{const o=ctx.createOscillator();o.type='sine';o.frequency.value=58;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;g.gain.linearRampToValueAtTime(0.6,t+0.04);g.gain.linearRampToValueAtTime(0,t+0.18);o.start(t);o.stop(t+0.2);};const loop=()=>{if(!alive.v)return;beat();setTimeout(beat,250);setTimeout(loop,1100);};loop();}
+  return {stop(){alive.v=false;try{out.gain.setTargetAtTime(0,ctx.currentTime,0.3);}catch(e){}setTimeout(()=>stops.forEach(s=>{try{s.stop();}catch(e){}}),400);}};
+}
+function stopKlang(){if(audioNodes){try{audioNodes.stop();}catch(e){}audioNodes=null;}playingKlang=null;document.querySelectorAll('.sound').forEach(s=>s.classList.remove('playing'));updateKlangBar();}
+function toggleKlang(typ,el){if(playingKlang===typ){stopKlang();return;}stopKlang();audioNodes=makeKlang(typ);playingKlang=typ;document.querySelectorAll('.sound').forEach(s=>s.classList.remove('playing'));if(el)el.classList.add('playing');updateKlangBar();}
+function updateKlangBar(){const bar=document.getElementById('klangBar');if(!bar)return;if(playingKlang){const k=KLANG.find(x=>x.typ===playingKlang);bar.style.display='flex';const n=document.getElementById('klangName');if(n)n.innerHTML=(k?k.icon+' '+k.name:'Klang')+' läuft';}else bar.style.display='none';}
+function viewKlang(){
+  let html=`<div class="view sec-klang"><div class="hero hero-klang"><div class="ornament"></div><div class="he">${KLANG.length} Klangwelten</div><h2>Klangraum</h2><p>live erzeugt – tippe an, um zu hören</p></div>${erkl('klang')}<div class="sound-grid">`;
+  html+=KLANG.map(k=>`<div class="sound ${playingKlang===k.typ?'playing':''}" tabindex="0" role="button" onclick="toggleKlang('${k.typ}',this)"><div class="si">${k.icon}</div><div class="sn">${k.name}</div><div class="sd">${k.beschreibung}</div></div>`).join('');
+  html+=`</div><div class="section-sub" style="margin-top:18px">Tipp: kombiniere den Klang mit einer Meditation oder Atempause.</div></div>`;
+  return html;
+}
+/* ===== MOND ===== */
+function moonSVG(frac){const r=70,cx=75,cy=75;const a=frac*2*Math.PI;const rx=r*Math.cos(a);const sl=(frac<0.5)?1:0;const st=(rx>0)?1-sl:sl;const top=cy-r,bot=cy+r;const path="M "+cx+" "+top+" A "+r+" "+r+" 0 0 "+sl+" "+cx+" "+bot+" A "+Math.abs(rx).toFixed(1)+" "+r+" 0 0 "+st+" "+cx+" "+top+" Z";return '<svg class="moon-svg" viewBox="0 0 150 150" width="150" height="150" aria-hidden="true"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="#2a2540"/><path d="'+path+'" fill="#ece4f5"/><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"/></svg>';}
+function viewMond(){
+  const mi=moonInfo(heute);const ph=MOND_PHASEN[mi.idx];const rit=RITUALE.find(r=>r.id===ph.ritual);
+  const waxing=mi.frac<0.5;const shadowW=Math.abs(100-mi.illum);
+  const shadowStyle=waxing?`right:0;width:${shadowW}%`:`left:0;width:${shadowW}%`;
+  return `<div class="view sec-mond"><div class="hero hero-mond"><div class="ornament"></div><div class="he">Heute am Himmel</div><h2>${ph.name}</h2><p>${mi.illum}% beleuchtet</p></div>${erkl('mond')}
+    <div class="card" style="text-align:center">${moonSVG(mi.frac)}
+      <div class="block-label">Bedeutung</div><div>${ph.bedeutung}</div>
+      <div class="block-label">Praxis für jetzt</div><div style="font-style:italic">${ph.praxis}</div>
+      ${rit?`<div class="actions"><button class="btn solid" onclick="openRitual('${rit.id}')">Passendes Ritual: ${rit.titel}</button></div>`:''}
+    </div>
+    <div class="card"><div class="block-label" style="text-align:center">Der Mondzyklus</div><div class="step-list">${MOND_PHASEN.map((p,i)=>`<div class="rstep" role="button" tabindex="0" style="cursor:pointer;${i===mi.idx?'color:var(--accent-deep)':''}" onclick="openMondPhase(${i})">${p.name}${i===mi.idx?' · jetzt':''} →</div>`).join('')}</div></div></div>`;
+}
+/* ===== REISEN ===== */
+function viewReisen(){
+  let html=`<div class="view sec-praxis"><div class="hero hero-reisen"><div class="ornament"></div><div class="he">${REISEN.length} mehrtägige Wege</div><h2>Reisen</h2><p>ein Thema, Schritt für Schritt durch die Tage</p></div>${erkl('reisen')}`;
+  html+=REISEN.map(r=>{const prog=state.journey[r.id]||0;const pct=Math.round(prog/r.tage.length*100);
+    return `<div class="journey"><h3>${r.titel}</h3><p>${r.beschreibung}</p><div class="progress"><i style="width:${pct}%"></i></div><div class="j-meta"><span>${prog} von ${r.tage.length} Tagen</span><span>${pct}%</span></div><div class="actions"><button class="btn gold" onclick="openReise('${r.id}')">${prog===0?'Reise beginnen':prog>=r.tage.length?'Noch einmal':'Fortsetzen'}</button></div></div>`;}).join('');
+  return html+`</div>`;
+}
+function openReise(rid){const r=REISEN.find(x=>x.id===rid);current='reise';renderReiseTag(rid,Math.min(state.journey[rid]||0,r.tage.length-1));}
+function renderReiseTag(rid,idx){const r=REISEN.find(x=>x.id===rid);const t=r.tage[idx];const last=idx>=r.tage.length-1;
+  document.getElementById('app').innerHTML=`<div class="view sec-praxis"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('reisen')">← Reisen</button></div>
+    <div class="section-title">${r.titel}</div><div class="section-sub">${idx+1} / ${r.tage.length}</div>
+    <div class="card"><h2>${t.titel}</h2><div class="affirm">„${t.affirmation}"</div><div class="block-label">Sanfte Praxis</div><div>${t.praxis}</div><div class="block-label">Frage für dich</div><div style="font-style:italic">${t.frage}</div>
+    <div class="actions">${idx>0?`<button class="btn" onclick="renderReiseTag('${rid}',${idx-1})">← Vorheriger</button>`:''}<button class="btn gold" onclick="reiseWeiter('${rid}',${idx})">${last?'Reise abschließen ✦':'Tag abschließen →'}</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+function reiseWeiter(rid,idx){const r=REISEN.find(x=>x.id===rid);state.journey[rid]=Math.max(state.journey[rid]||0,idx+1);store.set("journey",state.journey);if(idx+1<r.tage.length)renderReiseTag(rid,idx+1);else{markPractice("Reise abgeschlossen ✦");render('reisen');}}
+/* ===== Tageskarte ===== */
+let drawnId=null;
+function openDrawCard(){const ov=document.createElement('div');ov.className='overlay';ov.id='drawOverlay';
+  ov.innerHTML=`<div class="modal"><h2 style="font-size:22px">Ziehe deine Tageskarte</h2><p>Atme ein, tippe auf die Karte – und lass dich überraschen.</p><div id="drawSlot"></div><div id="drawActions"></div><button class="skip" onclick="closeOverlay(this)">schließen</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});showCardBack();}
+function showCardBack(){const s=document.getElementById('drawSlot');if(!s)return;s.innerHTML=`<div class="draw-card draw-back" tabindex="0" role="button" onclick="revealCard()"></div>`;const a=document.getElementById('drawActions');if(a)a.innerHTML='';}
+function revealCard(){drawnId=INHALTE[Math.floor(Math.random()*INHALTE.length)].id;const it=INHALTE.find(i=>i.id===drawnId);const s=document.getElementById('drawSlot');if(s)s.innerHTML=`<div class="draw-card draw-face"><div class="dp">${it.thema}</div><div class="dh">${it.titel}</div><div class="da">„${it.affirmation}"</div></div>`;const a=document.getElementById('drawActions');if(a)a.innerHTML=`<div class="actions"><button class="btn" onclick="showCardBack()">Nochmal ziehen</button><button class="btn gold" onclick="openImpulsFromDraw()">Ganz öffnen</button></div>`;}
+function openImpulsFromDraw(){const o=document.getElementById('drawOverlay');if(o)o.remove();openImpuls(drawnId);}
+/* ===== Affirmations-Bild ===== */
+function drawSpaced(x,t,cx,y,sp,font,color){x.save();x.font=font;x.fillStyle=color;x.textAlign="left";x.textBaseline="alphabetic";let w=0;for(const ch of t)w+=x.measureText(ch).width+sp;w-=sp;let sx=cx-w/2;for(const ch of t){x.fillText(ch,sx,y);sx+=x.measureText(ch).width+sp;}x.restore();}
+function wrapText(x,text,maxw){const words=text.split(' ');let lines=[],line='';for(const w of words){const test=line?line+' '+w:w;if(x.measureText(test).width>maxw&&line){lines.push(line);line=w;}else line=test;}if(line)lines.push(line);return lines;}
+const SHARE_STYLES={hell:{bg:[[0,"#efe3f3"],[.55,"#eee7f0"],[1,"#e3efe9"]],glow:"rgba(205,180,230,.5)",r1:"rgba(138,118,168,.85)",r2:"rgba(176,141,87,.7)",brand:"#8a76a8",theme:"#b08d57",aff:"#5a4f6b",foot:"#6f6678"},dunkel:{bg:[[0,"#241f30"],[.55,"#1f1b29"],[1,"#1a2220"]],glow:"rgba(150,125,190,.45)",r1:"rgba(205,180,230,.85)",r2:"rgba(216,184,126,.8)",brand:"#cdbbe6",theme:"#d8b87e",aff:"#ece6f0",foot:"#b3a9bd"},gold:{bg:[[0,"#f6ecde"],[.55,"#f3e6d3"],[1,"#efe0cf"]],glow:"rgba(205,170,120,.4)",r1:"rgba(176,141,87,.9)",r2:"rgba(138,118,168,.6)",brand:"#9a7b46",theme:"#8a76a8",aff:"#5b4a33",foot:"#8a7a64"}};
+function drawShareCard(aff,thema,style){const s=SHARE_STYLES[style]||SHARE_STYLES.hell;const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,W,H);s.bg.forEach(b=>g.addColorStop(b[0],b[1]));x.fillStyle=g;x.fillRect(0,0,W,H);
+  const rg=x.createRadialGradient(W*0.5,H*0.30,40,W*0.5,H*0.30,540);rg.addColorStop(0,s.glow);rg.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=rg;x.fillRect(0,0,W,H);
+  x.strokeStyle=s.r1;x.lineWidth=4;x.beginPath();x.arc(W/2,300,72,0,Math.PI*2);x.stroke();x.strokeStyle=s.r2;x.lineWidth=2;x.beginPath();x.arc(W/2,300,46,0,Math.PI*2);x.stroke();
+  drawSpaced(x,"SEELENRAUM",W/2,470,8,"30px Georgia",s.brand);drawSpaced(x,thema.toUpperCase(),W/2,520,5,"22px Arial",s.theme);
+  x.font="italic 56px Georgia";x.fillStyle=s.aff;x.textAlign="center";x.textBaseline="middle";const lines=wrapText(x,"„"+aff+"\"",W-200);const lineH=82;let sy=770-(lines.length-1)*lineH/2;lines.forEach((ln,i)=>x.fillText(ln,W/2,sy+i*lineH));
+  drawSpaced(x,"deine tägliche Praxis",W/2,H-96,3,"26px Georgia",s.foot);return c.toDataURL("image/png");}
+let shareURL=null,shareAff="",shareThema="",shareStyle="hell";
+function openShareImage(aff,thema){shareAff=aff;shareThema=thema;shareStyle="hell";shareURL=drawShareCard(aff,thema,"hell");
+  let canFileShare=false;try{canFileShare=!!(navigator.canShare&&navigator.canShare({files:[new File([new Blob([""],{type:"image/png"})],"a.png",{type:"image/png"})]}));}catch(e){canFileShare=false;}
+  const ov=document.createElement('div');ov.className='overlay';
+  ov.innerHTML=`<div class="modal"><h2 style="font-size:22px">Dein Affirmations-Bild</h2><p>Perfekt für deine Instagram-Story. Wähle einen Stil, speichere oder teile.</p>
+    <div class="style-chips"><button class="active" onclick="setShareStyle('hell',this)">Hell</button><button onclick="setShareStyle('dunkel',this)">Dunkel</button><button onclick="setShareStyle('gold',this)">Gold</button></div>
+    <img class="preview" id="sharePrev" src="${shareURL}" alt="Affirmation">
+    ${canFileShare?'<button class="btn gold" onclick="shareImageFile()">Direkt teilen</button>':''}
+    <button class="btn" onclick="downloadShare()">Bild speichern</button><button class="skip" onclick="closeOverlay(this)">schließen</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
+function setShareStyle(st,btn){shareStyle=st;shareURL=drawShareCard(shareAff,shareThema,st);const img=document.getElementById('sharePrev');if(img)img.src=shareURL;document.querySelectorAll('.style-chips button').forEach(b=>b.classList.toggle('active',b===btn));}
+function closeOverlay(el){const o=el.closest('.overlay');if(o)o.remove();}
+function downloadShare(){const a=document.createElement('a');a.href=shareURL;a.download="seelenraum-affirmation.png";document.body.appendChild(a);a.click();a.remove();toast("Bild gespeichert ✦");}
+function dataURLtoBlob(u){const a=u.split(',');const m=a[0].match(/:(.*?);/)[1];const b=atob(a[1]);let n=b.length;const arr=new Uint8Array(n);while(n--)arr[n]=b.charCodeAt(n);return new Blob([arr],{type:m});}
+async function shareImageFile(){try{const f=new File([dataURLtoBlob(shareURL)],"seelenraum.png",{type:"image/png"});await navigator.share({files:[f],text:"— Seelenraum"});}catch(e){}}
+/* ===== KOSMOS-DATEN ===== */
+const STERNZEICHEN=[
+  {id:"wid",name:"Widder",sym:"&#9800;",von:[3,21],bis:[4,19],element:"Feuer",planet:"Mars",keys:"Mut · Tatkraft · Neuanfang",staerke:"Du gehst voran, wo andere zögern. Deine Energie entzündet Bewegung.",wachstum:"Lerne, auch mal innezuhalten – nicht jeder Funke muss sofort lodern.",affirm:"Ich vertraue meinem Mut und gehe meinen Weg."},
+  {id:"sti",name:"Stier",sym:"&#9801;",von:[4,20],bis:[5,20],element:"Erde",planet:"Venus",keys:"Beständigkeit · Genuss · Sicherheit",staerke:"Du schaffst Halt und Schönheit. Auf dich ist Verlass.",wachstum:"Erlaube dir Veränderung – nicht alles Sichere ist auch lebendig.",affirm:"Ich ruhe in mir und darf trotzdem wachsen."},
+  {id:"zwi",name:"Zwillinge",sym:"&#9802;",von:[5,21],bis:[6,20],element:"Luft",planet:"Merkur",keys:"Neugier · Austausch · Leichtigkeit",staerke:"Dein Geist ist schnell und verbindet Welten. Du bringst Menschen ins Gespräch.",wachstum:"Übe Tiefe – nicht jede Frage braucht sofort die nächste.",affirm:"Ich darf neugierig sein und trotzdem ankommen."},
+  {id:"kre",name:"Krebs",sym:"&#9803;",von:[6,21],bis:[7,22],element:"Wasser",planet:"Mond",keys:"Fürsorge · Gefühl · Geborgenheit",staerke:"Du fühlst tief und schenkst anderen ein Zuhause.",wachstum:"Setze auch dir selbst liebevolle Grenzen.",affirm:"Ich darf fühlen und mich gleichzeitig schützen."},
+  {id:"loe",name:"Löwe",sym:"&#9804;",von:[7,23],bis:[8,22],element:"Feuer",planet:"Sonne",keys:"Strahlkraft · Herz · Großzügigkeit",staerke:"Du wärmst Räume und inspirierst durch dein offenes Herz.",wachstum:"Dein Wert hängt nicht an Applaus – du leuchtest auch leise.",affirm:"Ich darf strahlen, einfach weil ich bin."},
+  {id:"jun",name:"Jungfrau",sym:"&#9805;",von:[8,23],bis:[9,22],element:"Erde",planet:"Merkur",keys:"Klarheit · Hingabe · Sorgfalt",staerke:"Du siehst, was andere übersehen, und bringst Ordnung ins Chaos.",wachstum:"Auch unperfekt ist genug – sei sanfter mit dir.",affirm:"Ich darf Fehler machen und bleibe wertvoll."},
+  {id:"waa",name:"Waage",sym:"&#9806;",von:[9,23],bis:[10,22],element:"Luft",planet:"Venus",keys:"Harmonie · Schönheit · Ausgleich",staerke:"Du schaffst Frieden und siehst beide Seiten.",wachstum:"Triff Entscheidungen für dich – nicht nur für die Harmonie.",affirm:"Ich darf wählen, was mir guttut."},
+  {id:"sko",name:"Skorpion",sym:"&#9807;",von:[10,23],bis:[11,21],element:"Wasser",planet:"Pluto",keys:"Tiefe · Wandlung · Intensität",staerke:"Du gehst dorthin, wo es echt wird, und verwandelst Dunkles in Kraft.",wachstum:"Vertrauen darf wachsen – nicht alles ist Kontrolle.",affirm:"Ich darf mich wandeln und loslassen."},
+  {id:"sch",name:"Schütze",sym:"&#9808;",von:[11,22],bis:[12,21],element:"Feuer",planet:"Jupiter",keys:"Freiheit · Weite · Sinn",staerke:"Du suchst Wahrheit und steckst andere mit Lebensfreude an.",wachstum:"Bleib auch mal – nicht jede Weite liegt in der Ferne.",affirm:"Ich folge meiner Sehnsucht nach Sinn."},
+  {id:"ste",name:"Steinbock",sym:"&#9809;",von:[12,22],bis:[1,19],element:"Erde",planet:"Saturn",keys:"Disziplin · Verantwortung · Geduld",staerke:"Du baust mit Geduld, was Bestand hat. Auf deine Schultern kann man bauen.",wachstum:"Erlaube dir Leichtigkeit – du musst nicht alles tragen.",affirm:"Ich darf streben und trotzdem ruhen."},
+  {id:"was",name:"Wassermann",sym:"&#9810;",von:[1,20],bis:[2,18],element:"Luft",planet:"Uranus",keys:"Freigeist · Vision · Menschlichkeit",staerke:"Du denkst voraus und stehst für das Andere, Neue, Gerechte.",wachstum:"Lass auch Nähe zu – nicht nur Ideen, auch Herzen.",affirm:"Ich darf anders sein und dazugehören."},
+  {id:"fis",name:"Fische",sym:"&#9811;",von:[2,19],bis:[3,20],element:"Wasser",planet:"Neptun",keys:"Intuition · Mitgefühl · Traum",staerke:"Du spürst das Unsichtbare und schenkst grenzenloses Mitgefühl.",wachstum:"Erde dich – Träume brauchen auch Boden.",affirm:"Ich vertraue meiner Intuition und bleibe geerdet."}
+];
+const NUM_BEDEUTUNG={
+  1:{titel:"Die Pionierin",bedeutung:"Du bist hier, um zu führen und Neues zu beginnen. Unabhängigkeit und Mut sind dein Weg.",staerke:"Initiative, Willenskraft, Originalität.",affirm:"Ich vertraue meiner Kraft, voranzugehen."},
+  2:{titel:"Die Diplomatin",bedeutung:"Dein Weg ist Verbindung. Du heilst durch Sensibilität, Geduld und Zusammenarbeit.",staerke:"Empathie, Harmonie, Intuition.",affirm:"Ich darf sanft sein – darin liegt meine Stärke."},
+  3:{titel:"Die Schöpferin",bedeutung:"Ausdruck ist deine Sprache. Du bringst Freude, Kreativität und Leichtigkeit in die Welt.",staerke:"Kreativität, Kommunikation, Optimismus.",affirm:"Ich teile meine Freude und mein Licht."},
+  4:{titel:"Die Baumeisterin",bedeutung:"Du schaffst Fundamente. Mit Fleiß und Beständigkeit machst du Träume tragfähig.",staerke:"Stabilität, Disziplin, Verlässlichkeit.",affirm:"Schritt für Schritt baue ich, was bleibt."},
+  5:{titel:"Die Abenteurerin",bedeutung:"Freiheit und Wandel sind dein Element. Du lebst durch Erfahrung und Bewegung.",staerke:"Anpassung, Mut, Lebenslust.",affirm:"Ich umarme den Wandel als meinen Lehrer."},
+  6:{titel:"Die Fürsorgliche",bedeutung:"Liebe und Verantwortung führen dich. Du nährst, schützt und schaffst Schönheit.",staerke:"Hingabe, Wärme, Harmonie.",affirm:"Ich gebe Liebe und empfange sie ebenso."},
+  7:{titel:"Die Suchende",bedeutung:"Du gehst nach innen. Weisheit, Spiritualität und Wahrheit sind dein Pfad.",staerke:"Tiefe, Intuition, Erkenntnis.",affirm:"In der Stille finde ich meine Antworten."},
+  8:{titel:"Die Macherin",bedeutung:"Fülle und Kraft sind dein Feld. Du manifestierst im Außen, was du innen weißt.",staerke:"Führung, Manifestation, Ausdauer.",affirm:"Ich darf Fülle empfangen und gestalten."},
+  9:{titel:"Die Humanistin",bedeutung:"Mitgefühl und Vollendung prägen dich. Du dienst dem Größeren und lässt los.",staerke:"Großzügigkeit, Weisheit, Vergebung.",affirm:"Ich öffne mein Herz für die ganze Welt."},
+  11:{titel:"Die Inspiratorin (Meisterzahl)",bedeutung:"Hohe Intuition und Inspiration. Du bist ein Kanal für Licht – sensibel und visionär.",staerke:"Erleuchtung, Intuition, Inspiration.",affirm:"Ich vertraue meiner inneren Stimme vollkommen."},
+  22:{titel:"Die Visionärin (Meisterzahl)",bedeutung:"Die Meister-Baumeisterin: Du kannst große Visionen in die Realität bringen.",staerke:"Vision, Manifestation, Wirkung.",affirm:"Ich verwandle große Träume in Wirklichkeit."},
+  33:{titel:"Die Heilerin (Meisterzahl)",bedeutung:"Der Meister-Lehrer: bedingungslose Liebe und Heilung im Dienst aller.",staerke:"Heilung, Hingabe, Mitgefühl.",affirm:"Ich diene aus Liebe und heile durch mein Sein."}
+};
+const MANI_METHODEN=[
+  {id:"m369",titel:"Die 369-Methode",dauer:"Täglich",beschreibung:"Schreibe deinen Wunsch dreimal morgens, sechsmal mittags, neunmal abends.",steps:["Formuliere deinen Wunsch positiv und im Präsens (als wäre er schon da).","Schreibe ihn morgens 3-mal mit Gefühl auf.","Mittags schreibe ihn 6-mal.","Abends schreibe ihn 9-mal.","Spüre dabei jedes Mal, wie es sich anfühlt, dass es wahr ist.","Wiederhole es über mehrere Tage."],schluss:"Die Zahlen 3-6-9 bündeln deine Absicht und richten dich täglich neu aus."},
+  {id:"mskript",titel:"Skripting",dauer:"10 Min",beschreibung:"Schreibe dein Wunschleben im Präsens, als würdest du es heute schon leben.",steps:["Nimm dir ein ruhiges Blatt und Zeit.","Schreibe in der Gegenwart: Ich bin … Ich habe … Ich fühle …","Beschreibe einen Tag in deinem Wunschleben in allen Details.","Fühle die Dankbarkeit, als wäre es bereits real.","Lies es dir mit Freude noch einmal vor."],schluss:"Dein Unterbewusstsein unterscheidet nicht zwischen lebhaft Vorgestelltem und Erlebtem."},
+  {id:"mvis",titel:"Visualisierung",dauer:"5 Min",beschreibung:"Erlebe deinen Wunsch innerlich mit allen Sinnen.",steps:["Schließe die Augen und atme ruhig.","Stell dir vor, dein Wunsch ist erfüllt.","Was siehst du? Was hörst du? Was fühlst du auf der Haut?","Verweile in der Freude dieses Moments.","Lächle und öffne langsam die Augen."],schluss:"Was du regelmäßig fühlst, ziehst du in dein Leben."},
+  {id:"mdank",titel:"Dankbarkeit im Voraus",dauer:"3 Min",beschreibung:"Danke für deinen Wunsch, als wäre er schon eingetroffen.",steps:["Lege eine Hand aufs Herz.","Sag: Danke, dass … (dein Wunsch) … in mein Leben gekommen ist.","Spüre die Wärme echter Dankbarkeit.","Wiederhole es für drei Wünsche."],schluss:"Dankbarkeit ist die Schwingung des Empfangens."},
+  {id:"mspiegel",titel:"Spiegel-Affirmationen",dauer:"2 Min",beschreibung:"Sprich dir selbst in die Augen, was du werden möchtest.",steps:["Stell dich vor einen Spiegel.","Schau dir freundlich in die Augen.","Sprich deine Affirmation laut und mit Gefühl.","Wiederhole sie drei- bis fünfmal.","Lächle dir zum Abschluss zu."],schluss:"Niemand prägt dich so sehr wie deine eigene Stimme."},
+  {id:"mloslass",titel:"Loslassen & Vertrauen",dauer:"5 Min",beschreibung:"Übergib deinen Wunsch und vertraue dem richtigen Timing.",steps:["Schreibe deinen Wunsch ein letztes Mal auf.","Sag: Ich gebe dies in größere Hände als meine.","Atme tief und lass die Anspannung los.","Vertraue, dass es zur richtigen Zeit kommt – oder etwas Besseres.","Geh in deinen Tag, leicht und offen."],schluss:"Festhalten verengt, Vertrauen öffnet. Das Loslassen vollendet die Manifestation."}
+];
+const MANI_AFFIRM=[
+  "Ich bin ein Magnet für Fülle und gute Dinge.",
+  "Das Leben unterstützt mich auf jedem Schritt.",
+  "Ich verdiene es, meine Träume zu leben.",
+  "Alles, was ich brauche, kommt zur richtigen Zeit zu mir.",
+  "Ich öffne mich für unerwartete Wunder.",
+  "Geld und Chancen fließen mühelos in mein Leben.",
+  "Ich vertraue dem Plan, der größer ist als ich.",
+  "Ich bin bereit, Großes zu empfangen.",
+  "Meine Gedanken erschaffen meine Wirklichkeit.",
+  "Ich bin im Einklang mit meinem höchsten Weg.",
+  "Dankbarkeit zieht noch mehr Gutes an.",
+  "Ich lasse los und vertraue dem Leben."
+];
+const CHAKREN=[
+  {id:"c1",name:"Wurzelchakra",skt:"Muladhara",farbe:"#c0392b",ort:"Beckenboden",thema:"Sicherheit · Urvertrauen · Erdung",balanciert:"Du fühlst dich sicher, geerdet und im Leben willkommen.",blockiert:"Angst, Unsicherheit, das Gefühl, nicht genug zu haben.",affirm:"Ich bin sicher. Ich bin gehalten. Ich darf sein.",praxis:"Geh barfuß, spüre den Boden, atme tief in den Bauch."},
+  {id:"c2",name:"Sakralchakra",skt:"Svadhisthana",farbe:"#e67e22",ort:"Unterbauch",thema:"Lust · Kreativität · Gefühl",balanciert:"Du fühlst Lebensfreude, Kreativität und gesunde Sinnlichkeit.",blockiert:"Gefühlskälte, Schuld, blockierte Kreativität.",affirm:"Ich erlaube mir zu fühlen und zu genießen.",praxis:"Bewege deine Hüften, tanze, schaffe etwas Schönes."},
+  {id:"c3",name:"Solarplexus",skt:"Manipura",farbe:"#f1c40f",ort:"Oberbauch",thema:"Wille · Selbstwert · Kraft",balanciert:"Du stehst in deiner Kraft, selbstbewusst und klar.",blockiert:"Selbstzweifel, Kontrollverlust oder Kontrollzwang.",affirm:"Ich bin stark. Ich vertraue meiner Kraft.",praxis:"Atme in den Oberbauch und sag dreimal: Ich darf."},
+  {id:"c4",name:"Herzchakra",skt:"Anahata",farbe:"#27ae60",ort:"Mitte der Brust",thema:"Liebe · Mitgefühl · Verbindung",balanciert:"Du liebst offen – dich und andere – und kannst empfangen.",blockiert:"Verschlossenheit, Groll, Angst vor Nähe.",affirm:"Ich öffne mein Herz für Liebe – auch für mich.",praxis:"Lege beide Hände aufs Herz und atme dort hinein."},
+  {id:"c5",name:"Halschakra",skt:"Vishuddha",farbe:"#2980b9",ort:"Kehle",thema:"Ausdruck · Wahrheit · Stimme",balanciert:"Du sprichst deine Wahrheit klar und liebevoll.",blockiert:"Verschluckte Worte, Angst, gehört zu werden.",affirm:"Ich darf meine Wahrheit sagen.",praxis:"Summe sanft einen Ton und spüre die Kehle vibrieren."},
+  {id:"c6",name:"Stirnchakra",skt:"Ajna",farbe:"#5b4f9e",ort:"zwischen den Augenbrauen",thema:"Intuition · Klarheit · Weisheit",balanciert:"Du vertraust deiner inneren Führung und siehst klar.",blockiert:"Verwirrung, Überdenken, abgeschnittene Intuition.",affirm:"Ich vertraue dem, was ich innerlich weiß.",praxis:"Schließe die Augen, richte den Blick sanft zur Stirnmitte."},
+  {id:"c7",name:"Kronenchakra",skt:"Sahasrara",farbe:"#8e44ad",ort:"Scheitel",thema:"Spiritualität · Einheit · Sinn",balanciert:"Du fühlst dich verbunden mit etwas Größerem.",blockiert:"Sinnlosigkeit, Trennung, Leere.",affirm:"Ich bin Teil von allem. Ich bin geführt.",praxis:"Stell dir ein weißes Licht über deinem Kopf vor, das dich durchströmt."}
+];
+/* ===== KOSMOS-VIEWS ===== */
+function tilesKosmosHtml(){return `<div class="tiles">
+  ${tile('mond',icon('moon'),'Mondzyklen','Phasen & Rituale','linear-gradient(135deg,#8a98c8,#444c73)')}
+  ${tile('astro',icon('orbit'),'Astrologie','12 Sternzeichen','linear-gradient(135deg,#6b5fb0,#2e2658)')}
+  ${tile('num',icon('hash'),'Numerologie','Deine Lebenszahl','linear-gradient(135deg,#c9a85a,#7a6326)')}
+  ${tile('mani',icon('wand'),'Manifestieren','Methoden & Kraft','linear-gradient(135deg,#d98fb0,#a05676)')}
+  ${tile('chakra',icon('chakra'),'Chakren','7 Energiezentren','linear-gradient(135deg,#cf7a5e,#5b8f6a)')}
+</div>`;}
+function viewKosmos(){return `<div class="view sec-kosmos"><div class="hero hero-kosmos"><div class="ornament"></div><div class="he">Dein kosmischer Raum</div><h2>Kosmos</h2><p>Mond, Sterne, Zahlen und die Kraft der Manifestation</p></div>${tilesKosmosHtml()}</div>`;}
+/* Astrologie */
+function sunSign(d){const m=d.getMonth()+1,day=d.getDate();for(const z of STERNZEICHEN){const[vm,vd]=z.von,[bm,bd]=z.bis;if(vm===bm){if(m===vm&&day>=vd&&day<=bd)return z;}else{if((m===vm&&day>=vd)||(m===bm&&day<=bd))return z;}}return STERNZEICHEN[9];}
+function viewAstro(){const cur=sunSign(heute);
+  let html=`<div class="view sec-astro"><div class="hero hero-astro"><div class="ornament"></div><div class="he">Aktuelle Sonnenenergie</div><h2>${cur.sym} ${cur.name}</h2><p>${cur.keys}</p></div>
+    ${erkl('astro')}<div class="section-sub" style="margin-top:6px">Tippe dein Sternzeichen an</div><div class="zodiac">`;
+  html+=STERNZEICHEN.map(z=>`<button class="zsign" onclick="openSign('${z.id}')"><span class="zs">${z.sym}</span><span class="zn">${z.name}</span></button>`).join('');
+  return html+`</div></div>`;}
+function openSign(id){const z=STERNZEICHEN.find(s=>s.id===id);current='signview';
+  document.getElementById('app').innerHTML=`<div class="view sec-astro"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('astro')">← Sternzeichen</button></div>
+    <div class="hero hero-astro"><div class="he">${z.element} · ${z.planet}</div><h2 style="font-size:34px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
+    <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
+      <div class="block-label">Deine Stärke</div><div>${z.staerke}</div>
+      <div class="block-label">Dein Wachstum</div><div>${z.wachstum}</div>
+      <div class="need" style="margin-top:14px"><span>Element: ${z.element}</span><span>Planet: ${z.planet}</span></div>
+      <div class="actions"><button class="btn" onclick="openShareImage('${esc(z.affirm)}','${z.name}')">Als Bild teilen</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+/* Numerologie */
+function reduceNum(n){while(n>9&&n!==11&&n!==22&&n!==33){n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);}return n;}
+function computeLifePath(s){const digits=s.replace(/[^0-9]/g,'');if(digits.length<8)return null;let sum=digits.split('').reduce((a,b)=>a+parseInt(b),0);return reduceNum(sum);}
+let numResult=null;
+function viewNum(){const saved=store.get("birthdate","");const todayNum=reduceNum(todayKey.replace(/[^0-9]/g,'').split('').reduce((a,b)=>a+parseInt(b),0));const tn=NUM_BEDEUTUNG[todayNum];
+  let res="";
+  if(numResult&&NUM_BEDEUTUNG[numResult]){const b=NUM_BEDEUTUNG[numResult];res=`<div class="card"><div class="numbig">${numResult}</div><h2 style="text-align:center">${b.titel}</h2><div class="affirm" style="text-align:center">„${b.affirm}"</div><div class="block-label">Bedeutung</div><div>${b.bedeutung}</div><div class="block-label">Deine Stärken</div><div>${b.staerke}</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(b.affirm)}','Lebenszahl ${numResult}')">Als Bild teilen</button></div></div>`;}
+  return `<div class="view sec-num"><div class="hero hero-num"><div class="ornament"></div><div class="he">Die Sprache der Zahlen</div><h2>Numerologie</h2><p>deine Lebenszahl verrät deinen Seelenweg</p></div>${erkl('num')}
+    <div class="card"><div class="block-label" style="text-align:center">Dein Geburtsdatum</div>
+      <input id="bdIn" type="date" class="search" style="text-align:center" value="${saved}" max="2026-12-31">
+      <div class="actions"><button class="btn solid" onclick="showLifePath()">Lebenszahl berechnen ✦</button></div></div>
+    ${res}
+    <div class="card"><div class="block-label" style="text-align:center">Tagesenergie heute</div><div style="text-align:center"><span class="numday">${todayNum}</span></div><div style="text-align:center;font-style:italic;color:var(--accent-deep)">„${tn.affirm}"</div><div style="text-align:center;margin-top:6px">${tn.bedeutung}</div></div></div>`;}
+function showLifePath(){const el=document.getElementById('bdIn');if(!el||!el.value){toast("Bitte Geburtsdatum wählen");return;}store.set("birthdate",el.value);numResult=computeLifePath(el.value);render('num');}
+/* Manifestieren */
+function viewMani(){
+  let html=`<div class="view sec-mani"><div class="hero hero-mani"><div class="ornament"></div><div class="he">Erschaffe dein Leben</div><h2>Manifestieren</h2><p>Methoden, die deine Absicht ausrichten</p></div>${erkl('mani')}
+    <div class="section-title" style="margin-top:8px">Methoden</div>`;
+  html+=MANI_METHODEN.map(m=>`<div class="lib-item" tabindex="0" role="button" onclick="openMethod('${m.id}')"><span class="li-meta">${m.dauer}</span><div class="li-theme">Methode</div><h3>${m.titel}</h3><div class="li-aff">${m.beschreibung}</div></div>`).join('');
+  html+=`<div class="section-title" style="margin-top:20px">Manifestations-Affirmationen</div><div class="card">`+MANI_AFFIRM.map(a=>`<div style="font-style:italic;color:var(--accent-deep);padding:9px 0;border-bottom:1px solid var(--line)">„${a}"</div>`).join('')+`</div></div>`;
+  return html;}
+function openMethod(id){const m=MANI_METHODEN.find(x=>x.id===id);current='methodview';
+  document.getElementById('app').innerHTML=`<div class="view sec-mani"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('mani')">← Methoden</button></div>
+    <div class="hero hero-mani"><div class="he">${m.dauer}</div><h2>${m.titel}</h2><p>${m.beschreibung}</p></div>
+    <div class="card"><div class="block-label">So geht's</div><div class="step-list">${m.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div><div class="affirm" style="text-align:center;margin-top:18px">„${m.schluss}"</div><div class="actions"><button class="btn solid" onclick="methodDone()">Praxis abgeschlossen ✦</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+function methodDone(){markPractice("Manifestation gestärkt ✦");render('mani');}
+/* Chakren */
+function viewChakra(){
+  let html=`<div class="view sec-chakra"><div class="hero hero-chakra"><div class="ornament"></div><div class="he">7 Energiezentren</div><h2>Chakren</h2><p>bring deine Energie ins Gleichgewicht</p></div>${erkl('chakra')}`;
+  html+=CHAKREN.map(c=>`<div class="lib-item" tabindex="0" role="button" onclick="openChakra('${c.id}')" style="border-left:4px solid ${c.farbe}"><div class="li-theme">${c.skt}</div><h3>${c.name}</h3><div class="li-aff">${c.thema}</div></div>`).join('');
+  return html+`</div>`;}
+function openChakra(id){const c=CHAKREN.find(x=>x.id===id);current='chakraview';
+  document.getElementById('app').innerHTML=`<div class="view sec-chakra"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('chakra')">← Chakren</button></div>
+    <div class="hero" style="background:linear-gradient(135deg,${c.farbe},${c.farbe}99)"><div class="he">${c.skt} · ${c.ort}</div><h2>${c.name}</h2><p>${c.thema}</p></div>
+    <div class="card"><div class="affirm" style="text-align:center">„${c.affirm}"</div>
+      <div class="block-label">Im Gleichgewicht</div><div>${c.balanciert}</div>
+      <div class="block-label">Blockiert</div><div>${c.blockiert}</div>
+      <div class="block-label">Übung zur Öffnung</div><div>${c.praxis}</div>
+      <div class="actions"><button class="btn" onclick="openShareImage('${esc(c.affirm)}','${c.name}')">Als Bild teilen</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+/* Mondphasen-Detail */
+function openMondPhase(idx){const ph=MOND_PHASEN[idx];const rit=RITUALE.find(r=>r.id===ph.ritual);current='mondphase';
+  document.getElementById('app').innerHTML=`<div class="view sec-mond"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('mond')">← Mondzyklen</button></div>
+    <div class="hero hero-mond"><div class="he">Mondphase</div><h2>${ph.name}</h2></div>
+    <div class="card"><div class="block-label">Bedeutung</div><div>${ph.bedeutung}</div><div class="block-label">Praxis</div><div style="font-style:italic">${ph.praxis}</div>${rit?`<div class="actions"><button class="btn solid" onclick="openRitual('${rit.id}')">Passendes Ritual: ${rit.titel}</button></div>`:''}</div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ===== ERKLÄRUNGEN je Bereich ===== */
+const EXPLAIN={
+ impulse:{was:"Impulse sind kurze tägliche Anstöße: eine Affirmation, eine kleine Praxis und eine Frage zum Nachspüren. Sie helfen dir, jeden Tag für einen Moment innezuhalten und bei dir anzukommen.",nutzen:"Lies den Impuls in Ruhe, probiere die kleine Praxis aus und lass die Frage durch deinen Tag wandern. Was dich berührt, kannst du merken oder ins Tagebuch schreiben."},
+ meditationen:{was:"Geführte Meditationen sind angeleitete innere Reisen. Eine ruhige Abfolge von Schritten führt deine Aufmerksamkeit – mal zum Atem, mal zum Herzen, mal zur Ruhe.",nutzen:"Such dir eine Meditation nach Stimmung und Zeit aus. Tippe auf „Beginnen“ und folge den Schritten – automatisch oder in deinem Tempo. Augen schließen erlaubt."},
+ atem:{was:"Bewusstes Atmen ist der schnellste Weg, dein Nervensystem zu beruhigen. Bestimmte Rhythmen (wie 4-7-8) senden deinem Körper das Signal: Du bist sicher.",nutzen:"Wähle ein Programm, folge dem Atem-Orb: größer werden = einatmen, halten, kleiner werden = ausatmen. Schon vier Atemzüge können viel verändern."},
+ rituale:{was:"Rituale sind kleine, bewusste Handlungen mit Bedeutung. Sie geben dem Tag Struktur und Tiefe – vom Morgenstart bis zum Vollmond-Loslassen.",nutzen:"Wähle ein Ritual zum Anlass, leg dir bei Bedarf die wenigen Dinge bereit und folge den Schritten. Am Ende kannst du es als gelebt markieren."},
+ klang:{was:"Klang wirkt direkt auf dein Nervensystem. Gleichmäßige Klangwelten helfen dem Geist, zur Ruhe zu kommen – ganz ohne Worte.",nutzen:"Tippe eine Klangwelt an, um sie zu starten. Der Klang läuft weiter, auch wenn du in einen anderen Bereich wechselst – ideal als Begleitung zu Meditation oder Tagebuch."},
+ reisen:{was:"Reisen sind mehrtägige Programme zu einem Thema. Statt allem auf einmal gehst du Tag für Tag einen sanften Schritt – so entsteht echte Veränderung.",nutzen:"Beginne eine Reise und komm täglich für einen Tagesschritt zurück. Dein Fortschritt wird gespeichert, du kannst jederzeit weitermachen."},
+ mond:{was:"Der Mond durchläuft in rund 29 Tagen acht Phasen. Seit jeher richten Menschen ihr Tun danach aus: Neumond für Anfänge, Vollmond für Fülle und Loslassen.",nutzen:"Sieh deine aktuelle Mondphase und ihre Bedeutung. Tippe eine Phase an, um zu erfahren, was jetzt gut tut – mit passendem Ritual."},
+ astro:{was:"Astrologie deutet die Stellung von Sonne, Mond und Planeten zur Zeit deiner Geburt. Dein Sternzeichen (Sonnenzeichen) beschreibt deine Grundenergie und deinen Charakterkern.",nutzen:"Oben siehst du die aktuelle Sonnenenergie. Tippe dein Sternzeichen an, um deine Stärken, dein Wachstumsthema und deine Affirmation zu entdecken."},
+ num:{was:"Numerologie sieht in Zahlen Bedeutung. Deine Lebenszahl entsteht aus deinem Geburtsdatum und beschreibt deinen Seelenweg – wofür du hier bist.",nutzen:"Gib dein Geburtsdatum ein und berechne deine Lebenszahl. Lies, was sie über dich verrät. Die Tagesenergie zeigt die Schwingung des heutigen Tages."},
+ mani:{was:"Manifestieren heißt, das Innere bewusst auszurichten, um Gewünschtes ins Leben zu ziehen. Gedanken, Gefühl und Handlung wirken zusammen.",nutzen:"Wähle eine Methode (z. B. 369 oder Skripting) und folge den Schritten. Nutze die Affirmationen täglich. Wichtig ist das Gefühl, nicht die Technik."},
+ chakra:{was:"Chakren sind sieben Energiezentren entlang der Wirbelsäule. Jedes steht für ein Lebensthema – von Sicherheit (Wurzel) bis Spiritualität (Krone).",nutzen:"Tippe ein Chakra an, um zu erfahren, wofür es steht, wie sich Balance und Blockade anfühlen – und mit welcher Übung du es sanft öffnest."},
+ kristalle:{was:"Kristalle sind seit Jahrtausenden Begleiter für Heilung und Intention. Jeder Stein trägt eine eigene Energie – als Erinnerung und Fokus für dein Inneres.",nutzen:"Wähle einen Stein nach deinem Thema. Lies seine Wirkung und Anwendung. Du kannst ihn tragen, halten oder einfach als Symbol für deine Absicht nutzen."},
+ engel:{was:"Engelzahlen sind sich wiederholende Zahlenfolgen (wie 111 oder 444), die dir auffällig oft begegnen. Viele deuten sie als sanfte Botschaften und Bestätigung.",nutzen:"Wenn dir eine Zahl immer wieder begegnet, schau hier nach ihrer Bedeutung. Nimm die Botschaft als liebevollen Hinweis – nicht als Vorschrift."},
+ tier:{was:"Krafttiere sind symbolische Begleiter aus vielen spirituellen Traditionen. Jedes Tier verkörpert eine Qualität, die dich gerade stärken möchte.",nutzen:"Lass dich von einem Tier ansprechen oder lies, welche Eigenschaft du gerade brauchst. Nimm seine Botschaft als Spiegel und Ermutigung."},
+ wissen:{was:"Die Wissen-Bibliothek erklärt die Grundlagen – verständlich und ohne Vorwissen. Hier verstehst du, was hinter den Praktiken steckt.",nutzen:"Wähle ein Thema und lies in Ruhe. Du musst nichts glauben – nimm, was sich für dich stimmig anfühlt, und lass den Rest da."}
+};
+function erkl(a){const e=EXPLAIN[a];if(!e)return'';return `<div class="card erkl"><div class="block-label">Was ist das?</div><div>${e.was}</div><div class="block-label">So nutzt du diesen Bereich</div><div>${e.nutzen}</div></div>`;}
+/* ===== KRISTALLE ===== */
+const KRISTALLE=[
+ {id:"kr1",name:"Rosenquarz",farbe:"#e8a7b8",chakra:"Herz",wirkung:"Der Stein der bedingungslosen Liebe. Er öffnet das Herz, fördert Selbstliebe, Mitgefühl und sanfte Heilung emotionaler Wunden.",anwendung:"Halte ihn bei Herzthemen ans Herz oder leg ihn nachts neben dein Bett. Ideal für Selbstliebe-Rituale.",affirm:"Ich öffne mein Herz für Liebe – auch für mich."},
+ {id:"kr2",name:"Amethyst",farbe:"#9b72cf",chakra:"Stirn / Krone",wirkung:"Stein der Ruhe und Intuition. Er beruhigt den Geist, fördert Klarheit, Spiritualität und schützt vor Überreizung.",anwendung:"Lege ihn an deinen Meditationsplatz oder unter das Kopfkissen für ruhigen Schlaf.",affirm:"Ich bin ruhig, klar und mit mir verbunden."},
+ {id:"kr3",name:"Bergkristall",farbe:"#dfe6ee",chakra:"Alle",wirkung:"Der Meisterheiler und Verstärker. Er klärt, energetisiert und verstärkt jede Absicht, die du ihm gibst.",anwendung:"Programmiere ihn mit einer Absicht, indem du sie ihm beim Halten still sagst. Trag ihn als Fokus bei dir.",affirm:"Meine Absicht ist klar und kraftvoll."},
+ {id:"kr4",name:"Citrin",farbe:"#f1c45a",chakra:"Solarplexus",wirkung:"Stein der Fülle und Lebensfreude. Er stärkt Selbstvertrauen, zieht Erfolg an und vertreibt trübe Stimmung.",anwendung:"Ideal für Manifestation von Fülle. Leg ihn an deinen Arbeitsplatz oder ins Portemonnaie.",affirm:"Ich bin ein Magnet für Fülle und Freude."},
+ {id:"kr5",name:"Schwarzer Turmalin",farbe:"#2b2b33",chakra:"Wurzel",wirkung:"Der Schutzstein. Er erdet, wandelt schwere Energie und gibt ein Gefühl von Sicherheit und Stabilität.",anwendung:"Trag ihn bei dir an anstrengenden Tagen oder leg ihn an deine Eingangstür.",affirm:"Ich bin geschützt, geerdet und sicher."},
+ {id:"kr6",name:"Aventurin",farbe:"#62a87c",chakra:"Herz",wirkung:"Stein der Chance und Gelassenheit. Er öffnet für neue Möglichkeiten und bringt emotionale Ruhe.",anwendung:"Halte ihn vor neuen Schritten oder Entscheidungen. Begleiter für Mut und Optimismus.",affirm:"Ich bin offen für die Geschenke des Lebens."},
+ {id:"kr7",name:"Mondstein",farbe:"#cfd8e6",chakra:"Sakral / Stirn",wirkung:"Stein der Intuition und Weiblichkeit. Er verbindet mit dem Mond, fördert Gefühl, Zyklus-Bewusstsein und innere Führung.",anwendung:"Trag ihn bei Mondritualen oder wenn du deiner Intuition mehr vertrauen möchtest.",affirm:"Ich vertraue meinem inneren Rhythmus."},
+ {id:"kr8",name:"Lapislazuli",farbe:"#28508f",chakra:"Hals / Stirn",wirkung:"Stein der Wahrheit und Weisheit. Er stärkt den klaren Ausdruck, fördert Selbsterkenntnis und ehrliche Kommunikation.",anwendung:"Halte ihn an die Kehle vor wichtigen Gesprächen oder bei kreativem Ausdruck.",affirm:"Ich spreche meine Wahrheit klar und liebevoll."},
+ {id:"kr9",name:"Tigerauge",farbe:"#b6863c",chakra:"Solarplexus",wirkung:"Stein des Mutes und der Erdung. Er bündelt Willenskraft, gibt Stabilität in unsicheren Zeiten und schärft den Fokus.",anwendung:"Trag ihn bei dir, wenn du Mut und Durchhaltevermögen brauchst.",affirm:"Ich stehe stark und mutig in meiner Kraft."},
+ {id:"kr10",name:"Selenit",farbe:"#eef0f4",chakra:"Krone",wirkung:"Stein des Lichts und der Reinigung. Er klärt Räume und andere Steine, bringt Frieden und hohe Schwingung.",anwendung:"Leg andere Kristalle zum Reinigen darauf. Halte ihn für einen Moment der Stille.",affirm:"Ich lasse Licht durch mich strömen."}
+];
+/* ===== ENGELZAHLEN ===== */
+const ENGELZAHLEN=[
+ {id:"e1",zahl:"111",titel:"Neuanfang & Manifestation",bedeutung:"111 ist ein kraftvolles Tor. Deine Gedanken manifestieren sich gerade besonders schnell – achte darauf, worauf du dich konzentrierst.",botschaft:"Richte deine Gedanken auf das, was du wirklich willst. Ein neuer Anfang liegt vor dir."},
+ {id:"e2",zahl:"222",titel:"Vertrauen & Balance",bedeutung:"222 erinnert dich, dem Prozess zu vertrauen. Auch wenn du das Ergebnis noch nicht siehst – alles fügt sich.",botschaft:"Bleib geduldig und im Gleichgewicht. Du bist genau dort, wo du sein sollst."},
+ {id:"e3",zahl:"333",titel:"Unterstützung & Wachstum",bedeutung:"333 ist ein Zeichen, dass du geführt und unterstützt wirst. Deine Gaben wollen ausgedrückt werden.",botschaft:"Du bist nicht allein. Zeig dich und nutze deine Talente."},
+ {id:"e4",zahl:"444",titel:"Schutz & Fundament",bedeutung:"444 steht für Sicherheit und Halt. Eine schützende Kraft umgibt dich, dein Fundament ist stabil.",botschaft:"Du bist beschützt und gehalten. Bleib auf deinem Weg, du bist auf dem richtigen."},
+ {id:"e5",zahl:"555",titel:"Wandel & Freiheit",bedeutung:"555 kündigt Veränderung an. Etwas Altes geht, etwas Neues kommt – hab keine Angst vor dem Wandel.",botschaft:"Veränderung ist Wachstum. Lass los und vertraue dem Neuen."},
+ {id:"e6",zahl:"666",titel:"Ausgleich & Erdung",bedeutung:"666 (entgegen alter Mythen sanft gemeint) ruft dich zurück ins Gleichgewicht zwischen Materiellem und Spirituellem.",botschaft:"Komm zurück zu dir. Kümmere dich auch um deine Bedürfnisse und deinen Körper."},
+ {id:"e7",zahl:"777",titel:"Glück & Spiritualität",bedeutung:"777 ist ein glückverheißendes Zeichen. Du bist im Einklang mit deinem höheren Weg.",botschaft:"Du bist auf dem richtigen Pfad. Vertraue deiner Intuition – sie führt dich gut."},
+ {id:"e8",zahl:"888",titel:"Fülle & Belohnung",bedeutung:"888 steht für Fülle und das Gesetz von Geben und Nehmen. Mühe trägt Früchte.",botschaft:"Fülle ist im Anflug. Bleib offen, sie zu empfangen."},
+ {id:"e9",zahl:"999",titel:"Vollendung & Abschluss",bedeutung:"999 markiert das Ende eines Zyklus. Etwas darf abgeschlossen werden, damit Neues beginnen kann.",botschaft:"Lass würdevoll los, was vollendet ist. Ein neues Kapitel wartet."},
+ {id:"e10",zahl:"1111",titel:"Erwachen & Tor",bedeutung:"1111 ist das bekannteste spirituelle Zeichen – ein Moment des Erwachens und ein offenes Tor für Wünsche.",botschaft:"Halte einen Moment inne und wünsche dir etwas. Du bist hellwach und verbunden."}
+];
+/* ===== KRAFTTIERE ===== */
+const KRAFTTIERE=[
+ {id:"t1",name:"Wolf",thema:"Intuition & Freiheit",bedeutung:"Der Wolf lebt zwischen Gemeinschaft und Eigenständigkeit. Er steht für scharfe Intuition, Loyalität und den Mut, dem eigenen Weg zu folgen.",botschaft:"Vertraue deinem Instinkt. Du darfst zur Gemeinschaft gehören und trotzdem ganz du sein.",affirm:"Ich folge meiner inneren Führung."},
+ {id:"t2",name:"Bär",thema:"Kraft & Rückzug",bedeutung:"Der Bär verbindet rohe Kraft mit der Weisheit des Rückzugs. Er erinnert dich, dass auch Ruhe und Innenschau Stärke sind.",botschaft:"Zieh dich zurück, wenn du es brauchst. Aus der Stille kommt deine Kraft.",affirm:"Ich darf ruhen und bin trotzdem stark."},
+ {id:"t3",name:"Adler",thema:"Weitblick & Vision",bedeutung:"Der Adler steigt hoch und sieht das große Ganze. Er steht für Klarheit, Vision und die Verbindung zum Geistigen.",botschaft:"Hebe dich über das Kleine. Sieh dein Leben aus der Vogelperspektive.",affirm:"Ich sehe klar und weit."},
+ {id:"t4",name:"Eule",thema:"Weisheit & Intuition",bedeutung:"Die Eule sieht im Dunkeln. Sie steht für Weisheit, das Erkennen verborgener Wahrheiten und Vertrauen in die Intuition.",botschaft:"Schau hinter die Fassade. Was du tief drinnen weißt, ist wahr.",affirm:"Ich erkenne die Wahrheit hinter den Dingen."},
+ {id:"t5",name:"Hirsch",thema:"Sanftmut & Würde",bedeutung:"Der Hirsch bewegt sich mit Anmut und Wachsamkeit. Er steht für sanfte Stärke, Würde und ein offenes Herz.",botschaft:"Du musst nicht hart sein, um stark zu sein. Sanftmut ist Kraft.",affirm:"Ich gehe sanft und würdevoll meinen Weg."},
+ {id:"t6",name:"Schmetterling",thema:"Wandlung & Leichtigkeit",bedeutung:"Der Schmetterling verwandelt sich völlig. Er steht für Transformation, Neubeginn und die Schönheit des Werdens.",botschaft:"Vertraue deiner Verwandlung. Was sich gerade schwer anfühlt, formt deine Flügel.",affirm:"Ich darf mich wandeln und neu entfalten."},
+ {id:"t7",name:"Rabe",thema:"Magie & Wandel",bedeutung:"Der Rabe ist Bote zwischen den Welten. Er steht für Magie, Wandlung und das Licht im Dunkeln.",botschaft:"Im Unbekannten liegt Magie. Vertraue, dass sich etwas Neues formt.",affirm:"Ich vertraue dem Geheimnis des Lebens."},
+ {id:"t8",name:"Pferd",thema:"Freiheit & Kraft",bedeutung:"Das Pferd verkörpert Freiheit, Lebenskraft und Vorwärtsbewegung. Es trägt dich mit Schwung in Richtung deiner Wünsche.",botschaft:"Lass dich von deiner Lebenskraft tragen. Beweg dich auf das zu, was dich ruft.",affirm:"Ich bewege mich frei und kraftvoll."},
+ {id:"t9",name:"Schlange",thema:"Heilung & Erneuerung",bedeutung:"Die Schlange häutet sich und beginnt neu. Sie steht für Heilung, Transformation und Lebensenergie.",botschaft:"Du darfst Altes abstreifen. Heilung bedeutet, dich zu erneuern.",affirm:"Ich lasse Altes los und erneuere mich."},
+ {id:"t10",name:"Schwan",thema:"Anmut & Selbstannahme",bedeutung:"Der Schwan steht für Anmut, Liebe und das Erkennen der eigenen Schönheit. Aus dem unscheinbaren Küken wird Würde.",botschaft:"Du bist schöner, als du denkst. Nimm deine eigene Anmut an.",affirm:"Ich erkenne und liebe meine Schönheit."}
+];
+/* ===== WISSEN (Artikel) ===== */
+const WISSEN=[
+ {id:"w1",titel:"Was ist Manifestation?",intro:"Wie dein Inneres dein Außen formt.",absaetze:["Manifestation beschreibt die Idee, dass unsere Gedanken, Gefühle und unser Fokus beeinflussen, was wir in unser Leben ziehen. Der Kern ist nicht Magie, sondern Aufmerksamkeit: Worauf du dich richtest, das nimmt in deinem Leben mehr Raum ein.","Psychologisch lässt sich vieles erklären: Wer ein Ziel klar vor Augen hat, nimmt Chancen eher wahr, handelt mutiger und gibt nicht so schnell auf. Das Gefühl, es sei schon möglich, verändert das Verhalten – und Verhalten verändert Ergebnisse.","In der Praxis arbeitest du mit drei Zutaten: Klarheit (was genau willst du?), Gefühl (wie fühlt es sich an, es schon zu haben?) und Handlung (welcher kleine Schritt ist heute möglich?). Methoden wie die 369-Technik oder Skripting bündeln genau diese Ausrichtung.","Wichtig: Manifestation ersetzt kein Handeln und keine Geduld. Sie ist eine Einladung, dich auf das Gewünschte auszurichten – und dann dem Leben zu vertrauen."]},
+ {id:"w2",titel:"Wie funktionieren Mondphasen?",intro:"Der 29-Tage-Rhythmus am Himmel.",absaetze:["Der Mond leuchtet nicht selbst – wir sehen den Teil, den die Sonne beleuchtet. Während er die Erde umkreist, ändert sich dieser Winkel, und so entstehen die acht Mondphasen.","Ein voller Zyklus von Neumond zu Neumond dauert etwa 29,5 Tage. Bei Neumond steht der Mond zwischen Erde und Sonne – wir sehen ihn kaum. Bei Vollmond steht die Erde dazwischen, die ganze sichtbare Seite leuchtet.","Viele Menschen nutzen diesen Rhythmus als natürlichen Taktgeber: Neumond als Zeit für Absichten und Neuanfänge, die zunehmende Phase für Aufbau und Handlung, Vollmond für Fülle und Loslassen, die abnehmende Phase für Ruhe und Reflexion.","Du musst nicht an eine Wirkung glauben, um davon zu profitieren. Allein der Rhythmus gibt dem Monat Struktur – ein sanfter Anker, um regelmäßig innezuhalten."]},
+ {id:"w3",titel:"Grundlagen der Astrologie",intro:"Sternzeichen, Elemente und was sie bedeuten.",absaetze:["Astrologie deutet die Positionen von Sonne, Mond und Planeten zu einem bestimmten Zeitpunkt – meist deiner Geburt. Das bekannteste ist dein Sonnenzeichen: das Sternzeichen, in dem die Sonne bei deiner Geburt stand.","Die zwölf Zeichen teilen sich in vier Elemente: Feuer (Widder, Löwe, Schütze) steht für Tatkraft, Erde (Stier, Jungfrau, Steinbock) für Bodenständigkeit, Luft (Zwillinge, Waage, Wassermann) für Geist und Austausch, Wasser (Krebs, Skorpion, Fische) für Gefühl und Intuition.","Dein Sonnenzeichen beschreibt deine Grundenergie – aber ein vollständiges Horoskop umfasst viel mehr: Mondzeichen (deine Gefühlswelt), Aszendent (dein Auftreten) und die Stellung aller Planeten.","Astrologie ist kein festes Schicksal, sondern eine Sprache der Selbstreflexion. Sie lädt dich ein, dich selbst mit mehr Mitgefühl und Neugier zu betrachten."]},
+ {id:"w4",titel:"Was ist Numerologie?",intro:"Die Bedeutung deiner Lebenszahl.",absaetze:["Numerologie geht davon aus, dass Zahlen eine Bedeutung tragen. Die wichtigste ist die Lebenszahl, die aus deinem Geburtsdatum berechnet wird – sie soll deinen Lebensweg und deine Kernthemen beschreiben.","So rechnest du: Addiere alle Ziffern deines Geburtsdatums und reduziere die Summe, bis eine einzelne Ziffer bleibt. Beispiel: 15.07.1990 → 1+5+0+7+1+9+9+0 = 32 → 3+2 = 5. Deine Lebenszahl wäre die 5.","Eine Ausnahme sind die Meisterzahlen 11, 22 und 33 – sie werden nicht weiter reduziert, weil ihnen eine besonders hohe Schwingung zugeschrieben wird.","Jede Zahl von 1 bis 9 hat eine Charakteristik – von der Führungskraft der 1 bis zur Mitmenschlichkeit der 9. Numerologie ist ein Spiegel, der dir helfen kann, deine Stärken klarer zu sehen."]},
+ {id:"w5",titel:"Die 7 Chakren verstehen",intro:"Die Energiezentren von Wurzel bis Krone.",absaetze:["Das Chakren-System stammt aus den jahrtausendealten yogischen Traditionen Indiens. Chakra bedeutet Rad – gemeint sind sieben Energiezentren entlang der Wirbelsäule, die jeweils für ein Lebensthema stehen.","Von unten nach oben: Wurzel (Sicherheit), Sakral (Lust & Kreativität), Solarplexus (Wille & Selbstwert), Herz (Liebe), Hals (Ausdruck), Stirn (Intuition) und Krone (Spiritualität).","Die Idee: Ist ein Zentrum im Fluss, fühlt sich das entsprechende Lebensthema leicht an. Ist es blockiert, zeigen sich Themen wie Angst, Selbstzweifel oder Verschlossenheit. Übungen, Atem, Farben und Affirmationen sollen helfen, die Zentren auszugleichen.","Du kannst das Chakren-System als Landkarte deiner inneren Themen nutzen – ein hilfreiches Bild, um zu spüren, wo du gerade Aufmerksamkeit brauchst."]},
+ {id:"w6",titel:"Meditation für Anfänger",intro:"Einfach anfangen – ohne es richtig machen zu müssen.",absaetze:["Meditation ist kein Leeren des Kopfes. Es ist das Üben, immer wieder sanft zurückzukehren – zum Atem, zum Moment, zu dir. Gedanken kommen immer; das Zurückkehren ist die eigentliche Übung.","So fängst du an: Setz dich bequem hin, schließe die Augen, atme natürlich. Lenke die Aufmerksamkeit auf den Atem. Wenn du merkst, dass du abgeschweift bist – und das wirst du oft – komm freundlich zurück. Das ist kein Versagen, das ist Meditation.","Schon zwei bis fünf Minuten täglich wirken. Regelmäßigkeit ist wichtiger als Länge. Lieber jeden Tag kurz als einmal lang.","Sei geduldig mit dir. Es gibt keine perfekte Meditation. Jeder Moment, in dem du da bist, ist genug."]},
+ {id:"w7",titel:"Mit Affirmationen arbeiten",intro:"Wie Worte dein Inneres formen.",absaetze:["Affirmationen sind positive Sätze im Präsens, die du dir bewusst sagst, um dein Denken liebevoller auszurichten. Dein Gehirn glaubt mit der Zeit, was es oft hört – auch von der eigenen Stimme.","Damit sie wirken, sollten sie sich erreichbar anfühlen. Statt „Ich bin vollkommen angstfrei“ lieber „Ich lerne, mir selbst zu vertrauen“. Sätze, die du innerlich ablehnst, erzeugen Widerstand.","Wirksam wird eine Affirmation durch Wiederholung und Gefühl. Sprich sie morgens vor dem Spiegel, schreibe sie auf, oder lass sie als Tagesimpuls durch deinen Tag wandern.","Affirmationen sind kein Zaubertrick, sondern sanftes Umtrainieren deines inneren Tons – von Kritik hin zu Freundlichkeit."]},
+ {id:"w8",titel:"Kristalle & ihre Energie",intro:"Was hinter den Steinen steckt.",absaetze:["Kristalle werden seit Jahrtausenden in vielen Kulturen für Heilung, Schutz und Rituale genutzt. Jeder Stein wird mit bestimmten Qualitäten verbunden – Rosenquarz mit Liebe, Amethyst mit Ruhe, Citrin mit Fülle.","Aus wissenschaftlicher Sicht ist eine direkte Wirkung nicht belegt. Ihr Wert liegt vor allem darin, dass sie als Anker und Erinnerung für deine Absicht dienen: Ein Stein in der Hand holt dich zurück zu dem, wofür er steht.","In der Praxis wählst du einen Stein nach deinem Thema, hältst ihn bei Meditation oder trägst ihn bei dir. Manche „reinigen“ ihre Steine mit Wasser, Mondlicht oder Selenit – ein Ritual, das vor allem die eigene Intention klärt.","Nimm Kristalle als das, was sie für dich sind: schöne, beständige Begleiter, die dich an deine innere Ausrichtung erinnern."]}
+];
+/* ===== NEUE KOSMOS-KACHELN (überschreibt) ===== */
+function tilesKosmosHtml(){return `<div class="tiles">
+  ${tile('mond',icon('moon'),'Mondzyklen','Phasen & Rituale','linear-gradient(135deg,#8a98c8,#444c73)')}
+  ${tile('astro',icon('orbit'),'Astrologie','12 Sternzeichen','linear-gradient(135deg,#6b5fb0,#2e2658)')}
+  ${tile('num',icon('hash'),'Numerologie','Deine Lebenszahl','linear-gradient(135deg,#c9a85a,#7a6326)')}
+  ${tile('mani',icon('wand'),'Manifestieren','Methoden & Kraft','linear-gradient(135deg,#d98fb0,#a05676)')}
+  ${tile('chakra',icon('chakra'),'Chakren','7 Energiezentren','linear-gradient(135deg,#cf7a5e,#5b8f6a)')}
+  ${tile('kristalle',icon('crystal'),'Kristalle','10 Heilsteine','linear-gradient(135deg,#7fb0a6,#4a7d8f)')}
+  ${tile('engel',icon('wings'),'Engelzahlen','111, 222, 333 …','linear-gradient(135deg,#d7b56a,#8a6f3a)')}
+  ${tile('tier',icon('paw'),'Krafttiere','10 Begleiter','linear-gradient(135deg,#a9794e,#5d4730)')}
+  ${tile('wissen',icon('book'),'Wissen','Erklärt für dich','linear-gradient(135deg,#7a8bbf,#3f4a72)')}
+</div>`;}
+/* ===== KRISTALLE ===== */
+function viewKristalle(){let html=`<div class="view sec-kristall"><div class="hero hero-kristall"><div class="ornament"></div><div class="he">10 Heilsteine</div><h2>Kristalle</h2><p>Begleiter für deine Absicht</p></div>${erkl('kristalle')}`;
+  html+=KRISTALLE.map(k=>`<div class="lib-item" tabindex="0" role="button" onclick="openKristall('${k.id}')" style="border-left:4px solid ${k.farbe}"><span class="li-meta">${k.chakra}</span><div class="li-theme">Kristall</div><h3>${k.name}</h3></div>`).join('');
+  return html+`</div>`;}
+function openKristall(id){const k=KRISTALLE.find(x=>x.id===id);current='kristallview';
+  document.getElementById('app').innerHTML=`<div class="view sec-kristall"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('kristalle')">← Kristalle</button></div>
+    <div class="hero" style="background:linear-gradient(135deg,${k.farbe},${k.farbe}aa)"><div class="he">Chakra: ${k.chakra}</div><h2>${k.name}</h2></div>
+    <div class="card"><div class="affirm" style="text-align:center">„${k.affirm}"</div><div class="block-label">Wirkung</div><div>${k.wirkung}</div><div class="block-label">Anwendung</div><div>${k.anwendung}</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(k.affirm)}','${k.name}')">Als Bild teilen</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+/* ===== ENGELZAHLEN ===== */
+function viewEngel(){let html=`<div class="view sec-engel"><div class="hero hero-engel"><div class="ornament"></div><div class="he">Botschaften in Zahlen</div><h2>Engelzahlen</h2><p>wenn dir Zahlen immer wieder begegnen</p></div>${erkl('engel')}<div class="zodiac">`;
+  html+=ENGELZAHLEN.map(e=>`<button class="zsign" onclick="openEngel('${e.id}')"><span class="zs" style="font-size:22px">${e.zahl}</span><span class="zn">${e.titel.split(' ')[0]}</span></button>`).join('');
+  return html+`</div></div>`;}
+function openEngel(id){const e=ENGELZAHLEN.find(x=>x.id===id);current='engelview';
+  document.getElementById('app').innerHTML=`<div class="view sec-engel"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('engel')">← Engelzahlen</button></div>
+    <div class="hero hero-engel"><h2 style="font-size:46px">${e.zahl}</h2><p>${e.titel}</p></div>
+    <div class="card"><div class="block-label">Bedeutung</div><div>${e.bedeutung}</div><div class="block-label">Botschaft</div><div class="affirm">„${e.botschaft}"</div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+/* ===== KRAFTTIERE ===== */
+function viewTier(){let html=`<div class="view sec-tier"><div class="hero hero-tier"><div class="ornament"></div><div class="he">10 Begleiter</div><h2>Krafttiere</h2><p>welche Qualität dich gerade stärken will</p></div>${erkl('tier')}`;
+  html+=KRAFTTIERE.map(t=>`<div class="lib-item" tabindex="0" role="button" onclick="openTier('${t.id}')"><div class="li-theme">${t.thema}</div><h3>${t.name}</h3></div>`).join('');
+  return html+`</div>`;}
+function openTier(id){const t=KRAFTTIERE.find(x=>x.id===id);current='tierview';
+  document.getElementById('app').innerHTML=`<div class="view sec-tier"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('tier')">← Krafttiere</button></div>
+    <div class="hero hero-tier"><div class="he">${t.thema}</div><h2>${t.name}</h2></div>
+    <div class="card"><div class="affirm" style="text-align:center">„${t.affirm}"</div><div class="block-label">Bedeutung</div><div>${t.bedeutung}</div><div class="block-label">Botschaft</div><div style="font-style:italic">${t.botschaft}</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(t.affirm)}','${t.name}')">Als Bild teilen</button></div></div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+/* ===== WISSEN ===== */
+function viewWissen(){let html=`<div class="view sec-wissen"><div class="hero hero-wissen"><div class="ornament"></div><div class="he">Verstehen, was dahintersteckt</div><h2>Wissen</h2><p>die Grundlagen – klar erklärt</p></div>${erkl('wissen')}`;
+  html+=WISSEN.map(w=>`<div class="lib-item" tabindex="0" role="button" onclick="openWissen('${w.id}')"><div class="li-theme">Artikel</div><h3>${w.titel}</h3><div class="li-aff">${w.intro}</div></div>`).join('');
+  return html+`</div>`;}
+function openWissen(id){const w=WISSEN.find(x=>x.id===id);current='wissenview';
+  document.getElementById('app').innerHTML=`<div class="view sec-wissen"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('wissen')">← Wissen</button></div>
+    <div class="hero hero-wissen"><div class="he">Wissen</div><h2>${w.titel}</h2><p>${w.intro}</p></div>
+    <div class="card">${w.absaetze.map(a=>`<p style="margin-bottom:14px">${a}</p>`).join('')}</div></div>`;
+  window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ===== Personalisierung & kosmischer Tag ===== */
+function userSign(){const bd=store.get("birthdate","");if(!bd)return null;const d=new Date(bd);if(isNaN(d.getTime()))return null;return sunSign(d);}
+function personalDay(){const bd=store.get("birthdate","");const tdig=todayKey.replace(/[^0-9]/g,'');const bdig=bd?bd.replace(/[^0-9]/g,'').slice(4):'';const sum=(tdig+bdig).split('').reduce((a,b)=>a+parseInt(b),0);return reduceNum(sum);}
+function kosmischerTagHtml(){
+  const mi=moonInfo(heute);const mph=MOND_PHASEN[mi.idx];const sign=userSign();const pd=personalDay();
+  const mitte=sign?`<button class="kt-item" onclick="openSign('${sign.id}')"><span class="kt-ic">${sign.sym}</span><span class="kt-v">${sign.name}</span><span class="kt-l">Dein Zeichen</span></button>`
+                  :`<button class="kt-item" onclick="render('astro')"><span class="kt-ic">${icon('orbit')}</span><span class="kt-v">Astrologie</span><span class="kt-l">entdecken</span></button>`;
+  return `<div class="kostag"><div class="kt-head">&#10022; Dein kosmischer Tag</div><div class="kt-grid">
+    <button class="kt-item" onclick="render('mond')"><span class="kt-ic">${icon('moon')}</span><span class="kt-v">${mph.name}</span><span class="kt-l">Mondphase</span></button>
+    ${mitte}
+    <button class="kt-item" onclick="render('num')"><span class="kt-ic">${pd}</span><span class="kt-v">Tageszahl</span><span class="kt-l">Numerologie</span></button>
+  </div></div>`;}
+/* ===== Globale Suche ===== */
+function searchAll(q){q=q.trim().toLowerCase();if(!q)return[];const r=[];
+  INHALTE.forEach(i=>{if((i.titel+i.affirmation+i.thema+i.praxis).toLowerCase().includes(q))r.push({t:'Impuls',n:i.titel,fn:"openImpuls('"+i.id+"')"});});
+  MEDITATIONEN.forEach(m=>{if((m.titel+m.thema+m.intro).toLowerCase().includes(q))r.push({t:'Meditation',n:m.titel,fn:"openMeditation('"+m.id+"')"});});
+  RITUALE.forEach(x=>{if((x.titel+x.anlass).toLowerCase().includes(q))r.push({t:'Ritual',n:x.titel,fn:"openRitual('"+x.id+"')"});});
+  STERNZEICHEN.forEach(z=>{if((z.name+z.keys+z.element).toLowerCase().includes(q))r.push({t:'Sternzeichen',n:z.name,fn:"openSign('"+z.id+"')"});});
+  KRISTALLE.forEach(k=>{if((k.name+k.wirkung+k.chakra).toLowerCase().includes(q))r.push({t:'Kristall',n:k.name,fn:"openKristall('"+k.id+"')"});});
+  KRAFTTIERE.forEach(t=>{if((t.name+t.thema+t.bedeutung).toLowerCase().includes(q))r.push({t:'Krafttier',n:t.name,fn:"openTier('"+t.id+"')"});});
+  ENGELZAHLEN.forEach(e=>{if((e.zahl+e.titel).toLowerCase().includes(q))r.push({t:'Engelzahl',n:e.zahl+' · '+e.titel,fn:"openEngel('"+e.id+"')"});});
+  CHAKREN.forEach(c=>{if((c.name+c.thema+c.skt).toLowerCase().includes(q))r.push({t:'Chakra',n:c.name,fn:"openChakra('"+c.id+"')"});});
+  MANI_METHODEN.forEach(m=>{if((m.titel+m.beschreibung).toLowerCase().includes(q))r.push({t:'Methode',n:m.titel,fn:"openMethod('"+m.id+"')"});});
+  WISSEN.forEach(w=>{if((w.titel+w.intro).toLowerCase().includes(q))r.push({t:'Wissen',n:w.titel,fn:"openWissen('"+w.id+"')"});});
+  return r;}
+function openGlobalSearch(){const ov=document.createElement('div');ov.className='overlay';ov.id='gsOv';ov.style.alignItems='flex-start';
+  ov.innerHTML=`<div class="modal" style="margin-top:36px;text-align:left"><h2 style="font-size:20px;text-align:center">Suche</h2><input id="gsIn" class="search" placeholder="Suche in allen Bereichen …" oninput="gsRun(this.value)"><div id="gsRes"><div class="empty" style="padding:20px">Tippe, um alles zu durchsuchen.</div></div><button class="skip" style="display:block;margin:10px auto 0" onclick="closeOverlay(this)">schließen</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});setTimeout(()=>{const el=document.getElementById('gsIn');if(el)el.focus();},60);}
+function gsRun(q){const box=document.getElementById('gsRes');if(!box)return;if(!q.trim()){box.innerHTML='<div class="empty" style="padding:20px">Tippe, um alles zu durchsuchen.</div>';return;}const res=searchAll(q);
+  box.innerHTML=res.length?res.slice(0,40).map(x=>`<div class="gs-item" onclick="closeGS();${x.fn}"><span class="gs-t">${x.t}</span><span class="gs-n">${x.n}</span></div>`).join(''):'<div class="empty" style="padding:20px">Nichts gefunden.</div>';}
+function closeGS(){const o=document.getElementById('gsOv');if(o)o.remove();}
+/* ===== Einstellungen & Export ===== */
+function openSettings(){const bd=store.get("birthdate","");const ov=document.createElement('div');ov.className='overlay';
+  ov.innerHTML=`<div class="modal" style="text-align:left"><h2 style="font-size:20px;text-align:center">Einstellungen</h2>
+    <div class="block-label">Dein Name</div><input id="setName" class="search" value="${escHtml(state.name||'')}" placeholder="Vorname">
+    <div class="block-label">Geburtsdatum <span style="text-transform:none;letter-spacing:0;color:var(--ink-fade)">(für Astrologie & Numerologie)</span></div><input id="setBd" type="date" class="search" value="${bd}">
+    <div class="actions" style="margin-top:12px"><button class="btn solid" onclick="saveSettings()">Speichern</button><button class="btn" onclick="toggleThemeBtn()">Hell / Dunkel</button></div>
+    <div class="actions"><button class="btn" onclick="exportJournal()">Tagebuch exportieren</button><button class="btn" onclick="resetAll()">Alles zurücksetzen</button></div>
+    <button class="skip" style="display:block;margin:8px auto 0" onclick="closeOverlay(this)">schließen</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
+function saveSettings(){const n=document.getElementById('setName'),b=document.getElementById('setBd');if(n)state.name=n.value.trim();store.set("name",state.name);if(b&&b.value)store.set("birthdate",b.value);const ov=document.querySelector('.overlay');if(ov)ov.remove();updateHeader();toast("Gespeichert ✦");render('heute');}
+function toggleThemeBtn(){const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";store.set("theme",cur);applyTheme(cur);}
+function exportJournal(){const entries=Object.keys(state.journal).map(id=>({id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp).sort((a,b)=>b.ts-a.ts);
+  if(!entries.length){toast("Noch keine Einträge");return;}
+  let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+"  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\"\n"+e.text+"\n\n";});
+  const a=document.createElement('a');a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(txt);a.download="seelenraum-tagebuch.txt";document.body.appendChild(a);a.click();a.remove();toast("Tagebuch exportiert ✦");}
+/* ===== Nach-oben-Button ===== */
+window.addEventListener('scroll',function(){const b=document.getElementById('toTop');if(b)b.style.display=window.scrollY>500?'flex':'none';});
+
+/* ===== ICON-SYSTEM (handgezeichnete SVG-Linien-Icons) ===== */
+const ICONS={
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/>',
+ moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4 7 7 0 0 0 20 14.5z"/>',
+ spark:'<path d="M12 2.5c.5 5 2.5 7 7.5 8-5 1-7 3-7.5 8-.5-5-2.5-7-7.5-8 5-1 7-3 7.5-8z"/>',
+ stars:'<path d="M10 3c.4 4-1.5 6-5 7 3.5 1 5.4 3 5 7-.4-4 1.5-6 5-7-3.5-1-5.4-3-5-7z"/><circle cx="18.5" cy="6.5" r="1.1"/><circle cx="6.5" cy="18.5" r="1"/>',
+ lotus:'<path d="M12 20.5c-5.2 0-8.3-3-8.3-3 2.1-1.6 5.2-1.6 8.3.5 3.1-2.1 6.2-2.1 8.3-.5 0 0-3.1 3-8.3 3z"/><path d="M12 20.5c2.3 0 4.1-3.6 4.1-7.7 0 0-2.3 1.2-4.1 4.8-1.8-3.6-4.1-4.8-4.1-4.8 0 4.1 1.8 7.7 4.1 7.7z"/>',
+ book:'<path d="M12 5.2v15"/><path d="M12 5.2C10.4 4.1 7.4 3.6 4.8 4.1v14c2.6-.5 5.6 0 7.2 1.1 1.6-1.1 4.6-1.6 7.2-1.1v-14c-2.6-.5-5.6 0-7.2 1.1z"/>',
+ path:'<path d="M4 20c5.2 0 4-6.2 9.2-6.2S18.5 5.6 20.5 4.5"/><circle cx="4" cy="20" r="1.5"/><circle cx="13.2" cy="13.8" r="1.5"/><circle cx="20.5" cy="4.5" r="1.5"/>',
+ person:'<circle cx="12" cy="6" r="2.4"/><path d="M12 9c-2.6 0-4.6 2-4.6 4.6 0 1.7 1.6 2.6 4.6 2.6s4.6-.9 4.6-2.6C16.6 11 14.6 9 12 9z"/><path d="M5 18.2c2 1.3 4.4 1.9 7 1.9s5-.6 7-1.9"/>',
+ breath:'<circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="12" r="6.2"/><path d="M12 2.2a9.8 9.8 0 0 1 0 19.6" opacity=".5"/>',
+ candle:'<path d="M9.3 20.8h5.4"/><rect x="10" y="10.2" width="4" height="10.6" rx="1.2"/><path d="M12 10.2c0-2-2.1-2-2.1-3.9C9.9 4.6 12 3 12 3s2.1 1.6 2.1 3.3c0 1.9-2.1 1.9-2.1 3.9z"/>',
+ sound:'<path d="M3 12c2 0 2.4-5.5 4.4-5.5S9.8 19 12 19s2.6-12.5 4.6-12.5S19 12 21 12"/>',
+ flag:'<path d="M6 21V4.2"/><path d="M6 4.2c3.1-1.6 6.2 1.6 9.3 0v7.2c-3.1 1.6-6.2-1.6-9.3 0z"/>',
+ orbit:'<circle cx="12" cy="12" r="3.1"/><ellipse cx="12" cy="12" rx="9.6" ry="4.1" transform="rotate(28 12 12)"/>',
+ hash:'<path d="M9.6 3.8 7 20.2M17.2 3.8l-2.6 16.4M3.6 9.4h16.8M3 14.6h16.8"/>',
+ crystal:'<path d="M6 9.4 12 3l6 6.4-6 11.6z"/><path d="M6 9.4h12M9 9.4l3 11.6 3-11.6"/>',
+ wings:'<path d="M12 5v9.4"/><path d="M12 7.2C9.4 4.6 5.4 4.6 2.8 6.6c0 4.2 4.2 6.8 9.2 6.8"/><path d="M12 7.2c2.6-2.6 6.6-2.6 9.2-.6 0 4.2-4.2 6.8-9.2 6.8"/>',
+ paw:'<ellipse cx="12" cy="16" rx="4.2" ry="3.6"/><ellipse cx="6.4" cy="10.4" rx="1.6" ry="2.1"/><ellipse cx="10" cy="7.6" rx="1.6" ry="2.1"/><ellipse cx="14" cy="7.6" rx="1.6" ry="2.1"/><ellipse cx="17.6" cy="10.4" rx="1.6" ry="2.1"/>',
+ chakra:'<path d="M12 3.2v17.6"/><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="8.6" r="1.4"/><circle cx="12" cy="12.2" r="1.4"/><circle cx="12" cy="15.8" r="1.4"/><circle cx="12" cy="19.4" r="1.4"/>',
+ wand:'<path d="M4.5 19.5 14 10"/><path d="M18 3.8l.7 1.7 1.7.7-1.7.7-.7 1.7-.7-1.7-1.7-.7 1.7-.7z"/><path d="M14.5 9.5l1 1"/>',
+ heart:'<path d="M12 20.4s-7.2-4.7-7.2-9.4A3.9 3.9 0 0 1 12 8.1a3.9 3.9 0 0 1 7.2 2.9c0 4.7-7.2 9.4-7.2 9.4z"/>',
+ search:'<circle cx="11" cy="11" r="6"/><path d="M15.6 15.6 20 20"/>'
+};
+function icon(n){return '<svg class="ic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICONS[n]||'')+'</svg>';}
+function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(e){e.innerHTML=icon(e.getAttribute('data-icon'));});}
+
+/* ===== ROUTER ===== */
+let current='heute';
+function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
+function render(view){
+  if(view!=='atem'){stopBreathe();if(breathSound){breathSound.stop();breathSound=null;}atemSel=null;}
+  if(view!=='medplay')medStop();
+  /* Klang darf bereichsübergreifend weiterspielen */
+  current=view;const tb=tabFor(view);
+  document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.view===tb));
+  const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen}[view];
+  document.getElementById('app').innerHTML=v?v():viewHeute();
+  if(!['impulse','favoriten','tagebuch','meditationen','rituale'].includes(view))window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.view)));
+document.addEventListener('keydown',function(e){if(e.key==='Enter'){const a=document.activeElement;if(a&&a.classList&&(a.classList.contains('lib-item')||a.classList.contains('sound')||a.classList.contains('mood')||a.classList.contains('draw-back')||a.classList.contains('rstep')||a.classList.contains('zsign'))){e.preventDefault();a.click();}}});
+(function(){const f=document.getElementById('favBtn');if(f)f.addEventListener('click',()=>render('favoriten'));})();
+/* ===== Theme / Install / Onboarding ===== */
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);const b=document.getElementById("themeToggle");if(b)b.innerHTML=t==="dark"?icon('sun'):icon('moon');}
+(function initTheme(){let t=store.get("theme",null);if(!t)t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";applyTheme(t);const btn=document.getElementById("themeToggle");if(btn)btn.addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";store.set("theme",cur);applyTheme(cur);});})();
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const b=document.getElementById('installBanner');if(b)b.style.display='flex';});
+(function(){const btn=document.getElementById('installBtn');if(btn)btn.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();try{await deferredPrompt.userChoice;}catch(e){}deferredPrompt=null;const b=document.getElementById('installBanner');if(b)b.style.display='none';});})();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});}
+function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute');return;}
+  const ov=document.createElement('div');ov.className="overlay";
+  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen.</h2><p>Dein ruhiger Ort für jeden Tag. Erzähl mir kurz von dir.</p><input id="nameIn" placeholder="Dein Vorname (optional)" maxlength="24"><input id="bdIn2" type="date" style="color:var(--ink-soft)"><input id="intIn" placeholder="Absicht für die Woche (optional)" maxlength="60"><button class="btn gold" onclick="finishOnboard()">Eintreten</button><button class="skip" onclick="finishOnboard()">überspringen</button></div>`;
+  document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
+function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
+function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
+fillIcons();onboard();
+</script>
+</body>
+</html>
