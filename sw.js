@@ -1,13 +1,23 @@
 /* Seelenraum Service Worker — Offline-Fähigkeit & Installierbarkeit
    Hinweis: Bei jedem inhaltlichen Update der App die CACHE-Version
    erhöhen (z. B. v1 -> v2), damit Mitglieder die neue Version sehen. */
-const CACHE = "seelenraum-v12";
+const CACHE = "seelenraum-v13";
 const ASSETS = [
   "seelenraum-app.html",
   "manifest.webmanifest",
   "icon-192.png",
   "icon-512.png",
-  "apple-touch-icon.png"
+  "apple-touch-icon.png",
+  "tier-wolf.png",
+  "tier-eule.png",
+  "tier-hirsch.png",
+  "tier-schmetterling.png",
+  "tier-baer.png",
+  "tier-rabe.png",
+  "tier-schwan.png",
+  "tier-pferd.png",
+  "tier-fuchs.png",
+  "tier-katze.png"
 ];
 
 self.addEventListener("install", (e) => {
