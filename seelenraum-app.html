@@ -284,6 +284,11 @@
   .c3d-card .c3d-sym{font-size:52px;color:var(--accent-deep);line-height:1}
   .c3d-card .c3d-name{font-size:19px;font-weight:600}
   .c3d-card .c3d-keys{font-size:12px;color:var(--ink-soft)}
+  .c3d-card.sign{background-size:cover;background-position:center;justify-content:flex-end;padding:0;color:#fff;overflow:hidden}
+  .c3d-card.sign .c3d-cap{width:100%;box-sizing:border-box;padding:14px 12px;background:linear-gradient(transparent,rgba(15,10,25,.82));display:flex;flex-direction:column;gap:2px}
+  .c3d-card.sign .c3d-name{font-size:17px;font-weight:600;color:#fff}
+  .c3d-card.sign .c3d-keys{font-size:11px;color:rgba(255,255,255,.85)}
+  .detail-art{display:block;width:100%;max-width:320px;margin:0 auto 6px;border-radius:20px;box-shadow:var(--shadow)}
   .c3d-card .c3d-img{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-sm)}
   .c3d-card .c3d-ti{font-size:30px;margin-bottom:2px}
   .c3d-ti svg{width:34px;height:34px}
@@ -980,10 +985,11 @@ function sunSign(d){const m=d.getMonth()+1,day=d.getDate();for(const z of STERNZ
 function viewAstro(){const cur=sunSign(heute);const startIdx=STERNZEICHEN.findIndex(z=>z.id===cur.id);
   let html=`<div class="view sec-astro"><div class="hero hero-astro"><div class="ornament"></div><div class="he">Aktuelle Sonnenenergie</div><h2>${cur.sym} ${cur.name}</h2><p>${cur.keys}</p></div>
     ${erkl('astro')}<div class="section-sub" style="margin-top:6px">Swipe durch die Sternzeichen · tippe an zum Öffnen</div>`;
-  const items=STERNZEICHEN.map(z=>({act:`openSign('${z.id}')`,inner:`<div class="c3d-card sign"><div class="c3d-sym">${z.sym}</div><div class="c3d-name">${z.name}</div><div class="c3d-keys">${z.keys}</div></div>`}));
+  const items=STERNZEICHEN.map(z=>({act:`openSign('${z.id}')`,inner:`<div class="c3d-card sign" style="background-image:url('sign-${z.id}.jpg')"><span class="c3d-cap"><span class="c3d-name">${z.sym} ${z.name}</span><span class="c3d-keys">${z.keys}</span></span></div>`}));
   return html+carousel3dHtml('astroCar','signs',items,startIdx<0?0:startIdx)+`</div>`;}
 function openSign(id){const z=STERNZEICHEN.find(s=>s.id===id);current='signview';
   document.getElementById('app').innerHTML=`<div class="view sec-astro"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('astro')">← Sternzeichen</button></div>
+    <img class="detail-art" src="sign-${z.id}.jpg" alt="${z.name}">
     <div class="hero hero-astro"><div class="he">${z.element} · ${z.planet}</div><h2 style="font-size:34px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
     <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
       <div class="block-label">Deine Stärke</div><div>${z.staerke}</div>
@@ -1241,13 +1247,14 @@ function viewChina(){
       <input id="chinaYearIn" type="number" class="search" style="text-align:center" placeholder="z. B. 1990" min="1920" max="${curYear}" value="${savedYear||''}" onkeydown="if(event.key==='Enter')findChinaSign()">
       <div class="actions"><button class="btn solid" onclick="findChinaSign()">Mein Tierzeichen finden ✦</button></div></div>
     <div class="section-sub" style="margin-top:6px">Swipe durch die Tierzeichen · tippe an zum Öffnen</div>`;
-  const items=CHINA_TIERE.map(z=>({act:`openChinaZeichen('${z.id}')`,inner:`<div class="c3d-card sign"><div class="c3d-sym">${z.sym}</div><div class="c3d-name">${z.name}</div><div class="c3d-keys">${z.keys}</div></div>`}));
+  const items=CHINA_TIERE.map(z=>({act:`openChinaZeichen('${z.id}')`,inner:`<div class="c3d-card sign" style="background-image:url('china-${z.id}.jpg')"><span class="c3d-cap"><span class="c3d-name">${z.sym} ${z.name}</span><span class="c3d-keys">${z.keys}</span></span></div>`}));
   return html+carousel3dHtml('chinaCar','signs',items,CHINA_TIERE.indexOf(yz))+`</div>`;}
 function findChinaSign(){const el=document.getElementById('chinaYearIn');if(!el||!el.value){toast("Bitte Geburtsjahr eingeben");return;}const y=parseInt(el.value);if(isNaN(y)||y<1900||y>heute.getFullYear()){toast("Bitte gültiges Jahr eingeben");return;}store.set("birthYear",y);const z=chinaSignByYear(y);openChinaZeichen(z.id,y);}
 function openChinaZeichen(id,year){const z=CHINA_TIERE.find(s=>s.id===id);current='chinaview';
   const yrs=chinaYears(CHINA_TIERE.indexOf(z)).slice(0,7);
   const head=year?`<div class="he">Dein Zeichen · geboren ${year}</div>`:`<div class="he">Element: ${z.element}</div>`;
   document.getElementById('app').innerHTML=`<div class="view sec-china"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('china')">← Tierzeichen</button></div>
+    <img class="detail-art" src="china-${z.id}.jpg" alt="${z.name}">
     <div class="hero hero-china">${head}<h2 style="font-size:40px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
     <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
       <div class="block-label">Deine Stärke</div><div>${z.staerke}</div>
