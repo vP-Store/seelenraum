@@ -253,6 +253,57 @@
   .hero-engel{background:linear-gradient(135deg,#d7b56a,#8a6f3a)}
   .hero-tier{background:linear-gradient(135deg,#a9794e,#5d4730)}
   .hero-wissen{background:linear-gradient(135deg,#7a8bbf,#3a4366)}
+  .hero-china{background:linear-gradient(135deg,#c75c5c,#6e2a2a)}
+  .hero-orakel{background:linear-gradient(135deg,#8a6fb0,#3f2c66)}
+  .orakel-card{width:200px;height:280px;margin:8px auto 4px;border-radius:20px;cursor:pointer;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at 35% 30%,#b79ddd,#5b4585);color:#fff;transition:.2s}
+  .orakel-card:hover{transform:translateY(-3px)}
+  .orakel-card .oc-sym{font-size:54px;opacity:.92}
+  .orakel-card .oc-hint{font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;opacity:.85}
+  .orakel-card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  /* ===== 3D & Animationen ===== */
+  @keyframes viewIn{from{opacity:0;transform:perspective(1200px) translateY(34px) translateZ(-70px) rotateX(7deg)}to{opacity:1;transform:perspective(1200px) translateY(0) translateZ(0) rotateX(0)}}
+  .app-enter{animation:viewIn .55s cubic-bezier(.22,.61,.36,1)}
+  .reveal{opacity:0;transform:translateY(36px) scale(.97);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+  @keyframes glowpulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.8;transform:scale(1.14)}}
+  .companion .comp-art{animation:floaty 4.5s ease-in-out infinite}
+  .companion .comp-disc{animation:glowpulse 3.2s ease-in-out infinite}
+  .companion:active .comp-art{animation:none;transform:scale(.9)}
+  #cosmosBg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  #cosmosBg span{position:absolute;color:var(--accent);opacity:.12;will-change:transform;animation:drift linear infinite}
+  @keyframes drift{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(-118vh) rotate(360deg)}}
+  .wrap{position:relative;z-index:1}
+  .carousel3d{position:relative;height:330px;margin:14px 0 4px;perspective:1200px;overflow:hidden;touch-action:pan-y}
+  .c3d-stage{position:absolute;inset:0;transform-style:preserve-3d}
+  .c3d-item{position:absolute;top:50%;left:50%;transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s;transform-style:preserve-3d;cursor:pointer;will-change:transform,opacity}
+  .carousel3d.signs .c3d-item,.carousel3d.companions .c3d-item{width:170px;height:220px;margin:-110px 0 0 -85px}
+  .carousel3d.tiles .c3d-item{width:184px;height:200px;margin:-100px 0 0 -92px}
+  .c3d-card{width:100%;height:100%;border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px;box-sizing:border-box;background:var(--card);border:1px solid var(--line)}
+  .c3d-card.tile{color:#fff;border:none}
+  .c3d-card .c3d-sym{font-size:52px;color:var(--accent-deep);line-height:1}
+  .c3d-card .c3d-name{font-size:19px;font-weight:600}
+  .c3d-card .c3d-keys{font-size:12px;color:var(--ink-soft)}
+  .c3d-card .c3d-img{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-sm)}
+  .c3d-card .c3d-ti{font-size:30px;margin-bottom:2px}
+  .c3d-ti svg{width:34px;height:34px}
+  .c3d-card .c3d-tt{font-size:17px;font-weight:600}
+  .c3d-card .c3d-ts{font-size:12px;opacity:.9}
+  .c3d-item.center .c3d-card{box-shadow:0 20px 52px rgba(40,30,60,.30)}
+  .c3d-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:30;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--accent-deep);font-size:22px;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm)}
+  .c3d-nav.prev{left:8px}.c3d-nav.next{right:8px}
+  .c3d-dots{position:absolute;bottom:0;left:0;right:0;text-align:center;z-index:30}
+  .c3d-dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--line);margin:0 3px;cursor:pointer;transition:.2s}
+  .c3d-dots i.on{background:var(--accent);transform:scale(1.35)}
+  .flip3d{perspective:1200px;width:230px;height:320px;margin:14px auto 4px}
+  .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+  .flip3d.flipped .flip-inner{transform:rotateY(180deg)}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;box-sizing:border-box;text-align:center;cursor:pointer}
+  .flip-front{background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);color:#fff}
+  .flip-front::after{content:"";position:absolute;width:116px;height:116px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
+  .flip-front .ff-sym{position:relative;font-size:46px;z-index:1}
+  .flip-back{background:var(--card);border:1px solid var(--line);transform:rotateY(180deg)}
+  @media (prefers-reduced-motion: reduce){#cosmosBg span{animation:none!important}.companion .comp-art,.companion .comp-disc{animation:none!important}.app-enter{animation-duration:.01s}.reveal{transition-duration:.01s}.c3d-item,.flip-inner{transition-duration:.01s}}
   .card.erkl{background:var(--field);border-style:dashed;padding:22px 24px}
   .card.erkl .block-label{color:var(--accent)}
   .searchpill{display:inline-flex;align-items:center;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:9px 18px;color:var(--ink-soft);cursor:pointer;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.5px;box-shadow:var(--shadow-sm);transition:.2s}
@@ -277,9 +328,10 @@
   .kt-ic svg{width:23px;height:23px}
   .companion{position:fixed;left:14px;bottom:90px;z-index:26;cursor:pointer;width:64px;height:64px;animation:floaty 4.5s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(80,60,90,.3))}
   .companion:active{transform:scale(.92)}
-  .companion .comp-ph,.companion .comp-img{position:absolute;left:0;top:0;border-radius:50%}
-  .comp-ph{display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Georgia','Times New Roman',serif;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
-  .comp-img{object-fit:cover;box-shadow:0 0 0 2px var(--card);background:var(--card)}
+  .comp-art{position:relative;display:inline-block;vertical-align:middle}
+  .comp-art .comp-disc{position:absolute;inset:0;border-radius:50%;opacity:.5}
+  .comp-art .comp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(40,30,50,.38))}
+  .comp-art .comp-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-family:'Georgia','Times New Roman',serif;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
   @keyframes floaty{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}
   .companion::after{content:"";position:absolute;inset:-5px;border-radius:50%;box-shadow:0 0 18px 4px rgba(189,167,221,.4);animation:compglow 4.5s ease-in-out infinite;z-index:-1}
   @keyframes compglow{0%,100%{opacity:.45}50%{opacity:.85}}
@@ -315,6 +367,7 @@
     <button data-view="tagebuch">Tagebuch</button>
     <button data-view="weg">Mein Weg</button>
   </nav>
+  <button id="backBtn" onclick="goBack()" class="searchpill" style="display:none;margin:6px 0 0">&#8249; Zurück</button>
   <div id="app"></div>
   <footer>Seelenraum &middot; Mitglieder-Bereich &nbsp;&middot;&nbsp; <a class="reset" onclick="openSettings()">Einstellungen</a></footer>
 </div>
@@ -462,14 +515,19 @@ const RITUALE = [
   {id:"ri7",titel:"Herz-Dankbarkeit",anlass:"Um das Gute zu nähren",dauer:"5 Min",brauchst:["ein kleines Notizbuch (optional)"],steps:["Lege eine Hand aufs Herz.","Denk an drei Dinge, die heute schön waren.","Spüre bei jedem kurz die Wärme nach.","Schreibe sie auf, wenn du magst.","Sag: Mein Leben hält mehr Gutes, als ich oft sehe.","Atme die Dankbarkeit tief ein."],schluss:"Was wir würdigen, wächst."},
   {id:"ri8",titel:"Selbstliebe-Ritual",anlass:"Für sanftere Tage",dauer:"8 Min",brauchst:["eine Creme oder ein Öl (optional)"],steps:["Nimm dir ungestörte Zeit.","Creme deine Hände oder Arme bewusst und langsam ein.","Berühre dich, als wärst du dir kostbar.","Sag dir im Spiegel: Ich bin willkommen, so wie ich bin.","Nenne eine Sache, die du heute an dir magst.","Atme tief und lächle dir zu."],schluss:"Du bist ein Mensch, der Fürsorge verdient – auch deine eigene."},
   {id:"ri9",titel:"Schutz-Ritual",anlass:"Vor schweren Begegnungen",dauer:"4 Min",brauchst:["einen Moment Stille"],steps:["Schließe die Augen und atme ruhig.","Stell dir eine warme, goldene Lichthülle um dich vor.","Sie ist durchlässig für Liebe, undurchlässig für Schweres.","Sag: Ich bleibe bei mir, was auch kommt.","Spüre, wie diese Hülle dich umgibt.","Öffne die Augen und nimm sie mit."],schluss:"Du gehst geschützt und bei dir in die Begegnung."},
-  {id:"ri10",titel:"Wochen-Rückblick",anlass:"Sonntags",dauer:"10 Min",brauchst:["Papier & Stift"],steps:["Setz dich mit einem warmen Getränk hin.","Schreibe: Was hat mir diese Woche gutgetan?","Schreibe: Was hat mich gefordert?","Schreibe: Wofür bin ich dankbar?","Setze eine sanfte Absicht für die neue Woche.","Schließe mit einem tiefen Atemzug."],schluss:"Du gehst bewusst und klar in die neue Woche."}
+  {id:"ri10",titel:"Wochen-Rückblick",anlass:"Sonntags",dauer:"10 Min",brauchst:["Papier & Stift"],steps:["Setz dich mit einem warmen Getränk hin.","Schreibe: Was hat mir diese Woche gutgetan?","Schreibe: Was hat mich gefordert?","Schreibe: Wofür bin ich dankbar?","Setze eine sanfte Absicht für die neue Woche.","Schließe mit einem tiefen Atemzug."],schluss:"Du gehst bewusst und klar in die neue Woche."},
+  {id:"ri11",titel:"Dankbarkeits-Spaziergang",anlass:"Für klare Gedanken",dauer:"15 Min",brauchst:["bequeme Schuhe","frische Luft"],steps:["Geh nach draußen, ohne Ziel und ohne Handy.","Atme bei den ersten Schritten bewusst tief ein und aus.","Benenne im Gehen still fünf Dinge, die du wahrnimmst.","Sag dir zu jedem Schritt innerlich: Danke.","Spüre den Boden unter deinen Füßen.","Komm langsamer und ruhiger zurück."],schluss:"Bewegung an frischer Luft ordnet, was im Kopf verknotet war."},
+  {id:"ri12",titel:"Mittags-Innehalten",anlass:"Mitten im Trubel",dauer:"3 Min",brauchst:["einen Moment für dich"],steps:["Halte kurz inne, wo immer du gerade bist.","Stell beide Füße fest auf den Boden.","Atme dreimal langsam und tief.","Frag dich sanft: Was brauche ich im nächsten Schritt?","Trink einen Schluck Wasser, bewusst und langsam.","Geh mit einem klaren Atemzug weiter."],schluss:"Eine kleine Pause in der Mitte des Tages verändert den ganzen Rest."}
 ];
 /* ===== ATEM-PROGRAMME ===== */
 const ATEM = [
   {id:"a1",name:"Beruhigung · 4-7-8",beschreibung:"Längeres Ausatmen beruhigt das Nervensystem.",phases:[["Einatmen",4000,"expand"],["Halten",7000,"expand"],["Ausatmen",8000,""]]},
   {id:"a2",name:"Box-Atem · 4-4-4-4",beschreibung:"Gleichmäßig – für Fokus und Klarheit.",phases:[["Einatmen",4000,"expand"],["Halten",4000,"expand"],["Ausatmen",4000,""],["Halten",4000,""]]},
   {id:"a3",name:"Erdung · 4-6",beschreibung:"Sanft und einfach, um anzukommen.",phases:[["Einatmen",4000,"expand"],["Ausatmen",6000,""]]},
-  {id:"a4",name:"Energie · 6-2",beschreibung:"Längeres Einatmen für frische Wachheit.",phases:[["Einatmen",6000,"expand"],["Ausatmen",2000,""]]}
+  {id:"a4",name:"Energie · 6-2",beschreibung:"Längeres Einatmen für frische Wachheit.",phases:[["Einatmen",6000,"expand"],["Ausatmen",2000,""]]},
+  {id:"a5",name:"Seufzer-Atem · 2-2-7",beschreibung:"Doppeltes Einatmen, langer Seufzer – löst Anspannung im Brustkorb.",phases:[["Einatmen",2500,"expand"],["Noch ein bisschen",1500,"expand"],["Lang ausseufzen",7000,""]]},
+  {id:"a6",name:"Mond-Atem · 4-8",beschreibung:"Sehr langes Ausatmen – ideal, um abends zur Ruhe zu kommen.",phases:[["Einatmen",4000,"expand"],["Ausatmen",8000,""]]},
+  {id:"a7",name:"Gleichklang · 5-5",beschreibung:"Ebenmäßiger Rhythmus für tiefe Balance (Kohärenz-Atmung).",phases:[["Einatmen",5000,"expand"],["Ausatmen",5000,""]]}
 ];
 /* ===== KLANGWELTEN (live erzeugt) ===== */
 const KLANG = [
@@ -477,7 +535,13 @@ const KLANG = [
   {id:"k2",name:"Regen",icon:"&#9730;",beschreibung:"Sanftes Prasseln",typ:"regen"},
   {id:"k3",name:"Ozean",icon:"&#9780;",beschreibung:"Wellen, die kommen und gehen",typ:"ozean"},
   {id:"k4",name:"Wald",icon:"&#127794;",beschreibung:"Wind und ferne Vögel",typ:"wald"},
-  {id:"k5",name:"Herzschlag",icon:"&#9829;",beschreibung:"Ruhiger, langsamer Puls",typ:"herz"}
+  {id:"k5",name:"Herzschlag",icon:"&#9829;",beschreibung:"Ruhiger, langsamer Puls",typ:"herz"},
+  {id:"k6",name:"Wind",icon:"&#127788;",beschreibung:"Sanfter Wind, der kommt und geht",typ:"wind"},
+  {id:"k7",name:"Lagerfeuer",icon:"&#128293;",beschreibung:"Warmes Knistern",typ:"feuer"},
+  {id:"k8",name:"Klangschale",icon:"&#128276;",beschreibung:"Tibetische Schale, die nachklingt",typ:"schale"},
+  {id:"k9",name:"Bach",icon:"&#128167;",beschreibung:"Plätscherndes Wasser",typ:"bach"},
+  {id:"k10",name:"Sommernacht",icon:"&#127769;",beschreibung:"Grillen in der Dunkelheit",typ:"nacht"},
+  {id:"k11",name:"432 Hz",icon:"&#10070;",beschreibung:"Reiner, klärender Ton",typ:"ton432"}
 ];
 /* ===== MONDPHASEN (Bedeutung) ===== */
 const MOND_PHASEN = [
@@ -496,7 +560,7 @@ const MOODS=[{k:0,l:"Schwer",c:"#9a8fb0"},{k:1,l:"Gedämpft",c:"#b0a0c2"},{k:2,l
 const heute=new Date();
 const todayKey=heute.toISOString().slice(0,10);
 const store={get(k,d){try{const v=localStorage.getItem("sr_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem("sr_"+k,JSON.stringify(v));}catch(e){}}};
-let state={name:store.get("name",""),favs:store.get("favs",[]),streak:store.get("streak",0),lastDone:store.get("lastDone",""),journey:store.get("journey",{}),journal:store.get("journal",{}),moods:store.get("moods",{}),days:store.get("days",[]),intention:store.get("intention",null)};
+let state={name:store.get("name",""),favs:store.get("favs",[]),streak:store.get("streak",0),lastDone:store.get("lastDone",""),journey:store.get("journey",{}),journal:store.get("journal",{}),moods:store.get("moods",{}),days:store.get("days",[]),intention:store.get("intention",null),freejournal:store.get("freejournal",[])};
 function fmtShort(d){const p=d.split('-');return parseInt(p[2])+". "+MONATE[parseInt(p[1])-1];}
 function yesterdayKey(){const y=new Date(heute);y.setDate(y.getDate()-1);return y.toISOString().slice(0,10);}
 function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
@@ -562,14 +626,15 @@ function setIntention(){const el=document.getElementById('intentIn');if(el&&el.v
 function editIntention(){editingIntent=true;render('heute');setTimeout(()=>{const el=document.getElementById('intentIn');if(el)el.focus();},30);}
 function computeLongest(days){if(!days.length)return 0;const s=[...new Set(days)].sort();let best=1,cur=1;for(let i=1;i<s.length;i++){const p=new Date(s[i-1]);p.setDate(p.getDate()+1);if(p.toISOString().slice(0,10)===s[i]){cur++;best=Math.max(best,cur);}else cur=1;}return best;}
 function tile(view,icon,title,sub,grad){return `<button class="tile" style="background:${grad}" onclick="render('${view}')"><span class="ti">${icon}</span><span class="tt">${title}</span><span class="ts">${sub}</span></button>`;}
-function tilesHtml(){return `<div class="tiles">
-  ${tile('meditationen',icon('person'),'Meditationen','10 geführte Reisen','linear-gradient(135deg,#6273c4,#363c66)')}
-  ${tile('atem',icon('breath'),'Atempausen','4 Atem-Programme','linear-gradient(135deg,#5fb1a7,#3c7a72)')}
-  ${tile('rituale',icon('candle'),'Rituale','10 sanfte Rituale','linear-gradient(135deg,#cf9c66,#9a6336)')}
-  ${tile('klang',icon('sound'),'Klangraum','5 Klangwelten','linear-gradient(135deg,#cf85a6,#8f4d6b)')}
-  ${tile('reisen',icon('flag'),'Reisen','5 mehrtägige Wege','linear-gradient(135deg,#c2a36a,#7a6a44)')}
-  ${tile('mond',icon('moon'),'Mond','Phase & Ritual','linear-gradient(135deg,#8a98c8,#444c73)')}
-</div>`;}
+function tileCardInner(x){return `<div class="c3d-card tile" style="background:${x.g}"><span class="c3d-ti">${icon(x.ic)}</span><span class="c3d-tt">${x.t}</span><span class="c3d-ts">${x.s}</span></div>`;}
+function tilesHtml(){const d=[
+  {act:"render('meditationen')",ic:'person',t:'Meditationen',s:MEDITATIONEN.length+' geführte Reisen',g:'linear-gradient(135deg,#6273c4,#363c66)'},
+  {act:"render('atem')",ic:'breath',t:'Atempausen',s:ATEM.length+' Atem-Programme',g:'linear-gradient(135deg,#5fb1a7,#3c7a72)'},
+  {act:"render('rituale')",ic:'candle',t:'Rituale',s:RITUALE.length+' sanfte Rituale',g:'linear-gradient(135deg,#cf9c66,#9a6336)'},
+  {act:"render('klang')",ic:'sound',t:'Klangraum',s:KLANG.length+' Klangwelten',g:'linear-gradient(135deg,#cf85a6,#8f4d6b)'},
+  {act:"render('reisen')",ic:'flag',t:'Reisen',s:'5 mehrtägige Wege',g:'linear-gradient(135deg,#c2a36a,#7a6a44)'},
+  {act:"render('mond')",ic:'moon',t:'Mond',s:'Phase & Ritual',g:'linear-gradient(135deg,#8a98c8,#444c73)'}
+];return carousel3dHtml('praxisCar','tiles',d.map(x=>({act:x.act,inner:tileCardInner(x)})));}
 function moonMiniHtml(){const mi=moonInfo(heute);const ph=MOND_PHASEN[mi.idx];
   return `<div class="banner" onclick="render('mond')" style="cursor:pointer"><div class="b-txt"><b>&#9789; ${ph.name}</b> · ${mi.illum}% beleuchtet</div><button onclick="render('mond')">Mehr</button></div>`;}
 /* ===== HEUTE (Dashboard) ===== */
@@ -605,19 +670,60 @@ function viewImpulse(){
 function onSearch(v){libSearch=v;render('impulse');const el=document.getElementById('libSearch');if(el){el.focus();try{el.setSelectionRange(el.value.length,el.value.length);}catch(e){}}}
 function setFilter(t){aktiverFilter=t;render('impulse');}
 function libItem(it){return `<div class="lib-item" tabindex="0" role="button" onclick="openImpuls('${it.id}')"><span class="li-date">${fmtShort(it.datum)}</span><div class="li-theme">${it.thema}</div><h3>${it.titel}</h3><div class="li-aff">„${it.affirmation}"</div>${hasNote(it.id)?'<span class="li-note">✎</span>':''}${isFav(it.id)?'<span class="li-fav">♥</span>':''}</div>`;}
-function openImpuls(id){const it=INHALTE.find(i=>i.id===id);current='detail';document.getElementById('app').innerHTML=`<div class="view"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('impulse')">← zurück</button></div>${impulsCard(it,{journal:true})}</div>`;window.scrollTo({top:0,behavior:'smooth'});}
+function openImpuls(id){const it=INHALTE.find(i=>i.id===id);current='detail';document.getElementById('app').innerHTML=`<div class="view"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('impulse')">← zurück</button></div>${impulsCard(it,{journal:true})}</div>`;animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function viewFavoriten(){const favItems=state.favs.map(id=>INHALTE.find(i=>i.id===id)).filter(Boolean);
   let html=`<div class="view"><div class="section-title">Deine Favoriten</div><div class="section-sub">Impulse, die dich berührt haben</div>`;
   html+=favItems.length?favItems.map(libItem).join(''):`<div class="empty">Noch nichts gemerkt.<br>Tippe bei einem Impuls auf ♡ Merken.</div>`;return html+`</div>`;}
-function viewTagebuch(){const entries=Object.keys(state.journal).map(id=>({id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp).sort((a,b)=>b.ts-a.ts);
-  let html=`<div class="view sec-praxis"><div class="hero hero-tagebuch"><div class="ornament"></div><div class="he">Nur für dich</div><h2>Tagebuch</h2><p>${entries.length} ${entries.length===1?'Eintrag':'Einträge'} · lokal & privat gespeichert</p></div>`;
-  if(!entries.length)html+=`<div class="empty">Noch keine Einträge.<br>Schreib bei einem Impuls in das Tagebuch-Feld – er erscheint hier.</div>`;
-  else html+=entries.map(e=>`<div class="jentry"><div class="je-top"><span class="je-theme">${e.imp.thema}</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div><h3>${e.imp.titel}</h3><div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">„${e.imp.affirmation}"</div><div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="openImpuls('${e.id}')">öffnen</button> &nbsp; <button class="je-del" onclick="deleteJournal('${e.id}')">löschen</button></div>`).join('');
+const JOURNAL_PROMPTS=[
+ "Wofür bin ich heute dankbar?",
+ "Was hat mir heute ein Lächeln geschenkt?",
+ "Was beschäftigt mich gerade – und was brauche ich wirklich?",
+ "Welche kleine Sache ist mir heute gut gelungen?",
+ "Was darf ich heute loslassen?",
+ "Wann habe ich mich zuletzt richtig lebendig gefühlt?",
+ "Was würde mir jetzt guttun?",
+ "Welcher Gedanke begleitet mich heute am meisten?",
+ "Was möchte ich mir selbst heute verzeihen?",
+ "Worauf freue ich mich?",
+ "Wer oder was hat mir heute gutgetan?",
+ "Was macht mich gerade unruhig – und ist es wirklich meins?",
+ "Welche Eigenschaft an mir mag ich?",
+ "Was habe ich heute über mich gelernt?",
+ "Welchen kleinen Schritt kann ich morgen für mich tun?",
+ "Was würde ich einem Freund in meiner Lage raten?",
+ "Wo war ich heute zu streng mit mir?",
+ "Was gibt mir Kraft, wenn es schwer wird?",
+ "Welche Grenze möchte ich liebevoller schützen?",
+ "Was möchte ich öfter in meinem Leben spüren?",
+ "Was war heute schön, auch wenn es klein war?",
+ "Welcher Wunsch liegt mir gerade am Herzen?",
+ "Was darf heute genug sein?",
+ "Wie geht es mir wirklich – ganz ehrlich?"
+];
+let tbPromptIdx=Math.floor((heute-new Date(heute.getFullYear(),0,0))/86400000)%JOURNAL_PROMPTS.length;
+let tbDraft="";
+function tbNewPrompt(){const el=document.getElementById('tbText');if(el)tbDraft=el.value;tbPromptIdx=(tbPromptIdx+1)%JOURNAL_PROMPTS.length;render('tagebuch');}
+function tbSaveDraft(v){tbDraft=v;}
+function saveFreeEntry(){const el=document.getElementById('tbText');if(!el||!el.value.trim()){toast("Schreib zuerst etwas ✦");return;}state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:JOURNAL_PROMPTS[tbPromptIdx],text:el.value.trim()});store.set("freejournal",state.freejournal);tbDraft="";markPractice("Eintrag gespeichert ✦");render('tagebuch');}
+function deleteFreeEntry(id){if(!confirm("Diesen Eintrag löschen?"))return;state.freejournal=state.freejournal.filter(e=>e.id!==id);store.set("freejournal",state.freejournal);render('tagebuch');}
+function viewTagebuch(){
+  const impEntries=Object.keys(state.journal).map(id=>({kind:'imp',id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp);
+  const freeEntries=(state.freejournal||[]).map(e=>({kind:'free',id:e.id,text:e.text,ts:e.ts,prompt:e.prompt}));
+  const entries=[...impEntries,...freeEntries].sort((a,b)=>b.ts-a.ts);
+  const total=entries.length;
+  let html=`<div class="view sec-praxis"><div class="hero hero-tagebuch"><div class="ornament"></div><div class="he">Nur für dich</div><h2>Tagebuch</h2><p>${total} ${total===1?'Eintrag':'Einträge'} · lokal & privat gespeichert</p></div>`;
+  html+=`<div class="card"><div class="block-label">Schreibimpuls</div><div style="font-style:italic;color:var(--accent-deep);font-size:16px;margin-bottom:4px">${JOURNAL_PROMPTS[tbPromptIdx]}</div><button class="ie" style="margin-bottom:10px" onclick="tbNewPrompt()">anderer Impuls ↻</button><textarea class="journal" id="tbText" placeholder="Schreib frei, was in dir aufkommt …" oninput="tbSaveDraft(this.value)">${escHtml(tbDraft)}</textarea><div class="actions"><button class="btn gold" onclick="saveFreeEntry()">Eintrag speichern ✦</button></div></div>`;
+  html+=`<div class="section-title" style="margin-top:18px">Deine Einträge</div>`;
+  if(!total)html+=`<div class="empty">Noch keine Einträge.<br>Schreib oben zu einem Impuls – oder notiere bei einem Tages-Impuls etwas im Tagebuch-Feld.</div>`;
+  else html+=entries.map(e=>e.kind==='imp'
+    ?`<div class="jentry"><div class="je-top"><span class="je-theme">${e.imp.thema}</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div><h3>${e.imp.titel}</h3><div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">„${e.imp.affirmation}"</div><div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="openImpuls('${e.id}')">öffnen</button> &nbsp; <button class="je-del" onclick="deleteJournal('${e.id}')">löschen</button></div>`
+    :`<div class="jentry"><div class="je-top"><span class="je-theme">Eigener Eintrag</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div>${e.prompt?`<div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">${e.prompt}</div>`:''}<div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="deleteFreeEntry('${e.id}')">löschen</button></div>`
+  ).join('');
   return html+`</div>`;}
-function milestonesHtml(){const d=state.days.length,st=computeLongest(state.days),notes=Object.keys(state.journal).length,rd=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length,fav=state.favs.length;
+function milestonesHtml(){const d=state.days.length,st=computeLongest(state.days),notes=Object.keys(state.journal).length+(state.freejournal?state.freejournal.length:0),rd=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length,fav=state.favs.length;
   const M=[{on:d>=1,i:"✦",n:"Erster Tag"},{on:d>=3,i:"✦",n:"3 Tage"},{on:st>=7,i:"✶",n:"7 Tage Serie"},{on:st>=14,i:"✷",n:"14 Tage Serie"},{on:d>=30,i:"❂",n:"30 Praxis-Tage"},{on:d>=100,i:"☀",n:"100 Tage"},{on:notes>=1,i:"✎",n:"Erstes Tagebuch"},{on:notes>=10,i:"❖",n:"10 Einträge"},{on:rd>=1,i:"➶",n:"Erste Reise"},{on:fav>=10,i:"♥",n:"10 Favoriten"}];
   return `<div class="card"><div class="block-label" style="text-align:center">Deine Meilensteine</div><div class="badges">`+M.map(m=>`<div class="badge ${m.on?'on':''}"><div class="bi">${m.on?m.i:'◌'}</div><div class="bn">${m.n}</div></div>`).join('')+`</div></div>`;}
-function viewWeg(){const daysSet=new Set(state.days);const longest=computeLongest(state.days);const notes=Object.keys(state.journal).length;const reisenDone=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length;
+function viewWeg(){const daysSet=new Set(state.days);const longest=computeLongest(state.days);const notes=Object.keys(state.journal).length+(state.freejournal?state.freejournal.length:0);const reisenDone=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length;
   let cells="";const start=new Date(heute);start.setDate(start.getDate()-34);
   for(let i=0;i<35;i++){const dd=new Date(start);dd.setDate(dd.getDate()+i);const k=dd.toISOString().slice(0,10);cells+=`<div class="cell ${daysSet.has(k)?'on':''} ${k===todayKey?'today':''}" title="${k}"></div>`;}
   let md="";const ms=new Date(heute);ms.setDate(ms.getDate()-13);
@@ -638,7 +744,7 @@ function viewMeditationen(){
   html+=MEDITATIONEN.map(m=>`<div class="lib-item" tabindex="0" role="button" onclick="openMeditation('${m.id}')"><span class="li-meta">${m.dauer}</span><div class="li-theme">${m.thema}</div><h3>${m.titel}</h3><div class="li-aff">${m.intro}</div></div>`).join('');
   return html+`</div>`;
 }
-function openMeditation(id){current='medplay';med={id:id,idx:-1,timer:null,auto:false};renderMed();window.scrollTo({top:0,behavior:'smooth'});}
+function openMeditation(id){current='medplay';med={id:id,idx:-1,timer:null,auto:false};renderMed();animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function medBack(){medStop();render('meditationen');}
 function renderMed(){
   const m=MEDITATIONEN.find(x=>x.id===med.id);const app=document.getElementById('app');
@@ -717,6 +823,15 @@ function makeKlang(typ){
   else if(typ==='wald'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=820;bp.Q.value=0.7;s.connect(bp);bp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.07,ctx.currentTime+1.5);
     const bird=()=>{if(!alive.v)return;const o=ctx.createOscillator();o.type='sine';o.frequency.value=1700+Math.random()*1300;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;g.gain.linearRampToValueAtTime(0.05,t+0.05);g.gain.linearRampToValueAtTime(0,t+0.22);o.start(t);o.stop(t+0.26);setTimeout(bird,1800+Math.random()*2600);};setTimeout(bird,1500);}
   else if(typ==='herz'){out.gain.value=0.5;const beat=()=>{const o=ctx.createOscillator();o.type='sine';o.frequency.value=58;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;g.gain.linearRampToValueAtTime(0.6,t+0.04);g.gain.linearRampToValueAtTime(0,t+0.18);o.start(t);o.stop(t+0.2);};const loop=()=>{if(!alive.v)return;beat();setTimeout(beat,250);setTimeout(loop,1100);};loop();}
+  else if(typ==='wind'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=500;lp.Q.value=2;s.connect(lp);lp.connect(out);s.start();stops.push(s);const lfo=ctx.createOscillator();lfo.type='sine';lfo.frequency.value=0.08;const lg=ctx.createGain();lg.gain.value=380;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();stops.push(lfo);const lfo2=ctx.createOscillator();lfo2.frequency.value=0.06;const lg2=ctx.createGain();lg2.gain.value=0.05;lfo2.connect(lg2);lg2.connect(out.gain);lfo2.start();stops.push(lfo2);out.gain.value=0.08;}
+  else if(typ==='feuer'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=380;s.connect(lp);lp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.07,ctx.currentTime+1.5);
+    const crack=()=>{if(!alive.v)return;const n=ctx.createBufferSource();n.buffer=noiseBuffer(ctx);const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200+Math.random()*1800;bp.Q.value=8;const g=ctx.createGain();g.gain.value=0;n.connect(bp);bp.connect(g);g.connect(out);const t=ctx.currentTime;g.gain.linearRampToValueAtTime(0.12+Math.random()*0.18,t+0.005);g.gain.exponentialRampToValueAtTime(0.0001,t+0.06+Math.random()*0.05);n.start(t);n.stop(t+0.15);setTimeout(crack,60+Math.random()*420);};setTimeout(crack,300);}
+  else if(typ==='schale'){out.gain.value=0.5;const strike=()=>{if(!alive.v)return;const base=210+Math.random()*20;[1,2.76,5.4,8.9].forEach((mult,i)=>{const o=ctx.createOscillator();o.type='sine';o.frequency.value=base*mult;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;const peak=0.22/(i+1);g.gain.linearRampToValueAtTime(peak,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+5+i);o.start(t);o.stop(t+7);});setTimeout(strike,7000+Math.random()*3000);};strike();}
+  else if(typ==='bach'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1600;bp.Q.value=0.6;s.connect(bp);bp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.06,ctx.currentTime+1.2);
+    const bubble=()=>{if(!alive.v)return;const o=ctx.createOscillator();o.type='sine';const f0=600+Math.random()*900;o.frequency.value=f0;const g=ctx.createGain();g.gain.value=0;o.connect(g);g.connect(out);const t=ctx.currentTime;o.frequency.exponentialRampToValueAtTime(f0*1.8,t+0.08);g.gain.linearRampToValueAtTime(0.05,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+0.12);o.start(t);o.stop(t+0.16);setTimeout(bubble,80+Math.random()*260);};setTimeout(bubble,200);}
+  else if(typ==='nacht'){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx);s.loop=true;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=200;s.connect(lp);lp.connect(out);s.start();stops.push(s);out.gain.linearRampToValueAtTime(0.05,ctx.currentTime+1.5);
+    const chirp=()=>{if(!alive.v)return;const reps=3+Math.floor(Math.random()*4);for(let i=0;i<reps;i++){const o=ctx.createOscillator();o.type='square';o.frequency.value=4200+Math.random()*300;const g=ctx.createGain();g.gain.value=0;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=4500;bp.Q.value=12;o.connect(bp);bp.connect(g);g.connect(out);const t=ctx.currentTime+i*0.08;g.gain.linearRampToValueAtTime(0.03,t+0.005);g.gain.linearRampToValueAtTime(0,t+0.04);o.start(t);o.stop(t+0.05);}setTimeout(chirp,1400+Math.random()*1800);};setTimeout(chirp,600);}
+  else if(typ==='ton432'){[432,648].forEach((f,i)=>{const o=ctx.createOscillator();o.type='sine';o.frequency.value=f;const g=ctx.createGain();g.gain.value=i===0?0.5:0.18;o.connect(g);g.connect(out);o.start();stops.push(o);});const lfo=ctx.createOscillator();lfo.frequency.value=0.1;const lg=ctx.createGain();lg.gain.value=0.02;lfo.connect(lg);lg.connect(out.gain);lfo.start();stops.push(lfo);out.gain.linearRampToValueAtTime(0.07,ctx.currentTime+2);}
   return {stop(){alive.v=false;try{out.gain.setTargetAtTime(0,ctx.currentTime,0.3);}catch(e){}setTimeout(()=>stops.forEach(s=>{try{s.stop();}catch(e){}}),400);}};
 }
 function stopKlang(){if(audioNodes){try{audioNodes.stop();}catch(e){}audioNodes=null;}playingKlang=null;document.querySelectorAll('.sound').forEach(s=>s.classList.remove('playing'));updateKlangBar();}
@@ -755,15 +870,15 @@ function renderReiseTag(rid,idx){const r=REISEN.find(x=>x.id===rid);const t=r.ta
     <div class="section-title">${r.titel}</div><div class="section-sub">${idx+1} / ${r.tage.length}</div>
     <div class="card"><h2>${t.titel}</h2><div class="affirm">„${t.affirmation}"</div><div class="block-label">Sanfte Praxis</div><div>${t.praxis}</div><div class="block-label">Frage für dich</div><div style="font-style:italic">${t.frage}</div>
     <div class="actions">${idx>0?`<button class="btn" onclick="renderReiseTag('${rid}',${idx-1})">← Vorheriger</button>`:''}<button class="btn gold" onclick="reiseWeiter('${rid}',${idx})">${last?'Reise abschließen ✦':'Tag abschließen →'}</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function reiseWeiter(rid,idx){const r=REISEN.find(x=>x.id===rid);state.journey[rid]=Math.max(state.journey[rid]||0,idx+1);store.set("journey",state.journey);if(idx+1<r.tage.length)renderReiseTag(rid,idx+1);else{markPractice("Reise abgeschlossen ✦");render('reisen');}}
 /* ===== Tageskarte ===== */
 let drawnId=null;
 function openDrawCard(){const ov=document.createElement('div');ov.className='overlay';ov.id='drawOverlay';
   ov.innerHTML=`<div class="modal"><h2 style="font-size:22px">Ziehe deine Tageskarte</h2><p>Atme ein, tippe auf die Karte – und lass dich überraschen.</p><div id="drawSlot"></div><div id="drawActions"></div><button class="skip" onclick="closeOverlay(this)">schließen</button></div>`;
   document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});showCardBack();}
-function showCardBack(){const s=document.getElementById('drawSlot');if(!s)return;s.innerHTML=`<div class="draw-card draw-back" tabindex="0" role="button" onclick="revealCard()"></div>`;const a=document.getElementById('drawActions');if(a)a.innerHTML='';}
-function revealCard(){drawnId=INHALTE[Math.floor(Math.random()*INHALTE.length)].id;const it=INHALTE.find(i=>i.id===drawnId);const s=document.getElementById('drawSlot');if(s)s.innerHTML=`<div class="draw-card draw-face"><div class="dp">${it.thema}</div><div class="dh">${it.titel}</div><div class="da">„${it.affirmation}"</div></div>`;const a=document.getElementById('drawActions');if(a)a.innerHTML=`<div class="actions"><button class="btn" onclick="showCardBack()">Nochmal ziehen</button><button class="btn gold" onclick="openImpulsFromDraw()">Ganz öffnen</button></div>`;}
+function showCardBack(){const s=document.getElementById('drawSlot');if(!s)return;s.innerHTML=`<div class="flip3d" id="drawFlip"><div class="flip-inner"><div class="flip-face flip-front" tabindex="0" role="button" onclick="revealCard()"><span class="ff-sym">&#10070;</span></div><div class="flip-face flip-back draw-face" id="drawFace"></div></div></div>`;const a=document.getElementById('drawActions');if(a)a.innerHTML='';}
+function revealCard(){drawnId=INHALTE[Math.floor(Math.random()*INHALTE.length)].id;const it=INHALTE.find(i=>i.id===drawnId);const face=document.getElementById('drawFace');if(face)face.innerHTML=`<div class="dp">${it.thema}</div><div class="dh">${it.titel}</div><div class="da">„${it.affirmation}"</div>`;const fl=document.getElementById('drawFlip');if(fl)fl.classList.add('flipped');const a=document.getElementById('drawActions');if(a)a.innerHTML=`<div class="actions"><button class="btn" onclick="showCardBack()">Nochmal ziehen</button><button class="btn gold" onclick="openImpulsFromDraw()">Ganz öffnen</button></div>`;}
 function openImpulsFromDraw(){const o=document.getElementById('drawOverlay');if(o)o.remove();openImpuls(drawnId);}
 /* ===== Affirmations-Bild ===== */
 function drawSpaced(x,t,cx,y,sp,font,color){x.save();x.font=font;x.fillStyle=color;x.textAlign="left";x.textBaseline="alphabetic";let w=0;for(const ch of t)w+=x.measureText(ch).width+sp;w-=sp;let sx=cx-w/2;for(const ch of t){x.fillText(ch,sx,y);sx+=x.measureText(ch).width+sp;}x.restore();}
@@ -862,11 +977,11 @@ function tilesKosmosHtml(){return `<div class="tiles">
 function viewKosmos(){return `<div class="view sec-kosmos"><div class="hero hero-kosmos"><div class="ornament"></div><div class="he">Dein kosmischer Raum</div><h2>Kosmos</h2><p>Mond, Sterne, Zahlen und die Kraft der Manifestation</p></div>${tilesKosmosHtml()}</div>`;}
 /* Astrologie */
 function sunSign(d){const m=d.getMonth()+1,day=d.getDate();for(const z of STERNZEICHEN){const[vm,vd]=z.von,[bm,bd]=z.bis;if(vm===bm){if(m===vm&&day>=vd&&day<=bd)return z;}else{if((m===vm&&day>=vd)||(m===bm&&day<=bd))return z;}}return STERNZEICHEN[9];}
-function viewAstro(){const cur=sunSign(heute);
+function viewAstro(){const cur=sunSign(heute);const startIdx=STERNZEICHEN.findIndex(z=>z.id===cur.id);
   let html=`<div class="view sec-astro"><div class="hero hero-astro"><div class="ornament"></div><div class="he">Aktuelle Sonnenenergie</div><h2>${cur.sym} ${cur.name}</h2><p>${cur.keys}</p></div>
-    ${erkl('astro')}<div class="section-sub" style="margin-top:6px">Tippe dein Sternzeichen an</div><div class="zodiac">`;
-  html+=STERNZEICHEN.map(z=>`<button class="zsign" onclick="openSign('${z.id}')"><span class="zs">${z.sym}</span><span class="zn">${z.name}</span></button>`).join('');
-  return html+`</div></div>`;}
+    ${erkl('astro')}<div class="section-sub" style="margin-top:6px">Swipe durch die Sternzeichen · tippe an zum Öffnen</div>`;
+  const items=STERNZEICHEN.map(z=>({act:`openSign('${z.id}')`,inner:`<div class="c3d-card sign"><div class="c3d-sym">${z.sym}</div><div class="c3d-name">${z.name}</div><div class="c3d-keys">${z.keys}</div></div>`}));
+  return html+carousel3dHtml('astroCar','signs',items,startIdx<0?0:startIdx)+`</div>`;}
 function openSign(id){const z=STERNZEICHEN.find(s=>s.id===id);current='signview';
   document.getElementById('app').innerHTML=`<div class="view sec-astro"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('astro')">← Sternzeichen</button></div>
     <div class="hero hero-astro"><div class="he">${z.element} · ${z.planet}</div><h2 style="font-size:34px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
@@ -875,7 +990,7 @@ function openSign(id){const z=STERNZEICHEN.find(s=>s.id===id);current='signview'
       <div class="block-label">Dein Wachstum</div><div>${z.wachstum}</div>
       <div class="need" style="margin-top:14px"><span>Element: ${z.element}</span><span>Planet: ${z.planet}</span></div>
       <div class="actions"><button class="btn" onclick="openShareImage('${esc(z.affirm)}','${z.name}')">Als Bild teilen</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 /* Numerologie */
 function reduceNum(n){while(n>9&&n!==11&&n!==22&&n!==33){n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);}return n;}
 function computeLifePath(s){const digits=s.replace(/[^0-9]/g,'');if(digits.length<8)return null;let sum=digits.split('').reduce((a,b)=>a+parseInt(b),0);return reduceNum(sum);}
@@ -901,7 +1016,7 @@ function openMethod(id){const m=MANI_METHODEN.find(x=>x.id===id);current='method
   document.getElementById('app').innerHTML=`<div class="view sec-mani"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('mani')">← Methoden</button></div>
     <div class="hero hero-mani"><div class="he">${m.dauer}</div><h2>${m.titel}</h2><p>${m.beschreibung}</p></div>
     <div class="card"><div class="block-label">So geht's</div><div class="step-list">${m.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div><div class="affirm" style="text-align:center;margin-top:18px">„${m.schluss}"</div><div class="actions"><button class="btn solid" onclick="methodDone()">Praxis abgeschlossen ✦</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function methodDone(){markPractice("Manifestation gestärkt ✦");render('mani');}
 /* Chakren */
 function viewChakra(){
@@ -916,13 +1031,13 @@ function openChakra(id){const c=CHAKREN.find(x=>x.id===id);current='chakraview';
       <div class="block-label">Blockiert</div><div>${c.blockiert}</div>
       <div class="block-label">Übung zur Öffnung</div><div>${c.praxis}</div>
       <div class="actions"><button class="btn" onclick="openShareImage('${esc(c.affirm)}','${c.name}')">Als Bild teilen</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 /* Mondphasen-Detail */
 function openMondPhase(idx){const ph=MOND_PHASEN[idx];const rit=RITUALE.find(r=>r.id===ph.ritual);current='mondphase';
   document.getElementById('app').innerHTML=`<div class="view sec-mond"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('mond')">← Mondzyklen</button></div>
     <div class="hero hero-mond"><div class="he">Mondphase</div><h2>${ph.name}</h2></div>
     <div class="card"><div class="block-label">Bedeutung</div><div>${ph.bedeutung}</div><div class="block-label">Praxis</div><div style="font-style:italic">${ph.praxis}</div>${rit?`<div class="actions"><button class="btn solid" onclick="openRitual('${rit.id}')">Passendes Ritual: ${rit.titel}</button></div>`:''}</div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 
 /* ===== ERKLÄRUNGEN je Bereich ===== */
 const EXPLAIN={
@@ -940,7 +1055,9 @@ const EXPLAIN={
  kristalle:{was:"Kristalle sind seit Jahrtausenden Begleiter für Heilung und Intention. Jeder Stein trägt eine eigene Energie – als Erinnerung und Fokus für dein Inneres.",nutzen:"Wähle einen Stein nach deinem Thema. Lies seine Wirkung und Anwendung. Du kannst ihn tragen, halten oder einfach als Symbol für deine Absicht nutzen."},
  engel:{was:"Engelzahlen sind sich wiederholende Zahlenfolgen (wie 111 oder 444), die dir auffällig oft begegnen. Viele deuten sie als sanfte Botschaften und Bestätigung.",nutzen:"Wenn dir eine Zahl immer wieder begegnet, schau hier nach ihrer Bedeutung. Nimm die Botschaft als liebevollen Hinweis – nicht als Vorschrift."},
  tier:{was:"Krafttiere sind symbolische Begleiter aus vielen spirituellen Traditionen. Jedes Tier verkörpert eine Qualität, die dich gerade stärken möchte.",nutzen:"Lass dich von einem Tier ansprechen oder lies, welche Eigenschaft du gerade brauchst. Nimm seine Botschaft als Spiegel und Ermutigung."},
- wissen:{was:"Die Wissen-Bibliothek erklärt die Grundlagen – verständlich und ohne Vorwissen. Hier verstehst du, was hinter den Praktiken steckt.",nutzen:"Wähle ein Thema und lies in Ruhe. Du musst nichts glauben – nimm, was sich für dich stimmig anfühlt, und lass den Rest da."}
+ wissen:{was:"Die Wissen-Bibliothek erklärt die Grundlagen – verständlich und ohne Vorwissen. Hier verstehst du, was hinter den Praktiken steckt.",nutzen:"Wähle ein Thema und lies in Ruhe. Du musst nichts glauben – nimm, was sich für dich stimmig anfühlt, und lass den Rest da."},
+ china:{was:"Die chinesische Astrologie ordnet jedem Jahr eines von zwölf Tierzeichen zu, die sich alle zwölf Jahre wiederholen. Dein Geburtsjahr bestimmt dein Zeichen – es beschreibt deinen Charakter und deine Lebensenergie.",nutzen:"Gib dein Geburtsjahr ein, um dein Tierzeichen zu finden, oder tippe ein Zeichen an, um seine Stärken und Themen zu lesen. Hinweis: Bist du im Januar oder Februar geboren, kann dein Zeichen zum Vorjahr gehören – das chinesische Neujahr beginnt erst Ende Januar oder im Februar."},
+ orakel:{was:"Das Orakel ist eine Einladung zur Stille und zum Zufall. Du ziehst eine von vielen Botschaften – ein sanfter Anstoß, der dich heute begleiten möchte.",nutzen:"Atme einmal tief durch, halte kurz inne und tippe auf die Karte. Lies die Botschaft als liebevollen Spiegel – nicht als Vorhersage, sondern als Frage an dich selbst."}
 };
 function erkl(a){const e=EXPLAIN[a];if(!e)return'';return `<div class="card erkl"><div class="block-label">Was ist das?</div><div>${e.was}</div><div class="block-label">So nutzt du diesen Bereich</div><div>${e.nutzen}</div></div>`;}
 /* ===== KRISTALLE ===== */
@@ -954,7 +1071,11 @@ const KRISTALLE=[
  {id:"kr7",name:"Mondstein",farbe:"#cfd8e6",chakra:"Sakral / Stirn",wirkung:"Stein der Intuition und Weiblichkeit. Er verbindet mit dem Mond, fördert Gefühl, Zyklus-Bewusstsein und innere Führung.",anwendung:"Trag ihn bei Mondritualen oder wenn du deiner Intuition mehr vertrauen möchtest.",affirm:"Ich vertraue meinem inneren Rhythmus."},
  {id:"kr8",name:"Lapislazuli",farbe:"#28508f",chakra:"Hals / Stirn",wirkung:"Stein der Wahrheit und Weisheit. Er stärkt den klaren Ausdruck, fördert Selbsterkenntnis und ehrliche Kommunikation.",anwendung:"Halte ihn an die Kehle vor wichtigen Gesprächen oder bei kreativem Ausdruck.",affirm:"Ich spreche meine Wahrheit klar und liebevoll."},
  {id:"kr9",name:"Tigerauge",farbe:"#b6863c",chakra:"Solarplexus",wirkung:"Stein des Mutes und der Erdung. Er bündelt Willenskraft, gibt Stabilität in unsicheren Zeiten und schärft den Fokus.",anwendung:"Trag ihn bei dir, wenn du Mut und Durchhaltevermögen brauchst.",affirm:"Ich stehe stark und mutig in meiner Kraft."},
- {id:"kr10",name:"Selenit",farbe:"#eef0f4",chakra:"Krone",wirkung:"Stein des Lichts und der Reinigung. Er klärt Räume und andere Steine, bringt Frieden und hohe Schwingung.",anwendung:"Leg andere Kristalle zum Reinigen darauf. Halte ihn für einen Moment der Stille.",affirm:"Ich lasse Licht durch mich strömen."}
+ {id:"kr10",name:"Selenit",farbe:"#eef0f4",chakra:"Krone",wirkung:"Stein des Lichts und der Reinigung. Er klärt Räume und andere Steine, bringt Frieden und hohe Schwingung.",anwendung:"Leg andere Kristalle zum Reinigen darauf. Halte ihn für einen Moment der Stille.",affirm:"Ich lasse Licht durch mich strömen."},
+ {id:"kr11",name:"Labradorit",farbe:"#5a7d8c",chakra:"Stirn / Hals",wirkung:"Stein der Magie und des Schutzes. Er weckt Intuition und Fantasie und schirmt vor Energieverlust ab.",anwendung:"Trag ihn, wenn du dich abgrenzen oder deiner inneren Stimme mehr vertrauen möchtest.",affirm:"Ich schütze meine Energie und vertraue meiner Magie."},
+ {id:"kr12",name:"Karneol",farbe:"#c75b39",chakra:"Sakral",wirkung:"Stein der Lebensfreude und des Mutes. Er entfacht Tatkraft, Kreativität und gesunde Leidenschaft.",anwendung:"Halte ihn, wenn du Antrieb oder kreative Funken brauchst. Ideal für neue Projekte.",affirm:"Ich lebe mit Mut, Freude und Schwung."},
+ {id:"kr13",name:"Sodalith",farbe:"#39557f",chakra:"Hals / Stirn",wirkung:"Stein der Wahrheit und Logik. Er fördert klares Denken, ehrliche Worte und innere Ruhe.",anwendung:"Halte ihn bei Gesprächen oder wenn deine Gedanken kreisen und Ordnung brauchen.",affirm:"Ich denke klar und spreche meine Wahrheit."},
+ {id:"kr14",name:"Fluorit",farbe:"#6fae93",chakra:"Stirn",wirkung:"Stein der Ordnung und Konzentration. Er sortiert Chaos im Kopf und stärkt Fokus und Lernfähigkeit.",anwendung:"Leg ihn an deinen Arbeitsplatz oder halte ihn vor Aufgaben, die Klarheit verlangen.",affirm:"Ich finde Klarheit und Ordnung in mir."}
 ];
 /* ===== ENGELZAHLEN ===== */
 const ENGELZAHLEN=[
@@ -980,7 +1101,11 @@ const KRAFTTIERE=[
  {id:"t7",name:"Rabe",thema:"Magie & Wandel",bedeutung:"Der Rabe ist Bote zwischen den Welten. Er steht für Magie, Wandlung und das Licht im Dunkeln.",botschaft:"Im Unbekannten liegt Magie. Vertraue, dass sich etwas Neues formt.",affirm:"Ich vertraue dem Geheimnis des Lebens."},
  {id:"t8",name:"Pferd",thema:"Freiheit & Kraft",bedeutung:"Das Pferd verkörpert Freiheit, Lebenskraft und Vorwärtsbewegung. Es trägt dich mit Schwung in Richtung deiner Wünsche.",botschaft:"Lass dich von deiner Lebenskraft tragen. Beweg dich auf das zu, was dich ruft.",affirm:"Ich bewege mich frei und kraftvoll."},
  {id:"t9",name:"Schlange",thema:"Heilung & Erneuerung",bedeutung:"Die Schlange häutet sich und beginnt neu. Sie steht für Heilung, Transformation und Lebensenergie.",botschaft:"Du darfst Altes abstreifen. Heilung bedeutet, dich zu erneuern.",affirm:"Ich lasse Altes los und erneuere mich."},
- {id:"t10",name:"Schwan",thema:"Anmut & Selbstannahme",bedeutung:"Der Schwan steht für Anmut, Liebe und das Erkennen der eigenen Schönheit. Aus dem unscheinbaren Küken wird Würde.",botschaft:"Du bist schöner, als du denkst. Nimm deine eigene Anmut an.",affirm:"Ich erkenne und liebe meine Schönheit."}
+ {id:"t10",name:"Schwan",thema:"Anmut & Selbstannahme",bedeutung:"Der Schwan steht für Anmut, Liebe und das Erkennen der eigenen Schönheit. Aus dem unscheinbaren Küken wird Würde.",botschaft:"Du bist schöner, als du denkst. Nimm deine eigene Anmut an.",affirm:"Ich erkenne und liebe meine Schönheit."},
+ {id:"t11",name:"Fuchs",thema:"Klugheit & Anpassung",bedeutung:"Der Fuchs ist gewitzt und wandlungsfähig. Er findet kreative Wege und vertraut auf seinen scharfen Verstand.",botschaft:"Sei klug und flexibel. Es gibt mehr als einen Weg zum Ziel.",affirm:"Ich finde kreative Wege durch jede Lage."},
+ {id:"t12",name:"Delfin",thema:"Freude & Leichtigkeit",bedeutung:"Der Delfin lebt verspielt und verbunden. Er erinnert dich, dass Leichtigkeit und Freude heilende Kräfte sind.",botschaft:"Erlaube dir zu spielen. Freude ist kein Luxus, sondern Nahrung.",affirm:"Ich lasse Freude und Leichtigkeit in mein Leben."},
+ {id:"t13",name:"Schildkröte",thema:"Ruhe & Geduld",bedeutung:"Die Schildkröte trägt ihr Zuhause bei sich und geht ihren Weg in eigenem Tempo. Sie steht für Beständigkeit und innere Ruhe.",botschaft:"Du musst nicht hetzen. In der Langsamkeit liegt eine eigene Kraft.",affirm:"Ich gehe meinen Weg in meinem eigenen Tempo."},
+ {id:"t14",name:"Biene",thema:"Gemeinschaft & Hingabe",bedeutung:"Die Biene wirkt im Kleinen und schafft Großes. Sie steht für Fleiß, Süße des Lebens und das Miteinander.",botschaft:"Deine kleinen Mühen tragen Früchte. Vergiss dabei die Süße nicht.",affirm:"Ich wirke mit Hingabe und genieße die Früchte."}
 ];
 /* ===== WISSEN (Artikel) ===== */
 const WISSEN=[
@@ -994,17 +1119,19 @@ const WISSEN=[
  {id:"w8",titel:"Kristalle & ihre Energie",intro:"Was hinter den Steinen steckt.",absaetze:["Kristalle werden seit Jahrtausenden in vielen Kulturen für Heilung, Schutz und Rituale genutzt. Jeder Stein wird mit bestimmten Qualitäten verbunden – Rosenquarz mit Liebe, Amethyst mit Ruhe, Citrin mit Fülle.","Aus wissenschaftlicher Sicht ist eine direkte Wirkung nicht belegt. Ihr Wert liegt vor allem darin, dass sie als Anker und Erinnerung für deine Absicht dienen: Ein Stein in der Hand holt dich zurück zu dem, wofür er steht.","In der Praxis wählst du einen Stein nach deinem Thema, hältst ihn bei Meditation oder trägst ihn bei dir. Manche „reinigen“ ihre Steine mit Wasser, Mondlicht oder Selenit – ein Ritual, das vor allem die eigene Intention klärt.","Nimm Kristalle als das, was sie für dich sind: schöne, beständige Begleiter, die dich an deine innere Ausrichtung erinnern."]}
 ];
 /* ===== NEUE KOSMOS-KACHELN (überschreibt) ===== */
-function tilesKosmosHtml(){return `<div class="tiles">
-  ${tile('mond',icon('moon'),'Mondzyklen','Phasen & Rituale','linear-gradient(135deg,#8a98c8,#444c73)')}
-  ${tile('astro',icon('orbit'),'Astrologie','12 Sternzeichen','linear-gradient(135deg,#6b5fb0,#2e2658)')}
-  ${tile('num',icon('hash'),'Numerologie','Deine Lebenszahl','linear-gradient(135deg,#c9a85a,#7a6326)')}
-  ${tile('mani',icon('wand'),'Manifestieren','Methoden & Kraft','linear-gradient(135deg,#d98fb0,#a05676)')}
-  ${tile('chakra',icon('chakra'),'Chakren','7 Energiezentren','linear-gradient(135deg,#cf7a5e,#5b8f6a)')}
-  ${tile('kristalle',icon('crystal'),'Kristalle','10 Heilsteine','linear-gradient(135deg,#7fb0a6,#4a7d8f)')}
-  ${tile('engel',icon('wings'),'Engelzahlen','111, 222, 333 …','linear-gradient(135deg,#d7b56a,#8a6f3a)')}
-  ${tile('tier',icon('paw'),'Krafttiere','10 Begleiter','linear-gradient(135deg,#a9794e,#5d4730)')}
-  ${tile('wissen',icon('book'),'Wissen','Erklärt für dich','linear-gradient(135deg,#7a8bbf,#3f4a72)')}
-</div>`;}
+function tilesKosmosHtml(){const d=[
+  {act:"render('mond')",ic:'moon',t:'Mondzyklen',s:'Phasen & Rituale',g:'linear-gradient(135deg,#8a98c8,#444c73)'},
+  {act:"render('astro')",ic:'orbit',t:'Astrologie',s:'12 Sternzeichen',g:'linear-gradient(135deg,#6b5fb0,#2e2658)'},
+  {act:"render('num')",ic:'hash',t:'Numerologie',s:'Deine Lebenszahl',g:'linear-gradient(135deg,#c9a85a,#7a6326)'},
+  {act:"render('mani')",ic:'wand',t:'Manifestieren',s:'Methoden & Kraft',g:'linear-gradient(135deg,#d98fb0,#a05676)'},
+  {act:"render('chakra')",ic:'chakra',t:'Chakren',s:'7 Energiezentren',g:'linear-gradient(135deg,#cf7a5e,#5b8f6a)'},
+  {act:"render('china')",ic:'lantern',t:'Chinesische Tierzeichen',s:'12 Tierzeichen',g:'linear-gradient(135deg,#c75c5c,#7a2f2f)'},
+  {act:"render('orakel')",ic:'cards',t:'Orakel',s:'Zieh deine Botschaft',g:'linear-gradient(135deg,#8a6fb0,#4a3672)'},
+  {act:"render('kristalle')",ic:'crystal',t:'Kristalle',s:KRISTALLE.length+' Heilsteine',g:'linear-gradient(135deg,#7fb0a6,#4a7d8f)'},
+  {act:"render('engel')",ic:'wings',t:'Engelzahlen',s:'111, 222, 333 …',g:'linear-gradient(135deg,#d7b56a,#8a6f3a)'},
+  {act:"render('tier')",ic:'paw',t:'Krafttiere',s:KRAFTTIERE.length+' Begleiter',g:'linear-gradient(135deg,#a9794e,#5d4730)'},
+  {act:"render('wissen')",ic:'book',t:'Wissen',s:'Erklärt für dich',g:'linear-gradient(135deg,#7a8bbf,#3f4a72)'}
+];return carousel3dHtml('kosmosCar','tiles',d.map(x=>({act:x.act,inner:tileCardInner(x)})));}
 /* ===== KRISTALLE ===== */
 function viewKristalle(){let html=`<div class="view sec-kristall"><div class="hero hero-kristall"><div class="ornament"></div><div class="he">10 Heilsteine</div><h2>Kristalle</h2><p>Begleiter für deine Absicht</p></div>${erkl('kristalle')}`;
   html+=KRISTALLE.map(k=>`<div class="lib-item" tabindex="0" role="button" onclick="openKristall('${k.id}')" style="border-left:4px solid ${k.farbe}"><span class="li-meta">${k.chakra}</span><div class="li-theme">Kristall</div><h3>${k.name}</h3></div>`).join('');
@@ -1013,7 +1140,7 @@ function openKristall(id){const k=KRISTALLE.find(x=>x.id===id);current='kristall
   document.getElementById('app').innerHTML=`<div class="view sec-kristall"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('kristalle')">← Kristalle</button></div>
     <div class="hero" style="background:linear-gradient(135deg,${k.farbe},${k.farbe}aa)"><div class="he">Chakra: ${k.chakra}</div><h2>${k.name}</h2></div>
     <div class="card"><div class="affirm" style="text-align:center">„${k.affirm}"</div><div class="block-label">Wirkung</div><div>${k.wirkung}</div><div class="block-label">Anwendung</div><div>${k.anwendung}</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(k.affirm)}','${k.name}')">Als Bild teilen</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 /* ===== ENGELZAHLEN ===== */
 function viewEngel(){let html=`<div class="view sec-engel"><div class="hero hero-engel"><div class="ornament"></div><div class="he">Botschaften in Zahlen</div><h2>Engelzahlen</h2><p>wenn dir Zahlen immer wieder begegnen</p></div>${erkl('engel')}<div class="zodiac">`;
   html+=ENGELZAHLEN.map(e=>`<button class="zsign" onclick="openEngel('${e.id}')"><span class="zs" style="font-size:22px">${e.zahl}</span><span class="zn">${e.titel.split(' ')[0]}</span></button>`).join('');
@@ -1022,7 +1149,7 @@ function openEngel(id){const e=ENGELZAHLEN.find(x=>x.id===id);current='engelview
   document.getElementById('app').innerHTML=`<div class="view sec-engel"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('engel')">← Engelzahlen</button></div>
     <div class="hero hero-engel"><h2 style="font-size:46px">${e.zahl}</h2><p>${e.titel}</p></div>
     <div class="card"><div class="block-label">Bedeutung</div><div>${e.bedeutung}</div><div class="block-label">Botschaft</div><div class="affirm">„${e.botschaft}"</div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 /* ===== KRAFTTIERE ===== */
 function viewTier(){let html=`<div class="view sec-tier"><div class="hero hero-tier"><div class="ornament"></div><div class="he">10 Begleiter</div><h2>Krafttiere</h2><p>welche Qualität dich gerade stärken will</p></div>${erkl('tier')}`;
   html+=KRAFTTIERE.map(t=>`<div class="lib-item" tabindex="0" role="button" onclick="openTier('${t.id}')"><div class="li-theme">${t.thema}</div><h3>${t.name}</h3></div>`).join('');
@@ -1031,7 +1158,7 @@ function openTier(id){const t=KRAFTTIERE.find(x=>x.id===id);current='tierview';
   document.getElementById('app').innerHTML=`<div class="view sec-tier"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('tier')">← Krafttiere</button></div>
     <div class="hero hero-tier"><div class="he">${t.thema}</div><h2>${t.name}</h2></div>
     <div class="card"><div class="affirm" style="text-align:center">„${t.affirm}"</div><div class="block-label">Bedeutung</div><div>${t.bedeutung}</div><div class="block-label">Botschaft</div><div style="font-style:italic">${t.botschaft}</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(t.affirm)}','${t.name}')">Als Bild teilen</button></div></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 /* ===== WISSEN ===== */
 function viewWissen(){let html=`<div class="view sec-wissen"><div class="hero hero-wissen"><div class="ornament"></div><div class="he">Verstehen, was dahintersteckt</div><h2>Wissen</h2><p>die Grundlagen – klar erklärt</p></div>${erkl('wissen')}`;
   html+=WISSEN.map(w=>`<div class="lib-item" tabindex="0" role="button" onclick="openWissen('${w.id}')"><div class="li-theme">Artikel</div><h3>${w.titel}</h3><div class="li-aff">${w.intro}</div></div>`).join('');
@@ -1040,7 +1167,7 @@ function openWissen(id){const w=WISSEN.find(x=>x.id===id);current='wissenview';
   document.getElementById('app').innerHTML=`<div class="view sec-wissen"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('wissen')">← Wissen</button></div>
     <div class="hero hero-wissen"><div class="he">Wissen</div><h2>${w.titel}</h2><p>${w.intro}</p></div>
     <div class="card">${w.absaetze.map(a=>`<p style="margin-bottom:14px">${a}</p>`).join('')}</div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});}
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 
 /* ===== Personalisierung & kosmischer Tag ===== */
 function userSign(){const bd=store.get("birthdate","");if(!bd)return null;const d=new Date(bd);if(isNaN(d.getTime()))return null;return sunSign(d);}
@@ -1089,6 +1216,117 @@ function exportJournal(){const entries=Object.keys(state.journal).map(id=>({id,t
   let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+"  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\"\n"+e.text+"\n\n";});
   const a=document.createElement('a');a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(txt);a.download="seelenraum-tagebuch.txt";document.body.appendChild(a);a.click();a.remove();toast("Tagebuch exportiert ✦");}
 /* ===== Nach-oben-Button ===== */
+/* ===== CHINESISCHE TIERZEICHEN ===== */
+const CHINA_TIERE=[
+  {id:"ratte",name:"Ratte",sym:"&#128000;",element:"Wasser",keys:"Wachheit · Cleverness · Charme",staerke:"Du bist scharfsinnig, anpassungsfähig und findest schnell Lösungen, wo andere noch grübeln. Dein Charme öffnet dir Türen.",wachstum:"Vertraue auch mal, ohne alles zu durchdenken. Nicht jede Lage braucht einen Plan B.",affirm:"Ich vertraue meinem wachen Geist und meinem guten Herzen."},
+  {id:"bueffel",name:"Büffel",sym:"&#128002;",element:"Erde",keys:"Beständigkeit · Fleiß · Verlässlichkeit",staerke:"Du bist geduldig, verlässlich und baust mit ruhiger Hand, was Bestand hat. Auf dich kann man sich verlassen.",wachstum:"Erlaube dir Flexibilität – nicht jeder Weg muss der bewährte sein.",affirm:"Ich gehe meinen Weg mit Ruhe und innerer Stärke."},
+  {id:"tiger",name:"Tiger",sym:"&#128005;",element:"Holz",keys:"Mut · Leidenschaft · Tatkraft",staerke:"Du bist mutig, lebendig und steckst andere mit deiner Begeisterung an. Du wagst, was viele nur denken.",wachstum:"Übe Geduld – nicht jeder Sprung muss sofort sein. Auch Pausen sind Kraft.",affirm:"Mein Mut führt mich, meine Ruhe trägt mich."},
+  {id:"hase",name:"Hase",sym:"&#128007;",element:"Holz",keys:"Sanftmut · Feingefühl · Eleganz",staerke:"Du bist einfühlsam, friedliebend und schaffst Harmonie um dich herum. Dein Feingefühl ist ein Geschenk.",wachstum:"Steh auch für dich selbst ein – Sanftmut darf Grenzen haben.",affirm:"Ich darf sanft sein und mich gleichzeitig schützen."},
+  {id:"drache",name:"Drache",sym:"&#128009;",element:"Erde",keys:"Kraft · Charisma · Visionen",staerke:"Du strahlst, hast große Visionen und die Energie, sie auch zu leben. Menschen folgen deinem Feuer.",wachstum:"Lass auch Leisere zu Wort kommen – wahre Größe braucht keine Bühne.",affirm:"Ich darf groß träumen und sanft führen."},
+  {id:"schlange",name:"Schlange",sym:"&#128013;",element:"Feuer",keys:"Weisheit · Intuition · Tiefe",staerke:"Du bist tiefgründig, intuitiv und siehst hinter die Dinge. Deine ruhige Weisheit beeindruckt.",wachstum:"Öffne dich – nicht jedes Gefühl muss verborgen bleiben.",affirm:"Ich vertraue meiner inneren Weisheit."},
+  {id:"pferd",name:"Pferd",sym:"&#128014;",element:"Feuer",keys:"Freiheit · Energie · Lebenslust",staerke:"Du liebst Freiheit, Bewegung und das Leben. Deine Begeisterung reißt andere mit.",wachstum:"Bleib auch mal stehen – nicht jede Sehnsucht liegt im Aufbruch.",affirm:"Ich bewege mich frei und komme bei mir an."},
+  {id:"ziege",name:"Ziege",sym:"&#128016;",element:"Erde",keys:"Mitgefühl · Kreativität · Ruhe",staerke:"Du bist warmherzig, kreativ und schenkst anderen Geborgenheit. In dir wohnt eine sanfte Schönheit.",wachstum:"Vertraue mehr auf dich – du brauchst nicht immer die Bestätigung anderer.",affirm:"Ich vertraue meiner Sanftheit und meiner Kreativität."},
+  {id:"affe",name:"Affe",sym:"&#128018;",element:"Metall",keys:"Witz · Neugier · Wandlungsfähigkeit",staerke:"Du bist verspielt, clever und löst Probleme mit Leichtigkeit und Humor. Langeweile kennst du kaum.",wachstum:"Bleib bei einer Sache – nicht jede Idee muss sofort der nächsten weichen.",affirm:"Ich darf leicht sein und trotzdem tief gehen."},
+  {id:"hahn",name:"Hahn",sym:"&#128019;",element:"Metall",keys:"Klarheit · Mut · Ehrlichkeit",staerke:"Du bist ehrlich, organisiert und stehst für deine Überzeugungen ein. Du sprichst aus, was wahr ist.",wachstum:"Sei milder mit dir und anderen – nicht alles muss perfekt sein.",affirm:"Ich stehe klar und liebevoll zu mir."},
+  {id:"hund",name:"Hund",sym:"&#128021;",element:"Erde",keys:"Treue · Gerechtigkeit · Schutz",staerke:"Du bist treu, fürsorglich und ein verlässlicher Freund. Dein Gerechtigkeitssinn ist groß.",wachstum:"Lass auch dich beschützen – du musst nicht immer der Fels für alle sein.",affirm:"Ich darf vertrauen und mich tragen lassen."},
+  {id:"schwein",name:"Schwein",sym:"&#128022;",element:"Wasser",keys:"Großzügigkeit · Genuss · Gutmütigkeit",staerke:"Du bist großzügig, ehrlich und genießt das Leben mit offenem Herzen. Deine Wärme tut allen gut.",wachstum:"Setze auch dir liebevolle Grenzen – Geben darf im Gleichgewicht bleiben.",affirm:"Ich genieße das Leben und bin gut zu mir."}
+];
+function chinaSignByYear(y){return CHINA_TIERE[(((y-4)%12)+12)%12];}
+function chinaYears(idx){const cur=heute.getFullYear();const arr=[];for(let y=cur;y>cur-120;y--){if((((y-4)%12)+12)%12===idx)arr.push(y);}return arr;}
+function viewChina(){
+  const curYear=heute.getFullYear();const yz=chinaSignByYear(curYear);
+  const savedYear=store.get("birthYear",null)||(store.get("birthdate","")?parseInt(store.get("birthdate","").slice(0,4)):"");
+  let html=`<div class="view sec-china"><div class="hero hero-china"><div class="ornament"></div><div class="he">Tierzeichen des Jahres ${curYear}</div><h2>${yz.sym} ${yz.name}</h2><p>${yz.keys}</p></div>${erkl('china')}
+    <div class="card"><div class="block-label" style="text-align:center">Dein Geburtsjahr</div>
+      <input id="chinaYearIn" type="number" class="search" style="text-align:center" placeholder="z. B. 1990" min="1920" max="${curYear}" value="${savedYear||''}" onkeydown="if(event.key==='Enter')findChinaSign()">
+      <div class="actions"><button class="btn solid" onclick="findChinaSign()">Mein Tierzeichen finden ✦</button></div></div>
+    <div class="section-sub" style="margin-top:6px">Swipe durch die Tierzeichen · tippe an zum Öffnen</div>`;
+  const items=CHINA_TIERE.map(z=>({act:`openChinaZeichen('${z.id}')`,inner:`<div class="c3d-card sign"><div class="c3d-sym">${z.sym}</div><div class="c3d-name">${z.name}</div><div class="c3d-keys">${z.keys}</div></div>`}));
+  return html+carousel3dHtml('chinaCar','signs',items,CHINA_TIERE.indexOf(yz))+`</div>`;}
+function findChinaSign(){const el=document.getElementById('chinaYearIn');if(!el||!el.value){toast("Bitte Geburtsjahr eingeben");return;}const y=parseInt(el.value);if(isNaN(y)||y<1900||y>heute.getFullYear()){toast("Bitte gültiges Jahr eingeben");return;}store.set("birthYear",y);const z=chinaSignByYear(y);openChinaZeichen(z.id,y);}
+function openChinaZeichen(id,year){const z=CHINA_TIERE.find(s=>s.id===id);current='chinaview';
+  const yrs=chinaYears(CHINA_TIERE.indexOf(z)).slice(0,7);
+  const head=year?`<div class="he">Dein Zeichen · geboren ${year}</div>`:`<div class="he">Element: ${z.element}</div>`;
+  document.getElementById('app').innerHTML=`<div class="view sec-china"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('china')">← Tierzeichen</button></div>
+    <div class="hero hero-china">${head}<h2 style="font-size:40px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
+    <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
+      <div class="block-label">Deine Stärke</div><div>${z.staerke}</div>
+      <div class="block-label">Dein Wachstum</div><div>${z.wachstum}</div>
+      <div class="block-label">Element</div><div>${z.element}</div>
+      <div class="block-label">Geburtsjahre</div><div class="need">${yrs.map(y=>`<span>${y}</span>`).join('')}</div>
+      <div class="actions"><button class="btn" onclick="openShareImage('${esc(z.affirm)}','${z.name}')">Als Bild teilen</button></div></div></div>`;
+  animEnter();window.scrollTo({top:0,behavior:'smooth'});}
+/* ===== ORAKEL ===== */
+const ORAKEL=[
+  {id:"o1",titel:"Vertrauen",botschaft:"Etwas in deinem Leben darf gerade ohne deine Kontrolle wachsen. Du musst nicht alles festhalten, damit es gut wird.",affirm:"Ich vertraue, dass sich Dinge zu meinem Wohl fügen."},
+  {id:"o2",titel:"Loslassen",botschaft:"Du trägst etwas mit dir, das längst nicht mehr deins sein muss. Frag dich sanft: Was darf jetzt gehen?",affirm:"Ich lasse los, was mich nicht mehr nährt."},
+  {id:"o3",titel:"Geduld",botschaft:"Nicht alles, was reif werden will, geschieht heute. Deine Zeit kommt – ruhig und sicher.",affirm:"Ich darf in meinem eigenen Tempo wachsen."},
+  {id:"o4",titel:"Mut",botschaft:"Ein kleiner Schritt, den du aufschiebst, wartet auf dich. Du bist bereiter, als du glaubst.",affirm:"Ich gehe mutig den nächsten Schritt."},
+  {id:"o5",titel:"Ruhe",botschaft:"Heute darfst du weniger tun und mehr sein. In der Stille findest du, was Lärm verdeckt.",affirm:"Ich gönne mir Ruhe, ohne ein schlechtes Gewissen."},
+  {id:"o6",titel:"Selbstliebe",botschaft:"Sprich heute mit dir, wie du mit einem geliebten Menschen sprechen würdest. Deine eigene Freundlichkeit ist Medizin.",affirm:"Ich bin freundlich zu mir selbst."},
+  {id:"o7",titel:"Fülle",botschaft:"Schau auf das, was schon da ist. Dankbarkeit öffnet die Tür für mehr.",affirm:"Ich sehe und würdige die Fülle in meinem Leben."},
+  {id:"o8",titel:"Wandel",botschaft:"Etwas Altes geht zu Ende, damit Neues beginnen kann. Hab keine Angst vor der Veränderung.",affirm:"Ich begrüße den Wandel als meinen Lehrer."},
+  {id:"o9",titel:"Verbindung",botschaft:"Du musst nicht alles allein tragen. Reich heute jemandem die Hand – oder lass dir die deine reichen.",affirm:"Ich darf um Nähe und Hilfe bitten."},
+  {id:"o10",titel:"Intuition",botschaft:"Dein Bauchgefühl weiß bereits, was dein Kopf noch sucht. Hör hin.",affirm:"Ich vertraue dem, was ich innerlich spüre."},
+  {id:"o11",titel:"Vergebung",botschaft:"Ein alter Groll darf weicher werden – für dich, nicht für die anderen. Vergeben heißt, dich zu befreien.",affirm:"Ich lasse Groll los und werde frei."},
+  {id:"o12",titel:"Freude",botschaft:"Suche heute bewusst einen kleinen Moment der Leichtigkeit. Freude wartet oft im Einfachen.",affirm:"Ich erlaube mir Freude im Kleinen."},
+  {id:"o13",titel:"Grenzen",botschaft:"Ein liebevolles Nein zu anderen ist oft ein Ja zu dir. Du darfst dich schützen.",affirm:"Ich darf Grenzen setzen und bleibe ein guter Mensch."},
+  {id:"o14",titel:"Erdung",botschaft:"Komm zurück in deinen Körper, zurück in den Moment. Hier, im Jetzt, ist alles in Ordnung.",affirm:"Ich bin hier. Ich bin gehalten."},
+  {id:"o15",titel:"Hoffnung",botschaft:"Auch wenn es gerade schwer ist – nach jeder Nacht kommt ein Morgen. Halte dein kleines Licht.",affirm:"Ich vertraue darauf, dass es leichter wird."},
+  {id:"o16",titel:"Dankbarkeit",botschaft:"Nenne drei Dinge, die heute schon gut waren. Was du würdigst, wächst.",affirm:"Ich bin dankbar für das Gute in meinem Leben."},
+  {id:"o17",titel:"Klarheit",botschaft:"Du musst nicht alles auf einmal verstehen. Der nächste Schritt genügt, und er zeigt sich.",affirm:"Mein Weg wird klar, Schritt für Schritt."},
+  {id:"o18",titel:"Annahme",botschaft:"Lass heute etwas sein, wie es ist, ohne es ändern zu wollen. Im Annehmen liegt Frieden.",affirm:"Ich nehme an, was ist, mit einem weichen Herzen."},
+  {id:"o19",titel:"Kraft",botschaft:"Du hast schon so viel überstanden. Diese Stärke ist noch immer in dir.",affirm:"Ich trage mehr Kraft in mir, als ich oft sehe."},
+  {id:"o20",titel:"Leichtigkeit",botschaft:"Nimm dich heute nicht zu ernst. Manches löst sich, wenn du es lockerer hältst.",affirm:"Ich darf das Leben leichter nehmen."},
+  {id:"o21",titel:"Neubeginn",botschaft:"Jeder Moment ist eine Einladung, neu anzufangen. Du musst nicht bis morgen warten.",affirm:"Ich darf jederzeit neu beginnen."},
+  {id:"o22",titel:"Mitgefühl",botschaft:"Sei heute sanft mit dir und allen, die dir begegnen. Jeder trägt etwas, das du nicht siehst.",affirm:"Ich begegne mir und anderen mit Mitgefühl."},
+  {id:"o23",titel:"Vertraue dem Timing",botschaft:"Was für dich bestimmt ist, kommt zur rechten Zeit. Nichts Echtes geht dir verloren.",affirm:"Ich vertraue dem richtigen Zeitpunkt."},
+  {id:"o24",titel:"Du genügst",botschaft:"Du musst nichts leisten, um wertvoll zu sein. Schon dein Dasein ist genug.",affirm:"Ich bin genug, einfach weil ich bin."}
+];
+let orakelDrawn=null;
+function viewOrakel(){
+  return `<div class="view sec-orakel"><div class="hero hero-orakel"><div class="ornament"></div><div class="he">${ORAKEL.length} Botschaften</div><h2>Orakel</h2><p>halte inne und zieh deine Botschaft</p></div>${erkl('orakel')}
+    <div class="card" style="text-align:center">
+      <div class="flip3d" id="orakelFlip"><div class="flip-inner">
+        <div class="flip-face flip-front" tabindex="0" role="button" onclick="drawOrakel()"><span class="ff-sym">&#10070;</span><span class="oc-hint" style="position:relative;z-index:1;margin-top:12px;color:#fff;font-size:12px;letter-spacing:1px">tippen zum Ziehen</span></div>
+        <div class="flip-face flip-back" id="orakelBack"></div>
+      </div></div>
+      <div class="section-sub" id="orakelHint" style="margin-top:14px">Atme ein, denk an eine Frage – und tippe auf die Karte.</div>
+    </div></div>`;}
+function drawOrakel(){const flip=document.getElementById('orakelFlip');const back=document.getElementById('orakelBack');if(!flip||!back)return;let id;do{id=ORAKEL[Math.floor(Math.random()*ORAKEL.length)].id;}while(ORAKEL.length>1&&id===orakelDrawn);orakelDrawn=id;const o=ORAKEL.find(x=>x.id===id);back.innerHTML=`<div class="li-theme">Deine Botschaft</div><h2 style="margin:4px 0 6px;font-size:21px">${o.titel}</h2><div style="font-size:14px;margin-bottom:8px">${o.botschaft}</div><div class="affirm">„${o.affirm}"</div>`;flip.classList.add('flipped');const hint=document.getElementById('orakelHint');if(hint)hint.innerHTML=`<div class="actions" style="justify-content:center"><button class="btn" onclick="orakelReset()">Nochmal ziehen</button><button class="btn" onclick="openShareImage('${esc(o.affirm)}','Orakel')">Als Bild teilen</button></div>`;}
+function orakelReset(){const flip=document.getElementById('orakelFlip');if(flip)flip.classList.remove('flipped');const hint=document.getElementById('orakelHint');if(hint)hint.textContent='Atme ein, denk an eine Frage – und tippe auf die Karte.';setTimeout(drawOrakel,650);}
+/* ===== 3D-Karussell-Engine ===== */
+let _carousels={};
+function escAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+function carousel3dHtml(id,variant,items,start){
+  let h=`<div class="carousel3d ${variant}" id="${id}" data-start="${start||0}"><div class="c3d-stage">`;
+  h+=items.map((it,i)=>`<div class="c3d-item" data-i="${i}" data-act="${escAttr(it.act||'')}">${it.inner}</div>`).join('');
+  h+=`</div><button class="c3d-nav prev" data-dir="-1" aria-label="zurück">&#8249;</button><button class="c3d-nav next" data-dir="1" aria-label="weiter">&#8250;</button><div class="c3d-dots"></div></div>`;
+  return h;
+}
+function layoutCarousel(id){const st=_carousels[id];if(!st)return;const n=st.items.length;st.items.forEach((el,i)=>{let off=i-st.index;if(off>n/2)off-=n;if(off<-n/2)off+=n;const a=Math.abs(off);el.style.transform=`translateX(${off*60}%) translateZ(${-a*200}px) rotateY(${off*-42}deg) scale(${Math.max(0,1-a*0.13)})`;el.style.opacity=a>2?0:1-a*0.30;el.style.zIndex=100-a;el.style.pointerEvents=a>2?'none':'auto';el.classList.toggle('center',off===0);});const dots=st.el.querySelector('.c3d-dots');if(dots)dots.querySelectorAll('i').forEach((d,i)=>d.classList.toggle('on',i===st.index));}
+function setCarousel(id,idx){const st=_carousels[id];if(!st)return;const n=st.items.length;st.index=((idx%n)+n)%n;layoutCarousel(id);}
+function runAct(a){if(!a)return;const m=a.match(/^([\w$]+)\((?:'([^']*)')?\)$/);if(m&&typeof window[m[1]]==='function'){window[m[1]](m[2]);return;}try{(new Function(a))();}catch(e){}}
+function initCarousels(scope){(scope||document).querySelectorAll('.carousel3d').forEach(c=>{if(c._inited)return;c._inited=true;const id=c.id;const stage=c.querySelector('.c3d-stage');if(!stage)return;const items=Array.prototype.slice.call(stage.querySelectorAll('.c3d-item'));if(!items.length)return;const st={el:c,stage:stage,items:items,index:0,dragging:false,moved:false,startX:0};_carousels[id]=st;
+  const dots=c.querySelector('.c3d-dots');if(dots){dots.innerHTML=items.map((_,i)=>`<i data-i="${i}"></i>`).join('');dots.querySelectorAll('i').forEach(d=>d.addEventListener('click',()=>setCarousel(id,parseInt(d.dataset.i))));}
+  c.querySelectorAll('.c3d-nav').forEach(b=>b.addEventListener('click',()=>setCarousel(id,st.index+parseInt(b.dataset.dir))));
+  items.forEach((el,i)=>{el.addEventListener('click',function(){if(st.moved){st.moved=false;return;}if(i===st.index)runAct(el.dataset.act);else setCarousel(id,i);});});
+  stage.addEventListener('pointerdown',function(e){st.dragging=true;st.moved=false;st.startX=e.clientX;});
+  stage.addEventListener('pointermove',function(e){if(!st.dragging)return;if(Math.abs(e.clientX-st.startX)>8)st.moved=true;});
+  stage.addEventListener('pointerup',function(e){if(!st.dragging)return;st.dragging=false;const dx=e.clientX-st.startX;if(dx<=-40)setCarousel(id,st.index+1);else if(dx>=40)setCarousel(id,st.index-1);});
+  const sv=parseInt(c.dataset.start||'0');st.index=isNaN(sv)?0:((sv%items.length)+items.length)%items.length;
+  layoutCarousel(id);
+});}
+/* ===== Scroll-Reveal ===== */
+let _revObserver=null;
+function revealObserver(){if(_revObserver)return _revObserver;if(!('IntersectionObserver' in window))return null;_revObserver=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');_revObserver.unobserve(en.target);}});},{threshold:0.08,rootMargin:"0px 0px -40px 0px"});return _revObserver;}
+function applyReveal(scope){const root=scope||document.getElementById('app');if(!root)return;const ob=revealObserver();const els=root.querySelectorAll('.card,.lib-item,.journey,.jentry,.stat,.section-title,.banner,.intention');els.forEach(function(el,i){if(el.classList.contains('reveal'))return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*55,420)+'ms';if(ob)ob.observe(el);else el.classList.add('in');});}
+/* ===== Spirituelle Symbole (Hintergrund) ===== */
+function initCosmosBg(){if(document.getElementById('cosmosBg'))return;const syms=['✴','✦','⚛','☽','✨','ॐ','✪','◯','☸','✧'];const bg=document.createElement('div');bg.id='cosmosBg';let html='';for(let i=0;i<18;i++){const s=syms[i%syms.length];const left=Math.random()*100;const dur=18+Math.random()*26;const delay=-Math.random()*44;const size=14+Math.random()*30;html+=`<span style="left:${left}%;bottom:-12vh;font-size:${size}px;animation-duration:${dur}s;animation-delay:${delay}s">${s}</span>`;}bg.innerHTML=html;document.body.insertBefore(bg,document.body.firstChild);}
+/* ===== Parallax (Hero-Ornament) ===== */
+function initParallax(){window.addEventListener('scroll',function(){const y=window.scrollY;const els=document.querySelectorAll('#app .ornament');for(let i=0;i<els.length;i++)els[i].style.transform='translateY('+(y*0.12).toFixed(1)+'px)';},{passive:true});}
+/* ===== Sanftes Einblenden ===== */
+function animEnter(){const a=document.getElementById('app');if(!a)return;a.classList.remove('app-enter');void a.offsetWidth;a.classList.add('app-enter');}
 window.addEventListener('scroll',function(){const b=document.getElementById('toTop');if(b)b.style.display=window.scrollY>500?'flex':'none';});
 
 /* ===== ICON-SYSTEM (handgezeichnete SVG-Linien-Icons) ===== */
@@ -1113,13 +1351,15 @@ const ICONS={
  chakra:'<path d="M12 3.2v17.6"/><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="8.6" r="1.4"/><circle cx="12" cy="12.2" r="1.4"/><circle cx="12" cy="15.8" r="1.4"/><circle cx="12" cy="19.4" r="1.4"/>',
  wand:'<path d="M4.5 19.5 14 10"/><path d="M18 3.8l.7 1.7 1.7.7-1.7.7-.7 1.7-.7-1.7-1.7-.7 1.7-.7z"/><path d="M14.5 9.5l1 1"/>',
  heart:'<path d="M12 20.4s-7.2-4.7-7.2-9.4A3.9 3.9 0 0 1 12 8.1a3.9 3.9 0 0 1 7.2 2.9c0 4.7-7.2 9.4-7.2 9.4z"/>',
- search:'<circle cx="11" cy="11" r="6"/><path d="M15.6 15.6 20 20"/>'
+ search:'<circle cx="11" cy="11" r="6"/><path d="M15.6 15.6 20 20"/>',
+ lantern:'<path d="M12 2.4v2"/><path d="M12 19.6v2"/><ellipse cx="12" cy="12" rx="5.6" ry="7.2"/><path d="M6.6 8h10.8M6.6 16h10.8"/><path d="M12 4.8c-2.6 0-3.4 7.2 0 7.2s2.6-7.2 0-7.2z" opacity=".5"/>',
+ cards:'<rect x="6" y="6.5" width="8.4" height="12" rx="1.5" transform="rotate(-9 10.2 12.5)"/><rect x="9.6" y="5.5" width="8.4" height="12" rx="1.5" transform="rotate(9 13.8 11.5)"/><path d="M13.8 9l.7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z"/>'
 };
 function icon(n){return '<svg class="ic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICONS[n]||'')+'</svg>';}
 function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(e){e.innerHTML=icon(e.getAttribute('data-icon'));});}
 
 /* ===== ZUGRIFF (Stripe-Abo-Check via Cloudflare Worker) ===== */
-const GATE_URL = "https://spring-sound-7125.service-vpstore.workers.dev"; /* <- nach Worker-Deploy hier die Worker-URL eintragen, dann ist das Schloss aktiv */
+const GATE_URL = "https://spring-sound-7125.service-vpstore.workers.dev";
 const GATE_DAYS = 1;
 function gateState(){const g=store.get("access",null);if(!g||!g.email)return "locked";if(Date.now()-(g.ts||0) > GATE_DAYS*86400000)return "recheck";return "ok";}
 function startGate(){ if(!GATE_URL){ onboard(); return; } const st=gateState(); if(st==="ok"){ onboard(); return; } if(st==="recheck"){ const g=store.get("access",null); gateVerify(g.email,true); return; } showGate(); }
@@ -1143,7 +1383,8 @@ const COMPANIONS = [
    kosmos:"Komm, lass uns dem Ruf der Sterne folgen.",
    tagebuch:"Schöne Worte. Deine innere Stimme wird klarer.",
    vollmond:"Der Vollmond ruft. Heute heulen wir gemeinsam.",
-   tipp:"Vertrau dir. Du weißt mehr, als du denkst."},
+   tipp:"Vertrau dir. Du weißt mehr, als du denkst.",
+   sprueche:["Dein Instinkt flüstert leise. Hör hin.","Du musst den ganzen Weg nicht sehen – nur die nächste Spur.","Auch ein Wolf ruht, bevor er weiterzieht.","Dein Rudel trägt dich, auch wenn du allein läufst.","Vertrau dem Pfad unter deinen Pfoten.","Was sich richtig anfühlt, ist oft der Weg.","Heute darfst du deinen eigenen Spuren folgen.","Stärke heißt manchmal nur: weitergehen.","Die Nacht macht dir keine Angst – du kennst sie.","Dein Heulen darf gehört werden. Zeig dich.","Sei wild und sanft zugleich. Beides bist du.","Ein tiefer Atemzug, und du findest die Fährte wieder.","Du gehörst dazu, ganz ohne dich zu verbiegen.","Folge deiner Nase, nicht der Angst.","Auch leise Schritte kommen ans Ziel.","Dein innerer Kompass hat dich noch nie ganz verlassen.","Lauf heute in deinem eigenen Tempo.","Freiheit beginnt mit einem mutigen Schritt.","Du bist nicht verloren – nur zwischen zwei Spuren.","Vertrau dem, was du im Bauch weißt.","Manche Wege gehst du nur für dich. Das ist gut.","Heute trägt dich dein Mut weiter als dein Zweifel.","Auch der stärkste Wolf braucht sein Rudel. Lass dich halten.","Lausche nach innen – dort wartet die Antwort.","Du darfst Grenzen knurren. Liebevoll, aber klar.","Ein Wolf jagt nicht jeden Schatten. Lass los.","Deine Sanftheit ist keine Schwäche, sie ist Weisheit.","Spür den Boden, spür den Wind – du bist hier.","Was dich ruft, ruft aus gutem Grund.","Heute reicht es, einfach treu bei dir zu bleiben.","Der Mond zeigt dir den Weg, wenn die Sonne schläft.","Du bist freier, als deine Angst dir weismacht.","Geh los. Der Pfad entsteht beim Gehen.","Auch in der Stille bist du nicht allein.","Dein Instinkt ist älter und klüger als dein Zweifel.","Lass die alte Spur los. Eine neue wartet.","Heute darfst du knurren und schmusen – beides ist erlaubt.","Vertrauen ist auch ein Schritt ins Ungewisse.","Du musst nicht der Schnellste sein, nur treu – dir selbst.","Ruh dich aus. Auch das gehört zur Jagd.","Dein Herz kennt die Richtung. Folge ihm.","Sei stolz auf jede Spur, die du schon gelegt hast.","Was wild in dir ist, darf leben.","Heute heulen wir gemeinsam gegen den grauen Tag.","Du bist genug – mit Fell, Narben und allem.","Ein Wolf vergleicht sich nicht. Er läuft.","Atme den Wald ein. Komm zurück zu dir.","Deine Treue zu dir selbst zählt am meisten.","Lass dich vom Ruf der Weite tragen.","Ich bleibe an deiner Seite – die ganze Nacht."]},
   {id:"eule",name:"Eule",img:"tier-eule.png",tint:"#8a76a8",thema:"Weisheit & Intuition",
    morgen:"Ich habe über dich gewacht. Ein weiser Tag liegt vor dir.",
    streak:"Beständigkeit ist stille Weisheit. Gut gemacht.",
@@ -1151,7 +1392,8 @@ const COMPANIONS = [
    kosmos:"Die Nacht hält Antworten bereit. Schauen wir nach.",
    tagebuch:"Du hast hingeschaut. Das ist der Anfang aller Weisheit.",
    vollmond:"Mein liebster Mond. Lausche heute nach innen.",
-   tipp:"Eine ruhige Frage führt oft weiter als eine schnelle Antwort."},
+   tipp:"Eine ruhige Frage führt oft weiter als eine schnelle Antwort.",
+   sprueche:["Eine ruhige Frage öffnet mehr als eine schnelle Antwort.","Du musst nicht alles wissen. Nur das Nächste.","Im Dunkeln sehe ich klar – und ich sehe dich.","Weisheit beginnt mit einem ehrlichen Blick nach innen.","Halte inne. Die Antwort flüstert oft leise.","Du weißt mehr, als dein Kopf zugibt.","Nicht jede Unruhe braucht eine Lösung. Manche nur Ruhe.","Schau zweimal hin, bevor du urteilst – auch über dich.","Die Nacht ist nicht leer. Sie ist voller Antworten.","Geduld ist stille Weisheit.","Manchmal ist Nichtstun die klügste Tat.","Vertrau deiner inneren Stimme, sie hat keine Eile.","Was dich verwirrt, will nur in Ruhe verstanden werden.","Du darfst Fragen tragen, ohne sofort Antworten zu haben.","Sieh hinter die Fassade – auch bei dir selbst, liebevoll.","Ein weiser Geist ruht, bevor er entscheidet.","Deine Intuition kennt den Weg, den dein Verstand noch sucht.","Stille ist kein Mangel. Sie ist voll.","Atme. Klarheit kommt nicht durch Drängen.","Du musst nicht laut sein, um gehört zu werden.","Das Wichtige zeigt sich oft erst im Leisen.","Wachsamkeit heißt auch: sanft mit sich sein.","Schließe die Augen. Manches sieht man besser ohne sie.","Eine kluge Pause ist nie verlorene Zeit.","Du trägst eine alte Weisheit in dir. Hör ihr zu.","Nicht jeder Gedanke verdient, dass du ihm folgst.","Wahrheit hat es nicht eilig. Du auch nicht.","Im Zweifel: erst atmen, dann handeln.","Du siehst klarer, wenn du langsamer wirst.","Manche Antworten reifen nur in der Nacht.","Sei neugierig auf dich, nicht streng.","Ein weiser Blick verurteilt nicht, er versteht.","Du darfst deine Meinung ändern. Das ist Reife.","Lausche dem, was zwischen den Worten liegt.","Vertrau dem stillen Wissen in deiner Brust.","Auch Umwege sind Wege zur Erkenntnis.","Frag dich sanft: Was brauche ich wirklich?","Klugheit ohne Güte ist nur halb so weise.","Du musst nicht alles tragen, was du verstehst.","Die Dämmerung lehrt: Licht und Schatten gehören zusammen.","Heute reicht ein klarer Gedanke.","Lass die laute Welt kurz schweigen. Hör nach innen.","Was du in Ruhe betrachtest, verliert seinen Schrecken.","Dein Geist ist ein weiter Himmel – Wolken ziehen vorbei.","Wissen ist gut. Innehalten ist weise.","Du darfst nicht wissen, wie es ausgeht, und trotzdem starten.","Sieh das große Ganze, dann den nächsten Schritt.","Eine sanfte Frage an dich selbst kann Türen öffnen.","Vertrau der Dunkelheit – auch sie führt zum Morgen.","Ich wache über dich. Ruh deinen klugen Kopf aus."]},
   {id:"hirsch",name:"Hirsch",img:"tier-hirsch.png",tint:"#b08d57",thema:"Sanftmut & Würde",
    morgen:"Geh heute sanft, mit erhobenem Haupt. Ich gehe mit dir.",
    streak:"Leise und stetig – so wächst echte Stärke.",
@@ -1159,7 +1401,8 @@ const COMPANIONS = [
    kosmos:"Tritt ein, ganz ruhig. Der Kosmos mag die Leisen.",
    tagebuch:"Würdevoll, dass du dir zuhörst.",
    vollmond:"Im Mondlicht ist alles weicher. Auch du darfst es sein.",
-   tipp:"Du musst nicht hart sein, um stark zu sein."},
+   tipp:"Du musst nicht hart sein, um stark zu sein.",
+   sprueche:["Geh aufrecht, auch wenn der Weg uneben ist.","Du musst nicht hart sein, um stark zu sein.","Sanftheit ist eine Form von Mut.","Trag deinen Kopf hoch – du bist es wert.","Ruhig und stetig wächst echte Stärke.","Auch Zartes kann standhalten.","Du darfst dich bewegen, wie es dir entspricht – mit Anmut.","Würde heißt: bei sich bleiben, was auch kommt.","Sei sanft mit dir, so wie der Morgen sanft beginnt.","Nicht jeder Schritt muss groß sein. Nur deiner.","In der Ruhe liegt deine Größe.","Du musst dich nicht beweisen. Du bist genug.","Heb den Blick. Der Horizont gehört auch dir.","Leise Stärke hält länger als lautes Drängen.","Behandle dich mit der Achtung, die du verdienst.","Auch wenn du zögerst – du gehst mit Würde.","Wahre Kraft braucht keine Härte.","Atme, richte dich auf, geh weiter.","Du darfst empfindsam sein. Das ist eine Gabe.","Sanftmut entwaffnet mehr als jeder Kampf.","Steh ruhig, wenn es laut wird um dich.","Deine Anmut zeigt sich gerade im Schweren.","Geh deinen Weg, nicht den der anderen.","Würde verliert man nicht durch Weichheit, nur durch Härte gegen sich.","Heute darfst du dich behutsam behandeln.","Ein offenes Herz ist kein Risiko, es ist Stärke.","Du bewegst dich schöner, wenn du dir vertraust.","Lass dich nicht hetzen. Anmut hat ihr eigenes Tempo.","Auch im Rückzug bewahrst du Haltung.","Du bist kostbar. Behandle dich so.","Erhobenen Hauptes durch den Tag – ganz sanft.","Deine Sensibilität ist kein Makel, sie ist dein Reichtum.","Bleib weich, ohne dich zu verlieren.","Würde heißt auch, freundlich Nein zu sagen.","Du darfst Pause machen, ohne dich zu rechtfertigen.","Geh sanft mit deinem Herzen um.","Stärke flüstert, sie schreit nicht.","Auch heute trägst du dich mit Würde.","Sei dir selbst ein sanfter Begleiter.","Schönheit liegt in der Ruhe, mit der du gehst.","Du musst nicht laut sein, um Eindruck zu hinterlassen.","Halt inne, atme, spür deine Aufrichtung.","Deine Zartheit hat schon viel überstanden. Achte sie.","Geh durch den Tag wie über eine Lichtung – wachsam und ruhig.","Du darfst weich landen, immer.","Selbst im Sturm bleibst du würdevoll.","Sanft zu dir zu sein ist die höchste Form von Stärke.","Trag deine Geschichte mit erhobenem Haupt.","Du bewegst die Welt nicht mit Härte, sondern mit Herz.","Im Mondlicht ist alles weicher. Auch du darfst es sein."]},
   {id:"schmetterling",name:"Schmetterling",img:"tier-schmetterling.png",tint:"#cf85a6",thema:"Wandlung & Leichtigkeit",
    morgen:"Ein neuer Tag, ein neues Entfalten. Flieg leicht.",
    streak:"Schau, wie du dich entfaltest – Tag für Tag.",
@@ -1167,7 +1410,8 @@ const COMPANIONS = [
    kosmos:"Lass uns ein bisschen schweben.",
    tagebuch:"Jedes Wort ist ein kleiner Flügelschlag.",
    vollmond:"Vollmond – Zeit, etwas Altes abzulegen.",
-   tipp:"Wandlung fühlt sich erst eng an. Dann kommen die Flügel."},
+   tipp:"Wandlung fühlt sich erst eng an. Dann kommen die Flügel.",
+   sprueche:["Wandlung fühlt sich erst eng an. Dann kommen die Flügel.","Flieg heute leicht über das Schwere hinweg.","Auch die Raupe zweifelt, bevor sie fliegt.","Du darfst dich neu entfalten – immer wieder.","Leichtigkeit ist erlaubt. Nimm sie dir.","Was sich verpuppt, wird nicht weniger – es wird mehr.","Lass das Alte fallen wie eine zu enge Hülle.","Du musst nicht schwer tragen, um wertvoll zu sein.","Jede Veränderung beginnt im Verborgenen.","Setz dich sanft, wohin es dich zieht.","Dein Werden braucht Zeit. Sei geduldig.","Flatter nicht gegen den Wind – tanz mit ihm.","Heute darf es leicht sein.","Du bist mitten in deiner Verwandlung. Vertrau ihr.","Selbst kurze Flüge zählen.","Schönheit entsteht oft aus dem Unscheinbaren.","Lass los, was dich nicht mehr trägt.","Ein Lächeln ist auch ein Flügelschlag.","Du darfst leicht über deine Sorgen schweben.","Aus Enge wird Weite. Halte durch.","Heute reicht ein bunter Moment.","Spür die Luft unter deinen Flügeln.","Verändern heißt nicht verlieren, sondern werden.","Trag deine Farben offen.","Auch das Zarte ist stark genug zu fliegen.","Lass den Tag dich tragen, statt ihn zu schieben.","Du musst nicht alles festhalten.","Vertrau dem Wandel – er weiß, wohin.","Klein und leicht, und doch unterwegs zu Großem.","Setz dich auf die schöne Blüte, nicht auf das Welke.","Was schwer war, kann morgen Flügel haben.","Erlaube dir, neugierig zu flattern.","Du blühst in deinem eigenen Tempo auf.","Heute legst du ein altes Gewicht ab.","Leichtigkeit ist kein Leichtsinn. Sie ist Heilung.","Folge dem Licht, ganz unbeschwert.","Jeder Neuanfang fühlt sich erst wacklig an.","Du darfst dich zeigen, bunt und ganz.","Schweb kurz über allem – und atme.","Aus der Dunkelheit der Puppe wird Farbe.","Sei sanft zu deinem Werden.","Auch Umwege sind Teil des Flugs.","Heute trägt dich die Leichtigkeit.","Lass dich vom Augenblick verzaubern.","Verwandlung ist Mut in Zeitlupe.","Du bist nicht festgelegt. Du wandelst dich.","Berühr die Welt leicht, wie ein Flügel die Blüte.","Vergiss nicht zu spielen.","Was sich schwer anfühlt, formt gerade deine Flügel.","Flieg los. Der Himmel ist weit genug für dich."]},
   {id:"baer",name:"Bär",img:"tier-baer.png",tint:"#9a7b46",thema:"Kraft & Rückzug",
    morgen:"Guten Morgen. Deine Kraft ist schon da – ruhig und tief.",
    streak:"Stark und beständig wie ein Bär. Ich sehe dich.",
@@ -1175,7 +1419,8 @@ const COMPANIONS = [
    kosmos:"Lass uns in die Weite schauen, ganz in Ruhe.",
    tagebuch:"Gut, dass du nach innen gegangen bist.",
    vollmond:"Auch der Bär spürt den Mond. Ruh dich heute gut aus.",
-   tipp:"Ruhe ist keine Schwäche. Sie ist deine Kraftquelle."},
+   tipp:"Ruhe ist keine Schwäche. Sie ist deine Kraftquelle.",
+   sprueche:["Ruhe ist keine Schwäche. Sie ist deine Kraftquelle.","Zieh dich zurück, wenn du es brauchst. Das ist klug.","Deine Kraft ist schon da – ruhig und tief.","In der Höhle sammelt sich Stärke.","Du darfst langsam sein.","Auch ein Bär schläft, bevor er Berge versetzt.","Steh fest. Der Boden trägt dich.","Heute reicht es, einfach da zu sein.","Kraft heißt auch: Pausen zulassen.","Du musst nicht immer stark wirken, um stark zu sein.","Atme tief in den Bauch. Da wohnt deine Ruhe.","Zieh klare Grenzen, ruhig und bestimmt.","Rückzug ist kein Rückschritt.","Sammle dich. Dann gehst du weiter.","Du trägst mehr Kraft, als du gerade spürst.","Lass die Welt mal warten.","Schwere Tage brauchen einen ruhigen Bären.","Deine Langsamkeit ist Weisheit, kein Mangel.","Ruh dich aus, ohne schlechtes Gewissen.","Steh wie ein Berg – unbeeindruckt vom Wind.","Du darfst dir Zeit für dich nehmen.","Erst auftanken, dann aufbrechen.","Stille Kraft braucht keinen Applaus.","Geh in deine Höhle, wann immer du musst.","Du bist stark genug, auch mal nichts zu tun.","Wärme dich. Der Winter geht vorüber.","Tief atmen, fest stehen, ruhig bleiben.","Deine Ruhe beruhigt auch andere.","Heute darfst du dich klein machen und ausruhen.","Kraft wächst in der Stille.","Lass die Last für einen Moment los.","Du musst nicht alles allein stemmen.","Ein ausgeruhter Bär ist unaufhaltsam.","Sorge erst für dich. Dann für den Rest.","Beständig wie ein Bär – ich sehe dich.","Auch Höhlenzeit ist wertvolle Zeit.","Spür deine Schwere als Erdung, nicht als Last.","Du darfst brummen, wenn dir danach ist.","Setz dich, atme, komm an.","Stärke ist, sich selbst gut zu behandeln.","Heute trägt dich deine ruhige Kraft.","Mach es dir warm und sicher.","Was du in Ruhe tust, hält länger.","Du bist verwurzelt und stark.","Kein Sturm hält ewig. Warte ihn ruhig ab.","Gönn dir Schlaf wie ein Bär im Winter.","Deine Grenzen zu wahren ist gelebte Kraft.","Schritt für Schritt, schwer und sicher.","Du musst nichts beweisen. Ruh einfach.","Auch der Bär spürt den Mond. Schlaf gut."]},
   {id:"rabe",name:"Rabe",img:"tier-rabe.png",tint:"#4a4a63",thema:"Magie & Geheimnis",
    morgen:"Etwas Neues liegt in der Luft. Ich rieche es.",
    streak:"Du webst still deine Magie. Beeindruckend.",
@@ -1183,7 +1428,8 @@ const COMPANIONS = [
    kosmos:"Komm, ich kenne die Wege zwischen den Welten.",
    tagebuch:"Worte sind Zauber. Du hast gerade einen gewirkt.",
    vollmond:"Vollmond – die Schwelle ist dünn. Spür genau hin.",
-   tipp:"Im Ungewissen liegt oft das größte Geschenk."},
+   tipp:"Im Ungewissen liegt oft das größte Geschenk.",
+   sprueche:["Im Ungewissen liegt oft das größte Geschenk.","Etwas Neues liegt in der Luft. Ich rieche es.","Im Dunkeln wohnt auch Magie.","Vertrau dem Geheimnis, das sich gerade entfaltet.","Du webst still deine eigene Magie.","Achte auf die kleinen Zeichen heute.","Zwischen den Welten kenne ich die Wege.","Nicht alles muss erklärt sein, um wahr zu sein.","Worte sind Zauber. Wähle sie liebevoll.","Im Verborgenen reift gerade etwas für dich.","Die Schwelle ist heute dünn. Spür genau hin.","Vertrau dem, was du nicht beweisen kannst.","Auch Schatten gehören zur Magie des Lebens.","Ein Rabe sammelt Glänzendes. Was glänzt heute für dich?","Das Unbekannte ist kein Feind. Es ist offen.","Du bist mehr Geheimnis, als du ahnst.","Lausche der leisen Stimme im Wind.","Wandlung beginnt oft im Dunkeln.","Folge deiner Neugier in unbekannte Räume.","Heute darf etwas mysteriös bleiben.","Vertrau dem Zufall – er hat manchmal Pläne.","Was sich verbirgt, will gefunden werden.","Du trägst altes Wissen in dir, tief und still.","Ein Zeichen am Wegrand – sieh genauer hin.","Im Nebel verliert man sich nicht, man entdeckt.","Magie ist Aufmerksamkeit für das Feine.","Lass das Geheimnis arbeiten.","Auch das Ungesagte hat Kraft.","Du darfst dem Unsichtbaren vertrauen.","Die Nacht raunt dir etwas zu. Hör hin.","Aus Dunkelheit wird oft das Hellste geboren.","Sammle deine Gedanken wie glänzende Steine.","Vertrau dem Pfad zwischen den Welten.","Heute liegt Zauber im Alltäglichen.","Was rätselhaft ist, muss nicht gelöst werden.","Dein Bauchgefühl ist eine alte Magie.","Lass dich überraschen, statt zu kontrollieren.","Im Verborgenen bist du nie allein.","Ein Rabe fürchtet die Dunkelheit nicht. Du auch nicht.","Folge dem Flügelschlag deiner Ahnung.","Heute wirkst du leise einen Zauber.","Vertrau dem, was zwischen den Zeilen liegt.","Geheimnisse sind Geschenke, die sich öffnen.","Das Neue klopft schon. Lass es ein.","Du bist Bote zwischen Tag und Traum.","Schau in den Schatten – dort wartet Erkenntnis.","Magie braucht nur deinen aufmerksamen Blick.","Lass das Alte los, damit Neues sich zeigt.","Im Ungewissen wächst gerade dein Mut.","Spür die dünne Schwelle. Etwas wandelt sich."]},
   {id:"schwan",name:"Schwan",img:"tier-schwan.png",tint:"#9aa6c4",thema:"Anmut & Selbstannahme",
    morgen:"Guten Morgen, Schöne. Gleite heute durch den Tag.",
    streak:"Mit jeder Praxis erkennst du deine Anmut mehr.",
@@ -1191,7 +1437,8 @@ const COMPANIONS = [
    kosmos:"Lass uns sanft über die Sterne gleiten.",
    tagebuch:"Wie schön, dass du dich annimmst.",
    vollmond:"Im Mondlicht spiegelt sich deine Anmut.",
-   tipp:"Du bist schöner, als du denkst."},
+   tipp:"Du bist schöner, als du denkst.",
+   sprueche:["Du bist schöner, als du denkst.","Nimm deine eigene Anmut an.","Aus dem unscheinbaren Küken wird Würde.","Gleite heute sanft durch den Tag.","Du darfst dich annehmen, genau wie du bist.","Anmut beginnt mit Freundlichkeit zu dir selbst.","Spiegle dir Liebe, keinen Tadel.","Du musst dich nicht verbiegen, um schön zu sein.","Trag deinen Hals hoch, ruhig und stolz.","Unter der Oberfläche paddelst du tapfer. Das zählt.","Sei dir selbst gegenüber so sanft wie zu einem Freund.","Deine Eigenart ist deine Schönheit.","Heute darfst du dich mögen.","Ruhe und Anmut – das bist du, auch im Trubel.","Du bist genug, einfach weil du bist.","Lass das Wasser deiner Sorgen abperlen.","Schönheit ist, sich selbst freundlich zu begegnen.","Du darfst Raum einnehmen.","Gleite über das Schwere, statt darin zu versinken.","Annahme ist die zarteste Form von Mut.","Sieh dich heute mit milden Augen.","Du bist liebenswert, auch an grauen Tagen.","Halte dein inneres Gleichgewicht, sanft und sicher.","Deine Makel machen dich echt, nicht weniger schön.","Bewege dich, wie es sich für dich gut anfühlt.","Du musst dich nicht beweisen, um zu glänzen.","Sei stolz auf deinen Weg vom Küken zum Schwan.","Heute reicht es, dich anzunehmen.","Anmut ist Ruhe, nicht Perfektion.","Lieb dich ein Stück mehr als gestern.","Du trägst eine stille Würde in dir.","Lass dich treiben, wo du dich sicher fühlst.","Vergleiche dich nicht – kein Schwan gleicht dem anderen.","Du darfst weich und würdevoll zugleich sein.","Sei freundlich zu deinem Spiegelbild.","Im Wasser deiner Ruhe spiegelt sich dein Wert.","Heute gleitest du, statt zu kämpfen.","Deine Sanftheit zieht Schönes an.","Du bist eine seltene Anmut, gerade so wie du bist.","Atme, richte dich auf, gleite weiter.","Selbstliebe ist kein Luxus, sondern Nahrung.","Lass die Wellen dich nicht aus der Ruhe bringen.","Du darfst dich schön finden – jetzt schon.","Trag deine Geschichte mit Anmut.","Auch leise Schönheit leuchtet.","Heute begegnest du dir mit Wärme.","Du bist wertvoll, ganz ohne Beweis.","Schwimm zu den Ufern, die dir guttun.","Im Mondlicht spiegelt sich deine Anmut.","Sei dir selbst ein liebevoller Begleiter."]},
   {id:"pferd",name:"Pferd",img:"tier-pferd.png",tint:"#b6863c",thema:"Freiheit & Lebenskraft",
    morgen:"Auf geht's! Spür deine Lebenskraft. Ich galoppiere mit dir.",
    streak:"So viel Schwung – du trägst dich selbst weit.",
@@ -1199,7 +1446,8 @@ const COMPANIONS = [
    kosmos:"Komm, lass uns frei durch den Kosmos ziehen.",
    tagebuch:"Du bewegst etwas in dir. Schön.",
    vollmond:"Der Mond ruft die Wildnis. Spür deine Freiheit.",
-   tipp:"Beweg dich auf das zu, was dich ruft."},
+   tipp:"Beweg dich auf das zu, was dich ruft.",
+   sprueche:["Beweg dich auf das zu, was dich ruft.","Spür deine Lebenskraft. Ich galoppiere mit dir.","Auf geht's – ein kleiner Schritt setzt alles in Bewegung.","Freiheit beginnt im nächsten Atemzug.","Lass deine Energie fließen, statt sie zu stauen.","Du trägst dich selbst erstaunlich weit.","Heute darfst du Schwung holen.","Renn nicht weg – renn auf etwas zu.","Auch müde Pferde finden zurück zur Weide.","Deine Lebenslust ist eine Kraft. Nutz sie.","Spür den Wind, spür die Weite.","Beweg deinen Körper, und der Kopf wird leichter.","Du bist freier, als der Zaun dir weismacht.","Galoppier los, wenn dein Herz ruft.","Heute trägt dich dein Schwung.","Lebenskraft fragt nicht, sie fließt.","Steh auf, schüttel dich, geh weiter.","Du darfst wild und frei sein.","Jede Bewegung bringt dich näher zu dir.","Vertrau deiner Kraft, sie trägt dich.","Such dir die offene Weide, nicht den engen Stall.","Heute reicht ein Schritt nach vorn.","Deine Energie will gelebt werden.","Lauf dein eigenes Rennen, in deinem Takt.","Frische Luft, freier Kopf.","Du bist lebendig – spür es.","Lass dich von deiner Sehnsucht tragen.","Auch ein Trab bringt dich voran.","Brich auf, der Weg liegt offen.","Schüttel die Last ab wie Staub aus der Mähne.","Deine Wildheit ist gesund. Lass sie atmen.","Heute darfst du Tempo machen.","Beweg dich, wenn die Gedanken stocken.","Du bist nicht gemacht, um stillzustehen.","Spür den Boden unter den Hufen – fest und frei.","Folge deinem Drang nach Weite.","Ein freies Herz galoppiert leichter.","Du trägst Kraft genug für diesen Tag.","Lass los und lauf.","Heute fühlst du dich lebendig.","Jeder Aufbruch beginnt mit einem mutigen Schritt.","Deine Energie ist ansteckend – zeig sie.","Geh dorthin, wo du frei atmest.","Du darfst dich frei fühlen, jetzt.","Bewegung ist deine Medizin.","Renn dem Leben entgegen, nicht hinterher.","Spür den Schwung in deinen Beinen.","Heute trägt dich deine Lebenskraft weit.","Der Mond ruft die Wildnis. Spür deine Freiheit.","Lauf los – die Weite gehört auch dir."]},
   {id:"fuchs",name:"Fuchs",img:"tier-fuchs.png",tint:"#d98a4e",thema:"Verspieltheit & Klugheit",
    morgen:"Na, gut geschlafen? Heute findest du clevere kleine Wege.",
    streak:"Schlau dranbleiben – das gefällt mir an dir.",
@@ -1207,7 +1455,8 @@ const COMPANIONS = [
    kosmos:"Oh, die Sterne! Lass uns neugierig stöbern.",
    tagebuch:"Clever, dass du deine Gedanken sortierst.",
    vollmond:"Vollmond-Streiche! Aber heute lieber sanft zu dir.",
-   tipp:"Manchmal ist der leichte Weg auch der kluge."},
+   tipp:"Manchmal ist der leichte Weg auch der kluge.",
+   sprueche:["Manchmal ist der leichte Weg auch der kluge.","Heute findest du clevere kleine Wege.","Ein tiefer Atemzug – schon klarer im Kopf?","Sei schlau und bleib dabei verspielt.","Nimm das Leben nicht zu ernst.","Es gibt mehr als einen Weg zum Ziel.","Vertrau deinem Witz, er hilft dir oft weiter.","Heute darf etwas leicht und listig sein.","Such die Abkürzung, die dir guttut.","Neugier öffnet Türen, die Sorge verschlossen hält.","Ein Lächeln ist auch eine kluge Strategie.","Du findest immer einen Ausweg, glaub mir.","Spiel ein bisschen, statt nur zu funktionieren.","Klug ist, wer auch mal ausruht.","Folge deiner Neugier, sie kennt gute Pfade.","Heute reicht ein cleverer kleiner Trick: lächeln.","Probier es anders. Starrheit ist kein Plan.","Du bist findiger, als du denkst.","Lass deinen Schalk raus.","Manche Knoten löst man mit Leichtigkeit, nicht mit Kraft.","Heute darfst du schlau faul sein.","Beobachte erst, dann handle.","Ein wacher Fuchs wittert die Chance.","Spiel mit den Möglichkeiten, ohne Druck.","Du musst nicht alles ernst nehmen, um es ernst zu meinen.","Sei flink im Kopf und sanft zu dir.","Die kluge Lösung ist oft die einfachste.","Heute trägt dich deine Cleverness.","Lass dir etwas einfallen – du kannst das.","Ein bisschen Schabernack tut der Seele gut.","Vertrau deinem Spürsinn.","Wer spielt, lernt leichter.","Such den Weg, der Freude macht.","Du bist schlau genug, Hilfe anzunehmen.","Heute darfst du neugierig stöbern.","Auch Umwege können clever sein.","Nimm die Dinge mit einem Augenzwinkern.","Deine Leichtigkeit ist deine Stärke.","Ein kluger Fuchs gönnt sich Pausen.","Mach es dir einfacher, wo du kannst.","Heute findest du den Schlupfwinkel zur Ruhe.","Sei pfiffig, aber bleib freundlich – zu dir zuerst.","Frag dich: Was wäre der leichte Weg?","Du löst das. Auf deine listige Art.","Spiel, lach, denk um die Ecke.","Cleverness heißt auch, sich nicht zu überfordern.","Heute schnüffelst du nach kleinen Freuden.","Ein neugieriger Geist findet immer etwas.","Sei dir selbst ein schlauer, sanfter Freund.","Um die Ecke gedacht – dort wartet oft die Lösung."]},
   {id:"katze",name:"Katze",img:"tier-katze.png",tint:"#9a8f7e",thema:"Unabhängigkeit & Sanftheit",
    morgen:"Mmh, ein neuer Tag. Streck dich, atme, komm an.",
    streak:"Auf deine ruhige Art bleibst du dran. Schön.",
@@ -1215,16 +1464,19 @@ const COMPANIONS = [
    kosmos:"Sterne beobachten? Mein Lieblingsspiel.",
    tagebuch:"Fein, dass du bei dir verweilst.",
    vollmond:"Vollmondnächte sind unsere Nächte. Genieß die Stille.",
-   tipp:"Du darfst auf dich selbst hören – immer."}
+   tipp:"Du darfst auf dich selbst hören – immer.",
+   sprueche:["Du darfst auf dich selbst hören – immer.","Streck dich, atme, komm an.","Mach es dir leicht. Du darfst das.","Auf deine ruhige Art bleibst du dran.","Kuschel dich ein, wenn dir danach ist.","Du musst niemandem gefallen außer dir.","Sanft zu dir, das ist heute genug.","Folge deinem eigenen Rhythmus.","Ruhe ist kein Faulsein, sondern Selbstfürsorge.","Du darfst Nein sagen, ganz gelassen.","Such dir den sonnigen Platz, der dir guttut.","Unabhängig bleibst du, auch wenn du dich anlehnst.","Heute reicht es, dich wohlzufühlen.","Geh deinen eigenen Weg, leise und sicher.","Du musst dich nicht erklären.","Gönn dir Pausen wie eine Katze in der Sonne.","Sanftheit und Stärke schließen sich nicht aus.","Hör auf dein Bauchgefühl, es weiß Bescheid.","Du darfst wählerisch sein – mit deiner Zeit, deiner Nähe.","Schnurr ein bisschen mehr durch den Tag.","Mach langsam. Eile passt nicht zu dir.","Du bist genug, ganz ohne Aufwand.","Setz dich, beobachte, atme.","Deine Grenzen sind erlaubt und gesund.","Heute darfst du es dir bequem machen.","Vertrau dir selbst zuerst.","Lass dich nicht hetzen, von niemandem.","Ein bisschen Eigensinn ist Selbstachtung.","Such die Wärme, meide den Zug.","Du darfst dich zurückziehen, ohne Grund.","Sanft mit dir, klar nach außen.","Heute trägt dich deine ruhige Selbstständigkeit.","Du musst nicht überall dabei sein.","Genieß die kleinen Annehmlichkeiten.","Folge dem, was sich gut anfühlt.","Auch Alleinsein kann wohltun.","Streck alle Viere von dir und ruh dich aus.","Du bestimmst dein Tempo.","Pass auf dich auf, sanft und bestimmt.","Heute darfst du dich verwöhnen.","Lass die Welt mal um dich kreisen.","Deine Ruhe ist deine Kraft.","Du darfst dich sicher und geborgen fühlen.","Folge deiner Neugier, aber bleib gelassen.","Ein gemütlicher Moment ist nie verschwendet.","Sei freundlich zu dir, besonders heute.","Du musst nicht laut sein, um da zu sein.","Nimm dir, was du brauchst, ohne schlechtes Gewissen.","Vollmondnächte sind deine Nächte. Genieß die Stille.","Sei dir selbst ein sanfter, treuer Begleiter."]}
 ];
 function curCompanion(){const id=store.get("companion",null);return id?COMPANIONS.find(c=>c.id===id)||null:null;}
-function compInner(c,size){const s=size||64;return `<div class="comp-ph" style="background:radial-gradient(circle at 34% 28%, #ffffffcc, ${c.tint});width:${s}px;height:${s}px;font-size:${Math.round(s*0.42)}px">${c.name[0]}</div><img class="comp-img" src="${c.img}" alt="${c.name}" style="width:${s}px;height:${s}px" onerror="this.style.display='none'">`;}
+function compInner(c,size){const s=size||64;return `<span class="comp-art" style="width:${s}px;height:${s}px"><span class="comp-disc" style="background:radial-gradient(circle at 50% 42%, ${c.tint}, ${c.tint}99 52%, ${c.tint}00 72%)"></span><img class="comp-img" src="${c.img}" alt="${c.name}" onerror="this.style.display='none';var p=this.parentNode.querySelector('.comp-ph');if(p)p.style.display='flex'"><span class="comp-ph" style="background:radial-gradient(circle at 34% 28%, #ffffffcc, ${c.tint});font-size:${Math.round(s*0.4)}px">${c.name[0]}</span></span>`;}
 function updateCompanion(){const host=document.getElementById('companionHost');if(!host)return;const c=curCompanion();if(!c){host.innerHTML='';return;}
   host.innerHTML=`<div class="companion" id="companion" onclick="companionTap()" title="${c.name}">${compInner(c,64)}</div>`;}
 let _lastSay=0,_greeted=false,_pickerShown=false;
 function companionBubble(text){const old=document.getElementById('compBubble');if(old)old.remove();const b=document.createElement('div');b.id='compBubble';b.className='comp-bubble';b.textContent=text;document.body.appendChild(b);requestAnimationFrame(()=>b.classList.add('show'));setTimeout(()=>{if(b){b.classList.remove('show');setTimeout(()=>b.remove(),300);}},6500);}
-function companionSay(context,force){const c=curCompanion();if(!c)return;const now=Date.now();if(!force&&now-_lastSay<18000)return;_lastSay=now;const text=c[context]||c.tipp;companionBubble(text);}
-function companionTap(){const c=curCompanion();if(!c)return;_lastSay=Date.now();companionBubble(c.tipp);}
+let _lastSpruch="";
+function spruch(c){if(!c.sprueche||!c.sprueche.length)return c.tipp;let s;let n=0;do{s=c.sprueche[Math.floor(Math.random()*c.sprueche.length)];n++;}while(s===_lastSpruch&&c.sprueche.length>1&&n<8);_lastSpruch=s;return s;}
+function companionSay(context,force){const c=curCompanion();if(!c)return;const now=Date.now();if(!force&&now-_lastSay<18000)return;_lastSay=now;const text=c[context]||spruch(c);companionBubble(text);}
+function companionTap(){const c=curCompanion();if(!c)return;_lastSay=Date.now();companionBubble(spruch(c));}
 function companionOnRender(view){updateCompanion();
   if(view==='heute'&&!curCompanion()){if(!_pickerShown){_pickerShown=true;setTimeout(showCompanionPicker,600);}return;}
   const c=curCompanion();if(!c)return;
@@ -1232,24 +1484,32 @@ function companionOnRender(view){updateCompanion();
   else if(view==='kosmos'){setTimeout(()=>companionSay('kosmos'),400);}}
 function showCompanionPicker(){if(document.getElementById('compPickOv'))return;const cur=store.get("companion",null);
   const ov=document.createElement('div');ov.className='overlay';ov.id='compPickOv';
-  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:22px">Seelen<span>raum</span></div><h2 style="font-size:22px">Wähle deinen Begleiter</h2><p>Ein Tier, das dich von nun an durch deine Praxis begleitet. Du kannst es später jederzeit wechseln.</p><div class="comp-grid">`+
-    COMPANIONS.map(c=>`<button class="comp-pick ${cur===c.id?'sel':''}" onclick="chooseCompanion('${c.id}')"><span class="comp-pick-img">${compInner(c,58)}</span><span class="comp-pick-n">${c.name}</span><span class="comp-pick-t">${c.thema.split(' ')[0]}</span></button>`).join('')+
-    `</div><button class="skip" onclick="closeOverlay(this)">${cur?'schließen':'später wählen'}</button></div>`;
-  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
+  const startIdx=Math.max(0,COMPANIONS.findIndex(c=>c.id===cur));
+  const items=COMPANIONS.map(c=>({act:`chooseCompanion('${c.id}')`,inner:`<div class="c3d-card comp"><span class="comp-pick-img" style="width:92px;height:92px">${compInner(c,92)}</span><div class="c3d-name" style="margin-top:8px">${c.name}</div><div class="c3d-keys">${c.thema}</div></div>`}));
+  ov.innerHTML=`<div class="modal" style="max-width:430px"><div class="logo" style="font-size:22px">Seelen<span>raum</span></div><h2 style="font-size:22px">Wähle deinen Begleiter</h2><p>Ein Tier, das dich von nun an durch deine Praxis begleitet. Swipe und tippe zum Wählen.</p>${carousel3dHtml('compCar','companions',items,startIdx)}<button class="skip" onclick="closeOverlay(this)">${cur?'schließen':'später wählen'}</button></div>`;
+  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});initCarousels(ov);}
 function chooseCompanion(id){store.set("companion",id);const o=document.getElementById('compPickOv');if(o)o.remove();updateCompanion();const c=curCompanion();_lastSay=0;setTimeout(()=>companionBubble("Schön, dass du mich gewählt hast. Von nun an bin ich bei dir. ✦"),300);}
 
 /* ===== ROUTER ===== */
-let current='heute';
-function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
+let current='heute';let _hist=[],_goingBack=false;function goBack(){if(_hist.length){_goingBack=true;render(_hist.pop());}}
+function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','china','orakel','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview','chinaview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
 function render(view){
+  const prevView=current;const prevScroll=window.scrollY;
+  if(view!==prevView){if(_goingBack)_goingBack=false;else{_hist.push(prevView);if(_hist.length>60)_hist.shift();}}
   if(view!=='atem'){stopBreathe();if(breathSound){breathSound.stop();breathSound=null;}atemSel=null;}
   if(view!=='medplay')medStop();
   /* Klang darf bereichsübergreifend weiterspielen */
   current=view;const tb=tabFor(view);
   document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.view===tb));
-  const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen}[view];
+  const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen,china:viewChina,orakel:viewOrakel}[view];
   document.getElementById('app').innerHTML=v?v():viewHeute();companionOnRender(view);
-  if(!['impulse','favoriten','tagebuch','meditationen','rituale'].includes(view))window.scrollTo({top:0,behavior:'smooth'});
+  initCarousels(document.getElementById('app'));
+  var _bb=document.getElementById('backBtn');if(_bb)_bb.style.display=_hist.length?'inline-flex':'none';
+  if(view!==prevView){animEnter();applyReveal(document.getElementById('app'));}
+  /* Bei erneutem Rendern derselben Ansicht (z.B. nach einem Klick) Scroll-Position halten – kein Sprung nach oben.
+     Nur bei echtem Ansichtswechsel sanft nach oben scrollen. */
+  if(view===prevView){window.scrollTo({top:prevScroll});}
+  else if(!['impulse','favoriten','tagebuch','meditationen','rituale'].includes(view))window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.view)));
 document.addEventListener('keydown',function(e){if(e.key==='Enter'){const a=document.activeElement;if(a&&a.classList&&(a.classList.contains('lib-item')||a.classList.contains('sound')||a.classList.contains('mood')||a.classList.contains('draw-back')||a.classList.contains('rstep')||a.classList.contains('zsign'))){e.preventDefault();a.click();}}});
@@ -1266,8 +1526,8 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
   ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen.</h2><p>Dein ruhiger Ort für jeden Tag. Erzähl mir kurz von dir.</p><input id="nameIn" placeholder="Dein Vorname (optional)" maxlength="24"><input id="bdIn2" type="date" style="color:var(--ink-soft)"><input id="intIn" placeholder="Absicht für die Woche (optional)" maxlength="60"><button class="btn gold" onclick="finishOnboard()">Eintreten</button><button class="skip" onclick="finishOnboard()">überspringen</button></div>`;
   document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
-function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
-fillIcons();startGate();
+function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
+fillIcons();initCosmosBg();initParallax();startGate();
 </script>
 </body>
 </html>
