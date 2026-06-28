@@ -1,7 +1,7 @@
 /* Seelenraum Service Worker — Offline-Fähigkeit & Installierbarkeit
    Hinweis: Bei jedem inhaltlichen Update der App die CACHE-Version
    erhöhen (z. B. v1 -> v2), damit Mitglieder die neue Version sehen. */
-const CACHE = "seelenraum-v20";
+const CACHE = "seelenraum-v21";
 const ASSETS = [
   "seelenraum-app.html",
   "manifest.webmanifest",

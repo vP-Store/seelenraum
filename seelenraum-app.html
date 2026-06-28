@@ -582,7 +582,9 @@ const MOODS=[{k:0,l:"Schwer",c:"#9a8fb0"},{k:1,l:"Gedämpft",c:"#b0a0c2"},{k:2,l
 const heute=new Date();
 const todayKey=heute.toISOString().slice(0,10);
 const store={get(k,d){try{const v=localStorage.getItem("sr_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem("sr_"+k,JSON.stringify(v));}catch(e){}}};
-let state={name:store.get("name",""),favs:store.get("favs",[]),streak:store.get("streak",0),lastDone:store.get("lastDone",""),journey:store.get("journey",{}),journal:store.get("journal",{}),moods:store.get("moods",{}),days:store.get("days",[]),intention:store.get("intention",null),freejournal:store.get("freejournal",[])};
+let state={name:store.get("name",""),favs:store.get("favs",[]),streak:store.get("streak",0),lastDone:store.get("lastDone",""),journey:store.get("journey",{}),journal:store.get("journal",{}),moods:store.get("moods",{}),days:store.get("days",[]),intention:store.get("intention",null),freejournal:store.get("freejournal",[]),notes:store.get("notes",{})};
+function saveNote(key,val){if(!state.notes)state.notes={};if(val.trim()==="")delete state.notes[key];else state.notes[key]={text:val,ts:Date.now()};store.set("notes",state.notes);const h=document.getElementById('nh-'+key);if(h)h.textContent='Gespeichert ✓';}
+function noteField(key,label){const v=(state.notes&&state.notes[key])?state.notes[key].text:"";return `<div class="block-label">${label||'Deine Notizen'}</div><textarea class="journal" placeholder="Schreib hier frei – wird automatisch gespeichert, kein Zettel nötig …" oninput="saveNote('${key}',this.value)">${escHtml(v)}</textarea><div class="save-hint" id="nh-${key}">${v?'Gespeichert ✓':''}</div>`;}
 function fmtShort(d){const p=d.split('-');return parseInt(p[2])+". "+MONATE[parseInt(p[1])-1];}
 function yesterdayKey(){const y=new Date(heute);y.setDate(y.getDate()-1);return y.toISOString().slice(0,10);}
 function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
@@ -773,7 +775,7 @@ function renderMed(){
   if(med.idx<0){
     app.innerHTML=`<div class="view sec-med"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="medBack()">← Meditationen</button></div>
       <div class="hero hero-med"><div class="he">${m.thema} · ${m.dauer}</div><h2>${m.titel}</h2><p>${m.intro}</p></div>
-      <div class="card player"><div class="orb" id="orb"></div><div class="pstep">Wenn du bereit bist, beginne. Du kannst jederzeit pausieren.</div><div class="actions" style="justify-content:center"><button class="btn solid" style="flex:none;min-width:180px" onclick="medBegin()">Beginnen</button></div></div></div>`;
+      <div class="card player"><div class="orb" id="orb"></div><div class="pstep">Wenn du bereit bist, beginne. Du kannst jederzeit pausieren.</div><div class="actions" style="justify-content:center"><button class="btn solid" style="flex:none;min-width:180px" onclick="medBegin()">Beginnen</button></div></div><div class="card">${noteField('med-'+m.id,'Notizen zu dieser Meditation')}</div></div>`;
     return;
   }
   const step=m.steps[med.idx];const pct=Math.round((med.idx+1)/m.steps.length*100);const last=med.idx>=m.steps.length-1;
@@ -806,7 +808,7 @@ function openRitual(id){const r=RITUALE.find(x=>x.id===id);current='ritualview';
   document.getElementById('app').innerHTML=`<div class="view sec-ritual"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('rituale')">← Rituale</button></div>
     <div class="hero hero-ritual"><div class="he">${r.anlass} · ${r.dauer}</div><h2>${r.titel}</h2></div>
     <div class="card">${need}<div class="block-label">So geht's</div><div class="step-list">${r.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div>
-    <div class="affirm" style="text-align:center;margin-top:18px">„${r.schluss}"</div>
+    <div class="affirm" style="text-align:center;margin-top:18px">„${r.schluss}"</div>${noteField('ritual-'+r.id,'Deine Notizen zu diesem Ritual')}
     <div class="actions"><button class="btn solid" onclick="ritualDone()">Ritual abgeschlossen ✦</button></div></div></div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -890,7 +892,7 @@ function openReise(rid){const r=REISEN.find(x=>x.id===rid);current='reise';rende
 function renderReiseTag(rid,idx){const r=REISEN.find(x=>x.id===rid);const t=r.tage[idx];const last=idx>=r.tage.length-1;
   document.getElementById('app').innerHTML=`<div class="view sec-praxis"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('reisen')">← Reisen</button></div>
     <div class="section-title">${r.titel}</div><div class="section-sub">${idx+1} / ${r.tage.length}</div>
-    <div class="card"><h2>${t.titel}</h2><div class="affirm">„${t.affirmation}"</div><div class="block-label">Sanfte Praxis</div><div>${t.praxis}</div><div class="block-label">Frage für dich</div><div style="font-style:italic">${t.frage}</div>
+    <div class="card"><h2>${t.titel}</h2><div class="affirm">„${t.affirmation}"</div><div class="block-label">Sanfte Praxis</div><div>${t.praxis}</div><div class="block-label">Frage für dich</div><div style="font-style:italic">${t.frage}</div>${noteField('reise-'+rid+'-'+idx,'Dein Tagebuch zu diesem Tag')}
     <div class="actions">${idx>0?`<button class="btn" onclick="renderReiseTag('${rid}',${idx-1})">← Vorheriger</button>`:''}<button class="btn gold" onclick="reiseWeiter('${rid}',${idx})">${last?'Reise abschließen ✦':'Tag abschließen →'}</button></div></div></div>`;
   animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function reiseWeiter(rid,idx){const r=REISEN.find(x=>x.id===rid);state.journey[rid]=Math.max(state.journey[rid]||0,idx+1);store.set("journey",state.journey);if(idx+1<r.tage.length)renderReiseTag(rid,idx+1);else{markPractice("Reise abgeschlossen ✦");render('reisen');}}
@@ -1053,7 +1055,7 @@ function viewMani(){
 function openMethod(id){const m=MANI_METHODEN.find(x=>x.id===id);current='methodview';
   document.getElementById('app').innerHTML=`<div class="view sec-mani"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('mani')">← Methoden</button></div>
     <div class="hero hero-mani"><div class="he">${m.dauer}</div><h2>${m.titel}</h2><p>${m.beschreibung}</p></div>
-    <div class="card"><div class="block-label">So geht's</div><div class="step-list">${m.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div><div class="affirm" style="text-align:center;margin-top:18px">„${m.schluss}"</div><div class="actions"><button class="btn solid" onclick="methodDone()">Praxis abgeschlossen ✦</button></div></div></div>`;
+    <div class="card"><div class="block-label">So geht's</div><div class="step-list">${m.steps.map(s=>`<div class="rstep">${s}</div>`).join('')}</div><div class="affirm" style="text-align:center;margin-top:18px">„${m.schluss}"</div>${noteField('method-'+m.id,'Deine Notizen')}<div class="actions"><button class="btn solid" onclick="methodDone()">Praxis abgeschlossen ✦</button></div></div></div>`;
   animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function methodDone(){markPractice("Manifestation gestärkt ✦");render('mani');}
 /* Chakren */
@@ -1423,7 +1425,7 @@ const NEUE_BEREICHE={
 };
 function erklB(b){return `<div class="card erkl"><div class="block-label">Was ist das?</div><div>${b.was}</div><div class="block-label">So nutzt du diesen Bereich</div><div>${b.nutzen}</div></div>`;}
 function viewBereich(id){const b=NEUE_BEREICHE[id];if(!b)return viewHeute();let html=`<div class="view"><div class="hero hero-bereich" style="background-image:url('${b.img}')"><div class="ornament"></div><div class="he">${b.he}</div><h2>${b.name}</h2><p>${b.sub}</p></div>${erklB(b)}`;html+=b.items.map((it,i)=>`<div class="lib-item" tabindex="0" role="button" onclick="openBereich('${id}',${i})"><div class="li-theme">${b.name}</div><h3>${it.t}</h3><div class="li-aff">${it.s}</div></div>`).join('');return html+`</div>`;}
-function openBereich(id,i){const b=NEUE_BEREICHE[id];if(!b)return;const it=b.items[i];current='bereichview';document.getElementById('app').innerHTML=`<div class="view"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('${id}')">← ${b.name}</button></div><div class="hero hero-bereich" style="background-image:url('${b.img}')"><div class="he">${b.name}</div><h2>${it.t}</h2></div><div class="card"><div>${it.txt}</div><div class="affirm" style="text-align:center;margin-top:16px">„${it.affirm}"</div><div class="actions"><button class="btn" onclick="openShareImage('${esc(it.affirm)}','${b.name}')">Als Bild teilen</button></div></div></div>`;animEnter();window.scrollTo({top:0,behavior:'smooth'});}
+function openBereich(id,i){const b=NEUE_BEREICHE[id];if(!b)return;const it=b.items[i];current='bereichview';document.getElementById('app').innerHTML=`<div class="view"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('${id}')">← ${b.name}</button></div><div class="hero hero-bereich" style="background-image:url('${b.img}')"><div class="he">${b.name}</div><h2>${it.t}</h2></div><div class="card"><div>${it.txt}</div><div class="affirm" style="text-align:center;margin-top:16px">„${it.affirm}"</div>${noteField('bereich-'+id+'-'+i,'Deine Notizen & Reflexion')}<div class="actions"><button class="btn" onclick="openShareImage('${esc(it.affirm)}','${b.name}')">Als Bild teilen</button></div></div></div>`;animEnter();window.scrollTo({top:0,behavior:'smooth'});}
 function bgTileInner(name,img){return `<div class="c3d-card sign" style="background-image:url('${img}')"><span class="c3d-cap"><span class="c3d-name">${name}</span></span></div>`;}
 /* ===== 3D-Karussell-Engine ===== */
 let _carousels={};
@@ -1656,7 +1658,7 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
   ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen.</h2><p>Dein ruhiger Ort für jeden Tag. Erzähl mir kurz von dir.</p><input id="nameIn" placeholder="Dein Vorname (optional)" maxlength="24"><input id="bdIn2" type="date" style="color:var(--ink-soft)"><input id="intIn" placeholder="Absicht für die Woche (optional)" maxlength="60"><button class="btn gold" onclick="finishOnboard()">Eintreten</button><button class="skip" onclick="finishOnboard()">überspringen</button></div>`;
   document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
-function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
+function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","notes","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
 fillIcons();initCosmosBg();initParallax();startGate();
 </script>
 </body>
