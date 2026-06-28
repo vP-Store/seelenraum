@@ -306,6 +306,20 @@
   .c3d-card.sign .c3d-name{font-size:17px;font-weight:600;color:#fff}
   .c3d-card.sign .c3d-keys{font-size:11px;color:rgba(255,255,255,.85)}
   .detail-art{display:block;width:100%;max-width:320px;margin:0 auto 6px;border-radius:20px;box-shadow:var(--shadow)}
+  /* ===== Design-Politur: Akkordeon, Typografie, Fokus ===== */
+  .card{line-height:1.62}
+  .acc-h{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;user-select:none;border-top:1px solid var(--line);padding-top:16px;margin-top:20px;transition:color .2s}
+  .acc-h.acc-first{border-top:none;padding-top:0;margin-top:10px}
+  .acc-h:hover{color:var(--accent-deep)}
+  .acc-h::after{content:"⌄";font-family:Arial,sans-serif;font-size:18px;line-height:1;opacity:.55;transition:transform .3s;margin-top:-2px}
+  .acc-h.collapsed::after{transform:rotate(-90deg)}
+  .acc-b{animation:accIn .32s ease}
+  .acc-b.acc-hidden{display:none}
+  @keyframes accIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .acc-hint{text-align:center;font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-fade);margin:0 0 4px}
+  a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,.lib-item:focus-visible,.zsign:focus-visible,[role="button"]:focus-visible,.tile:focus-visible,.sound:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .btn{min-height:44px}
+  :root{--ink-soft:#5f5668}
   .c3d-card .c3d-img{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-sm)}
   .c3d-card .c3d-ti{font-size:30px;margin-bottom:2px}
   .c3d-ti svg{width:34px;height:34px}
@@ -1458,7 +1472,9 @@ function initCosmosBg(){if(document.getElementById('cosmosBg'))return;const syms
 /* ===== Parallax (Hero-Ornament) ===== */
 function initParallax(){window.addEventListener('scroll',function(){const y=window.scrollY;const els=document.querySelectorAll('#app .ornament');for(let i=0;i<els.length;i++)els[i].style.transform='translateY('+(y*0.12).toFixed(1)+'px)';},{passive:true});}
 /* ===== Sanftes Einblenden ===== */
-function animEnter(){const a=document.getElementById('app');if(!a)return;a.classList.remove('app-enter');void a.offsetWidth;a.classList.add('app-enter');}
+function animEnter(){const a=document.getElementById('app');if(!a)return;a.classList.remove('app-enter');void a.offsetWidth;a.classList.add('app-enter');makeAccordions(a);}
+function makeAccordions(scope){if(!scope)return;scope.querySelectorAll('.card').forEach(function(card){if(card._acc)return;const labels=card.querySelectorAll(':scope > .block-label');if(labels.length<4)return;card._acc=true;const hint=document.createElement('div');hint.className='acc-hint';hint.textContent='tippe einen Abschnitt zum Auf- und Zuklappen';card.insertBefore(hint,labels[0]);labels.forEach(function(lab,i){lab.classList.add('acc-h');if(i===0)lab.classList.add('acc-first');const body=lab.nextElementSibling;const hasBody=body&&!body.classList.contains('block-label')&&!body.classList.contains('actions');if(hasBody)body.classList.add('acc-b');if(i>0){lab.classList.add('collapsed');if(hasBody)body.classList.add('acc-hidden');}});});}
+document.addEventListener('click',function(e){const h=(e.target&&e.target.closest)?e.target.closest('.acc-h'):null;if(!h)return;h.classList.toggle('collapsed');const b=h.nextElementSibling;if(b&&b.classList.contains('acc-b'))b.classList.toggle('acc-hidden');});
 window.addEventListener('scroll',function(){const b=document.getElementById('toTop');if(b)b.style.display=window.scrollY>500?'flex':'none';});
 
 /* ===== ICON-SYSTEM (handgezeichnete SVG-Linien-Icons) ===== */
