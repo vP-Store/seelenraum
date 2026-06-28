@@ -1,17 +1,10 @@
 <!--
   ============================================================
-  SEELENRAUM — Landingpage / Verkaufsseite
+  SEELENRAUM — Landingpage / Verkaufsseite (Conversion-optimiert)
   ============================================================
-  Dies ist die oeffentliche Seite, die Besucher zuerst sehen.
-  Sie fuehrt zur Mitgliedschaft (Abo).
-
-  >>> SO VERBINDEST DU DEN KAUF-BUTTON (nur EINE Stelle):
-      Suche weiter unten im <script>:  const CHECKOUT_URL = "";
-      Trage zwischen die Anfuehrungszeichen deinen echten
-      Memberstack-/Stripe-Checkout-Link ein, z. B.:
-      const CHECKOUT_URL = "https://dein-shop.com/checkout";
-      Solange das Feld leer ist, zeigen die Buttons einen
-      freundlichen Hinweis statt ins Leere zu fuehren.
+  Kauf-Links: weiter unten im <script> bei CHECKOUT_URL* eintragen.
+  Kundenstimmen: Abschnitt "stimmen" enthält Platzhalter —
+  bitte durch ECHTE Bewertungen ersetzen, bevor du sie nutzt.
   ============================================================
 -->
 <!DOCTYPE html>
@@ -19,27 +12,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seelenraum — dein ruhiger Ort für jeden Tag</title>
-<meta name="description" content="Seelenraum ist deine tägliche spirituelle Praxis als App: Impulse, geführte Reisen, Affirmationen und Atempausen. Jeden Monat neu. Werde Mitglied.">
+<title>Seelenraum — deine tägliche spirituelle Praxis als App</title>
+<meta name="description" content="Seelenraum ist deine komplette spirituelle Praxis in einer App: täglicher Impuls, Astrologie, Numerologie, Chakren, Kristalle, Meditationen, Atempausen, Rituale, Klangraum & Tagebuch. Sanft geführt, jeden Monat neu. Jetzt Mitglied werden.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f4ede7">
 <meta property="og:title" content="Seelenraum — dein ruhiger Ort für jeden Tag">
-<meta property="og:description" content="Deine tägliche spirituelle Praxis als App. Impulse, Reisen, Affirmationen, Atempausen — jeden Monat neu.">
+<meta property="og:description" content="Deine komplette spirituelle Praxis als App. Impulse, Astrologie, Numerologie, Chakren, Meditationen, Klangraum & mehr — jeden Tag neu.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23cdb4e6'/%3E%3Cstop offset='1' stop-color='%238a76a8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%23fff' stroke-opacity='.85' stroke-width='2'/%3E%3C/svg%3E">
 <style>
   :root{
-    --ink:#3b333f;--ink-soft:#6f6678;--ink-fade:#9a90a2;
+    --ink:#3b333f;--ink-soft:#5f5668;--ink-fade:#9a90a2;
     --gold:#b08d57;--accent:#8a76a8;--accent-deep:#6f5d8e;
-    --card:#fffdfb;--line:#ece2d9;
-    --shadow:0 14px 40px rgba(80,60,90,.12);--shadow-sm:0 5px 16px rgba(80,60,90,.08);
+    --card:#fffdfbee;--card-solid:#fffdfb;--line:#ece2d9;
+    --shadow:0 18px 48px rgba(80,60,90,.14);--shadow-sm:0 6px 18px rgba(80,60,90,.09);
   }
   @media (prefers-color-scheme: dark){
-    :root{--ink:#ece6f0;--ink-soft:#b3a9bd;--ink-fade:#8a8094;--gold:#d8b87e;--accent:#bda7dd;--accent-deep:#d3c2ea;--card:#272231;--line:#3b3548;--shadow:0 14px 40px rgba(0,0,0,.4);--shadow-sm:0 5px 16px rgba(0,0,0,.3)}
+    :root{--ink:#ece6f0;--ink-soft:#b3a9bd;--ink-fade:#8a8094;--gold:#d8b87e;--accent:#bda7dd;--accent-deep:#d3c2ea;--card:#272231ee;--card-solid:#272231;--line:#3b3548;--shadow:0 18px 48px rgba(0,0,0,.45);--shadow-sm:0 6px 18px rgba(0,0,0,.32)}
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'Georgia','Times New Roman',serif;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+  body{font-family:'Georgia','Times New Roman',serif;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
     background:
       radial-gradient(900px 520px at 12% -6%, #efe3f3 0%, transparent 60%),
       radial-gradient(820px 500px at 100% 6%, #dcebe6 0%, transparent 55%),
@@ -53,115 +46,242 @@
       radial-gradient(760px 640px at 50% 118%, #2c2533 0%, transparent 60%),
       linear-gradient(160deg,#1c1822,#231d2e 60%,#1a2220);background-color:#1b1722}
   }
-  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  /* floating spirituelle Symbole */
+  #cosmos{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  #cosmos span{position:absolute;color:var(--accent);opacity:.10;will-change:transform;animation:drift linear infinite}
+  @keyframes drift{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(-118vh) rotate(360deg)}}
+  .page{position:relative;z-index:1}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;z-index:40;transition:.35s}
+  header .bar{max-width:1040px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}
+  header.scrolled{background:var(--card);backdrop-filter:blur(12px);box-shadow:var(--shadow-sm);border-bottom:1px solid var(--line)}
+  .logo{font-size:15px;letter-spacing:5px;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+  .logo b{color:var(--gold);font-weight:normal}
+  header .hbtn{opacity:0;transform:translateY(-6px);transition:.35s;pointer-events:none}
+  header.scrolled .hbtn{opacity:1;transform:none;pointer-events:auto}
+
   .btn{display:inline-block;font-family:Arial,sans-serif;font-size:14px;letter-spacing:1px;text-decoration:none;
-    background:var(--accent);color:#fff;border:none;border-radius:30px;padding:15px 30px;cursor:pointer;transition:.2s;box-shadow:var(--shadow-sm)}
-  .btn:hover{background:var(--accent-deep);transform:translateY(-2px)}
-  .btn.ghost{background:transparent;color:var(--accent-deep);border:1px solid var(--accent)}
+    background:var(--accent);color:#fff;border:none;border-radius:30px;padding:15px 32px;cursor:pointer;transition:.25s;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+  .btn:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);transition:.5s}
+  .btn:hover::after{left:130%}
+  .btn.gold{background:linear-gradient(135deg,#c7a064,#a87e44);color:#fff}
+  .btn.gold:hover{filter:brightness(1.06)}
+  .btn.ghost{background:transparent;color:var(--accent-deep);border:1px solid var(--accent);box-shadow:none}
   .btn.ghost:hover{background:var(--accent);color:#fff}
-  .btn.gold{background:var(--gold)}
-  .btn.gold:hover{filter:brightness(1.05)}
+  .btn.sm{padding:11px 22px;font-size:13px}
 
   /* Hero */
-  .hero{text-align:center;padding:70px 0 30px}
-  .orb{width:120px;height:120px;border-radius:50%;margin:0 auto 26px;
-    background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);box-shadow:0 0 60px rgba(138,118,168,.45);
+  .hero{text-align:center;padding:120px 0 40px}
+  .orb{width:128px;height:128px;border-radius:50%;margin:0 auto 26px;
+    background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);box-shadow:0 0 70px rgba(138,118,168,.5);
     position:relative;animation:float 6s ease-in-out infinite}
-  .orb::after{content:"";position:absolute;inset:30px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .orb::after{content:"";position:absolute;inset:32px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
+  .orb::before{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid var(--accent);opacity:.35;animation:halo 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes halo{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.12);opacity:.1}}
   .brand{font-size:20px;letter-spacing:7px;text-transform:uppercase;color:var(--ink-soft)}
   .brand b{color:var(--gold);font-weight:normal}
-  h1{font-size:46px;font-weight:normal;line-height:1.18;margin:18px auto 14px;max-width:14ch}
-  .lead{font-size:20px;font-style:italic;color:var(--ink-soft);max-width:30ch;margin:0 auto 30px}
+  h1{font-size:50px;font-weight:normal;line-height:1.14;margin:18px auto 16px;max-width:16ch;letter-spacing:.2px}
+  .lead{font-size:20px;font-style:italic;color:var(--ink-soft);max-width:40ch;margin:0 auto 32px}
   .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .microtrust{font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;color:var(--ink-fade);margin-top:22px}
+  .microtrust{display:flex;gap:8px 18px;flex-wrap:wrap;justify-content:center;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.5px;color:var(--ink-fade);margin-top:26px}
+  .microtrust span{display:inline-flex;align-items:center;gap:6px}
+  .microtrust b{color:var(--gold);font-weight:normal}
 
-  section{padding:46px 0}
-  .eyebrow{text-align:center;font-family:Arial,sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-  h2{font-size:32px;font-weight:normal;text-align:center;margin-bottom:8px;line-height:1.25}
-  .sub{text-align:center;color:var(--ink-soft);max-width:48ch;margin:0 auto 30px;font-style:italic}
+  /* Stats */
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:18px 0 6px}
+  .stat{flex:1;min-width:150px;max-width:230px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 16px;text-align:center;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px)}
+  .stat .n{font-size:36px;color:var(--accent-deep);line-height:1}
+  .stat .l{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow-sm)}
-  .feat .ic{font-size:26px;display:block;margin-bottom:10px}
-  .feat h3{font-size:20px;font-weight:normal;margin-bottom:6px}
-  .feat p{color:var(--ink-soft);font-size:15px}
+  section{padding:54px 0}
+  .eyebrow{text-align:center;font-family:Arial,sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  h2{font-size:34px;font-weight:normal;text-align:center;margin-bottom:10px;line-height:1.22}
+  .sub{text-align:center;color:var(--ink-soft);max-width:52ch;margin:0 auto 34px;font-style:italic}
+
+  /* Feature-Gruppen */
+  .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .group{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px);transition:.3s}
+  .group:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .group .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .group .gi{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;flex:none}
+  .group h3{font-size:20px;font-weight:normal}
+  .group ul{list-style:none}
+  .group li{padding:6px 0 6px 22px;position:relative;color:var(--ink-soft);font-size:15.5px}
+  .group li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:12px;top:9px}
+
+  /* Galerie */
+  .gallery{display:flex;gap:14px;overflow-x:auto;padding:6px 22px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .gallery::-webkit-scrollbar{height:0}
+  .gcard{position:relative;flex:none;width:172px;height:240px;border-radius:20px;overflow:hidden;scroll-snap-align:center;box-shadow:var(--shadow);background:var(--line)}
+  .gcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .gcard span{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 12px;color:#fff;font-size:15px;
+    background:linear-gradient(transparent,rgba(15,10,25,.8))}
 
   /* Sample */
-  .sample{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:38px 32px;box-shadow:var(--shadow);max-width:520px;margin:0 auto;text-align:center}
+  .sample{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:40px 34px;box-shadow:var(--shadow);max-width:540px;margin:0 auto;text-align:center;backdrop-filter:blur(6px)}
   .sample .pill{display:inline-block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:20px;padding:4px 12px;margin-bottom:14px}
-  .sample .aff{font-size:23px;font-style:italic;color:var(--accent-deep);margin:14px 0}
+  .sample .aff{font-size:24px;font-style:italic;color:var(--accent-deep);margin:14px 0}
   .sample .lbl{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 4px}
 
   /* Steps */
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:s}
-  .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm);position:relative}
-  .step::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-family:Arial,sans-serif;font-size:16px;margin-bottom:12px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;counter-reset:s}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow-sm);position:relative;backdrop-filter:blur(6px)}
+  .step::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;font-family:Arial,sans-serif;font-size:17px;margin-bottom:14px}
   .step h3{font-size:19px;font-weight:normal;margin-bottom:4px}
   .step p{color:var(--ink-soft);font-size:15px}
 
+  /* Stimmen */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .quote{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px)}
+  .quote .stars{color:var(--gold);letter-spacing:3px;font-size:14px;margin-bottom:10px}
+  .quote p{font-style:italic;color:var(--ink);font-size:16px}
+  .quote .who{font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;color:var(--ink-fade);margin-top:12px}
+
   /* Pricing */
-  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;align-items:stretch}
-  .price{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;text-align:center}
-  .price.feat-card{border:2px solid var(--gold);box-shadow:var(--shadow)}
+  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px;align-items:stretch}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px 26px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;text-align:center;backdrop-filter:blur(6px);transition:.3s;position:relative}
+  .price:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .price.feat-card{border:2px solid var(--gold);box-shadow:var(--shadow);transform:scale(1.03)}
+  .price.feat-card:hover{transform:scale(1.03) translateY(-4px)}
   .price .tier{font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
-  .price .amt{font-size:40px;margin:10px 0 2px}
+  .price .amt{font-size:44px;margin:10px 0 2px}
   .price .amt small{font-size:15px;color:var(--ink-fade)}
   .price .note{color:var(--ink-soft);font-size:14px;min-height:42px;margin-bottom:14px}
-  .price ul{list-style:none;text-align:left;margin:0 0 22px;font-size:15px;color:var(--ink-soft)}
-  .price li{padding:5px 0 5px 24px;position:relative}
+  .price ul{list-style:none;text-align:left;margin:0 0 24px;font-size:15px;color:var(--ink-soft)}
+  .price li{padding:6px 0 6px 24px;position:relative}
   .price li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
-  .price .btn{margin-top:auto}
+  .price .btn{margin-top:auto;text-align:center}
   .ribbon{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;color:var(--gold);margin-bottom:6px}
+  .save{display:inline-block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;background:rgba(176,141,87,.14);color:var(--gold);border-radius:20px;padding:3px 10px;margin-top:6px}
 
   /* FAQ */
-  details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:12px 0;box-shadow:var(--shadow-sm)}
-  summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:12px 0;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px)}
+  summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";color:var(--accent);font-size:24px}
+  summary::after{content:"+";color:var(--accent);font-size:24px;flex:none}
   details[open] summary::after{content:"–"}
   details p{color:var(--ink-soft);margin-top:12px;font-size:15px}
 
-  .final{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:50px 30px;box-shadow:var(--shadow);margin:20px 0}
+  .final{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:60px 30px;box-shadow:var(--shadow);margin:20px 0;backdrop-filter:blur(6px)}
   .final h2{margin-bottom:10px}
-  footer{text-align:center;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;padding:30px 0 50px}
-  @media(max-width:560px){h1{font-size:34px}.hero{padding:50px 0 20px}}
+  footer{text-align:center;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;padding:30px 0 110px}
+  footer a{color:var(--ink-soft);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--accent)}
+
+  /* mobile sticky CTA */
+  .stickyBar{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;gap:10px;align-items:center;justify-content:space-between;
+    padding:12px 16px;background:var(--card);backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(80,60,90,.12)}
+  .stickyBar .p{font-family:Arial,sans-serif;font-size:13px;color:var(--ink-soft)}
+  .stickyBar .p b{color:var(--ink);font-size:16px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:680px){
+    h1{font-size:36px}h2{font-size:28px}.hero{padding:96px 0 24px}
+    .stickyBar{display:flex}
+    section{padding:42px 0}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important}.reveal{transition-duration:.01s}
+  }
 </style>
 </head>
 <body>
+<div id="cosmos"></div>
+
+<header id="hd">
+  <div class="bar">
+    <a class="logo" href="#top">Seelen<b>raum</b></a>
+    <a class="btn gold sm hbtn" href="#preise" onclick="goCheckout(event)">Mitglied werden</a>
+  </div>
+</header>
+
+<div class="page" id="top">
 <div class="wrap">
 
   <div class="hero">
     <div class="orb"></div>
     <div class="brand">Seelen<b>raum</b></div>
-    <h1>Dein ruhiger Ort für jeden Tag</h1>
-    <p class="lead">Eine sanfte spirituelle Praxis, die mit dir wächst — als App, immer dabei.</p>
+    <h1>Finde jeden Tag zu dir zurück</h1>
+    <p class="lead">Deine komplette spirituelle Praxis in einer App — sanft geführt, wunderschön gestaltet, jeden Tag neu.</p>
     <div class="cta-row">
-      <a class="btn gold" href="#" onclick="goCheckout(event)">Mitglied werden</a>
+      <a class="btn gold" href="#preise" onclick="goCheckout(event)">Mitglied werden</a>
       <a class="btn ghost" href="#vorschau">Erst hineinspüren</a>
     </div>
-    <div class="microtrust">Jeden Monat neue Inhalte · Jederzeit kündbar · Auf Handy &amp; Computer</div>
+    <div class="microtrust">
+      <span>✦ <b>27</b> Bereiche</span>
+      <span>✦ Jeden Monat Neues</span>
+      <span>✦ Jederzeit kündbar</span>
+      <span>✦ Werbefrei &amp; privat</span>
+    </div>
+  </div>
+
+  <div class="stats reveal">
+    <div class="stat"><div class="n" data-count="27">0</div><div class="l">Bereiche & Themen</div></div>
+    <div class="stat"><div class="n" data-count="1000" data-suffix="+">0</div><div class="l">Inhalte & Texte</div></div>
+    <div class="stat"><div class="n" data-count="10">0</div><div class="l">Spirit-Begleiter</div></div>
+    <div class="stat"><div class="n">∞</div><div class="l">Momente für dich</div></div>
   </div>
 
   <section>
-    <div class="eyebrow">Was dich erwartet</div>
-    <h2>Alles für deine tägliche Rückkehr zu dir</h2>
-    <p class="sub">Kein überforderndes Programm. Ein paar ruhige Minuten am Tag — geführt, sanft, persönlich.</p>
-    <div class="grid">
-      <div class="feat"><span class="ic">☀</span><h3>Impuls des Tages</h3><p>Jeden Tag eine Affirmation, eine kleine Praxis und eine Frage zum Innehalten.</p></div>
-      <div class="feat"><span class="ic">✶</span><h3>Geführte Reisen</h3><p>Mehrtägige Programme wie „7 Tage Loslassen" — Schritt für Schritt, mit Fortschritt.</p></div>
-      <div class="feat"><span class="ic">❖</span><h3>Wachsende Bibliothek</h3><p>Alle Impulse gesammelt, nach Thema filterbar. Sie wird mit jedem Monat reicher.</p></div>
-      <div class="feat"><span class="ic">◯</span><h3>Atempausen</h3><p>Geführte Atemübungen für die Momente, in denen alles zu viel wird.</p></div>
-      <div class="feat"><span class="ic">♡</span><h3>Deine Favoriten</h3><p>Was dich berührt, merkst du dir — und findest es jederzeit wieder.</p></div>
-      <div class="feat"><span class="ic">✦</span><h3>Jeden Monat neu</h3><p>Frische Impulse und Reisen kommen regelmäßig dazu. Es bleibt lebendig.</p></div>
+    <div class="eyebrow reveal">Alles an einem Ort</div>
+    <h2 class="reveal">Eine ganze Welt für deine Seele</h2>
+    <p class="sub reveal">Kein überforderndes Programm — sondern ein ruhiger Raum, in dem du jeden Tag genau das findest, was dir guttut. Geführt, sanft, persönlich.</p>
+    <div class="groups">
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#a48bc4,#6f5d8e)">☀</span><h3>Tägliche Praxis</h3></div>
+        <ul><li>Impuls des Tages mit Affirmation &amp; Frage</li><li>Atempausen für stressige Momente</li><li>Affirmationen &amp; Dankbarkeit</li><li>Tageskarte &amp; „Heute im Fokus"</li></ul>
+      </div>
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#6b5fb0,#2e2658)">✦</span><h3>Kosmos &amp; Deutung</h3></div>
+        <ul><li>Astrologie — alle 12 Sternzeichen, ausführlich</li><li>Numerologie &amp; deine Lebenszahl</li><li>Chinesische Tierzeichen &amp; Engelszahlen</li><li>Mondphasen &amp; Manifestieren</li></ul>
+      </div>
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#cf7a5e,#5b8f6a)">❖</span><h3>Heilung &amp; Energie</h3></div>
+        <ul><li>Die 7 Chakren — verständlich erklärt</li><li>Kristalle &amp; ihre Wirkung</li><li>Krafttiere &amp; ihre Botschaft</li><li>Schattenarbeit &amp; Inneres Kind</li></ul>
+      </div>
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#5fb1a7,#3c7a72)">◯</span><h3>Ruhe &amp; Reise</h3></div>
+        <ul><li>Geführte Meditationen</li><li>Klangraum mit live erzeugten Klängen</li><li>Mehrtägige geführte Reisen</li><li>Sanfte Rituale &amp; Orakel</li></ul>
+      </div>
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#c9a85a,#7a6326)">♡</span><h3>Dein Weg</h3></div>
+        <ul><li>Privates Tagebuch — überall, kein Zettel nötig</li><li>Fortschritt, Serien &amp; Meilensteine</li><li>Dein persönlicher Spirit-Begleiter</li><li>Favoriten für alles, was dich berührt</li></ul>
+      </div>
+      <div class="group reveal">
+        <div class="gh"><span class="gi" style="background:linear-gradient(135deg,#d8b87e,#a87e44)">✶</span><h3>Immer lebendig</h3></div>
+        <ul><li>„Heute im Fokus" rotiert täglich</li><li>Jeden Monat neue Inhalte</li><li>Auf Handy &amp; Computer, sogar offline</li><li>Als App auf dem Startbildschirm installierbar</li></ul>
+      </div>
     </div>
   </section>
 
+  <section>
+    <div class="eyebrow reveal">Ein Blick hinein</div>
+    <h2 class="reveal">Liebevoll gestaltet, bis ins Detail</h2>
+    <p class="sub reveal">Jeder Bereich hat sein eigenes Bild, seine eigene Farbe, seinen eigenen Klang. Wisch dich durch einen kleinen Eindruck.</p>
+  </section>
+  <div class="gallery reveal">
+    <div class="gcard"><img loading="lazy" src="bg-astrologie.jpg" alt="Astrologie"><span>Astrologie</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-chakren.jpg" alt="Chakren"><span>Chakren</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-mond.jpg" alt="Mond"><span>Mondzyklen</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-kristalle.jpg" alt="Kristalle"><span>Kristalle</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-tarot.jpg" alt="Tarot & Orakel"><span>Tarot &amp; Orakel</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-krafttiere.jpg" alt="Krafttiere"><span>Krafttiere</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-selbstliebe.jpg" alt="Selbstliebe"><span>Selbstliebe</span></div>
+    <div class="gcard"><img loading="lazy" src="bg-traumdeutung.jpg" alt="Traumdeutung"><span>Traumdeutung</span></div>
+  </div>
+
   <section id="vorschau">
-    <div class="eyebrow">So fühlt es sich an</div>
-    <h2>Ein Impuls aus dem Seelenraum</h2>
-    <p class="sub">So begegnet dir jeder Tag — ruhig, klar, ohne Druck.</p>
-    <div class="sample">
+    <div class="eyebrow reveal">So fühlt es sich an</div>
+    <h2 class="reveal">Ein Impuls aus dem Seelenraum</h2>
+    <p class="sub reveal">So begegnet dir jeder Tag — ruhig, klar, ohne Druck.</p>
+    <div class="sample reveal">
       <span class="pill">Vertrauen</span>
       <h3 style="font-size:25px;font-weight:normal">Der Boden trägt dich</h3>
       <div class="aff">„Ich muss nicht alles wissen, um sicher zu sein."</div>
@@ -170,40 +290,53 @@
       <div class="lbl">Frage für dich</div>
       <div style="font-style:italic">Wo darf ich heute ein wenig mehr loslassen und vertrauen?</div>
     </div>
-    <div style="text-align:center;margin-top:24px"><a class="btn ghost" href="seelenraum-app.html">Live-Vorschau der App ansehen</a></div>
+    <div style="text-align:center;margin-top:26px" class="reveal"><a class="btn ghost" href="seelenraum-app.html">Live-Vorschau der App ansehen →</a></div>
   </section>
 
   <section>
-    <div class="eyebrow">So einfach</div>
-    <h2>In drei Schritten in deinem Raum</h2>
+    <div class="eyebrow reveal">So einfach</div>
+    <h2 class="reveal">In drei Schritten in deinem Raum</h2>
     <div class="steps">
-      <div class="step"><h3>Mitglied werden</h3><p>Mit wenigen Klicks anmelden — sicher bezahlen, sofort starten.</p></div>
-      <div class="step"><h3>Täglich eintreten</h3><p>Öffne die App, nimm dir deinen Impuls. Auf dem Handy wie eine echte App installierbar.</p></div>
-      <div class="step"><h3>Wachsen</h3><p>Sammle Praxis-Tage, gehe Reisen, kehre immer wieder zu dir zurück.</p></div>
+      <div class="step reveal"><h3>Mitglied werden</h3><p>Mit wenigen Klicks anmelden — sicher über Stripe bezahlen, sofort starten.</p></div>
+      <div class="step reveal"><h3>Täglich eintreten</h3><p>Öffne die App, nimm dir deinen Impuls. Auf dem Handy wie eine echte App installierbar.</p></div>
+      <div class="step reveal"><h3>Wachsen</h3><p>Sammle Praxis-Tage, gehe Reisen, kehre immer wieder zu dir zurück.</p></div>
     </div>
   </section>
 
-  <section>
-    <div class="eyebrow">Mitgliedschaft</div>
-    <h2>Wähle, was sich richtig anfühlt</h2>
-    <p class="sub">Jederzeit kündbar. Keine versteckten Kosten.</p>
+  <section id="stimmen">
+    <div class="eyebrow reveal">Stimmen</div>
+    <h2 class="reveal">Was Mitglieder berührt</h2>
+    <p class="sub reveal">Echte Worte sagen mehr als jedes Versprechen.</p>
+    <!-- WICHTIG: Diese Stimmen sind Platzhalter — bitte durch echte Kundenbewertungen ersetzen. -->
+    <div class="quotes">
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>„Mein kleines Ritual am Morgen. Drei Minuten Seelenraum und ich starte ruhiger in den Tag."</p><div class="who">— Platzhalter, bitte echte Stimme einsetzen</div></div>
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>„So viel Tiefe an einem Ort — von Sternzeichen bis Chakren. Und alles so schön gemacht."</p><div class="who">— Platzhalter, bitte echte Stimme einsetzen</div></div>
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>„Das Tagebuch direkt in der App liebe ich. Ich schreibe wieder regelmäßig."</p><div class="who">— Platzhalter, bitte echte Stimme einsetzen</div></div>
+    </div>
+  </section>
+
+  <section id="preise">
+    <div class="eyebrow reveal">Mitgliedschaft</div>
+    <h2 class="reveal">Wähle, was sich richtig anfühlt</h2>
+    <p class="sub reveal">Jederzeit kündbar. Sofort-Zugang. Keine versteckten Kosten.</p>
     <div class="prices">
-      <div class="price">
+      <div class="price reveal">
         <div class="tier">Monatlich</div>
         <div class="amt">7 €<small>/Monat</small></div>
         <div class="note">Volle Flexibilität, monatlich kündbar.</div>
-        <ul><li>Alle Impulse &amp; Reisen</li><li>Neue Inhalte jeden Monat</li><li>Atempausen &amp; Favoriten</li></ul>
+        <ul><li>Alle 27 Bereiche &amp; Inhalte</li><li>Neue Inhalte jeden Monat</li><li>Tagebuch, Begleiter &amp; Favoriten</li></ul>
         <a class="btn" href="#" onclick="goCheckout(event)">Monatlich starten</a>
       </div>
-      <div class="price feat-card">
+      <div class="price feat-card reveal">
         <div class="ribbon">★ BELIEBT — beste Wahl</div>
         <div class="tier">Jährlich</div>
         <div class="amt">59 €<small>/Jahr</small></div>
-        <div class="note">Zwei Monate geschenkt gegenüber monatlich.</div>
-        <ul><li>Alles aus Monatlich</li><li>Über 30 % gespart</li><li>Ein Jahr Begleitung</li></ul>
-        <a class="btn gold" href="#" onclick="goTo(CHECKOUT_URL_YEAR,event)">Jahr sichern</a>
+        <div class="note">Nur 4,92 € im Monat — zwei Monate geschenkt.</div>
+        <ul><li>Alles aus Monatlich</li><li>Über 30 % gespart</li><li>Ein ganzes Jahr Begleitung</li></ul>
+        <span class="save">Spar-Tipp</span>
+        <a class="btn gold" href="#" onclick="goTo(CHECKOUT_URL_YEAR,event)" style="margin-top:14px">Jahr sichern</a>
       </div>
-      <div class="price">
+      <div class="price reveal">
         <div class="ribbon">Nur zum Start — limitiert</div>
         <div class="tier">Founding Member</div>
         <div class="amt">5 €<small>/Monat</small></div>
@@ -212,66 +345,91 @@
         <a class="btn" href="#" onclick="goTo(CHECKOUT_URL_FOUNDING,event)">Platz sichern</a>
       </div>
     </div>
+    <p style="text-align:center;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;margin-top:18px" class="reveal">🔒 Sichere Zahlung über Stripe · Keine Mindestlaufzeit beim Monatsabo</p>
   </section>
 
   <section>
-    <div class="eyebrow">Gut zu wissen</div>
-    <h2>Häufige Fragen</h2>
-    <details><summary>Was genau bekomme ich?</summary><p>Zugang zur Seelenraum-App mit täglichem Impuls, geführten Reisen, einer wachsenden Bibliothek an Affirmationen und Übungen sowie geführten Atempausen. Jeden Monat kommen neue Inhalte dazu.</p></details>
-    <details><summary>Brauche ich etwas zu installieren?</summary><p>Nein. Die App läuft im Browser auf Handy und Computer. Auf dem Handy kannst du sie optional mit einem Tipp zum Startbildschirm hinzufügen — dann fühlt sie sich an wie eine echte App.</p></details>
+    <div class="eyebrow reveal">Gut zu wissen</div>
+    <h2 class="reveal">Häufige Fragen</h2>
+    <div class="reveal">
+    <details><summary>Was genau bekomme ich?</summary><p>Vollen Zugang zur Seelenraum-App: täglicher Impuls, Astrologie, Numerologie, chinesische Tierzeichen, Engelszahlen, Chakren, Kristalle, Krafttiere, Orakel &amp; Tarot, geführte Meditationen, Atempausen, Klangraum, mehrtägige Reisen, Rituale, ein privates Tagebuch und deinen persönlichen Spirit-Begleiter. Jeden Monat kommen neue Inhalte dazu.</p></details>
+    <details><summary>Brauche ich etwas zu installieren?</summary><p>Nein. Die App läuft im Browser auf Handy und Computer. Auf dem Handy kannst du sie mit einem Tipp zum Startbildschirm hinzufügen — dann fühlt sie sich an wie eine echte App und funktioniert sogar offline.</p></details>
     <details><summary>Kann ich jederzeit kündigen?</summary><p>Ja. Die monatliche Mitgliedschaft ist jederzeit zum Monatsende kündbar — unkompliziert, ohne Nachfragen.</p></details>
-    <details><summary>Für wen ist Seelenraum gedacht?</summary><p>Für alle, die sich kleine, ruhige Momente der Selbstfürsorge im Alltag wünschen — egal ob Anfänger oder schon länger auf dem Weg.</p></details>
+    <details><summary>Wie sicher ist die Bezahlung?</summary><p>Die Bezahlung läuft komplett verschlüsselt über Stripe, einen der weltweit größten Zahlungsanbieter. Deine Zahlungsdaten sehen wir nie.</p></details>
+    <details><summary>Sind meine Tagebuch-Einträge privat?</summary><p>Ja, absolut. Deine Notizen und Tagebuch-Einträge werden nur lokal auf deinem Gerät gespeichert — niemand außer dir hat Zugriff darauf.</p></details>
+    <details><summary>Für wen ist Seelenraum gedacht?</summary><p>Für alle, die sich kleine, ruhige Momente der Selbstfürsorge im Alltag wünschen — egal ob Anfängerin oder schon länger auf dem Weg.</p></details>
     <details><summary>Ist das eine Therapie?</summary><p>Nein. Seelenraum ist eine spirituelle Selbstfürsorge-Praxis und ersetzt keine medizinische oder psychotherapeutische Behandlung.</p></details>
+    </div>
   </section>
 
-  <div class="final">
+  <div class="final reveal">
     <div class="eyebrow">Dein Moment beginnt jetzt</div>
     <h2>Tritt ein in deinen Seelenraum</h2>
-    <p class="sub" style="font-style:normal">Ein paar ruhige Minuten am Tag — für ein Jahr voller kleiner Rückkehr zu dir.</p>
+    <p class="sub" style="font-style:normal">Ein paar ruhige Minuten am Tag — für ein Leben voller kleiner Rückkehr zu dir.</p>
     <a class="btn gold" href="#" onclick="goCheckout(event)">Jetzt Mitglied werden</a>
+    <div class="microtrust" style="margin-top:22px"><span>✦ Jederzeit kündbar</span><span>✦ Sofort-Zugang</span><span>✦ Werbefrei</span></div>
   </div>
 
-  <footer>© Seelenraum · Mit Achtsamkeit gemacht</footer>
+  <footer>
+    © Seelenraum · Mit Achtsamkeit gemacht<br>
+    <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="seelenraum-app.html">App-Vorschau</a>
+  </footer>
+</div>
 </div>
 
+<div class="stickyBar">
+  <div class="p">Schon ab <b>5 €</b>/Monat</div>
+  <a class="btn gold sm" href="#" onclick="goCheckout(event)">Mitglied werden</a>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Seelenraum — spirituelle Praxis-App","description":"Deine komplette spirituelle Praxis als App: Impulse, Astrologie, Numerologie, Chakren, Kristalle, Meditationen, Atempausen, Klangraum, Rituale & Tagebuch. Jeden Monat neu.","brand":{"@type":"Brand","name":"Seelenraum"},"offers":[{"@type":"Offer","price":"7.00","priceCurrency":"EUR","name":"Monatlich"},{"@type":"Offer","price":"59.00","priceCurrency":"EUR","name":"Jährlich"},{"@type":"Offer","price":"5.00","priceCurrency":"EUR","name":"Founding Member"}]}
+</script>
 <script>
-  /* ====================================================================
-     HIER DEINEN KAUF-LINK EINTRAGEN  (nur diese eine Zeile!)
-     Leer lassen = Buttons zeigen einen Hinweis statt ins Leere zu fuehren.
-     Beispiel: const CHECKOUT_URL = "https://dein-shop.com/checkout";
-     ==================================================================== */
+  /* ====== KAUF-LINKS (Stripe) ====== */
   const CHECKOUT_URL = "https://buy.stripe.com/eVq9AL4eagmpeFWcXk2cg00";
   const CHECKOUT_URL_YEAR = "https://buy.stripe.com/3cIaEP11Y8TXbtK0ay2cg01";
   const CHECKOUT_URL_FOUNDING = "https://buy.stripe.com/4gMeV5h0WdadeFWg9w2cg02";
 
-  function goCheckout(e){
-    if(e && e.preventDefault) e.preventDefault();
-    var url = (CHECKOUT_URL || "").trim();
-    if(/^https?:\/\//i.test(url)){ window.location.href = url; return false; }
-    showCheckoutInfo();
-    return false;
-  }
-  function goTo(url,e){ if(e && e.preventDefault) e.preventDefault(); url=(url||"").trim(); if(/^https?:\/\//i.test(url)){ window.location.href=url; return false; } showCheckoutInfo(); return false; }
+  function goCheckout(e){ if(e&&e.preventDefault)e.preventDefault(); var url=(CHECKOUT_URL||"").trim(); if(/^https?:\/\//i.test(url)){window.location.href=url;return false;} showCheckoutInfo(); return false; }
+  function goTo(url,e){ if(e&&e.preventDefault)e.preventDefault(); url=(url||"").trim(); if(/^https?:\/\//i.test(url)){window.location.href=url;return false;} showCheckoutInfo(); return false; }
   function showCheckoutInfo(){
-    if(document.getElementById('coOv')) return;
-    var ov = document.createElement('div');
-    ov.id = 'coOv';
-    ov.style.cssText = "position:fixed;inset:0;background:rgba(58,51,64,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100";
-    var box = document.createElement('div');
-    box.style.cssText = "background:var(--card);border:1px solid var(--line);border-radius:22px;max-width:420px;width:100%;padding:30px 26px;text-align:center;box-shadow:var(--shadow)";
-    box.innerHTML = '<div style="font-size:34px;margin-bottom:6px">&#10022;</div>'
-      + '<h2 style="font-size:23px;font-weight:normal;margin-bottom:10px">Fast fertig</h2>'
-      + '<p style="color:var(--ink-soft);font-size:15px;margin-bottom:16px">Der Bezahl-Link ist noch nicht verbunden. Sobald du dein Abo bei Memberstack oder Stripe eingerichtet und den Link eingetragen hast, fuehrt dieser Button direkt zur Anmeldung.</p>'
-      + '<p style="color:var(--ink-fade);font-size:13px;margin-bottom:20px">Anleitung: siehe Seelenraum-Launch-Guide, Abschnitt 3.</p>';
-    var btn = document.createElement('button');
-    btn.textContent = 'Verstanden';
-    btn.style.cssText = "font-family:Arial,sans-serif;font-size:13px;letter-spacing:1px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 26px;cursor:pointer";
-    btn.onclick = function(){ ov.remove(); };
-    box.appendChild(btn);
-    ov.appendChild(box);
-    ov.addEventListener('click', function(ev){ if(ev.target === ov) ov.remove(); });
-    document.body.appendChild(ov);
+    if(document.getElementById('coOv'))return;
+    var ov=document.createElement('div');ov.id='coOv';
+    ov.style.cssText="position:fixed;inset:0;background:rgba(58,51,64,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100";
+    var box=document.createElement('div');
+    box.style.cssText="background:var(--card-solid);border:1px solid var(--line);border-radius:22px;max-width:420px;width:100%;padding:30px 26px;text-align:center;box-shadow:var(--shadow)";
+    box.innerHTML='<div style="font-size:34px;margin-bottom:6px">&#10022;</div><h2 style="font-size:23px;font-weight:normal;margin-bottom:10px">Fast fertig</h2><p style="color:var(--ink-soft);font-size:15px;margin-bottom:18px">Der Bezahl-Link ist gerade nicht erreichbar. Bitte versuche es gleich nochmal.</p>';
+    var btn=document.createElement('button');btn.textContent='Verstanden';
+    btn.style.cssText="font-family:Arial,sans-serif;font-size:13px;letter-spacing:1px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 26px;cursor:pointer";
+    btn.onclick=function(){ov.remove();};box.appendChild(btn);ov.appendChild(box);
+    ov.addEventListener('click',function(ev){if(ev.target===ov)ov.remove();});document.body.appendChild(ov);
   }
+
+  /* Header beim Scrollen */
+  var hd=document.getElementById('hd');
+  window.addEventListener('scroll',function(){hd.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+  /* Floating Symbole */
+  (function(){var syms=['✴','✦','⚛','☽','✨','ॐ','✪','◯','☸','✧'];var bg=document.getElementById('cosmos');var h='';for(var i=0;i<16;i++){var s=syms[i%syms.length];h+='<span style="left:'+(Math.random()*100)+'%;bottom:-12vh;font-size:'+(14+Math.random()*28)+'px;animation-duration:'+(20+Math.random()*26)+'s;animation-delay:'+(-Math.random()*40)+'s">'+s+'</span>';}bg.innerHTML=h;})();
+
+  /* Reveal beim Scrollen */
+  (function(){
+    if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(e,i){e.style.transitionDelay=Math.min(i%6*60,300)+'ms';io.observe(e);});
+  })();
+
+  /* Zahlen hochzählen */
+  (function(){
+    function run(el){var t=parseInt(el.getAttribute('data-count'));var suf=el.getAttribute('data-suffix')||'';var st=null;
+      function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/1100,1);el.textContent=Math.floor((1-Math.pow(1-p,3))*t).toLocaleString('de-DE')+suf;if(p<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);}
+    var seen=false;var stats=document.querySelector('.stats');
+    if(!stats)return;
+    if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&!seen){seen=true;document.querySelectorAll('.stat .n[data-count]').forEach(run);}});},{threshold:.4});io.observe(stats);}
+    else document.querySelectorAll('.stat .n[data-count]').forEach(run);
+  })();
 </script>
 </body>
 </html>
