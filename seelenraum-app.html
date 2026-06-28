@@ -320,6 +320,11 @@
   a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,.lib-item:focus-visible,.zsign:focus-visible,[role="button"]:focus-visible,.tile:focus-visible,.sound:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .btn{min-height:44px}
   :root{--ink-soft:#5f5668}
+  .card.fokus{cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .card.fokus:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(40,30,60,.16)}
+  @keyframes imgFade{from{opacity:0}to{opacity:1}}
+  .detail-art{animation:imgFade .6s ease both}
+  .c3d-card.sign,.flip-back,.hero-bereich,.hero-med,.hero-atem,.hero-ritual,.hero-klang,.hero-reisen,.hero-mond,.hero-astro,.hero-num,.hero-mani,.hero-chakra,.hero-kristall,.hero-engel,.hero-tier,.hero-wissen,.hero-china{background-color:var(--field)}
   .c3d-card .c3d-img{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-sm)}
   .c3d-card .c3d-ti{font-size:30px;margin-bottom:2px}
   .c3d-ti svg{width:34px;height:34px}
@@ -676,6 +681,19 @@ function tilesHtml(){const d=[
 function moonMiniHtml(){const mi=moonInfo(heute);const ph=MOND_PHASEN[mi.idx];
   return `<div class="banner" onclick="render('mond')" style="cursor:pointer"><div class="b-txt"><b>&#9789; ${ph.name}</b> · ${mi.illum}% beleuchtet</div><button onclick="render('mond')">Mehr</button></div>`;}
 /* ===== HEUTE (Dashboard) ===== */
+function tagesFokusHtml(){
+  const day=Math.floor((heute-new Date(heute.getFullYear(),0,0))/86400000);
+  const cats=[
+    function(){const z=STERNZEICHEN[day%STERNZEICHEN.length];return{he:'Sternzeichen im Fokus',sym:z.sym,name:z.name,sub:z.keys,act:"openSign('"+z.id+"')"};},
+    function(){const k=KRISTALLE[day%KRISTALLE.length];return{he:'Kristall des Tages',sym:'&#9672;',name:k.name,sub:k.chakra,act:"openKristall('"+k.id+"')"};},
+    function(){const t=KRAFTTIERE[day%KRAFTTIERE.length];return{he:'Krafttier des Tages',sym:'&#128062;',name:t.name,sub:t.thema,act:"openTier('"+t.id+"')"};},
+    function(){const e=ENGELZAHLEN[day%ENGELZAHLEN.length];return{he:'Engelzahl des Tages',sym:e.zahl,name:e.titel,sub:'wenn dir Zahlen begegnen',act:"openEngel('"+e.id+"')"};},
+    function(){const c=CHINA_TIERE[day%CHINA_TIERE.length];return{he:'Tierzeichen im Fokus',sym:c.sym,name:c.name,sub:c.keys,act:"openChinaZeichen('"+c.id+"')"};},
+    function(){const c=CHAKREN[day%CHAKREN.length];return{he:'Chakra des Tages',sym:'&#10070;',name:c.name,sub:c.thema,act:"openChakra('"+c.id+"')"};}
+  ];
+  const f=cats[day%cats.length]();
+  return `<div class="section-title">Heute im Fokus</div><div class="section-sub">jeden Tag etwas Neues für dich</div><div class="card fokus" role="button" tabindex="0" onclick="${f.act}"><div class="block-label">${f.he}</div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:40px;line-height:1;color:var(--accent-deep);flex:none">${f.sym}</span><div style="flex:1"><div style="font-size:19px">${f.name}</div><div style="font-style:italic;color:var(--ink-soft);font-size:14px">${f.sub}</div></div><span style="color:var(--accent);font-size:20px">→</span></div></div>`;
+}
 function viewHeute(){
   const start=new Date(heute.getFullYear(),0,0);const tag=Math.floor((heute-start)/86400000);
   const it=INHALTE[tag%INHALTE.length];
@@ -685,6 +703,7 @@ function viewHeute(){
   return `<div class="view">${banner}${kosmischerTagHtml()}${intentionHtml()}
     <div class="section-title">Dein Impuls für heute</div><div class="section-sub">nimm dir einen ruhigen Moment</div>
     ${impulsCard(it,{heute:true})}
+    ${tagesFokusHtml()}
     <div class="banner"><div class="b-txt">Magst du eine Karte ziehen?</div><button onclick="openDrawCard()">Tageskarte ✦</button></div>
     <div class="section-title">Entdecke deinen Raum</div><div class="section-sub">für jede Stimmung das Richtige</div>
     ${tilesHtml()}
@@ -1022,7 +1041,7 @@ function viewAstro(){const cur=sunSign(heute);const startIdx=STERNZEICHEN.findIn
   return html+carousel3dHtml('astroCar','signs',items,startIdx<0?0:startIdx)+`</div>`;}
 function openSign(id){const z=STERNZEICHEN.find(s=>s.id===id);current='signview';
   document.getElementById('app').innerHTML=`<div class="view sec-astro"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('astro')">← Sternzeichen</button></div>
-    <img class="detail-art" src="sign-${z.id}.jpg" alt="${z.name}">
+    <img loading="lazy" class="detail-art" src="sign-${z.id}.jpg" alt="${z.name}">
     <div class="hero hero-astro"><div class="he">${z.element} · ${z.planet}</div><h2 style="font-size:34px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
     <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
       <div class="need" style="margin-top:8px;justify-content:center"><span>${z.von[1]}. ${MONATE[z.von[0]-1]} – ${z.bis[1]}. ${MONATE[z.bis[0]-1]}</span><span>Element: ${z.element}</span><span>Planet: ${z.planet}</span></div>
@@ -1307,7 +1326,7 @@ function openChinaZeichen(id,year){const z=CHINA_TIERE.find(s=>s.id===id);curren
   const yrs=chinaYears(CHINA_TIERE.indexOf(z)).slice(0,7);
   const head=year?`<div class="he">Dein Zeichen · geboren ${year}</div>`:`<div class="he">Element: ${z.element}</div>`;
   document.getElementById('app').innerHTML=`<div class="view sec-china"><div style="text-align:center;margin:18px 0"><button class="btn" style="flex:none;display:inline-block" onclick="render('china')">← Tierzeichen</button></div>
-    <img class="detail-art" src="china-${z.id}.jpg" alt="${z.name}">
+    <img loading="lazy" class="detail-art" src="china-${z.id}.jpg" alt="${z.name}">
     <div class="hero hero-china">${head}<h2 style="font-size:40px">${z.sym}</h2><h2 style="margin-top:0">${z.name}</h2><p>${z.keys}</p></div>
     <div class="card"><div class="affirm" style="text-align:center">„${z.affirm}"</div>
       <div class="block-label">Die Essenz deines Zeichens</div><div>${z.essenz}</div>
