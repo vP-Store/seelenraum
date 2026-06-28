@@ -664,14 +664,14 @@ function setIntention(){const el=document.getElementById('intentIn');if(el&&el.v
 function editIntention(){editingIntent=true;render('heute');setTimeout(()=>{const el=document.getElementById('intentIn');if(el)el.focus();},30);}
 function computeLongest(days){if(!days.length)return 0;const s=[...new Set(days)].sort();let best=1,cur=1;for(let i=1;i<s.length;i++){const p=new Date(s[i-1]);p.setDate(p.getDate()+1);if(p.toISOString().slice(0,10)===s[i]){cur++;best=Math.max(best,cur);}else cur=1;}return best;}
 function tile(view,icon,title,sub,grad){return `<button class="tile" style="background:${grad}" onclick="render('${view}')"><span class="ti">${icon}</span><span class="tt">${title}</span><span class="ts">${sub}</span></button>`;}
-function tileCardInner(x){return `<div class="c3d-card tile" style="background:${x.g}"><span class="c3d-ti">${icon(x.ic)}</span><span class="c3d-tt">${x.t}</span><span class="c3d-ts">${x.s}</span></div>`;}
+function tileCardInner(x){if(x.img)return `<div class="c3d-card sign" style="background-image:url('${x.img}')"><span class="c3d-cap"><span class="c3d-name">${x.t}</span><span class="c3d-keys">${x.s}</span></span></div>`;return `<div class="c3d-card tile" style="background:${x.g}"><span class="c3d-ti">${icon(x.ic)}</span><span class="c3d-tt">${x.t}</span><span class="c3d-ts">${x.s}</span></div>`;}
 function tilesHtml(){const d=[
-  {act:"render('meditationen')",ic:'person',t:'Meditationen',s:MEDITATIONEN.length+' geführte Reisen',g:'linear-gradient(135deg,#6273c4,#363c66)'},
-  {act:"render('atem')",ic:'breath',t:'Atempausen',s:ATEM.length+' Atem-Programme',g:'linear-gradient(135deg,#5fb1a7,#3c7a72)'},
-  {act:"render('rituale')",ic:'candle',t:'Rituale',s:RITUALE.length+' sanfte Rituale',g:'linear-gradient(135deg,#cf9c66,#9a6336)'},
-  {act:"render('klang')",ic:'sound',t:'Klangraum',s:KLANG.length+' Klangwelten',g:'linear-gradient(135deg,#cf85a6,#8f4d6b)'},
-  {act:"render('reisen')",ic:'flag',t:'Reisen',s:'5 mehrtägige Wege',g:'linear-gradient(135deg,#c2a36a,#7a6a44)'},
-  {act:"render('mond')",ic:'moon',t:'Mond',s:'Phase & Ritual',g:'linear-gradient(135deg,#8a98c8,#444c73)'}
+  {act:"render('meditationen')",img:'bg-meditationen.jpg',t:'Meditationen',s:MEDITATIONEN.length+' geführte Reisen'},
+  {act:"render('atem')",img:'bg-atempause.jpg',t:'Atempausen',s:ATEM.length+' Atem-Programme'},
+  {act:"render('rituale')",img:'bg-rituale.jpg',t:'Rituale',s:RITUALE.length+' sanfte Rituale'},
+  {act:"render('klang')",img:'bg-klangraum.jpg',t:'Klangraum',s:KLANG.length+' Klangwelten'},
+  {act:"render('reisen')",img:'bg-reisen.jpg',t:'Reisen',s:'5 mehrtägige Wege'},
+  {act:"render('mond')",img:'bg-mond.jpg',t:'Mond',s:'Phase & Ritual'}
 ];return carousel3dHtml('praxisCar','tiles',d.map(x=>({act:x.act,inner:tileCardInner(x)})));}
 function moonMiniHtml(){const mi=moonInfo(heute);const ph=MOND_PHASEN[mi.idx];
   return `<div class="banner" onclick="render('mond')" style="cursor:pointer"><div class="b-txt"><b>&#9789; ${ph.name}</b> · ${mi.illum}% beleuchtet</div><button onclick="render('mond')">Mehr</button></div>`;}
@@ -1179,17 +1179,17 @@ const WISSEN=[
 ];
 /* ===== NEUE KOSMOS-KACHELN (überschreibt) ===== */
 function tilesKosmosHtml(){const d=[
-  {act:"render('mond')",ic:'moon',t:'Mondzyklen',s:'Phasen & Rituale',g:'linear-gradient(135deg,#8a98c8,#444c73)'},
-  {act:"render('astro')",ic:'orbit',t:'Astrologie',s:'12 Sternzeichen',g:'linear-gradient(135deg,#6b5fb0,#2e2658)'},
-  {act:"render('num')",ic:'hash',t:'Numerologie',s:'Deine Lebenszahl',g:'linear-gradient(135deg,#c9a85a,#7a6326)'},
-  {act:"render('mani')",ic:'wand',t:'Manifestieren',s:'Methoden & Kraft',g:'linear-gradient(135deg,#d98fb0,#a05676)'},
-  {act:"render('chakra')",ic:'chakra',t:'Chakren',s:'7 Energiezentren',g:'linear-gradient(135deg,#cf7a5e,#5b8f6a)'},
-  {act:"render('china')",ic:'lantern',t:'Chinesische Tierzeichen',s:'12 Tierzeichen',g:'linear-gradient(135deg,#c75c5c,#7a2f2f)'},
-  {act:"render('orakel')",ic:'cards',t:'Orakel',s:'Zieh deine Botschaft',g:'linear-gradient(135deg,#8a6fb0,#4a3672)'},
-  {act:"render('kristalle')",ic:'crystal',t:'Kristalle',s:KRISTALLE.length+' Heilsteine',g:'linear-gradient(135deg,#7fb0a6,#4a7d8f)'},
-  {act:"render('engel')",ic:'wings',t:'Engelzahlen',s:'111, 222, 333 …',g:'linear-gradient(135deg,#d7b56a,#8a6f3a)'},
-  {act:"render('tier')",ic:'paw',t:'Krafttiere',s:KRAFTTIERE.length+' Begleiter',g:'linear-gradient(135deg,#a9794e,#5d4730)'},
-  {act:"render('wissen')",ic:'book',t:'Wissen',s:'Erklärt für dich',g:'linear-gradient(135deg,#7a8bbf,#3f4a72)'}
+  {act:"render('mond')",img:'bg-mond.jpg',t:'Mondzyklen',s:'Phasen & Rituale'},
+  {act:"render('astro')",img:'bg-astrologie.jpg',t:'Astrologie',s:'12 Sternzeichen'},
+  {act:"render('num')",img:'bg-numerologie.jpg',t:'Numerologie',s:'Deine Lebenszahl'},
+  {act:"render('mani')",img:'bg-manifestation.jpg',t:'Manifestieren',s:'Methoden & Kraft'},
+  {act:"render('chakra')",img:'bg-chakren.jpg',t:'Chakren',s:'7 Energiezentren'},
+  {act:"render('china')",img:'china-drache.jpg',t:'Chinesische Tierzeichen',s:'12 Tierzeichen'},
+  {act:"render('orakel')",img:'bg-tarot.jpg',t:'Orakel',s:'Zieh deine Botschaft'},
+  {act:"render('kristalle')",img:'bg-kristalle.jpg',t:'Kristalle',s:KRISTALLE.length+' Heilsteine'},
+  {act:"render('engel')",img:'bg-engelszahlen.jpg',t:'Engelzahlen',s:'111, 222, 333 …'},
+  {act:"render('tier')",img:'bg-krafttiere.jpg',t:'Krafttiere',s:KRAFTTIERE.length+' Begleiter'},
+  {act:"render('wissen')",img:'bg-wissen.jpg',t:'Wissen',s:'Erklärt für dich'}
 ];const extra=Object.keys(NEUE_BEREICHE).map(id=>({act:"render('"+id+"')",inner:bgTileInner(NEUE_BEREICHE[id].name,NEUE_BEREICHE[id].img)}));return carousel3dHtml('kosmosCar','tiles',[...d.map(x=>({act:x.act,inner:tileCardInner(x)})),...extra]);}
 /* ===== KRISTALLE ===== */
 function viewKristalle(){let html=`<div class="view sec-kristall"><div class="hero hero-kristall"><div class="ornament"></div><div class="he">${KRISTALLE.length} Heilsteine</div><h2>Kristalle</h2><p>Begleiter für deine Absicht</p></div>${erkl('kristalle')}`;
