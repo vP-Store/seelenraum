@@ -514,4 +514,25 @@ class Component extends DCLogic {
 </script>
 
 
+<script>
+/* Stripe-Checkout-Verdrahtung (Tarif-Buttons -> echte Bezahllinks) */
+(function(){
+  var MAP=[
+    [/jahr sichern/i,"https://buy.stripe.com/3cIaEP11Y8TXbtK0ay2cg01"],
+    [/platz sichern|founding/i,"https://buy.stripe.com/4gMeV5h0WdadeFWg9w2cg02"],
+    [/monatlich starten/i,"https://buy.stripe.com/eVq9AL4eagmpeFWcXk2cg00"]
+  ];
+  document.addEventListener('click',function(e){
+    var el=e.target;
+    for(var n=0;n<6&&el;n++,el=el.parentElement){
+      if(el.nodeType!==1)continue;
+      var t=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(!t||t.length>40)continue;
+      for(var i=0;i<MAP.length;i++){
+        if(MAP[i][0].test(t)){ e.preventDefault(); e.stopPropagation(); window.location.href=MAP[i][1]; return; }
+      }
+    }
+  },true);
+})();
+</script>
 </body></html>
