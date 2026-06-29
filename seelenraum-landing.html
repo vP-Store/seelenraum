@@ -1,274 +1,517 @@
-<!--
-  ============================================================
-  SEELENRAUM — Landingpage / Verkaufsseite
-  ============================================================
-  Dies ist die oeffentliche Seite, die Besucher zuerst sehen.
-  Sie fuehrt zur Mitgliedschaft (Abo).
-
-  >>> SO VERBINDEST DU DEN KAUF-BUTTON (nur EINE Stelle):
-      Suche weiter unten im <script>:  const CHECKOUT_URL = "";
-      Trage zwischen die Anfuehrungszeichen deinen echten
-      Memberstack-/Stripe-Checkout-Link ein, z. B.:
-      const CHECKOUT_URL = "https://dein-shop.com/checkout";
-      Solange das Feld leer ist, zeigen die Buttons einen
-      freundlichen Hinweis statt ins Leere zu fuehren.
-  ============================================================
--->
 <!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html><head><script>window.__resources = {"heroMond": "heroMond.jpg", "heroMeditation": "heroMeditation.jpg", "heroSelbstliebe": "heroSelbstliebe.jpg", "heroTarot": "heroTarot.jpg"};</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seelenraum — dein ruhiger Ort für jeden Tag</title>
 <meta name="description" content="Seelenraum ist deine tägliche spirituelle Praxis als App: Impulse, geführte Reisen, Affirmationen und Atempausen. Jeden Monat neu. Werde Mitglied.">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f4ede7">
+<meta name="theme-color" content="#120d1c">
 <meta property="og:title" content="Seelenraum — dein ruhiger Ort für jeden Tag">
 <meta property="og:description" content="Deine tägliche spirituelle Praxis als App. Impulse, Reisen, Affirmationen, Atempausen — jeden Monat neu.">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23cdb4e6'/%3E%3Cstop offset='1' stop-color='%238a76a8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%23fff' stroke-opacity='.85' stroke-width='2'/%3E%3C/svg%3E">
-<style>
-  :root{
-    --ink:#3b333f;--ink-soft:#6f6678;--ink-fade:#9a90a2;
-    --gold:#b08d57;--accent:#8a76a8;--accent-deep:#6f5d8e;
-    --card:#fffdfb;--line:#ece2d9;
-    --shadow:0 14px 40px rgba(80,60,90,.12);--shadow-sm:0 5px 16px rgba(80,60,90,.08);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{--ink:#ece6f0;--ink-soft:#b3a9bd;--ink-fade:#8a8094;--gold:#d8b87e;--accent:#bda7dd;--accent-deep:#d3c2ea;--card:#272231;--line:#3b3548;--shadow:0 14px 40px rgba(0,0,0,.4);--shadow-sm:0 5px 16px rgba(0,0,0,.3)}
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Georgia','Times New Roman',serif;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
-    background:
-      radial-gradient(900px 520px at 12% -6%, #efe3f3 0%, transparent 60%),
-      radial-gradient(820px 500px at 100% 6%, #dcebe6 0%, transparent 55%),
-      radial-gradient(760px 640px at 50% 118%, #f3e7dc 0%, transparent 60%),
-      linear-gradient(160deg,#f7f1ec,#efe7f1 60%,#e6efec);
-    background-color:#f4ede7;background-attachment:fixed}
-  @media (prefers-color-scheme: dark){
-    body{background:
-      radial-gradient(900px 520px at 12% -6%, #2a2440 0%, transparent 60%),
-      radial-gradient(820px 500px at 100% 6%, #1f2b34 0%, transparent 55%),
-      radial-gradient(760px 640px at 50% 118%, #2c2533 0%, transparent 60%),
-      linear-gradient(160deg,#1c1822,#231d2e 60%,#1a2220);background-color:#1b1722}
-  }
-  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
-  .btn{display:inline-block;font-family:Arial,sans-serif;font-size:14px;letter-spacing:1px;text-decoration:none;
-    background:var(--accent);color:#fff;border:none;border-radius:30px;padding:15px 30px;cursor:pointer;transition:.2s;box-shadow:var(--shadow-sm)}
-  .btn:hover{background:var(--accent-deep);transform:translateY(-2px)}
-  .btn.ghost{background:transparent;color:var(--accent-deep);border:1px solid var(--accent)}
-  .btn.ghost:hover{background:var(--accent);color:#fff}
-  .btn.gold{background:var(--gold)}
-  .btn.gold:hover{filter:brightness(1.05)}
+<meta property="og:image" content="heroMond.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  /* Hero */
-  .hero{text-align:center;padding:70px 0 30px}
-  .orb{width:120px;height:120px;border-radius:50%;margin:0 auto 26px;
-    background:radial-gradient(circle at 35% 30%,#cdb4e6,#8a76a8);box-shadow:0 0 60px rgba(138,118,168,.45);
-    position:relative;animation:float 6s ease-in-out infinite}
-  .orb::after{content:"";position:absolute;inset:30px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .brand{font-size:20px;letter-spacing:7px;text-transform:uppercase;color:var(--ink-soft)}
-  .brand b{color:var(--gold);font-weight:normal}
-  h1{font-size:46px;font-weight:normal;line-height:1.18;margin:18px auto 14px;max-width:14ch}
-  .lead{font-size:20px;font-style:italic;color:var(--ink-soft);max-width:30ch;margin:0 auto 30px}
-  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .microtrust{font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;color:var(--ink-fade);margin-top:22px}
-
-  section{padding:46px 0}
-  .eyebrow{text-align:center;font-family:Arial,sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-  h2{font-size:32px;font-weight:normal;text-align:center;margin-bottom:8px;line-height:1.25}
-  .sub{text-align:center;color:var(--ink-soft);max-width:48ch;margin:0 auto 30px;font-style:italic}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow-sm)}
-  .feat .ic{font-size:26px;display:block;margin-bottom:10px}
-  .feat h3{font-size:20px;font-weight:normal;margin-bottom:6px}
-  .feat p{color:var(--ink-soft);font-size:15px}
-
-  /* Sample */
-  .sample{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:38px 32px;box-shadow:var(--shadow);max-width:520px;margin:0 auto;text-align:center}
-  .sample .pill{display:inline-block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:20px;padding:4px 12px;margin-bottom:14px}
-  .sample .aff{font-size:23px;font-style:italic;color:var(--accent-deep);margin:14px 0}
-  .sample .lbl{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 4px}
-
-  /* Steps */
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:s}
-  .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm);position:relative}
-  .step::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-family:Arial,sans-serif;font-size:16px;margin-bottom:12px}
-  .step h3{font-size:19px;font-weight:normal;margin-bottom:4px}
-  .step p{color:var(--ink-soft);font-size:15px}
-
-  /* Pricing */
-  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;align-items:stretch}
-  .price{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;text-align:center}
-  .price.feat-card{border:2px solid var(--gold);box-shadow:var(--shadow)}
-  .price .tier{font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
-  .price .amt{font-size:40px;margin:10px 0 2px}
-  .price .amt small{font-size:15px;color:var(--ink-fade)}
-  .price .note{color:var(--ink-soft);font-size:14px;min-height:42px;margin-bottom:14px}
-  .price ul{list-style:none;text-align:left;margin:0 0 22px;font-size:15px;color:var(--ink-soft)}
-  .price li{padding:5px 0 5px 24px;position:relative}
-  .price li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
-  .price .btn{margin-top:auto}
-  .ribbon{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;color:var(--gold);margin-bottom:6px}
-
-  /* FAQ */
-  details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:12px 0;box-shadow:var(--shadow-sm)}
-  summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";color:var(--accent);font-size:24px}
-  details[open] summary::after{content:"–"}
-  details p{color:var(--ink-soft);margin-top:12px;font-size:15px}
-
-  .final{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:50px 30px;box-shadow:var(--shadow);margin:20px 0}
-  .final h2{margin-bottom:10px}
-  footer{text-align:center;color:var(--ink-fade);font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;padding:30px 0 50px}
-  @media(max-width:560px){h1{font-size:34px}.hero{padding:50px 0 20px}}
-</style>
+<script src="a881916f.js"></script>
 </head>
 <body>
-<div class="wrap">
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d0056645.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e4252c2b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("d0056645.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("e4252c2b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("d0056645.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("e4252c2b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("d0056645.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("e4252c2b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("1166fa3f.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("cb6ea8f9.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("246b4ba8.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c9f1770d.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 
-  <div class="hero">
-    <div class="orb"></div>
-    <div class="brand">Seelen<b>raum</b></div>
-    <h1>Dein ruhiger Ort für jeden Tag</h1>
-    <p class="lead">Eine sanfte spirituelle Praxis, die mit dir wächst — als App, immer dabei.</p>
-    <div class="cta-row">
-      <a class="btn gold" href="#" onclick="goCheckout(event)">Mitglied werden</a>
-      <a class="btn ghost" href="#vorschau">Erst hineinspüren</a>
-    </div>
-    <div class="microtrust">Jeden Monat neue Inhalte · Jederzeit kündbar · Auf Handy &amp; Computer</div>
+
+
+
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0}
+  @keyframes sr-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  @keyframes sr-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes sr-twinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+  details > summary{list-style:none;outline:none}
+  details > summary::-webkit-details-marker{display:none}
+  ::selection{background:#e7d4b3;color:#2a2330}
+</style>
+</helmet>
+<div style="--ink:#2a2330;--soft:#6f6678;--fade:#9a90a2;--gold:#b08d57;--gold2:#c6a06a;--gold-l:#d8b87e;--lilac:#8a76a8;--lilacd:#6f5d8e;--night:#1a1426;--night2:#120d1c;--card:#fffdfb;--line:#e9e1d6;font-family:'DM Sans',system-ui,-apple-system,sans-serif;color:var(--ink);background:#f7f2ea;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden">
+
+  
+  <!-- Announcement -->
+  <div style="background:var(--night2);color:#e9dff0;text-align:center;font-size:12px;letter-spacing:.12em;padding:9px 16px;font-weight:500">
+    <span style="color:var(--gold-l)">✦</span>&nbsp; Founding-Preis · nur zum Start · lebenslang günstigster Tarif
   </div>
 
-  <section>
-    <div class="eyebrow">Was dich erwartet</div>
-    <h2>Alles für deine tägliche Rückkehr zu dir</h2>
-    <p class="sub">Kein überforderndes Programm. Ein paar ruhige Minuten am Tag — geführt, sanft, persönlich.</p>
-    <div class="grid">
-      <div class="feat"><span class="ic">☀</span><h3>Impuls des Tages</h3><p>Jeden Tag eine Affirmation, eine kleine Praxis und eine Frage zum Innehalten.</p></div>
-      <div class="feat"><span class="ic">✶</span><h3>Geführte Reisen</h3><p>Mehrtägige Programme wie „7 Tage Loslassen" — Schritt für Schritt, mit Fortschritt.</p></div>
-      <div class="feat"><span class="ic">❖</span><h3>Wachsende Bibliothek</h3><p>Alle Impulse gesammelt, nach Thema filterbar. Sie wird mit jedem Monat reicher.</p></div>
-      <div class="feat"><span class="ic">◯</span><h3>Atempausen</h3><p>Geführte Atemübungen für die Momente, in denen alles zu viel wird.</p></div>
-      <div class="feat"><span class="ic">♡</span><h3>Deine Favoriten</h3><p>Was dich berührt, merkst du dir — und findest es jederzeit wieder.</p></div>
-      <div class="feat"><span class="ic">✦</span><h3>Jeden Monat neu</h3><p>Frische Impulse und Reisen kommen regelmäßig dazu. Es bleibt lebendig.</p></div>
-    </div>
-  </section>
+  <!-- Header -->
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px clamp(20px,5vw,56px);background:rgba(18,13,28,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)">
+    <a href="#top" style="font-family:'DM Sans';font-size:15px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:#fff;text-decoration:none">Seelen<span style="color:var(--gold-l)">raum</span></a>
+    <nav style="display:flex;align-items:center;gap:30px">
+      <a href="#welten" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Welten</a>
+      <a href="#vorschau" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Vorschau</a>
+      <a href="#preise" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Preise</a>
+      <a href="#faq" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Fragen</a>
+      <a href="#preise" style="font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--night2);background:var(--gold-l);padding:10px 20px;border-radius:999px;text-decoration:none" style-hover="background:#e7caa0">Mitglied werden</a>
+    </nav>
+  </header>
 
-  <section id="vorschau">
-    <div class="eyebrow">So fühlt es sich an</div>
-    <h2>Ein Impuls aus dem Seelenraum</h2>
-    <p class="sub">So begegnet dir jeder Tag — ruhig, klar, ohne Druck.</p>
-    <div class="sample">
-      <span class="pill">Vertrauen</span>
-      <h3 style="font-size:25px;font-weight:normal">Der Boden trägt dich</h3>
-      <div class="aff">„Ich muss nicht alles wissen, um sicher zu sein."</div>
-      <div class="lbl">Sanfte Praxis</div>
-      <div>Spüre eine Minute deine Füße auf dem Boden. Er hält dich — ohne dass du etwas tun musst.</div>
-      <div class="lbl">Frage für dich</div>
-      <div style="font-style:italic">Wo darf ich heute ein wenig mehr loslassen und vertrauen?</div>
-    </div>
-    <div style="text-align:center;margin-top:24px"><a class="btn ghost" href="seelenraum-app.html">Live-Vorschau der App ansehen</a></div>
-  </section>
-
-  <section>
-    <div class="eyebrow">So einfach</div>
-    <h2>In drei Schritten in deinem Raum</h2>
-    <div class="steps">
-      <div class="step"><h3>Mitglied werden</h3><p>Mit wenigen Klicks anmelden — sicher bezahlen, sofort starten.</p></div>
-      <div class="step"><h3>Täglich eintreten</h3><p>Öffne die App, nimm dir deinen Impuls. Auf dem Handy wie eine echte App installierbar.</p></div>
-      <div class="step"><h3>Wachsen</h3><p>Sammle Praxis-Tage, gehe Reisen, kehre immer wieder zu dir zurück.</p></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="eyebrow">Mitgliedschaft</div>
-    <h2>Wähle, was sich richtig anfühlt</h2>
-    <p class="sub">Jederzeit kündbar. Keine versteckten Kosten.</p>
-    <div class="prices">
-      <div class="price">
-        <div class="tier">Monatlich</div>
-        <div class="amt">7 €<small>/Monat</small></div>
-        <div class="note">Volle Flexibilität, monatlich kündbar.</div>
-        <ul><li>Alle Impulse &amp; Reisen</li><li>Neue Inhalte jeden Monat</li><li>Atempausen &amp; Favoriten</li></ul>
-        <a class="btn" href="#" onclick="goCheckout(event)">Monatlich starten</a>
+  <!-- Hero -->
+  <section id="top" style="position:relative;min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:90px clamp(20px,5vw,40px);background:var(--night);overflow:hidden">
+    <img id="sr-hero-img" src="heroMond.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,11,24,.62) 0%,rgba(16,11,24,.4) 36%,rgba(16,11,24,.9) 100%)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(75% 55% at 50% 52%,rgba(16,11,24,.62) 0%,transparent 72%)"></div>
+    <div style="position:relative;max-width:820px;animation:sr-up 1s cubic-bezier(.16,1,.3,1) both">
+      <div style="font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:26px">Deine tägliche spirituelle Praxis</div>
+      <h1 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;color:#fff;font-size:clamp(46px,8vw,96px);line-height:1.0;letter-spacing:-.01em;margin:0">Dein <em style="font-style:italic;color:var(--gold-l)">ruhiger</em> Ort<br>für jeden Tag.</h1>
+      <p style="font-size:clamp(17px,2.1vw,21px);line-height:1.6;color:rgba(255,255,255,.82);max-width:33ch;margin:26px auto 0;font-weight:400">Eine sanfte Praxis, die mit dir wächst — 27 spirituelle Bereiche, jeden Tag neu, immer dabei.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px">
+        <a href="#preise" style="display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;letter-spacing:.02em;color:var(--night2);background:var(--gold-l);border-radius:999px;padding:16px 34px;text-decoration:none;transition:all .25s cubic-bezier(.16,1,.3,1)" style-hover="background:#e9cda2;transform:translateY(-2px)">Mitglied werden</a>
+        <a href="#vorschau" style="display:inline-flex;align-items:center;font-size:14.5px;font-weight:500;letter-spacing:.02em;color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:16px 30px;text-decoration:none;transition:all .25s cubic-bezier(.16,1,.3,1)" style-hover="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.7)">Erst hineinspüren</a>
       </div>
-      <div class="price feat-card">
-        <div class="ribbon">★ BELIEBT — beste Wahl</div>
-        <div class="tier">Jährlich</div>
-        <div class="amt">59 €<small>/Jahr</small></div>
-        <div class="note">Zwei Monate geschenkt gegenüber monatlich.</div>
-        <ul><li>Alles aus Monatlich</li><li>Über 30 % gespart</li><li>Ein Jahr Begleitung</li></ul>
-        <a class="btn gold" href="#" onclick="goCheckout(event)">Jahr sichern</a>
+      <div style="margin-top:30px;font-size:12.5px;letter-spacing:.06em;color:rgba(255,255,255,.6)">Jeden Monat neu &nbsp;·&nbsp; Jederzeit kündbar &nbsp;·&nbsp; Handy &amp; Computer</div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(70px,10vw,118px) clamp(20px,5vw,56px)">
+    <div style="text-align:center;max-width:30ch;margin:0 auto 56px">
+      <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px">Was dich erwartet</div>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.06;letter-spacing:-.01em;margin:0">Alles für deine tägliche Rückkehr zu dir.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden">
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">☼</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Impuls des Tages</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Jeden Tag eine Affirmation, eine sanfte Praxis und eine Frage zum Innehalten — plus deine Tageskarte.</p>
       </div>
-      <div class="price">
-        <div class="ribbon">Nur zum Start — limitiert</div>
-        <div class="tier">Founding Member</div>
-        <div class="amt">5 €<small>/Monat</small></div>
-        <div class="note">Dauerhaft dieser Preis für die ersten Mitglieder.</div>
-        <ul><li>Lebenslang günstigster Preis</li><li>Du gestaltest mit</li><li>Nur begrenzte Plätze</li></ul>
-        <a class="btn" href="#" onclick="goCheckout(event)">Platz sichern</a>
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">✶</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Geführte Reisen</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Mehrtägige Programme wie „7 Tage Loslassen“ — Schritt für Schritt, mit sichtbarem Fortschritt.</p>
+      </div>
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">❖</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">27 Bereiche</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Astrologie, Mond, Chakren, Kristalle, Tarot, Numerologie — eine ganze Welt, nach Thema filterbar.</p>
+      </div>
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">◯</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Atempausen &amp; Klang</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Geführte Atemübungen und ein Klangraum für die Momente, in denen alles zu viel wird.</p>
+      </div>
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">♡</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Tagebuch &amp; Favoriten</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Was dich berührt, merkst du dir. Dein privates Tagebuch ist überall dabei — kein Zettel nötig.</p>
+      </div>
+      <div style="background:var(--card);padding:38px 32px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;color:var(--lilacd);margin-bottom:16px">✦</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Jeden Monat neu</h3>
+        <p style="color:var(--soft);font-size:15px;margin:0;line-height:1.65">Frische Impulse und Reisen kommen regelmäßig dazu. Werbefrei, offline nutzbar — es bleibt lebendig.</p>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="eyebrow">Gut zu wissen</div>
-    <h2>Häufige Fragen</h2>
-    <details><summary>Was genau bekomme ich?</summary><p>Zugang zur Seelenraum-App mit täglichem Impuls, geführten Reisen, einer wachsenden Bibliothek an Affirmationen und Übungen sowie geführten Atempausen. Jeden Monat kommen neue Inhalte dazu.</p></details>
-    <details><summary>Brauche ich etwas zu installieren?</summary><p>Nein. Die App läuft im Browser auf Handy und Computer. Auf dem Handy kannst du sie optional mit einem Tipp zum Startbildschirm hinzufügen — dann fühlt sie sich an wie eine echte App.</p></details>
-    <details><summary>Kann ich jederzeit kündigen?</summary><p>Ja. Die monatliche Mitgliedschaft ist jederzeit zum Monatsende kündbar — unkompliziert, ohne Nachfragen.</p></details>
-    <details><summary>Für wen ist Seelenraum gedacht?</summary><p>Für alle, die sich kleine, ruhige Momente der Selbstfürsorge im Alltag wünschen — egal ob Anfänger oder schon länger auf dem Weg.</p></details>
-    <details><summary>Ist das eine Therapie?</summary><p>Nein. Seelenraum ist eine spirituelle Selbstfürsorge-Praxis und ersetzt keine medizinische oder psychotherapeutische Behandlung.</p></details>
+  <!-- Welten gallery -->
+  <section id="welten" style="background:var(--night);padding:clamp(70px,10vw,120px) clamp(20px,5vw,56px);position:relative;overflow:hidden">
+    <div style="max-width:1180px;margin:0 auto;position:relative">
+      <div style="text-align:center;max-width:34ch;margin:0 auto 54px">
+        <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:14px">Deine Welten</div>
+        <h2 style="font-family:'Instrument Serif',serif;font-weight:400;color:#fff;font-size:clamp(34px,5vw,58px);line-height:1.06;letter-spacing:-.01em;margin:0 0 14px">27 Bereiche, ein Raum.</h2>
+        <p style="color:rgba(255,255,255,.66);font-size:16px;margin:0">Von Mondzyklen bis Klangraum — jeder Bereich eine eigene, ruhige Welt.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="heroMond.jpg" alt="Mond" style="width:100%;height:100%;object-fit:cover;object-position:center 30%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Kosmos</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Mond &amp; Zyklen</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="heroMeditation.jpg" alt="Meditationen" style="width:100%;height:100%;object-fit:cover;object-position:center 26%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Praxis</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Meditationen</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="heroSelbstliebe.jpg" alt="Selbstliebe" style="width:100%;height:100%;object-fit:cover;object-position:center 24%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Herz</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Selbstliebe</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="heroTarot.jpg" alt="Tarot" style="width:100%;height:100%;object-fit:cover;object-position:center 34%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Orakel</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Tarot &amp; Karten</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="31b3c25b.jpg" alt="Rituale" style="width:100%;height:100%;object-fit:cover;object-position:center 48%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Praxis</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Rituale</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="1dd04811.jpg" alt="Klangraum" style="width:100%;height:100%;object-fit:cover;object-position:center 38%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Klang</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Klangraum</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="ec21bb93.jpg" alt="Astrologie" style="width:100%;height:100%;object-fit:cover;object-position:center 34%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Kosmos</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Astrologie</div></div>
+        </a>
+        <a href="#preise" style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;text-decoration:none;display:block;box-shadow:0 18px 40px -16px rgba(0,0,0,.55)" style-hover="outline:1px solid rgba(216,184,126,.6)">
+          <img src="8ded867a.jpg" alt="Chakren" style="width:100%;height:100%;object-fit:cover;object-position:center 30%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,10,22,.86))"></div>
+          <div style="position:absolute;left:18px;bottom:16px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:3px">Körper</div><div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;line-height:1.05">Chakren</div></div>
+        </a>
+        <div style="position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;justify-content:center;padding:24px;background:rgba(255,255,255,.03)">
+          <div style="font-family:'Instrument Serif',serif;font-size:40px;color:var(--gold-l);line-height:1;margin-bottom:10px">+19</div>
+          <div style="font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.55">weitere Bereiche — Numerologie, Krafttiere, Engelszahlen, Schattenarbeit, Kristalle, Traumdeutung …</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <div class="final">
-    <div class="eyebrow">Dein Moment beginnt jetzt</div>
-    <h2>Tritt ein in deinen Seelenraum</h2>
-    <p class="sub" style="font-style:normal">Ein paar ruhige Minuten am Tag — für ein Jahr voller kleiner Rückkehr zu dir.</p>
-    <a class="btn gold" href="#" onclick="goCheckout(event)">Jetzt Mitglied werden</a>
-  </div>
+  <!-- Vorschau / phone -->
+  <section id="vorschau" style="max-width:1180px;margin:0 auto;padding:clamp(70px,10vw,120px) clamp(20px,5vw,56px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,80px);align-items:center">
+      <div>
+        <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px">So fühlt es sich an</div>
+        <h2 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,4.6vw,54px);line-height:1.07;letter-spacing:-.01em;margin:0 0 18px">So begegnet dir jeder Tag — ruhig, klar, ohne Druck.</h2>
+        <p style="color:var(--soft);font-size:16.5px;line-height:1.7;margin:0 0 26px;max-width:46ch">Kein überforderndes Programm. Ein paar ruhige Minuten: ein Impuls, eine Affirmation, eine Frage für dich. Du entscheidest, wie tief du gehst.</p>
+        <a href="seelenraum-app.html" style="display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;letter-spacing:.02em;color:#fff;background:var(--lilacd);border-radius:999px;padding:15px 30px;text-decoration:none;transition:all .25s cubic-bezier(.16,1,.3,1)" style-hover="background:#5b4a78;transform:translateY(-2px)">Live-Vorschau der App ansehen <span style="font-size:16px">→</span></a>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <!-- phone -->
+        <div style="width:300px;max-width:80vw;background:#0f0b18;border-radius:46px;padding:11px;box-shadow:0 40px 80px -28px rgba(26,20,38,.55),0 0 0 1px rgba(0,0,0,.4);animation:sr-drift 7s ease-in-out infinite">
+          <div style="border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#f4ecf6,#eef0ec);position:relative">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0f0b18;border-radius:0 0 16px 16px;z-index:3"></div>
+            <div style="padding:42px 22px 30px;text-align:center">
+              <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px">Dein Impuls für heute</div>
+              <div style="background:#fffdfb;border-radius:22px;padding:26px 20px;box-shadow:0 14px 30px -14px rgba(26,20,38,.22)">
+                <span style="display:inline-block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac);border:1px solid var(--lilac);border-radius:999px;padding:4px 12px;margin-bottom:14px">Vertrauen</span>
+                <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:27px;line-height:1.12;margin:0 0 12px;color:var(--ink)">Der Boden trägt dich</h3>
+                <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:19px;line-height:1.4;color:var(--lilacd);margin:0 0 18px">„Ich muss nicht alles wissen, um sicher zu sein.“</p>
+                <div style="text-align:left;border-top:1px solid var(--line);padding-top:14px">
+                  <div style="font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:5px">Sanfte Praxis</div>
+                  <p style="font-size:13.5px;color:var(--soft);margin:0 0 14px;line-height:1.55">Spüre eine Minute deine Füße auf dem Boden. Er hält dich — ohne dass du etwas tun musst.</p>
+                  <div style="font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:5px">Frage für dich</div>
+                  <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:14.5px;color:var(--ink);margin:0;line-height:1.5">Wo darf ich heute ein wenig mehr loslassen?</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">
+                <div style="flex:1;font-size:10.5px;letter-spacing:.08em;color:var(--soft);border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 0">Erledigt ✓</div>
+                <div style="flex:1;font-size:10.5px;letter-spacing:.08em;color:#fff;background:var(--gold);border-radius:999px;padding:9px 0">Merken ♡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>© Seelenraum · <a href="impressum.html" style="color:var(--ink-fade);text-decoration:none;transition:.2s">Impressum</a> · <a href="datenschutz.html" style="color:var(--ink-fade);text-decoration:none;transition:.2s">Datenschutz</a> · Mit Achtsamkeit gemacht</footer>
+  <!-- Manifesto -->
+  <sc-if value="{{ showSocial }}" hint-placeholder-val="{{ true }}">
+  <section style="position:relative;padding:clamp(80px,12vw,150px) clamp(20px,5vw,40px);text-align:center;overflow:hidden;background:var(--night)">
+    <img src="heroSelbstliebe.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.5">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,11,24,.78),rgba(16,11,24,.6))"></div>
+    <div style="position:relative;max-width:760px;margin:0 auto">
+      <div style="font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:24px">Seelenraum</div>
+      <p style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#fff;font-size:clamp(28px,4.6vw,52px);line-height:1.22;margin:0">„Du musst nichts werden. Du darfst nur zurückkommen — ein wenig, jeden Tag.“</p>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- Steps -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(70px,10vw,118px) clamp(20px,5vw,56px)">
+    <div style="text-align:center;margin-bottom:54px">
+      <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px">So einfach</div>
+      <h2 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.06;letter-spacing:-.01em;margin:0">In drei Schritten in deinem Raum.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+      <div style="text-align:center;padding:0 12px">
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;color:var(--gold);line-height:1;margin-bottom:14px">01</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Mitglied werden</h3>
+        <p style="color:var(--soft);font-size:15.5px;margin:0;line-height:1.65">Mit wenigen Klicks anmelden — sicher bezahlen, sofort starten.</p>
+      </div>
+      <div style="text-align:center;padding:0 12px;border-left:1px solid var(--line);border-right:1px solid var(--line)">
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;color:var(--gold);line-height:1;margin-bottom:14px">02</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Täglich eintreten</h3>
+        <p style="color:var(--soft);font-size:15.5px;margin:0;line-height:1.65">Öffne die App, nimm dir deinen Impuls. Am Handy installierbar wie eine echte App.</p>
+      </div>
+      <div style="text-align:center;padding:0 12px">
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;color:var(--gold);line-height:1;margin-bottom:14px">03</div>
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;margin:0 0 8px">Wachsen</h3>
+        <p style="color:var(--soft);font-size:15.5px;margin:0;line-height:1.65">Sammle Praxis-Tage, gehe Reisen, kehre immer wieder zu dir zurück.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="preise" style="background:#f1e9df;padding:clamp(70px,10vw,120px) clamp(20px,5vw,56px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:54px">
+        <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px">Mitgliedschaft</div>
+        <h2 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-.01em;margin:0 0 12px">Wähle, was sich richtig anfühlt.</h2>
+        <p style="color:var(--soft);font-size:16px;margin:0">Jederzeit kündbar. Keine versteckten Kosten.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:stretch;max-width:980px;margin:0 auto">
+        <!-- monthly -->
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column">
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lilacd);font-weight:600">Monatlich</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:54px;line-height:1;margin:14px 0 4px">7&nbsp;€<span style="font-size:16px;color:var(--fade);font-family:'DM Sans'">/Monat</span></div>
+          <p style="color:var(--soft);font-size:14px;margin:0 0 20px;min-height:40px">Volle Flexibilität, monatlich kündbar.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 26px;font-size:15px;color:var(--soft)">
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Alle 27 Bereiche &amp; Reisen</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Neue Inhalte jeden Monat</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Atempausen &amp; Tagebuch</li>
+          </ul>
+          <button onclick="{{ goMonthly }}" style="margin-top:auto;font-family:'DM Sans';font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:999px;padding:14px;cursor:pointer;transition:all .2s" style-hover="background:var(--ink);color:#fff">Monatlich starten</button>
+        </div>
+        <!-- yearly featured -->
+        <div style="background:var(--night);border:1px solid var(--night);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column;position:relative;box-shadow:0 30px 60px -24px rgba(26,20,38,.5)">
+          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold-l);color:var(--night2);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;border-radius:999px;white-space:nowrap">★ Beste Wahl</div>
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);font-weight:600">Jährlich</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:54px;line-height:1;margin:14px 0 4px;color:#fff">59&nbsp;€<span style="font-size:16px;color:rgba(255,255,255,.55);font-family:'DM Sans'">/Jahr</span></div>
+          <p style="color:rgba(255,255,255,.7);font-size:14px;margin:0 0 20px;min-height:40px">Zwei Monate geschenkt — über 30&nbsp;% gespart.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 26px;font-size:15px;color:rgba(255,255,255,.8)">
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold-l)">✦</span>Alles aus Monatlich</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold-l)">✦</span>Über 30&nbsp;% gespart</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold-l)">✦</span>Ein Jahr Begleitung</li>
+          </ul>
+          <button onclick="{{ goYear }}" style="margin-top:auto;font-family:'DM Sans';font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--night2);background:var(--gold-l);border:none;border-radius:999px;padding:14px;cursor:pointer;transition:all .2s" style-hover="background:#e9cda2">Jahr sichern</button>
+        </div>
+        <!-- founding -->
+        <sc-if value="{{ showFounding }}" hint-placeholder-val="{{ true }}">
+        <div style="background:var(--card);border:1px solid var(--gold);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column">
+          <div style="font-size:11px;letter-spacing:.12em;color:var(--gold);font-weight:600;margin-bottom:4px">Nur zum Start · limitiert</div>
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lilacd);font-weight:600">Founding Member</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:54px;line-height:1;margin:14px 0 4px">5&nbsp;€<span style="font-size:16px;color:var(--fade);font-family:'DM Sans'">/Monat</span></div>
+          <p style="color:var(--soft);font-size:14px;margin:0 0 20px;min-height:40px">Dauerhaft dieser Preis für die ersten Mitglieder.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 26px;font-size:15px;color:var(--soft)">
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Lebenslang günstigster Preis</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Du gestaltest mit</li>
+            <li style="padding:6px 0 6px 24px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Nur begrenzte Plätze</li>
+          </ul>
+          <button onclick="{{ goFounding }}" style="margin-top:auto;font-family:'DM Sans';font-size:14px;font-weight:600;letter-spacing:.02em;color:#fff;background:var(--gold);border:none;border-radius:999px;padding:14px;cursor:pointer;transition:all .2s" style-hover="background:var(--gold2)">Platz sichern</button>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="max-width:760px;margin:0 auto;padding:clamp(70px,10vw,118px) clamp(20px,5vw,40px)">
+    <div style="text-align:center;margin-bottom:44px">
+      <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px">Gut zu wissen</div>
+      <h2 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,5vw,52px);line-height:1.06;margin:0">Häufige Fragen</h2>
+    </div>
+    <details style="border-top:1px solid var(--line);padding:20px 4px">
+      <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)">Was genau bekomme ich?<span style="font-size:24px;color:var(--gold);flex:none">+</span></summary>
+      <p style="color:var(--soft);font-size:15.5px;line-height:1.7;margin:14px 0 0">Zugang zur Seelenraum-App mit täglichem Impuls, geführten Reisen und 27 Bereichen von Astrologie bis Klangraum — plus Affirmationen, Atempausen und Tagebuch. Jeden Monat kommen neue Inhalte dazu.</p>
+    </details>
+    <details style="border-top:1px solid var(--line);padding:20px 4px">
+      <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)">Brauche ich etwas zu installieren?<span style="font-size:24px;color:var(--gold);flex:none">+</span></summary>
+      <p style="color:var(--soft);font-size:15.5px;line-height:1.7;margin:14px 0 0">Nein. Die App läuft im Browser auf Handy und Computer. Am Handy kannst du sie mit einem Tipp zum Startbildschirm hinzufügen — dann fühlt sie sich an wie eine echte App.</p>
+    </details>
+    <details style="border-top:1px solid var(--line);padding:20px 4px">
+      <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)">Kann ich jederzeit kündigen?<span style="font-size:24px;color:var(--gold);flex:none">+</span></summary>
+      <p style="color:var(--soft);font-size:15.5px;line-height:1.7;margin:14px 0 0">Ja. Die monatliche Mitgliedschaft ist jederzeit zum Monatsende kündbar — unkompliziert, ohne Nachfragen.</p>
+    </details>
+    <details style="border-top:1px solid var(--line);padding:20px 4px">
+      <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)">Für wen ist Seelenraum gedacht?<span style="font-size:24px;color:var(--gold);flex:none">+</span></summary>
+      <p style="color:var(--soft);font-size:15.5px;line-height:1.7;margin:14px 0 0">Für alle, die sich kleine, ruhige Momente der Selbstfürsorge im Alltag wünschen — egal ob Anfänger oder schon länger auf dem Weg.</p>
+    </details>
+    <details style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 4px">
+      <summary style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)">Ist das eine Therapie?<span style="font-size:24px;color:var(--gold);flex:none">+</span></summary>
+      <p style="color:var(--soft);font-size:15.5px;line-height:1.7;margin:14px 0 0">Nein. Seelenraum ist eine spirituelle Selbstfürsorge-Praxis und ersetzt keine medizinische oder psychotherapeutische Behandlung.</p>
+    </details>
+  </section>
+
+  <!-- Final CTA -->
+  <section style="position:relative;overflow:hidden;background:var(--night)">
+    <img src="heroMeditation.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.45">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,11,24,.7),rgba(16,11,24,.82))"></div>
+    <div style="position:relative;text-align:center;max-width:680px;margin:0 auto;padding:clamp(80px,12vw,140px) clamp(20px,5vw,40px)">
+      <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:20px">Dein Moment beginnt jetzt</div>
+      <h2 style="font-family:'Instrument Serif',serif;font-weight:400;color:#fff;font-size:clamp(36px,6vw,68px);line-height:1.04;letter-spacing:-.01em;margin:0 0 18px">Tritt ein in deinen Seelenraum.</h2>
+      <p style="color:rgba(255,255,255,.78);font-size:17px;line-height:1.6;margin:0 auto 36px;max-width:42ch">Ein paar ruhige Minuten am Tag — für ein Jahr voller kleiner Rückkehr zu dir.</p>
+      <a href="#preise" style="display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--night2);background:var(--gold-l);border-radius:999px;padding:17px 38px;text-decoration:none;transition:all .25s cubic-bezier(.16,1,.3,1)" style-hover="background:#e9cda2;transform:translateY(-2px)">Jetzt Mitglied werden</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:var(--night2);color:rgba(255,255,255,.6);padding:56px clamp(20px,5vw,56px) 40px">
+    <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;align-items:flex-start">
+      <div style="max-width:34ch">
+        <div style="font-size:15px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:#fff;margin-bottom:12px">Seelen<span style="color:var(--gold-l)">raum</span></div>
+        <p style="font-size:14px;line-height:1.65;margin:0;color:rgba(255,255,255,.55)">Dein ruhiger Ort für jeden Tag — eine sanfte spirituelle Praxis als App.</p>
+      </div>
+      <div style="display:flex;gap:48px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:4px">Entdecken</div>
+          <a href="#welten" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Welten</a>
+          <a href="#vorschau" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Vorschau</a>
+          <a href="#preise" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Preise</a>
+          <a href="#faq" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Fragen</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l);font-weight:600;margin-bottom:4px">Rechtliches</div>
+          <a href="impressum.html" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Impressum</a>
+          <a href="datenschutz.html" style="font-size:14px;color:rgba(255,255,255,.62);text-decoration:none">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;letter-spacing:.04em;color:rgba(255,255,255,.45)">© Seelenraum · Mit Achtsamkeit gemacht</div>
+  </footer>
+
 </div>
-
-<script>
-  /* ====================================================================
-     HIER DEINEN KAUF-LINK EINTRAGEN  (nur diese eine Zeile!)
-     Leer lassen = Buttons zeigen einen Hinweis statt ins Leere zu fuehren.
-     Beispiel: const CHECKOUT_URL = "https://dein-shop.com/checkout";
-     ==================================================================== */
-  const CHECKOUT_URL = "";
-
-  function goCheckout(e){
-    if(e && e.preventDefault) e.preventDefault();
-    var url = (CHECKOUT_URL || "").trim();
-    if(/^https?:\/\//i.test(url)){ window.location.href = url; return false; }
-    showCheckoutInfo();
-    return false;
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2400},&quot;heroImage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Mond&quot;,&quot;Meditation&quot;,&quot;Selbstliebe&quot;,&quot;Tarot&quot;],&quot;default&quot;:&quot;Mond&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;showFounding&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Inhalt&quot;},&quot;showSocial&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Inhalt&quot;}}">
+class Component extends DCLogic {
+  go(url){
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      try { window.open(url, '_blank', 'noopener'); } catch (err) { window.location.href = url; }
+    };
   }
-  function showCheckoutInfo(){
-    if(document.getElementById('coOv')) return;
-    var ov = document.createElement('div');
-    ov.id = 'coOv';
-    ov.style.cssText = "position:fixed;inset:0;background:rgba(58,51,64,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100";
-    var box = document.createElement('div');
-    box.style.cssText = "background:var(--card);border:1px solid var(--line);border-radius:22px;max-width:420px;width:100%;padding:30px 26px;text-align:center;box-shadow:var(--shadow)";
-    box.innerHTML = '<div style="font-size:34px;margin-bottom:6px">&#10022;</div>'
-      + '<h2 style="font-size:23px;font-weight:normal;margin-bottom:10px">Fast fertig</h2>'
-      + '<p style="color:var(--ink-soft);font-size:15px;margin-bottom:16px">Der Bezahl-Link ist noch nicht verbunden. Sobald du dein Abo bei Memberstack oder Stripe eingerichtet und den Link eingetragen hast, fuehrt dieser Button direkt zur Anmeldung.</p>'
-      + '<p style="color:var(--ink-fade);font-size:13px;margin-bottom:20px">Anleitung: siehe Seelenraum-Launch-Guide, Abschnitt 3.</p>';
-    var btn = document.createElement('button');
-    btn.textContent = 'Verstanden';
-    btn.style.cssText = "font-family:Arial,sans-serif;font-size:13px;letter-spacing:1px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 26px;cursor:pointer";
-    btn.onclick = function(){ ov.remove(); };
-    box.appendChild(btn);
-    ov.appendChild(box);
-    ov.addEventListener('click', function(ev){ if(ev.target === ov) ov.remove(); });
-    document.body.appendChild(ov);
+  heroImgUrl(){
+    const R = (typeof window !== 'undefined' && window.__resources) || {};
+    const heroMap = {
+      'Mond': R.heroMond || 'assets/bg-mond.jpg',
+      'Meditation': R.heroMeditation || 'assets/bg-meditationen.jpg',
+      'Selbstliebe': R.heroSelbstliebe || 'assets/bg-selbstliebe.jpg',
+      'Tarot': R.heroTarot || 'assets/bg-tarot.jpg'
+    };
+    return heroMap[this.props.heroImage] || heroMap['Mond'];
   }
+  applyHero(){
+    const el = document.getElementById('sr-hero-img');
+    if (!el) return;
+    // Default 'Mond' is already inlined as the literal <img src>; only swap for non-default choices.
+    if ((this.props.heroImage || 'Mond') === 'Mond') return;
+    const url = this.heroImgUrl();
+    if (url && el.getAttribute('src') !== url) el.src = url;
+  }
+  componentDidMount(){ this.applyHero(); }
+  componentDidUpdate(){ this.applyHero(); }
+  renderVals(){
+    return {
+      goMonthly: this.go('https://buy.stripe.com/eVq9AL4eagmpeFWcXk2cg00'),
+      goYear: this.go('https://buy.stripe.com/3cIaEP11Y8TXbtK0ay2cg01'),
+      goFounding: this.go('https://buy.stripe.com/4gMeV5h0WdadeFWg9w2cg02'),
+      showFounding: this.props.showFounding ?? true,
+      showSocial: this.props.showSocial ?? true
+    };
+  }
+}
 </script>
-</body>
-</html>
+
+
+</body></html>
