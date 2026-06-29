@@ -2092,27 +2092,7 @@ function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.va
 function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","notes","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
 fillIcons();initCosmosBg();initParallax();initScrollProgress();startGate();
 </script>
-<script>
-/* Standalone-Asset-Brücke: ersetzt dynamisch erzeugte Datei-Referenzen durch eingebettete Blob-URLs */
-(function(){
-  function whenReady(cb){var n=0;(function p(){if(window.__resources&&Object.keys(window.__resources).length){cb();}else if(n++<250){setTimeout(p,40);}})();}
-  whenReady(function(){
-    var R=window.__resources||{};
-    /* Der Bundler entfernt die Meta-Tags nach dem Inlinen, daher leiten wir die ID aus dem Dateinamen ab:
-       'bg-inneres-kind.jpg' -> 'bg_inneres_kind' (= Schlüssel in window.__resources) */
-    function blobFor(f){if(!f)return null;var id=f.replace(/\?.*$/,'').replace(/\.[a-z0-9]+$/i,'').replace(/-/g,'_');return R[id]||null;}
-    function fixEl(el){
-      if(!el||el.nodeType!==1)return;
-      if(el.tagName==='IMG'){var s=el.getAttribute('src')||'';if(s.indexOf('blob:')<0&&s.indexOf('data:')<0){var b=blobFor(s.split('/').pop());if(b&&el.src!==b)el.src=b;}}
-      var bi=el.style&&el.style.backgroundImage;
-      if(bi&&bi.indexOf('blob:')<0&&bi.indexOf('data:')<0){var m=bi.match(/url\(['"]?([^'")]+)['"]?\)/);if(m){var b2=blobFor(m[1].split('/').pop());if(b2)el.style.backgroundImage="url('"+b2+"')";}}
-    }
-    function fixTree(root){if(!root||root.nodeType!==1)return;fixEl(root);if(root.querySelectorAll)root.querySelectorAll('img,[style*="background-image"]').forEach(fixEl);}
-    fixTree(document.body);
-    new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='attributes')fixEl(m.target);if(m.addedNodes)m.addedNodes.forEach(fixTree);});}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src','style']});
-  });
-})();
-</script>
+
 
 
 </body></html>
