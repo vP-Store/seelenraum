@@ -766,6 +766,152 @@
     outline:2px solid var(--gold);outline-offset:3px
   }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style id="fable5-polish">
+  /* ============================================================
+     FABLE-5 POLISH LAYER — Design-Perfektion & Animationen
+     (reine Zusatzschicht: überschreibt nur Optik, keine Logik)
+     ============================================================ */
+  :root{
+    --ease-spring:cubic-bezier(.34,1.56,.64,1);
+    --ease-out:cubic-bezier(.22,.61,.36,1);
+    --aur1:rgba(205,180,230,.50);--aur2:rgba(170,215,200,.42);--aur3:rgba(240,215,180,.38);
+  }
+  html[data-theme="dark"]{--aur1:rgba(120,95,175,.34);--aur2:rgba(60,120,110,.26);--aur3:rgba(150,120,70,.20)}
+  body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(38% 30% at 22% 24%, var(--aur1), transparent 70%),
+      radial-gradient(34% 28% at 78% 18%, var(--aur2), transparent 70%),
+      radial-gradient(40% 34% at 55% 82%, var(--aur3), transparent 72%);
+    filter:blur(46px);opacity:.55;will-change:transform;
+    animation:f5aurora 26s ease-in-out infinite alternate}
+  @keyframes f5aurora{
+    0%{transform:translate3d(-2%,-1%,0) rotate(-1.5deg) scale(1)}
+    50%{transform:translate3d(2%,2%,0) rotate(1deg) scale(1.06)}
+    100%{transform:translate3d(-1%,3%,0) rotate(2deg) scale(1.03)}}
+  header{animation:f5down .8s var(--ease-out) both}
+  @keyframes f5down{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+  .logo span{background:linear-gradient(100deg,var(--gold) 20%,#ecd3a2 50%,var(--gold) 80%);
+    background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;animation:f5shimmer 5.5s linear infinite}
+  @keyframes f5shimmer{to{background-position:-200% center}}
+  .streak b{display:inline-block;animation:f5pulse 2.8s ease-in-out infinite}
+  @keyframes f5pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .hero{isolation:isolate}
+  .hero::after{content:"";position:absolute;top:0;left:-75%;width:46%;height:100%;z-index:0;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,.16) 50%,transparent);
+    transform:skewX(-18deg);pointer-events:none;animation:f5sheen 7.5s ease-in-out infinite}
+  @keyframes f5sheen{0%,55%{left:-75%}85%,100%{left:125%}}
+  .hero .ornament::after{content:"";position:absolute;inset:16px;border-radius:50%;
+    border:1.5px solid rgba(255,255,255,.20);animation:f5ring 6s ease-in-out infinite}
+  @keyframes f5ring{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.12);opacity:1}}
+  .card{transition:box-shadow .4s var(--ease-out),transform .4s var(--ease-out)}
+  @media(hover:hover){
+    .card:hover{box-shadow:0 18px 46px rgba(70,50,95,.15)}
+    .lib-item:hover{border-color:var(--accent)}
+    .corner:hover{transform:scale(1.1) rotate(8deg)}
+  }
+  .lib-item,.sound,.tile,.zsign,.mood,.kt-item,.comp-pick{transition:transform .28s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .25s,background .25s,color .25s}
+  .tile:active,.sound:active,.zsign:active,.mood:active,.kt-item:active,.lib-item:active{transform:scale(.97)}
+  .btn,.tabbar button,.nav-top button,.filters button,.style-chips button,.banner button,.install-banner button,.tile,.sound,.zsign,.mood,.kt-item,.comp-pick{position:relative;overflow:hidden}
+  .btn{transition:background .25s,color .25s,border-color .25s,box-shadow .3s,transform .22s var(--ease-spring)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(70,50,95,.16)}
+  .btn:active{transform:translateY(0) scale(.96)}
+  .f5-ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.16;
+    transform:scale(0);pointer-events:none;animation:f5ripple .55s var(--ease-out) forwards}
+  @keyframes f5ripple{to{transform:scale(2.6);opacity:0}}
+  .tabbar{background:rgba(255,253,251,.72);backdrop-filter:blur(18px) saturate(1.6);
+    -webkit-backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 -8px 32px rgba(70,50,95,.08)}
+  html[data-theme="dark"] .tabbar{background:rgba(33,29,42,.72)}
+  .tabbar button{border-radius:14px;transition:color .25s}
+  .tabbar button .ico{transition:transform .35s var(--ease-spring)}
+  .tabbar button.active .ico{transform:translateY(-3px) scale(1.18)}
+  .tabbar button::before{content:"";position:absolute;left:50%;bottom:1px;width:4px;height:4px;
+    border-radius:50%;background:var(--accent-deep);transform:translateX(-50%) scale(0);
+    transition:transform .35s var(--ease-spring)}
+  .tabbar button.active::before{transform:translateX(-50%) scale(1)}
+  textarea.journal:focus,.search:focus,.modal input:focus,.intention input:focus{
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent);
+    transition:box-shadow .25s,border-color .25s}
+  .progress i,.pbar i{position:relative;overflow:hidden}
+  .progress i::after,.pbar i::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+    transform:translateX(-100%);animation:f5bar 2.6s ease-in-out infinite}
+  @keyframes f5bar{55%,100%{transform:translateX(100%)}}
+  .orb{animation:f5orb 6s ease-in-out infinite}
+  .view.sec-med .orb{animation:mpulse 9s ease-in-out infinite,f5orb 6s ease-in-out infinite}
+  @keyframes f5orb{0%,100%{box-shadow:0 0 44px rgba(138,118,168,.38)}50%{box-shadow:0 0 92px rgba(138,118,168,.62)}}
+  .moon-svg{filter:drop-shadow(0 0 20px rgba(150,140,220,.4));animation:f5float 7s ease-in-out infinite}
+  @keyframes f5float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  .orakel-card,.flip-front{animation:f5invite 4.5s ease-in-out infinite}
+  @keyframes f5invite{0%,100%{box-shadow:0 12px 34px rgba(80,60,90,.22)}50%{box-shadow:0 16px 48px rgba(120,90,170,.42)}}
+  .flip3d,.orakel-card,.draw-card{transition:transform .35s var(--ease-out)}
+  .overlay{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+  .modal{animation:f5modal .5s cubic-bezier(.22,1.2,.36,1) both}
+  @keyframes f5modal{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}
+  .f5-toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(14px);
+    background:linear-gradient(135deg,var(--accent-deep),var(--accent));color:#fff;
+    font-family:Arial,sans-serif;font-size:13px;letter-spacing:1px;padding:11px 20px;
+    border-radius:30px;z-index:60;opacity:0;max-width:80%;text-align:center;
+    box-shadow:0 10px 30px rgba(60,40,90,.35);
+    transition:opacity .35s var(--ease-out),transform .45s var(--ease-spring)}
+  .f5-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .f5-spark{position:fixed;z-index:70;pointer-events:none;font-size:15px;color:var(--gold);will-change:transform,opacity}
+  #klangBar{animation:f5klang 3s ease-in-out infinite}
+  @keyframes f5klang{0%,100%{box-shadow:0 8px 24px rgba(60,40,90,.28)}50%{box-shadow:0 8px 34px rgba(140,100,190,.5)}}
+  .badge.on .bi{display:inline-block;animation:f5badge 3.4s ease-in-out infinite}
+  @keyframes f5badge{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.14);filter:drop-shadow(0 0 6px rgba(200,160,90,.7))}}
+  .searchpill:hover{transform:translateY(-1px)}
+  #toTop{transition:transform .25s var(--ease-spring),opacity .25s;animation:f5down .4s var(--ease-out)}
+  #toTop:hover{transform:scale(1.1)}
+  ::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+  @media(pointer:fine){
+    ::-webkit-scrollbar{width:10px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 35%,transparent);border-radius:20px;border:2px solid transparent;background-clip:content-box}
+    ::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--accent) 55%,transparent);background-clip:content-box}
+  }
+  html.f5-theme-anim,html.f5-theme-anim body,html.f5-theme-anim *,html.f5-theme-anim *::before,html.f5-theme-anim *::after{
+    transition:background .5s ease,background-color .5s ease,color .4s ease,border-color .5s ease,box-shadow .5s ease,fill .4s ease,stroke .4s ease!important}
+  /* ============================================================
+     STUFE 2 — Charakter, Tiefe & Leben
+     ============================================================ */
+  .logo,h2,h3,.affirm,.hero h2,.player .pword,.draw-face .dh,.draw-face .da,.numbig,.numday,
+  .jentry h3,.lib-item h3,.journey h3,.modal h2{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+  h2,.hero h2{font-weight:600;letter-spacing:.2px}
+  .logo{font-weight:600}
+  .affirm,.player .pword{font-weight:500}
+  .f5-tabpill{position:absolute;top:6px;left:0;height:calc(100% - 12px);border-radius:14px;
+    background:color-mix(in srgb,var(--accent) 14%,transparent);
+    transition:transform .45s var(--ease-spring),width .45s var(--ease-spring),opacity .3s;
+    z-index:0;pointer-events:none;opacity:0}
+  .tabbar button{position:relative;z-index:1}
+  .orb{position:relative}
+  .orb::before{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+    background:conic-gradient(from 0deg,transparent 0 38%,rgba(255,255,255,.22) 50%,transparent 62% 100%);
+    animation:f5orbspin 13s linear infinite}
+  @keyframes f5orbspin{to{transform:rotate(360deg)}}
+  .sound.playing{animation:f5soundpulse 2.2s ease-in-out infinite}
+  @keyframes f5soundpulse{0%,100%{box-shadow:var(--shadow-sm)}50%{box-shadow:0 0 26px rgba(160,120,200,.5)}}
+  .f5-eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;margin-right:2px}
+  .f5-eq i{width:3px;height:100%;background:#fff;border-radius:2px;transform-origin:bottom;animation:f5eq .8s ease-in-out infinite alternate}
+  .f5-eq i:nth-child(2){animation-delay:.25s}.f5-eq i:nth-child(3){animation-delay:.5s}
+  @keyframes f5eq{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+  .mood.sel{animation:f5boing .5s var(--ease-spring)}
+  @keyframes f5boing{0%{transform:scale(.85)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+  .f5-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);
+    filter:blur(.5px);pointer-events:none;animation:f5dotfloat ease-in-out infinite;z-index:0}
+  @keyframes f5dotfloat{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-16px);opacity:.8}}
+  .lib-item{content-visibility:auto;contain-intrinsic-size:1px 120px}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
+  @media (prefers-reduced-motion: reduce){
+    body::before,.logo span,.hero::after,.hero .ornament::after,.streak b,.orb,.moon-svg,
+    .orakel-card,.flip-front,.progress i::after,.pbar i::after,#klangBar,.badge.on .bi,
+    .orb::before,.sound.playing,.f5-eq i,.f5-dot,.mood.sel{animation:none!important}
+  }
+</style>
 </head>
 <body>
 <button class="corner left" id="favBtn" aria-label="Favoriten" title="Favoriten"><span class="ic-inline" data-icon="heart"></span></button>
@@ -2091,6 +2237,176 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
 function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","notes","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
 fillIcons();initCosmosBg();initParallax();initScrollProgress();startGate();
+</script>
+<script id="fable5-enhance">
+/* ============================================================
+   FABLE-5 ENHANCEMENT LAYER — Micro-Interactions & Bewegung
+   (erweitert bestehende Funktionen, ändert keine Logik)
+   ============================================================ */
+(function(){
+"use strict";
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var FINE=window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* --- Scroll-Reveal v2: mehr Elemente, native Transitions bleiben erhalten --- */
+window.applyReveal=function(scope){
+  var root=scope||document.getElementById('app');if(!root)return;
+  var ob=revealObserver();
+  var els=root.querySelectorAll('.card,.lib-item,.journey,.jentry,.stat,.section-title,.banner,.intention,.tiles .tile,.sound,.zsign,.badge,.kostag,.hero,.mood-row,.heat');
+  els.forEach(function(el,i){
+    if(el.classList.contains('reveal')||el._f5r)return;el._f5r=true;
+    el.classList.add('reveal');el.style.transitionDelay=Math.min(i*50,400)+'ms';
+    var done=function(){el.classList.remove('reveal','in');el.style.transitionDelay='';};
+    if(ob){ob.observe(el);el.addEventListener('transitionend',function h(ev){if(ev.propertyName==='opacity'){el.removeEventListener('transitionend',h);done();}});
+      setTimeout(function(){if(el.classList.contains('reveal'))done();},2600);}
+    else done();
+  });
+};
+
+/* --- Toast v2 --- */
+window.toast=function(msg){
+  var old=document.querySelector('.f5-toast');if(old)old.remove();
+  var t=document.createElement('div');t.className='f5-toast';t.setAttribute('role','status');t.textContent=msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){t.classList.add('show');});});
+  setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},400);},1800);
+};
+
+/* --- Ripple --- */
+document.addEventListener('pointerdown',function(e){
+  if(REDUCED)return;
+  var el=e.target.closest&&e.target.closest('.btn,.tile,.sound,.zsign,.mood,.kt-item,.tabbar button,.nav-top button,.filters button,.style-chips button,.banner button,.install-banner button,.comp-pick');
+  if(!el)return;
+  var r=el.getBoundingClientRect();var d=Math.max(r.width,r.height);
+  var s=document.createElement('span');s.className='f5-ripple';
+  s.style.width=s.style.height=d+'px';
+  s.style.left=(e.clientX-r.left-d/2)+'px';s.style.top=(e.clientY-r.top-d/2)+'px';
+  el.appendChild(s);setTimeout(function(){s.remove();},600);
+},{passive:true});
+
+/* --- 3D-Tilt (Desktop) --- */
+if(FINE&&!REDUCED){
+  var tiltSel='.orakel-card,.flip3d,.draw-card,.c3d-item.center .c3d-card';
+  document.addEventListener('pointerover',function(e){
+    var el=e.target.closest&&e.target.closest(tiltSel);
+    if(!el||el._f5tilt)return;el._f5tilt=true;
+    var move=function(ev){
+      var r=el.getBoundingClientRect();
+      var x=(ev.clientX-r.left)/r.width-0.5, y=(ev.clientY-r.top)/r.height-0.5;
+      el.style.transform='perspective(900px) rotateY('+(x*10).toFixed(2)+'deg) rotateX('+(-y*10).toFixed(2)+'deg) translateZ(6px)';
+      el.style.transition='transform .08s linear';
+    };
+    var leave=function(){
+      el.style.transition='transform .5s cubic-bezier(.22,.61,.36,1)';
+      el.style.transform='';
+      el.removeEventListener('pointermove',move);el.removeEventListener('pointerleave',leave);
+      el._f5tilt=false;
+    };
+    el.addEventListener('pointermove',move);el.addEventListener('pointerleave',leave);
+  });
+}
+
+/* --- Count-Up für Statistik-Zahlen --- */
+function f5CountUp(root){
+  if(REDUCED)return;
+  (root||document).querySelectorAll('.stat .num').forEach(function(el){
+    if(el._f5c)return;var txt=el.textContent.trim();
+    if(!/^\d{1,4}$/.test(txt))return;var target=parseInt(txt,10);
+    if(target<=1){el._f5c=true;return;}
+    el._f5c=true;var t0=null,dur=Math.min(500+target*24,1100);
+    el.textContent='0';
+    var step=function(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      el.textContent=String(Math.round(target*eased));
+      if(p<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step);
+  });
+}
+
+/* --- Sparkle-Burst bei Abschlüssen --- */
+function f5Burst(){
+  if(REDUCED)return;
+  var syms=['✦','✧','✨','·'];
+  var cx=window.innerWidth/2,cy=window.innerHeight*0.62;
+  for(var i=0;i<14;i++){
+    var s=document.createElement('span');s.className='f5-spark';
+    s.textContent=syms[i%syms.length];
+    s.style.left=cx+'px';s.style.top=cy+'px';
+    s.style.fontSize=(11+Math.random()*14)+'px';
+    document.body.appendChild(s);
+    var ang=Math.random()*Math.PI*2,dist=60+Math.random()*110;
+    var dx=Math.cos(ang)*dist,dy=Math.sin(ang)*dist-40;
+    try{
+      s.animate([
+        {transform:'translate(-50%,-50%) scale(.4) rotate(0deg)',opacity:1},
+        {transform:'translate(calc(-50% + '+dx.toFixed(0)+'px), calc(-50% + '+dy.toFixed(0)+'px)) scale(1.15) rotate('+((Math.random()*160-80).toFixed(0))+'deg)',opacity:0}
+      ],{duration:750+Math.random()*450,easing:'cubic-bezier(.22,.61,.36,1)',fill:'forwards'});
+    }catch(e){}
+    (function(sp){setTimeout(function(){sp.remove();},1300);})(s);
+  }
+}
+var _mp=window.markPractice;window.markPractice=function(msg){_mp(msg);f5Burst();};
+var _md=window.markDone;window.markDone=function(msg){_md(msg);f5Burst();};
+
+/* --- Theme-Wechsel weich überblenden + Browserleisten-Farbe --- */
+var _at=window.applyTheme;window.applyTheme=function(t){
+  var h=document.documentElement;h.classList.add('f5-theme-anim');
+  _at(t);
+  document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){
+    m.setAttribute('content',t==='dark'?'#1b1722':'#f4ede7');});
+  clearTimeout(window._f5tt);window._f5tt=setTimeout(function(){h.classList.remove('f5-theme-anim');},600);
+};
+
+/* --- Gleitende Tab-Pille --- */
+var tb=document.getElementById('tabbar'),pill=null;
+function updPill(){if(!tb)return;var act=tb.querySelector('button.active');
+  if(!pill){pill=document.createElement('span');pill.className='f5-tabpill';tb.insertBefore(pill,tb.firstChild);}
+  if(!act){pill.style.opacity='0';return;}
+  pill.style.opacity='1';pill.style.width=act.offsetWidth+'px';
+  pill.style.transform='translateX('+act.offsetLeft+'px)';}
+window.addEventListener('resize',function(){updPill();},{passive:true});
+
+/* --- Schwebende Lichtpunkte in Heros --- */
+function heroDots(){if(REDUCED)return;
+  document.querySelectorAll('#app .hero').forEach(function(h){if(h._f5d)return;h._f5d=true;
+    for(var i=0;i<4;i++){var d=document.createElement('span');d.className='f5-dot';
+      d.style.left=(10+Math.random()*80).toFixed(1)+'%';d.style.top=(15+Math.random()*70).toFixed(1)+'%';
+      d.style.animationDuration=(5+Math.random()*5).toFixed(1)+'s';
+      d.style.animationDelay=(-Math.random()*6).toFixed(1)+'s';
+      h.appendChild(d);}});}
+
+/* --- Equalizer in der Klangleiste --- */
+var _ukb=window.updateKlangBar;window.updateKlangBar=function(){_ukb();
+  var bar=document.getElementById('klangBar');if(!bar)return;
+  var eq=bar.querySelector('.f5-eq');
+  if(bar.style.display!=='none'&&!eq&&!REDUCED){
+    eq=document.createElement('span');eq.className='f5-eq';eq.innerHTML='<i></i><i></i><i></i>';
+    bar.insertBefore(eq,bar.firstChild);}
+  if(bar.style.display==='none'&&eq)eq.remove();};
+
+/* --- View-Transition-Crossfade + sanfte Haptik + Hooks --- */
+var _r=window.render;
+window.render=function(v){
+  var changed=false;try{changed=(v!==current);}catch(e){}
+  var go=function(){_r(v);f5CountUp(document.getElementById('app'));updPill();heroDots();};
+  if(changed&&!REDUCED&&navigator.vibrate){try{navigator.vibrate(6);}catch(e){}}
+  if(changed&&!REDUCED&&document.startViewTransition){try{document.startViewTransition(go);}catch(e){go();}}
+  else go();
+};
+
+/* --- Maus-Parallax für kosmische Symbole (Desktop) --- */
+if(FINE&&!REDUCED){
+  var bg=document.getElementById('cosmosBg'),_pTick=false,_mx=0,_my=0;
+  document.addEventListener('pointermove',function(e){
+    _mx=(e.clientX/window.innerWidth-.5)*14;_my=(e.clientY/window.innerHeight-.5)*10;
+    if(!_pTick){_pTick=true;requestAnimationFrame(function(){
+      if(bg)bg.style.transform='translate('+_mx.toFixed(1)+'px,'+_my.toFixed(1)+'px)';_pTick=false;});}
+  },{passive:true});
+}
+
+/* --- Initial --- */
+f5CountUp(document.getElementById('app'));updPill();heroDots();
+})();
 </script>
 
 
