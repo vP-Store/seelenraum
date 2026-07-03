@@ -897,6 +897,32 @@
     filter:blur(.5px);pointer-events:none;animation:f5dotfloat ease-in-out infinite;z-index:0}
   @keyframes f5dotfloat{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-16px);opacity:.8}}
   .lib-item{content-visibility:auto;contain-intrinsic-size:1px 120px}
+  /* ===== STUFE 4 — Tagebuch, Fokus-Schreiben, Karussell-Tiefe ===== */
+  .tb-meta{display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;letter-spacing:.5px;color:var(--ink-fade);margin-top:8px;min-height:14px}
+  header,.nav-top,#cosmosBg,.companion,footer,.tabbar,#toTop,.section-title,.jentry,.hero,#scrollProg{transition:opacity .6s ease}
+  body.f5-write header,body.f5-write .nav-top,body.f5-write #cosmosBg,body.f5-write .companion,
+  body.f5-write .comp-bubble,body.f5-write footer,body.f5-write .tabbar,body.f5-write #toTop,
+  body.f5-write .section-title,body.f5-write .jentry,body.f5-write .hero,body.f5-write #scrollProg,
+  body.f5-write .style-chips{opacity:.15}
+  body.f5-write .card:focus-within{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent),0 24px 60px rgba(40,25,70,.35)}
+  .c3d-card{transition:filter .45s ease}
+  .c3d-item:not(.center) .c3d-card{filter:blur(1.1px) saturate(.75) brightness(.85)}
+  .c3d-item.center .c3d-card{filter:none}
+  .f5-shoot{position:fixed;z-index:1;pointer-events:none;width:74px;height:1.5px;border-radius:2px;
+    background:linear-gradient(270deg,rgba(255,255,255,.95),transparent);opacity:0;
+    filter:drop-shadow(0 0 4px rgba(255,255,255,.7))}
+  @media (prefers-reduced-motion: reduce){.f5-shoot{display:none}}
+  /* ===== STUFE 5 — Persönlicher Faden ===== */
+  .f5-resume{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);
+    border:1px solid var(--line);border-radius:18px;padding:13px 18px;margin:14px 0;box-shadow:var(--shadow-sm);
+    cursor:pointer;font-size:15px;transition:transform .25s var(--ease-spring),box-shadow .3s,border-color .25s}
+  .f5-resume:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--accent)}
+  .f5-resume .fr-l{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .f5-week-row{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:6px}
+  .f5-week-item{flex:1;min-width:90px;text-align:center}
+  .f5-week-num{font-size:26px;color:var(--accent-deep)}
+  .f5-week-lbl{font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-fade);margin-top:2px}
+  .btn.gold.f5-ready{animation:f5pulse 2.4s ease-in-out infinite}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
   @media (prefers-reduced-motion: reduce){
     body::before,.logo span,.hero::after,.hero .ornament::after,.streak b,.orb,.moon-svg,
@@ -1277,22 +1303,41 @@ const JOURNAL_PROMPTS=[
 let tbPromptIdx=Math.floor((heute-new Date(heute.getFullYear(),0,0))/86400000)%JOURNAL_PROMPTS.length;
 let tbDraft="";
 function tbNewPrompt(){const el=document.getElementById('tbText');if(el)tbDraft=el.value;tbPromptIdx=(tbPromptIdx+1)%JOURNAL_PROMPTS.length;render('tagebuch');}
-function tbSaveDraft(v){tbDraft=v;}
-function saveFreeEntry(){const el=document.getElementById('tbText');if(!el||!el.value.trim()){toast("Schreib zuerst etwas ✦");return;}state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:JOURNAL_PROMPTS[tbPromptIdx],text:el.value.trim()});store.set("freejournal",state.freejournal);tbDraft="";markPractice("Eintrag gespeichert ✦");render('tagebuch');}
+let tbFilter="alle",tbSearch="";
+function tbSearchIn(v){tbSearch=v;render('tagebuch');const el=document.getElementById('tbSearch');if(el){el.focus();try{el.setSelectionRange(el.value.length,el.value.length);}catch(e){}}}
+function tbMode(){return store.get("tbMode","impuls");}
+function setTbMode(m){const el=document.getElementById('tbText');if(el)tbDraft=el.value;store.set("tbMode",m);render('tagebuch');}
+function setTbFilter(f){tbFilter=f;render('tagebuch');}
+function tbCountTxt(v){const w=(String(v||"").trim().match(/\S+/g)||[]).length;return w===0?"":w+(w===1?" Wort":" Wörter");}
+function tbSaveDraft(v){tbDraft=v;const c=document.getElementById('tbCount');if(c)c.textContent=tbCountTxt(v);}
+function saveFreeEntry(){const el=document.getElementById('tbText');if(!el||!el.value.trim()){toast("Schreib zuerst etwas ✦");return;}state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:(tbMode()==='frei'?null:JOURNAL_PROMPTS[tbPromptIdx]),text:el.value.trim()});store.set("freejournal",state.freejournal);tbDraft="";markPractice("Eintrag gespeichert ✦");render('tagebuch');}
 function deleteFreeEntry(id){if(!confirm("Diesen Eintrag löschen?"))return;state.freejournal=state.freejournal.filter(e=>e.id!==id);store.set("freejournal",state.freejournal);render('tagebuch');}
 function viewTagebuch(){
   const impEntries=Object.keys(state.journal).map(id=>({kind:'imp',id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp);
   const freeEntries=(state.freejournal||[]).map(e=>({kind:'free',id:e.id,text:e.text,ts:e.ts,prompt:e.prompt}));
-  const entries=[...impEntries,...freeEntries].sort((a,b)=>b.ts-a.ts);
+  let entries=[...impEntries,...freeEntries].sort((a,b)=>b.ts-a.ts);
   const total=entries.length;
+  const mode=tbMode();
+  if(tbFilter==='imp')entries=entries.filter(e=>e.kind==='imp');
+  else if(tbFilter==='frei')entries=entries.filter(e=>e.kind==='free');
+  if(tbSearch.trim()){const q=tbSearch.trim().toLowerCase();entries=entries.filter(e=>(e.text||'').toLowerCase().includes(q)||(e.imp&&(e.imp.titel+' '+e.imp.thema).toLowerCase().includes(q))||(e.prompt||'').toLowerCase().includes(q));}
   let html=`<div class="view sec-praxis"><div class="hero hero-tagebuch"><div class="ornament"></div><div class="he">Nur für dich</div><h2>Tagebuch</h2><p>${total} ${total===1?'Eintrag':'Einträge'} · lokal & privat gespeichert</p></div>`;
-  html+=`<div class="card"><div class="block-label">Schreibimpuls</div><div style="font-style:italic;color:var(--accent-deep);font-size:16px;margin-bottom:4px">${JOURNAL_PROMPTS[tbPromptIdx]}</div><button class="ie" style="margin-bottom:10px" onclick="tbNewPrompt()">anderer Impuls ↻</button><textarea class="journal" id="tbText" placeholder="Schreib frei, was in dir aufkommt …" oninput="tbSaveDraft(this.value)">${escHtml(tbDraft)}</textarea><div class="actions"><button class="btn gold" onclick="saveFreeEntry()">Eintrag speichern ✦</button></div></div>`;
+  html+=`<div class="card" id="tbCard">`;
+  html+=`<div class="style-chips" style="justify-content:flex-start;margin-bottom:16px"><button class="${mode==='impuls'?'active':''}" onclick="setTbMode('impuls')">✧ Mit Impuls</button><button class="${mode==='frei'?'active':''}" onclick="setTbMode('frei')">Frei schreiben</button></div>`;
+  if(mode==='impuls'){html+=`<div class="block-label">Schreibimpuls</div><div style="font-style:italic;color:var(--accent-deep);font-size:16px;margin-bottom:4px">${JOURNAL_PROMPTS[tbPromptIdx]}</div><button class="ie" style="margin-bottom:10px" onclick="tbNewPrompt()">anderer Impuls ↻</button>`;}
+  html+=`<textarea class="journal" id="tbText" style="min-height:${mode==='frei'?'180':'88'}px" placeholder="${mode==='frei'?'Dein Raum. Keine Vorgaben – schreib einfach, was da ist …':'Schreib frei, was in dir aufkommt …'}" oninput="tbSaveDraft(this.value)">${escHtml(tbDraft)}</textarea>`;
+  html+=`<div class="tb-meta"><span id="tbCount">${tbCountTxt(tbDraft)}</span><span>${heute.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'})}</span></div>`;
+  html+=`<div class="actions"><button class="btn gold" onclick="saveFreeEntry()">Eintrag speichern ✦</button></div></div>`;
   html+=`<div class="section-title" style="margin-top:18px">Deine Einträge</div>`;
-  if(!total)html+=`<div class="empty">Noch keine Einträge.<br>Schreib oben zu einem Impuls – oder notiere bei einem Tages-Impuls etwas im Tagebuch-Feld.</div>`;
+  if(total>3)html+=`<input class="search" id="tbSearch" placeholder="Einträge durchsuchen …" value="${escAttr(tbSearch)}" oninput="tbSearchIn(this.value)">`;
+  if(total>0)html+=`<div class="style-chips" style="margin:2px 0 6px"><button class="${tbFilter==='alle'?'active':''}" onclick="setTbFilter('alle')">Alle</button><button class="${tbFilter==='imp'?'active':''}" onclick="setTbFilter('imp')">Zu Impulsen</button><button class="${tbFilter==='frei'?'active':''}" onclick="setTbFilter('frei')">Eigene</button></div>`;
+  if(!total)html+=`<div class="empty">${mode==='frei'?'Noch keine Einträge.<br>Dies ist dein stiller Ort. Der erste Satz darf klein sein.':'Noch keine Einträge.<br>Schreib oben zu einem Impuls – oder notiere bei einem Tages-Impuls etwas im Tagebuch-Feld.'}</div>`;
+  else if(!entries.length)html+=`<div class="empty">In dieser Ansicht ist nichts – wechsle oben den Filter.</div>`;
   else html+=entries.map(e=>e.kind==='imp'
     ?`<div class="jentry"><div class="je-top"><span class="je-theme">${e.imp.thema}</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div><h3>${e.imp.titel}</h3><div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">„${e.imp.affirmation}"</div><div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="openImpuls('${e.id}')">öffnen</button> &nbsp; <button class="je-del" onclick="deleteJournal('${e.id}')">löschen</button></div>`
     :`<div class="jentry"><div class="je-top"><span class="je-theme">Eigener Eintrag</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div>${e.prompt?`<div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">${e.prompt}</div>`:''}<div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="deleteFreeEntry('${e.id}')">löschen</button></div>`
   ).join('');
+  if(total>0)html+=`<div class="actions" style="margin-top:14px"><button class="btn" onclick="exportJournal()">Alle Einträge exportieren ⇩</button></div>`;
   return html+`</div>`;}
 function milestonesHtml(){const d=state.days.length,st=computeLongest(state.days),notes=Object.keys(state.journal).length+(state.freejournal?state.freejournal.length:0),rd=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length,fav=state.favs.length;
   const M=[{on:d>=1,i:"✦",n:"Erster Tag"},{on:d>=3,i:"✦",n:"3 Tage"},{on:st>=7,i:"✶",n:"7 Tage Serie"},{on:st>=14,i:"✷",n:"14 Tage Serie"},{on:d>=30,i:"❂",n:"30 Praxis-Tage"},{on:d>=100,i:"☀",n:"100 Tage"},{on:notes>=1,i:"✎",n:"Erstes Tagebuch"},{on:notes>=10,i:"❖",n:"10 Einträge"},{on:rd>=1,i:"➶",n:"Erste Reise"},{on:fav>=10,i:"♥",n:"10 Favoriten"}];
@@ -1806,9 +1851,12 @@ function openSettings(){const bd=store.get("birthdate","");const ov=document.cre
   document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
 function saveSettings(){const n=document.getElementById('setName'),b=document.getElementById('setBd');if(n)state.name=n.value.trim();store.set("name",state.name);if(b&&b.value)store.set("birthdate",b.value);const ov=document.querySelector('.overlay');if(ov)ov.remove();updateHeader();toast("Gespeichert ✦");render('heute');}
 function toggleThemeBtn(){const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";store.set("theme",cur);applyTheme(cur);}
-function exportJournal(){const entries=Object.keys(state.journal).map(id=>({id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp).sort((a,b)=>b.ts-a.ts);
+function exportJournal(){
+  const impE=Object.keys(state.journal).map(id=>({text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp);
+  const freeE=(state.freejournal||[]).map(e=>({text:e.text,ts:e.ts,prompt:e.prompt}));
+  const entries=[...impE,...freeE].sort((a,b)=>b.ts-a.ts);
   if(!entries.length){toast("Noch keine Einträge");return;}
-  let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+"  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\"\n"+e.text+"\n\n";});
+  let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+(e.imp?("  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\""):(e.prompt?("  —  "+e.prompt):"  —  Freier Eintrag"))+"\n"+e.text+"\n\n";});
   const a=document.createElement('a');a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(txt);a.download="seelenraum-tagebuch.txt";document.body.appendChild(a);a.click();a.remove();toast("Tagebuch exportiert ✦");}
 /* ===== Nach-oben-Button ===== */
 /* ===== CHINESISCHE TIERZEICHEN ===== */
@@ -2398,8 +2446,86 @@ if(FINE&&!REDUCED){
   },{passive:true});
 }
 
+/* --- Fokus-Schreiben: beim Schreiben tritt alles andere zurück --- */
+document.addEventListener('focusin',function(e){
+  if(e.target&&e.target.classList&&e.target.classList.contains('journal'))document.body.classList.add('f5-write');
+});
+document.addEventListener('focusout',function(e){
+  if(e.target&&e.target.classList&&e.target.classList.contains('journal'))
+    setTimeout(function(){var a=document.activeElement;
+      if(!a||!a.classList||!a.classList.contains('journal'))document.body.classList.remove('f5-write');},120);
+});
+
+/* --- Sternschnuppen: selten, leise, nur ohne Reduced-Motion --- */
+if(!REDUCED){(function shoot(){
+  setTimeout(function(){
+    if(document.hidden){shoot();return;}
+    var s=document.createElement('span');s.className='f5-shoot';
+    s.style.left=(25+Math.random()*55)+'%';s.style.top=(8+Math.random()*30)+'%';
+    document.body.appendChild(s);
+    try{s.animate([
+      {transform:'translate(0,0) rotate(150deg)',opacity:0},
+      {opacity:.9,offset:.15},
+      {transform:'translate(-260px,150px) rotate(150deg)',opacity:0}
+    ],{duration:1300,easing:'ease-out'});}catch(e){}
+    setTimeout(function(){s.remove();},1400);
+    shoot();
+  },16000+Math.random()*20000);
+})();}
+
 /* --- Initial --- */
 f5CountUp(document.getElementById('app'));updPill();heroDots();
+})();
+/* ============================================================
+   STUFE 5 — Persönlicher Faden: Weitermachen, Wochen-Rückblick
+   ============================================================ */
+(function(){
+"use strict";
+var LABELS={meditationen:'Meditationen',atem:'Atempausen',rituale:'Rituale',klang:'Klangraum',reisen:'Reisen',mond:'Mondkalender',astro:'Astrologie',num:'Numerologie',mani:'Manifestation',chakra:'Chakren',kristalle:'Kristalle',engel:'Engelszahlen',tier:'Krafttiere',wissen:'Wissen',china:'Chinesische Tierzeichen',orakel:'Orakel',tagebuch:'Tagebuch',impulse:'Impulse'};
+function week(){
+  var out={days:0,entries:0,moods:[]};var now=Date.now();
+  for(var i=0;i<7;i++){var d=new Date();d.setDate(d.getDate()-i);var k=d.toISOString().slice(0,10);
+    if(state.days&&state.days.indexOf(k)>=0)out.days++;
+    if(state.moods&&state.moods[k]!==undefined)out.moods.push(state.moods[k]);}
+  var cnt=0;
+  Object.keys(state.journal||{}).forEach(function(id){if(now-state.journal[id].ts<7*86400000)cnt++;});
+  (state.freejournal||[]).forEach(function(e){if(now-e.ts<7*86400000)cnt++;});
+  out.entries=cnt;return out;
+}
+function decorate(v){
+  var app=document.getElementById('app');if(!app)return;
+  if(LABELS[v])store.set('lastSection',v);
+  var view=app.querySelector('.view')||app;
+  if(v==='heute'){
+    var last=store.get('lastSection',null);
+    if(last&&LABELS[last]&&!document.getElementById('f5Resume')){
+      var el=document.createElement('div');el.id='f5Resume';el.className='f5-resume';
+      el.innerHTML='<span><span class="fr-l">Weitermachen</span><br>'+LABELS[last]+'</span><span style="color:var(--accent-deep);font-size:20px">→</span>';
+      el.addEventListener('click',function(){render(last);});
+      var ref=view.children[1]||null;view.insertBefore(el,ref);
+    }
+  }
+  if(v==='weg'&&!document.getElementById('f5Week')){
+    var w=week();
+    var moodTxt=w.moods.length?(function(){var a=w.moods.reduce(function(x,y){return x+y;},0)/w.moods.length;return a>=3?'hell ☀':a>=1.8?'gemischt ☁':'sanft & leise ☾';})():'–';
+    var c=document.createElement('div');c.id='f5Week';c.className='card';
+    c.innerHTML='<div class="block-label">Deine letzte Woche</div><div class="f5-week-row">'
+      +'<div class="f5-week-item"><div class="f5-week-num">'+w.days+'</div><div class="f5-week-lbl">Praxis-Tage</div></div>'
+      +'<div class="f5-week-item"><div class="f5-week-num">'+w.entries+'</div><div class="f5-week-lbl">Einträge</div></div>'
+      +'<div class="f5-week-item"><div class="f5-week-num" style="font-size:18px;line-height:1.7">'+moodTxt+'</div><div class="f5-week-lbl">Stimmung</div></div></div>';
+    var hero=view.querySelector('.hero');
+    if(hero&&hero.parentNode)hero.parentNode.insertBefore(c,hero.nextSibling);
+    else view.insertBefore(c,view.children[1]||null);
+  }
+}
+var _r5=window.render;window.render=function(v){_r5(v);try{decorate(v);}catch(e){}};
+document.addEventListener('input',function(e){
+  if(e.target&&e.target.id==='tbText'){
+    var card=e.target.closest('.card');if(!card)return;
+    var b=card.querySelector('.btn.gold');if(b)b.classList.toggle('f5-ready',e.target.value.trim().length>0);
+  }
+});
+try{decorate(current);}catch(e){}
 })();
 </script>
 
