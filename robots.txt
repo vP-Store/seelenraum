@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /seelenraum-app.html
+Disallow: /willkommen.html
