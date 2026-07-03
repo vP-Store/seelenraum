@@ -2822,6 +2822,40 @@ function f5pDecorate(v){
 var _rp=window.render;window.render=function(v){_rp(v);
   var run=function(){try{f5pDecorate(v);}catch(e){}};
   run();setTimeout(run,150);setTimeout(run,550);};
+
+/* ---------- Seelen-Sicherung: Export / Import (Datenverlust-Schutz) ---------- */
+window.f5pBackup=function(){
+  var data={};for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+    if(k&&k.indexOf('sr_')===0)data[k]=localStorage.getItem(k);}
+  var blob=new Blob([JSON.stringify({app:'seelenraum',version:1,ts:Date.now(),data:data},null,1)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='seelenraum-sicherung-'+todayKey+'.json';document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},400);
+  toast('Sicherung gespeichert ✦');};
+window.f5pRestoreFile=function(inp){
+  var f=inp.files&&inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){try{
+    var j=JSON.parse(r.result);
+    if(!j||j.app!=='seelenraum'||!j.data){toast('Keine gültige Sicherung');return;}
+    if(!confirm('Sicherung einspielen? Deine aktuellen Daten auf diesem Gerät werden dabei ersetzt.'))return;
+    Object.keys(j.data).forEach(function(k){if(k.indexOf('sr_')===0)localStorage.setItem(k,j.data[k]);});
+    location.reload();
+  }catch(e){toast('Datei konnte nicht gelesen werden');}};
+  r.readAsText(f);};
+var _os=window.openSettings;window.openSettings=function(){_os();
+  setTimeout(function(){
+    var m=document.querySelector('.overlay .modal');
+    if(!m||document.getElementById('f5pBk'))return;
+    var d=document.createElement('div');d.id='f5pBk';
+    d.innerHTML='<div style="border-top:1px solid var(--line);margin:16px 0 12px"></div>'
+      +'<div class="block-label" style="margin:0 0 8px">Seelen-Sicherung</div>'
+      +'<div style="font-size:13px;color:var(--ink-soft);margin-bottom:10px">Dein Tagebuch lebt nur auf diesem Gerät. Sichere es regelmäßig als Datei – und spiele es auf einem neuen Gerät wieder ein.</div>'
+      +'<button class="btn" style="width:100%;margin-bottom:8px" onclick="f5pBackup()">Sicherung herunterladen ⇩</button>'
+      +'<label class="btn" style="width:100%;display:block;box-sizing:border-box;cursor:pointer;text-align:center">Sicherung einspielen ⇪<input type="file" accept="application/json,.json" style="display:none" onchange="f5pRestoreFile(this)"></label>';
+    m.appendChild(d);
+  },80);};
+
 try{f5pDecorate(current);}catch(e){}
 })();
 </script>
