@@ -1,7 +1,7 @@
 /* Seelenraum Service Worker — Offline-Fähigkeit & Installierbarkeit
    Hinweis: Bei jedem inhaltlichen Update der App die CACHE-Version
    erhöhen (z. B. v1 -> v2), damit Mitglieder die neue Version sehen. */
-const CACHE = "seelenraum-v23";
+const CACHE = "seelenraum-v24";
 const ASSETS = [
   "seelenraum-app.html",
   "manifest.webmanifest",
@@ -11,7 +11,12 @@ const ASSETS = [
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(
+    caches.open(CACHE)
+      .then((c) => c.addAll(ASSETS))
+      .catch(() => {})
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", (e) => {
@@ -22,10 +27,22 @@ self.addEventListener("activate", (e) => {
   );
 });
 
+/* Stale-while-revalidate: sofort aus dem Cache antworten,
+   im Hintergrund frisch laden und Cache erneuern. */
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
+  const url = new URL(e.request.url);
+  if (url.origin !== self.location.origin) return;
   e.respondWith(
     caches.match(e.request).then((cached) => {
       const live = fetch(e.request).then((res) => {
         if (res && res.status === 200 && res.type === "basic") {
- 
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(e.request, copy));
+        }
+        return res;
+      }).catch(() => cached);
+      return cached || live;
+    })
+  );
+});
