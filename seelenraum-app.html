@@ -2566,7 +2566,9 @@ function decorate(v){
     else view.insertBefore(c,view.children[1]||null);
   }
 }
-var _r5=window.render;window.render=function(v){_r5(v);try{decorate(v);}catch(e){}};
+var _r5=window.render;window.render=function(v){_r5(v);
+  var run=function(){try{decorate(v);}catch(e){}};
+  run();setTimeout(run,150);setTimeout(run,550);};
 document.addEventListener('input',function(e){
   if(e.target&&e.target.id==='tbText'){
     var card=e.target.closest('.card');if(!card)return;
@@ -2817,7 +2819,9 @@ function f5pDecorate(v){
     var mini=document.getElementById('f5pMini');if(mini)f5pDraw(mini.getContext('2d'),220);}
   if(v==='mandala')f5pPaint('f5pCanvas');
 }
-var _rp=window.render;window.render=function(v){_rp(v);try{f5pDecorate(v);}catch(e){}};
+var _rp=window.render;window.render=function(v){_rp(v);
+  var run=function(){try{f5pDecorate(v);}catch(e){}};
+  run();setTimeout(run,150);setTimeout(run,550);};
 try{f5pDecorate(current);}catch(e){}
 })();
 </script>
