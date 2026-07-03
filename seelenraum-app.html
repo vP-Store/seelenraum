@@ -2432,7 +2432,12 @@ window.render=function(v){
   var changed=false;try{changed=(v!==current);}catch(e){}
   var go=function(){_r(v);f5CountUp(document.getElementById('app'));updPill();heroDots();setTimeout(updPill,400);};
   if(changed&&!REDUCED&&navigator.vibrate){try{navigator.vibrate(6);}catch(e){}}
-  if(changed&&!REDUCED&&document.startViewTransition){try{document.startViewTransition(go);}catch(e){go();}}
+  if(changed&&!REDUCED&&document.startViewTransition){
+    try{var _vt=document.startViewTransition(go);
+      if(_vt){if(_vt.finished&&_vt.finished.catch)_vt.finished.catch(function(){});
+        if(_vt.ready&&_vt.ready.catch)_vt.ready.catch(function(){});
+        if(_vt.updateCallbackDone&&_vt.updateCallbackDone.catch)_vt.updateCallbackDone.catch(function(){});}
+    }catch(e){go();}}
   else go();
 };
 
