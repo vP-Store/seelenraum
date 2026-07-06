@@ -1,7 +1,7 @@
 /* Seelenraum Service Worker — Offline-Fähigkeit & Installierbarkeit
    Hinweis: Bei jedem inhaltlichen Update der App die CACHE-Version
    erhöhen (z. B. v1 -> v2), damit Mitglieder die neue Version sehen. */
-const CACHE = "seelenraum-v26";
+const CACHE = "seelenraum-v27";
 const ASSETS = [
   "seelenraum-app.html",
   "manifest.webmanifest",
@@ -34,16 +34,17 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
+  // Network-first: immer die aktuelle Version vom Server holen, wenn online.
+  // Nur offline (kein Netz) greift der Cache als Fallback. So sehen Besucher
+  // sofort neue Inhalte, statt eine veraltete zwischengespeicherte Version
+  // zu bekommen, die erst beim übernächsten Laden aktualisiert würde.
   e.respondWith(
-    caches.match(e.request).then((cached) => {
-      const live = fetch(e.request).then((res) => {
-        if (res && res.status === 200 && res.type === "basic") {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, copy));
-        }
-        return res;
-      }).catch(() => cached);
-      return cached || live;
-    })
+    fetch(e.request).then((res) => {
+      if (res && res.status === 200 && res.type === "basic") {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy));
+      }
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });
