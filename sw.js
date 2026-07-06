@@ -7,16 +7,21 @@ const ASSETS = [
   "manifest.webmanifest",
   "icon-192.png",
   "icon-512.png",
-  "apple-touch-icon.png"
+  "apple-touch-icon.png",
+  "tier-wolf.png",
+  "tier-eule.png",
+  "tier-hirsch.png",
+  "tier-schmetterling.png",
+  "tier-baer.png",
+  "tier-rabe.png",
+  "tier-schwan.png",
+  "tier-pferd.png",
+  "tier-fuchs.png",
+  "tier-katze.png"
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(CACHE)
-      .then((c) => c.addAll(ASSETS))
-      .catch(() => {})
-      .then(() => self.skipWaiting())
-  );
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (e) => {
@@ -27,12 +32,8 @@ self.addEventListener("activate", (e) => {
   );
 });
 
-/* Stale-while-revalidate: sofort aus dem Cache antworten,
-   im Hintergrund frisch laden und Cache erneuern. */
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
-  const url = new URL(e.request.url);
-  if (url.origin !== self.location.origin) return;
   e.respondWith(
     caches.match(e.request).then((cached) => {
       const live = fetch(e.request).then((res) => {

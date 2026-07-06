@@ -1,5 +1,14 @@
+<!--
+  ============================================================
+  SEELENRAUM  —  Membership-App  (Welt-Version)
+  Bereiche: Heute · Impulse · Praxis (Meditationen, Atem,
+  Rituale, Klangraum, Reisen) · Mond · Tagebuch · Mein Weg
+  Inhalte unten in den const-Arrays pflegbar.
+  ============================================================
+-->
 <!DOCTYPE html>
-<html lang="de"><head><script>window.__resources = {"bg_inneres_kind": "bg_inneres_kind.jpg", "bg_atempause": "bg_atempause.jpg", "bg_kristalle": "bg_kristalle.jpg", "bg_affirmationen": "bg_affirmationen.jpg", "bg_traumdeutung": "bg_traumdeutung.jpg", "bg_klangraum": "bg_klangraum.jpg", "bg_dankbarkeit": "bg_dankbarkeit.jpg", "tier_schmetterling": "tier_schmetterling.png", "tier_hirsch": "tier_hirsch.png", "bg_astrologie": "bg_astrologie.jpg", "bg_intuition": "bg_intuition.jpg", "bg_reinigung": "bg_reinigung.jpg", "bg_selbstliebe": "bg_selbstliebe.jpg", "bg_rituale": "bg_rituale.jpg", "bg_numerologie": "bg_numerologie.jpg", "bg_schattenarbeit": "bg_schattenarbeit.jpg", "bg_krafttiere": "bg_krafttiere.jpg", "bg_engelszahlen": "bg_engelszahlen.jpg", "bg_mond": "bg_mond.jpg", "bg_meditationen": "bg_meditationen.jpg", "bg_tarot": "bg_tarot.jpg", "bg_chakren": "bg_chakren.jpg", "bg_vergebung": "bg_vergebung.jpg", "tier_pferd": "tier_pferd.png", "tier_fuchs": "tier_fuchs.png", "bg_seelenplan": "bg_seelenplan.jpg", "tier_eule": "tier_eule.png", "bg_manifestation": "bg_manifestation.jpg", "bg_wissen": "bg_wissen.jpg", "bg_reisen": "bg_reisen.jpg", "bg_akasha": "bg_akasha.jpg", "tier_baer": "tier_baer.png", "tier_rabe": "tier_rabe.png", "tier_wolf": "tier_wolf.png", "tier_katze": "tier_katze.png", "tier_schwan": "tier_schwan.png"};</script>
+<html lang="de">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Seelenraum — deine tägliche Praxis</title>
@@ -11,156 +20,11 @@
 <meta name="apple-mobile-web-app-title" content="Seelenraum">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="483446ed.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23cdb4e6'/%3E%3Cstop offset='1' stop-color='%238a76a8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%23fff' stroke-opacity='.85' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<style>/* latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("5b9519aa.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("81d62211.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("5b9519aa.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("81d62211.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("5b9519aa.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("81d62211.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("5b9519aa.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("81d62211.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("788a181d.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("5a8eff92.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("51af4939.woff2") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("b83a4084.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23cdb4e6'/%3E%3Cstop offset='1' stop-color='%238a76a8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%23fff' stroke-opacity='.85' stroke-width='2'/%3E%3C/svg%3E">
 <style>
   :root{
     --ink:#3b333f;--ink-soft:#6f6678;--ink-fade:#9a90a2;
@@ -397,20 +261,20 @@
   .hero-bereich{background-size:cover;background-position:center;position:relative;color:#fff}
   .hero-bereich::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,15,35,.30),rgba(20,15,35,.74));border-radius:24px}
   .hero-bereich>*{position:relative;z-index:1}
-  .hero-med{background:linear-gradient(rgba(30,22,55,.45),rgba(30,22,55,.72)),url("bg_meditationen.jpg") center/cover}
-  .hero-atem{background:linear-gradient(rgba(20,45,45,.45),rgba(20,45,45,.72)),url("bg_atempause.jpg") center/cover}
-  .hero-ritual{background:linear-gradient(rgba(55,35,20,.45),rgba(55,35,20,.72)),url("bg_rituale.jpg") center/cover}
-  .hero-klang{background:linear-gradient(rgba(55,25,45,.45),rgba(55,25,45,.72)),url("bg_klangraum.jpg") center/cover}
-  .hero-reisen{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url("bg_reisen.jpg") center/cover}
-  .hero-mond{background:linear-gradient(rgba(25,28,55,.42),rgba(25,28,55,.70)),url("bg_mond.jpg") center/cover}
-  .hero-astro{background:linear-gradient(rgba(35,25,60,.45),rgba(35,25,60,.72)),url("bg_astrologie.jpg") center/cover}
-  .hero-num{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url("bg_numerologie.jpg") center/cover}
-  .hero-mani{background:linear-gradient(rgba(55,30,50,.45),rgba(55,30,50,.72)),url("bg_manifestation.jpg") center/cover}
-  .hero-chakra{background:linear-gradient(rgba(40,30,50,.42),rgba(40,30,50,.70)),url("bg_chakren.jpg") center/cover}
-  .hero-kristall{background:linear-gradient(rgba(25,45,50,.45),rgba(25,45,50,.72)),url("bg_kristalle.jpg") center/cover}
-  .hero-engel{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url("bg_engelszahlen.jpg") center/cover}
-  .hero-tier{background:linear-gradient(rgba(45,32,20,.45),rgba(45,32,20,.72)),url("bg_krafttiere.jpg") center/cover}
-  .hero-wissen{background:linear-gradient(rgba(30,35,60,.45),rgba(30,35,60,.72)),url("bg_wissen.jpg") center/cover}
+  .hero-med{background:linear-gradient(rgba(30,22,55,.45),rgba(30,22,55,.72)),url('bg-meditationen.jpg') center/cover}
+  .hero-atem{background:linear-gradient(rgba(20,45,45,.45),rgba(20,45,45,.72)),url('bg-atempause.jpg') center/cover}
+  .hero-ritual{background:linear-gradient(rgba(55,35,20,.45),rgba(55,35,20,.72)),url('bg-rituale.jpg') center/cover}
+  .hero-klang{background:linear-gradient(rgba(55,25,45,.45),rgba(55,25,45,.72)),url('bg-klangraum.jpg') center/cover}
+  .hero-reisen{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url('bg-reisen.jpg') center/cover}
+  .hero-mond{background:linear-gradient(rgba(25,28,55,.42),rgba(25,28,55,.70)),url('bg-mond.jpg') center/cover}
+  .hero-astro{background:linear-gradient(rgba(35,25,60,.45),rgba(35,25,60,.72)),url('bg-astrologie.jpg') center/cover}
+  .hero-num{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url('bg-numerologie.jpg') center/cover}
+  .hero-mani{background:linear-gradient(rgba(55,30,50,.45),rgba(55,30,50,.72)),url('bg-manifestation.jpg') center/cover}
+  .hero-chakra{background:linear-gradient(rgba(40,30,50,.42),rgba(40,30,50,.70)),url('bg-chakren.jpg') center/cover}
+  .hero-kristall{background:linear-gradient(rgba(25,45,50,.45),rgba(25,45,50,.72)),url('bg-kristalle.jpg') center/cover}
+  .hero-engel{background:linear-gradient(rgba(50,40,20,.45),rgba(50,40,20,.72)),url('bg-engelszahlen.jpg') center/cover}
+  .hero-tier{background:linear-gradient(rgba(45,32,20,.45),rgba(45,32,20,.72)),url('bg-krafttiere.jpg') center/cover}
+  .hero-wissen{background:linear-gradient(rgba(30,35,60,.45),rgba(30,35,60,.72)),url('bg-wissen.jpg') center/cover}
   .orakel-card{width:200px;height:280px;margin:8px auto 4px;border-radius:20px;cursor:pointer;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at 35% 30%,#b79ddd,#5b4585);color:#fff;transition:.2s}
   .orakel-card:hover{transform:translateY(-3px)}
   .orakel-card .oc-sym{font-size:54px;opacity:.92}
@@ -525,246 +389,6 @@
   .comp-pick-n{font-size:14px;color:var(--ink)}
   .comp-pick-t{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-fade)}
   @media(max-width:480px){.companion{width:58px;height:58px}}
-
-  /* ============================================================
-     ✦ PREMIUM-EBENE — Meridian/Horizon-Sprache der Landingpage
-     Instrument Serif + DM Sans · flache warme Flächen · Gold-Akzent
-     ============================================================ */
-  :root{
-    --bg:#f7f2ea;--tabbar:rgba(247,242,234,.82);
-    --ink:#2a2330;--ink-soft:#6b6470;--ink-fade:#a298a8;
-    --gold:#b08d57;--gold2:#c6a06a;--gold-l:#d8b87e;
-    --accent:#8a76a8;--accent-deep:#6f5d8e;
-    --card:#fffdfb;--line:#ece4d9;--line-2:#e2d8ca;--good:#7fa98c;--field:#f5efe5;
-    --night:#1a1426;--night2:#120d1c;--sel:#e7d4b3;--sel-ink:#2a2330;
-    --shadow:0 22px 60px -26px rgba(42,30,58,.30);
-    --shadow-sm:0 2px 12px rgba(60,45,80,.06);
-    --ease:cubic-bezier(.16,1,.3,1);
-  }
-  /* ✦ DESIGN 1 — Tageslicht (warmes Cremeweiß) */
-  html[data-theme="licht"]{
-    --bg:#f7f2ea;--tabbar:rgba(247,242,234,.82);
-    --ink:#2a2330;--ink-soft:#6b6470;--ink-fade:#a298a8;
-    --gold:#b08d57;--gold2:#c6a06a;--gold-l:#d8b87e;
-    --accent:#8a76a8;--accent-deep:#6f5d8e;
-    --card:#fffdfb;--line:#ece4d9;--line-2:#e2d8ca;--good:#7fa98c;--field:#f5efe5;
-    --sel:#e7d4b3;--sel-ink:#2a2330;
-    --shadow:0 22px 60px -26px rgba(42,30,58,.30);--shadow-sm:0 2px 12px rgba(60,45,80,.06);
-  }
-  /* ✦ DESIGN 2 — Morgenröte (sanftes Rosé) */
-  html[data-theme="rose"]{
-    --bg:#f8efe9;--tabbar:rgba(248,239,233,.82);
-    --ink:#3a2a2f;--ink-soft:#7d6168;--ink-fade:#b196a0;
-    --gold:#c08552;--gold2:#cf9461;--gold-l:#dcae7e;
-    --accent:#bd7a86;--accent-deep:#9c5763;
-    --card:#fffaf6;--line:#f0e0d8;--line-2:#e9d3c8;--good:#86a98c;--field:#f6e8e0;
-    --night:#3a2630;--night2:#2a1b23;--sel:#f0cdb8;--sel-ink:#3a2a2f;
-    --shadow:0 22px 60px -26px rgba(90,45,55,.26);--shadow-sm:0 2px 12px rgba(120,60,70,.07);
-  }
-  /* ✦ DESIGN 3 — Mondnacht (tiefes Violett) */
-  html[data-theme="nacht"]{
-    --bg:#16111e;--tabbar:rgba(22,17,30,.82);
-    --ink:#efe9f3;--ink-soft:#bcb2c6;--ink-fade:#8b8194;
-    --gold:#d8b87e;--gold2:#e4c891;--gold-l:#e7caa0;
-    --accent:#c4b0e2;--accent-deep:#d9cbef;
-    --card:#221c2d;--line:#352d44;--line-2:#3d3550;--good:#8fc1a0;--field:#1c1726;
-    --night:#0f0b18;--night2:#0a0712;--sel:#5a4a78;--sel-ink:#fff;
-    --shadow:0 26px 60px -20px rgba(0,0,0,.55);--shadow-sm:0 2px 14px rgba(0,0,0,.34);
-  }
-  /* ✦ DESIGN 4 — Sternenmeer (kosmisches Indigo) */
-  html[data-theme="kosmos"]{
-    --bg:#0c1022;--tabbar:rgba(12,16,34,.82);
-    --ink:#e6ebf5;--ink-soft:#a9b2c8;--ink-fade:#7782a0;
-    --gold:#cdb78a;--gold2:#ddc99a;--gold-l:#e3d2a8;
-    --accent:#7e9ad6;--accent-deep:#a8c0ee;
-    --card:#161b30;--line:#283250;--line-2:#33405f;--good:#7fb8a8;--field:#121627;
-    --night:#0a0e1f;--night2:#070a16;--sel:#2d3a63;--sel-ink:#fff;
-    --shadow:0 26px 60px -20px rgba(0,0,0,.6);--shadow-sm:0 2px 14px rgba(0,0,0,.4);
-  }
-  /* — Flächen: flach, token-gesteuert — */
-  body{
-    font-family:'DM Sans',system-ui,-apple-system,sans-serif !important;
-    background:var(--bg) !important;background-color:var(--bg) !important;
-    color:var(--ink);letter-spacing:-.002em;
-    transition:background-color .5s var(--ease),color .5s var(--ease);
-  }
-  ::selection{background:var(--sel);color:var(--sel-ink)}
-
-  /* — Typografie — */
-  h2,.hero h2,.journey h3,.jentry h3,.lib-item h3,.modal h2{
-    font-family:'Instrument Serif',Georgia,serif !important;font-weight:400 !important;letter-spacing:-.01em;
-  }
-  .affirm,.player .pword,.intention .it,.draw-face .dh,.draw-face .da,.numbig,.numday,.c3d-card .c3d-sym{
-    font-family:'Instrument Serif',Georgia,serif !important;
-  }
-  .affirm,.player .pword,.intention .it,.draw-face .da{font-style:italic !important}
-  .logo{
-    font-family:'DM Sans',sans-serif !important;font-weight:600 !important;
-    font-size:16px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink)
-  }
-  .logo span{color:var(--gold)}
-  .tag{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;color:var(--ink-soft);letter-spacing:0}
-  .greet,.streak,.block-label,.he,.li-theme,.li-date,.li-meta,.section-title,.theme-pill,.badge-new,
-  .nav-top button,.tabbar button,.filters button,.btn,.j-meta,.heat-legend,.acc-hint,.gs-t,.kt-l,.comp-pick-t,
-  .stat .lbl,.badge .bn,.intention .il,.draw-face .dp,.jentry .je-theme,.jentry .je-date{
-    font-family:'DM Sans',sans-serif !important;
-  }
-  .block-label,.he{letter-spacing:.22em !important;font-weight:600;font-size:11px}
-  .section-title{letter-spacing:.24em;font-weight:600;color:var(--gold);font-size:11.5px}
-  .section-sub{font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-soft)}
-  .affirm{font-size:22px;line-height:1.5;color:var(--accent-deep)}
-  h2{font-size:27px}
-
-  /* — Karten & Trenner — */
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:20px;
-    box-shadow:var(--shadow-sm);padding:30px 28px;
-  }
-  .lib-item,.jentry,.journey,.stat,.sound,.zsign,.comp-pick{
-    border:1px solid var(--line) !important;border-radius:16px;box-shadow:var(--shadow-sm);
-    transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease) !important;
-  }
-  .lib-item:hover,.sound:hover,.zsign:hover,.comp-pick:hover{
-    transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-2) !important;
-  }
-  .theme-pill{border:1px solid var(--gold);color:var(--gold);letter-spacing:.16em;border-radius:999px;font-size:10px;opacity:1}
-  .badge-new{background:var(--gold);letter-spacing:.12em;border-radius:999px}
-
-  /* — Eyebrow-Farbe in Karten — */
-  .block-label{color:var(--gold)}
-  .li-theme,.jentry .je-theme,.draw-face .dp{color:var(--accent)}
-
-  /* — Hero-Köpfe: editorial, scharfe Typo, Gold-Eyebrow — */
-  .hero{border-radius:20px;padding:40px 30px;box-shadow:var(--shadow)}
-  .hero .he{color:var(--gold-l);opacity:1;letter-spacing:.24em;font-size:11px}
-  .hero h2{font-size:38px;line-height:1.04;margin:8px 0 6px}
-  .hero p{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.9)}
-  .hero .ornament{border-color:rgba(255,255,255,.22)}
-  /* einfarbige Helden auf Nacht-/Akzent-Töne harmonisieren */
-  .hero-impulse{background:linear-gradient(150deg,#6f5d8e,#3a2f54)}
-  .hero-weg{background:linear-gradient(150deg,#6f5d8e,#382c52)}
-  .hero-tagebuch{background:linear-gradient(150deg,#7a6796,#3f3358)}
-  .hero-kosmos,.hero-astro-solid{background:linear-gradient(150deg,#4a3f86,#211c44)}
-
-  /* — Buttons: Premium-Pills, Gold = primär — */
-  .btn{
-    border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--ink-soft);
-    letter-spacing:.04em;font-weight:600;font-size:12px;min-height:46px;
-    transition:all .22s var(--ease) !important;
-  }
-  .btn:hover{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-1px)}
-  .btn:active{transform:scale(.98)}
-  .btn.gold,.btn.solid{background:var(--gold);border-color:var(--gold);color:#fff}
-  .btn.gold:hover,.btn.solid:hover{background:var(--gold2);border-color:var(--gold2);color:#fff;transform:translateY(-1px)}
-  .btn.done{background:var(--good);border-color:var(--good);color:#fff}
-  .btn.fav-on{background:var(--gold);border-color:var(--gold);color:#fff}
-
-  /* — Banner / Intention: flach statt Verlauf — */
-  .banner,.intention,.install-banner{
-    background:var(--field) !important;border:1px solid var(--line) !important;border-radius:16px;
-    box-shadow:none !important;
-  }
-  html[data-theme="dark"] .banner,html[data-theme="dark"] .intention,html[data-theme="dark"] .install-banner{background:var(--field) !important}
-  .banner button{background:var(--accent-deep);border-radius:999px;font-family:'DM Sans';letter-spacing:.04em;font-weight:600}
-  .install-banner button{background:var(--gold);border-radius:999px}
-  .intention .il{color:var(--gold)}
-  .intention .it{color:var(--accent-deep)}
-
-  /* — Navigation oben — */
-  .nav-top button{letter-spacing:.14em;font-size:11px;border-radius:999px;transition:all .2s var(--ease)}
-  .nav-top button.active{background:var(--card);color:var(--ink);border-color:var(--line);box-shadow:var(--shadow-sm)}
-  .searchpill{border-radius:999px;font-family:'DM Sans';letter-spacing:.04em;border-color:var(--line-2)}
-  .searchpill:hover{color:var(--gold);border-color:var(--gold)}
-
-  /* — Streak-Pill — */
-  .streak{border-radius:999px;border-color:var(--line-2);letter-spacing:.08em;box-shadow:var(--shadow-sm)}
-  .streak b{color:var(--gold)}
-
-  /* — Eingaben — */
-  .search,textarea.journal,.modal input,.intention input{
-    background:var(--field);border:1px solid var(--line);border-radius:14px;font-family:'DM Sans',sans-serif;
-  }
-  .search{border-radius:999px}
-  .search:focus,textarea.journal:focus,.modal input:focus,.intention input:focus{
-    outline:none;border-color:var(--ink)
-  }
-
-  /* — Tabbar: Glas, Gold-Indikator — */
-  .tabbar{
-    background:var(--tabbar);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border-top:1px solid var(--line);
-  }
-  .tabbar button{letter-spacing:.08em;font-size:9.5px;font-weight:600;position:relative;transition:color .2s var(--ease)}
-  .tabbar button.active{color:var(--gold)}
-  .tabbar button.active::after{
-    content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-    width:22px;height:2px;border-radius:2px;background:var(--gold)
-  }
-
-  /* — Corner-Buttons — */
-  .corner{border-radius:50%;border-color:var(--line-2);box-shadow:var(--shadow-sm);transition:all .2s var(--ease)}
-  .corner:hover{color:var(--gold);border-color:var(--gold)}
-
-  /* — Filter-Chips — */
-  .filters button{border-radius:999px;letter-spacing:.06em;border-color:var(--line-2);transition:all .2s var(--ease)}
-  .filters button.active,.filters button:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
-
-  /* — Statistik / Meilensteine — */
-  .stat{border-radius:16px;background:var(--card)}
-  .stat .num{font-family:'Instrument Serif',serif;font-size:34px;color:var(--accent-deep)}
-  .stat .lbl{letter-spacing:.1em}
-  .progress i{background:linear-gradient(90deg,var(--accent),var(--gold))}
-  .heat .cell.on{background:var(--accent)}
-  .badge.on .bi{color:var(--gold)}
-
-  /* — Modale — */
-  .overlay{background:rgba(26,20,38,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-  .modal{border-radius:22px;box-shadow:var(--shadow);padding:34px 30px}
-  .modal .logo{margin-bottom:6px}
-
-  /* — Footer — */
-  footer{font-family:'DM Sans';letter-spacing:.06em;color:var(--ink-fade)}
-
-  /* — Step-Liste Nummern in Gold-Lilac — */
-  .step-list .rstep::before{background:var(--accent-deep)}
-
-  /* — Companion-Bubble Premium — */
-  .comp-bubble{border-radius:18px 18px 18px 6px;font-family:'DM Sans';box-shadow:var(--shadow)}
-
-  /* — Karussell-Karten — */
-  .c3d-card{border-radius:18px;border-color:var(--line)}
-  .c3d-card .c3d-tt,.c3d-card .c3d-name{font-family:'DM Sans';font-weight:600}
-
-  /* — Detail-Bilder schärfer & ruhiger — */
-  .detail-art{border-radius:16px;box-shadow:var(--shadow)}
-
-  /* — Scroll-Animationen: reicheres Reveal + Fortschrittsbalken — */
-  .reveal{opacity:0;transform:translateY(42px) scale(.985);filter:blur(7px);
-    transition:opacity .75s var(--ease),transform .75s var(--ease),filter .75s var(--ease) !important}
-  .reveal.in{opacity:1;transform:none;filter:none}
-  .view .hero.reveal{transform:translateY(54px) scale(.97)}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
-    background:linear-gradient(90deg,var(--accent),var(--gold));
-    box-shadow:0 0 12px var(--gold);transition:width .12s linear;pointer-events:none}
-  @media (prefers-reduced-motion: reduce){.reveal{filter:none !important}#scrollProg{display:none}}
-
-  /* — Design-Wähler — */
-  .theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 18px}
-  .theme-card{background:var(--field);border:1px solid var(--line);border-radius:16px;
-    padding:16px 14px;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;
-    display:flex;flex-direction:column;gap:8px;transition:all .22s var(--ease)}
-  .theme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-2)}
-  .theme-card.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
-  .theme-sw{display:flex;gap:5px}
-  .theme-sw i{width:26px;height:26px;border-radius:8px;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
-  .theme-nm{font-family:'Instrument Serif',serif;font-size:21px;line-height:1;color:var(--ink)}
-  .theme-tg{font-size:11px;letter-spacing:.04em;color:var(--ink-soft)}
-
-  /* — Fokus-Ring in Gold — */
-  a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,
-  .lib-item:focus-visible,.zsign:focus-visible,[role="button"]:focus-visible,.tile:focus-visible,.sound:focus-visible{
-    outline:2px solid var(--gold);outline-offset:3px
-  }
 </style>
 <style id="fable5-polish">
   /* ============================================================
@@ -776,7 +400,8 @@
     --ease-out:cubic-bezier(.22,.61,.36,1);
     --aur1:rgba(205,180,230,.50);--aur2:rgba(170,215,200,.42);--aur3:rgba(240,215,180,.38);
   }
-  html[data-theme="dark"],html[data-theme="nacht"],html[data-theme="kosmos"]{--aur1:rgba(120,95,175,.34);--aur2:rgba(60,120,110,.26);--aur3:rgba(150,120,70,.20)}
+  html[data-theme="dark"]{--aur1:rgba(120,95,175,.34);--aur2:rgba(60,120,110,.26);--aur3:rgba(150,120,70,.20)}
+  /* --- Aurora-Ambient hinter allem --- */
   body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
     background:
       radial-gradient(38% 30% at 22% 24%, var(--aur1), transparent 70%),
@@ -788,6 +413,7 @@
     0%{transform:translate3d(-2%,-1%,0) rotate(-1.5deg) scale(1)}
     50%{transform:translate3d(2%,2%,0) rotate(1deg) scale(1.06)}
     100%{transform:translate3d(-1%,3%,0) rotate(2deg) scale(1.03)}}
+  /* --- Kopfbereich: sanfter Eintritt + Gold-Schimmer im Logo --- */
   header{animation:f5down .8s var(--ease-out) both}
   @keyframes f5down{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
   .logo span{background:linear-gradient(100deg,var(--gold) 20%,#ecd3a2 50%,var(--gold) 80%);
@@ -796,6 +422,7 @@
   @keyframes f5shimmer{to{background-position:-200% center}}
   .streak b{display:inline-block;animation:f5pulse 2.8s ease-in-out infinite}
   @keyframes f5pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  /* --- Heros: Licht-Sweep + atmender Ornament-Ring --- */
   .hero{isolation:isolate}
   .hero::after{content:"";position:absolute;top:0;left:-75%;width:46%;height:100%;z-index:0;
     background:linear-gradient(105deg,transparent,rgba(255,255,255,.16) 50%,transparent);
@@ -804,6 +431,7 @@
   .hero .ornament::after{content:"";position:absolute;inset:16px;border-radius:50%;
     border:1.5px solid rgba(255,255,255,.20);animation:f5ring 6s ease-in-out infinite}
   @keyframes f5ring{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.12);opacity:1}}
+  /* --- Karten & Listen: weiche Elevation --- */
   .card{transition:box-shadow .4s var(--ease-out),transform .4s var(--ease-out)}
   @media(hover:hover){
     .card:hover{box-shadow:0 18px 46px rgba(70,50,95,.15)}
@@ -812,6 +440,7 @@
   }
   .lib-item,.sound,.tile,.zsign,.mood,.kt-item,.comp-pick{transition:transform .28s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .25s,background .25s,color .25s}
   .tile:active,.sound:active,.zsign:active,.mood:active,.kt-item:active,.lib-item:active{transform:scale(.97)}
+  /* --- Buttons: Sprungfeder + Ripple-Basis --- */
   .btn,.tabbar button,.nav-top button,.filters button,.style-chips button,.banner button,.install-banner button,.tile,.sound,.zsign,.mood,.kt-item,.comp-pick{position:relative;overflow:hidden}
   .btn{transition:background .25s,color .25s,border-color .25s,box-shadow .3s,transform .22s var(--ease-spring)}
   .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(70,50,95,.16)}
@@ -819,8 +448,10 @@
   .f5-ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.16;
     transform:scale(0);pointer-events:none;animation:f5ripple .55s var(--ease-out) forwards}
   @keyframes f5ripple{to{transform:scale(2.6);opacity:0}}
-  .tabbar{background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(18px) saturate(1.6);
-    -webkit-backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 -8px 32px rgba(20,12,32,.25)}
+  /* --- Tab-Leiste: Glas + aktiver Punkt + Icon-Hüpfer --- */
+  .tabbar{background:rgba(255,253,251,.72);backdrop-filter:blur(18px) saturate(1.6);
+    -webkit-backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 -8px 32px rgba(70,50,95,.08)}
+  html[data-theme="dark"] .tabbar{background:rgba(33,29,42,.72)}
   .tabbar button{border-radius:14px;transition:color .25s}
   .tabbar button .ico{transition:transform .35s var(--ease-spring)}
   .tabbar button.active .ico{transform:translateY(-3px) scale(1.18)}
@@ -828,40 +459,52 @@
     border-radius:50%;background:var(--accent-deep);transform:translateX(-50%) scale(0);
     transition:transform .35s var(--ease-spring)}
   .tabbar button.active::before{transform:translateX(-50%) scale(1)}
+  /* --- Eingabefelder: Fokus-Glow --- */
   textarea.journal:focus,.search:focus,.modal input:focus,.intention input:focus{
     box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent);
     transition:box-shadow .25s,border-color .25s}
+  /* --- Fortschritt: Schimmer-Lauflicht --- */
   .progress i,.pbar i{position:relative;overflow:hidden}
   .progress i::after,.pbar i::after{content:"";position:absolute;inset:0;
     background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
     transform:translateX(-100%);animation:f5bar 2.6s ease-in-out infinite}
   @keyframes f5bar{55%,100%{transform:translateX(100%)}}
+  /* --- Atem-/Meditations-Orb: lebendiges Leuchten --- */
   .orb{animation:f5orb 6s ease-in-out infinite}
   .view.sec-med .orb{animation:mpulse 9s ease-in-out infinite,f5orb 6s ease-in-out infinite}
   @keyframes f5orb{0%,100%{box-shadow:0 0 44px rgba(138,118,168,.38)}50%{box-shadow:0 0 92px rgba(138,118,168,.62)}}
+  /* --- Mond: schweben + Glühen --- */
   .moon-svg{filter:drop-shadow(0 0 20px rgba(150,140,220,.4));animation:f5float 7s ease-in-out infinite}
   @keyframes f5float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  /* --- Karten ziehen / Orakel: Einladung --- */
   .orakel-card,.flip-front{animation:f5invite 4.5s ease-in-out infinite}
   @keyframes f5invite{0%,100%{box-shadow:0 12px 34px rgba(80,60,90,.22)}50%{box-shadow:0 16px 48px rgba(120,90,170,.42)}}
   .flip3d,.orakel-card,.draw-card{transition:transform .35s var(--ease-out)}
+  /* --- Overlays & Modals: Tiefe + Eintritt --- */
   .overlay{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
   .modal{animation:f5modal .5s cubic-bezier(.22,1.2,.36,1) both}
   @keyframes f5modal{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}
+  /* --- Toast v2 --- */
   .f5-toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(14px);
     background:linear-gradient(135deg,var(--accent-deep),var(--accent));color:#fff;
-    font-family:inherit;font-size:13px;letter-spacing:1px;padding:11px 20px;
+    font-family:Arial,sans-serif;font-size:13px;letter-spacing:1px;padding:11px 20px;
     border-radius:30px;z-index:60;opacity:0;max-width:80%;text-align:center;
     box-shadow:0 10px 30px rgba(60,40,90,.35);
     transition:opacity .35s var(--ease-out),transform .45s var(--ease-spring)}
   .f5-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  /* --- Sparkle-Partikel --- */
   .f5-spark{position:fixed;z-index:70;pointer-events:none;font-size:15px;color:var(--gold);will-change:transform,opacity}
+  /* --- Klangleiste: sanfter Puls solange Klang läuft --- */
   #klangBar{animation:f5klang 3s ease-in-out infinite}
   @keyframes f5klang{0%,100%{box-shadow:0 8px 24px rgba(60,40,90,.28)}50%{box-shadow:0 8px 34px rgba(140,100,190,.5)}}
+  /* --- Badges: Aufleuchten wenn erreicht --- */
   .badge.on .bi{display:inline-block;animation:f5badge 3.4s ease-in-out infinite}
   @keyframes f5badge{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.14);filter:drop-shadow(0 0 6px rgba(200,160,90,.7))}}
+  /* --- Companion-Bubble & Suche --- */
   .searchpill:hover{transform:translateY(-1px)}
   #toTop{transition:transform .25s var(--ease-spring),opacity .25s;animation:f5down .4s var(--ease-out)}
   #toTop:hover{transform:scale(1.1)}
+  /* --- Auswahl & Scrollbar --- */
   ::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
   @media(pointer:fine){
     ::-webkit-scrollbar{width:10px}
@@ -869,114 +512,63 @@
     ::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 35%,transparent);border-radius:20px;border:2px solid transparent;background-clip:content-box}
     ::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--accent) 55%,transparent);background-clip:content-box}
   }
+  /* --- Theme-Wechsel: weiches Überblenden --- */
   html.f5-theme-anim,html.f5-theme-anim body,html.f5-theme-anim *,html.f5-theme-anim *::before,html.f5-theme-anim *::after{
     transition:background .5s ease,background-color .5s ease,color .4s ease,border-color .5s ease,box-shadow .5s ease,fill .4s ease,stroke .4s ease!important}
   /* ============================================================
      STUFE 2 — Charakter, Tiefe & Leben
      ============================================================ */
-  /* (Typografie: das Nacht-Design bringt Instrument Serif + DM Sans bereits mit) */
+  /* Edle Display-Typografie (fällt sauber auf Georgia zurück) */
+  .logo,h2,h3,.affirm,.hero h2,.player .pword,.draw-face .dh,.draw-face .da,.numbig,.numday,
+  .jentry h3,.lib-item h3,.journey h3,.modal h2,.sample-aff{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+  h2,.hero h2{font-weight:600;letter-spacing:.2px}
+  .logo{font-weight:600}
+  .affirm,.player .pword{font-weight:500}
+  /* Scroll-Fortschritt ganz oben */
+  .f5-progressbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;
+    background:linear-gradient(90deg,var(--accent),var(--gold));transform-origin:0 50%;
+    transform:scaleX(0);pointer-events:none;opacity:.85}
+  /* Gleitende Tab-Pille */
   .f5-tabpill{position:absolute;top:6px;left:0;height:calc(100% - 12px);border-radius:14px;
     background:color-mix(in srgb,var(--accent) 14%,transparent);
     transition:transform .45s var(--ease-spring),width .45s var(--ease-spring),opacity .3s;
     z-index:0;pointer-events:none;opacity:0}
   .tabbar button{position:relative;z-index:1}
+  /* Lebender Orb: rotierender Lichtschein (kreisrund, ohne Clipping) */
   .orb{position:relative}
   .orb::before{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
     background:conic-gradient(from 0deg,transparent 0 38%,rgba(255,255,255,.22) 50%,transparent 62% 100%);
     animation:f5orbspin 13s linear infinite}
   @keyframes f5orbspin{to{transform:rotate(360deg)}}
+  /* Klang: pulsierende Kachel + Equalizer in der Leiste */
   .sound.playing{animation:f5soundpulse 2.2s ease-in-out infinite}
   @keyframes f5soundpulse{0%,100%{box-shadow:var(--shadow-sm)}50%{box-shadow:0 0 26px rgba(160,120,200,.5)}}
   .f5-eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;margin-right:2px}
   .f5-eq i{width:3px;height:100%;background:#fff;border-radius:2px;transform-origin:bottom;animation:f5eq .8s ease-in-out infinite alternate}
   .f5-eq i:nth-child(2){animation-delay:.25s}.f5-eq i:nth-child(3){animation-delay:.5s}
   @keyframes f5eq{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+  /* Stimmungs-Auswahl: freudiger Boing */
   .mood.sel{animation:f5boing .5s var(--ease-spring)}
   @keyframes f5boing{0%{transform:scale(.85)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
+  /* Schwebende Lichtpunkte in den Heros */
   .f5-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);
     filter:blur(.5px);pointer-events:none;animation:f5dotfloat ease-in-out infinite;z-index:0}
   @keyframes f5dotfloat{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-16px);opacity:.8}}
+  /* Performance: lange Listen erst rendern, wenn sichtbar */
   .lib-item{content-visibility:auto;contain-intrinsic-size:1px 120px}
-  /* ===== STUFE 4 — Tagebuch, Fokus-Schreiben, Karussell-Tiefe ===== */
-  .tb-meta{display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;letter-spacing:.5px;color:var(--ink-fade);margin-top:8px;min-height:14px}
-  header,.nav-top,#cosmosBg,.companion,footer,.tabbar,#toTop,.section-title,.jentry,.hero,#scrollProg{transition:opacity .6s ease}
-  body.f5-write header,body.f5-write .nav-top,body.f5-write #cosmosBg,body.f5-write .companion,
-  body.f5-write .comp-bubble,body.f5-write footer,body.f5-write .tabbar,body.f5-write #toTop,
-  body.f5-write .section-title,body.f5-write .jentry,body.f5-write .hero,body.f5-write #scrollProg,
-  body.f5-write .style-chips{opacity:.15}
-  body.f5-write .card:focus-within{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent),0 24px 60px rgba(40,25,70,.35)}
-  .c3d-card{transition:filter .45s ease}
-  .c3d-item:not(.center) .c3d-card{filter:blur(1.1px) saturate(.75) brightness(.85)}
-  .c3d-item.center .c3d-card{filter:none}
-  .f5-shoot{position:fixed;z-index:1;pointer-events:none;width:74px;height:1.5px;border-radius:2px;
-    background:linear-gradient(270deg,rgba(255,255,255,.95),transparent);opacity:0;
-    filter:drop-shadow(0 0 4px rgba(255,255,255,.7))}
-  @media (prefers-reduced-motion: reduce){.f5-shoot{display:none}}
-  /* ===== STUFE 5 — Persönlicher Faden ===== */
-  .f5-resume{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);
-    border:1px solid var(--line);border-radius:18px;padding:13px 18px;margin:14px 0;box-shadow:var(--shadow-sm);
-    cursor:pointer;font-size:15px;transition:transform .25s var(--ease-spring),box-shadow .3s,border-color .25s}
-  .f5-resume:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--accent)}
-  .f5-resume .fr-l{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-  .f5-week-row{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:6px}
-  .f5-week-item{flex:1;min-width:90px;text-align:center}
-  .f5-week-num{font-size:26px;color:var(--accent-deep)}
-  .f5-week-lbl{font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-fade);margin-top:2px}
-  .btn.gold.f5-ready{animation:f5pulse 2.4s ease-in-out infinite}
+  /* Sanfte View-Transitions (Browser mit Unterstützung) */
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
+  /* --- Reduzierte Bewegung: alles Neue abschalten --- */
   @media (prefers-reduced-motion: reduce){
     body::before,.logo span,.hero::after,.hero .ornament::after,.streak b,.orb,.moon-svg,
     .orakel-card,.flip-front,.progress i::after,.pbar i::after,#klangBar,.badge.on .bi,
     .orb::before,.sound.playing,.f5-eq i,.f5-dot,.mood.sel{animation:none!important}
   }
-  /* ============================================================
-     PREMIUM — Seelen-Mandala, Abendtor, Jahrbuch
-     ============================================================ */
-  .hero-mandala{background:radial-gradient(120% 130% at 50% -10%,#6b5fb0 0%,#3a2f6a 45%,#1e1840 100%)}
-  .f5p-ov{position:fixed;inset:0;z-index:80;overflow:auto;
-    background:radial-gradient(120% 90% at 50% 112%,#2a2350 0%,#141126 55%,#0b0a18 100%);
-    display:flex;align-items:center;justify-content:center;animation:f5pFade .9s ease both}
-  @keyframes f5pFade{from{opacity:0}to{opacity:1}}
-  .f5p-stage{position:relative;max-width:430px;width:92%;text-align:center;color:#efeaf6;
-    padding:40px 0;animation:f5up .8s var(--ease-out) both}
-  .f5p-stage h2{color:#fff;font-size:30px;font-weight:normal;margin:8px 0 6px}
-  .f5p-stage p{color:#cfc6e0;font-size:16px;line-height:1.6}
-  .f5p-he{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#d8b87e}
-  .f5p-orb{width:150px;height:150px;border-radius:50%;margin:30px auto;position:relative;
-    background:radial-gradient(circle at 35% 30%,#9d89e2,#3b2f6e);
-    box-shadow:0 0 70px rgba(150,125,225,.55)}
-  .f5p-word{font-size:22px;font-style:italic;color:#e6ddf5;min-height:32px}
-  .f5p-in{width:100%;font-family:inherit;font-size:17px;color:#fff;background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:15px 16px;text-align:center;margin:18px 0 6px}
-  .f5p-in:focus{outline:none;border-color:#bda7dd;box-shadow:0 0 0 3px rgba(189,167,221,.25)}
-  .f5p-in::placeholder{color:rgba(255,255,255,.4)}
-  .f5p-btn{display:inline-block;font-family:Arial,sans-serif;font-size:13px;letter-spacing:1.5px;
-    background:linear-gradient(135deg,#c7a064,#a87e44);color:#fff;border:none;border-radius:30px;
-    padding:14px 34px;cursor:pointer;margin-top:16px;box-shadow:0 8px 26px rgba(160,120,60,.35);
-    transition:transform .22s var(--ease-spring),box-shadow .3s;position:relative;overflow:hidden}
-  .f5p-btn:hover{transform:translateY(-2px)}
-  .f5p-btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.35);box-shadow:none;color:#d9d0ea}
-  .f5p-skip{display:block;margin:14px auto 0;background:none;border:none;color:rgba(255,255,255,.45);
-    font-family:Arial,sans-serif;font-size:12px;letter-spacing:1px;cursor:pointer}
-  .f5p-x{position:fixed;top:18px;right:22px;z-index:81;width:40px;height:40px;border-radius:50%;
-    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;
-    font-size:17px;cursor:pointer}
-  .f5p-release{position:fixed;z-index:82;pointer-events:none;color:#e6ddf5;font-size:18px;
-    font-style:italic;white-space:pre-wrap;max-width:80vw;text-align:center}
-  .f5p-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;
-    background:linear-gradient(135deg,#332a52,#1f1a38);border:1px solid rgba(189,167,221,.35);
-    border-radius:18px;padding:14px 18px;margin:14px 0;cursor:pointer;color:#efeaf6;
-    box-shadow:var(--shadow-sm);transition:transform .25s var(--ease-spring),box-shadow .3s}
-  .f5p-chip:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-  .f5p-chip .fc-l{font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#d8b87e}
-  .f5p-seal{margin:20px auto;display:block;border-radius:50%;box-shadow:0 0 60px rgba(150,125,225,.5);animation:f5pSeal 1.6s var(--ease-out) both}
-  @keyframes f5pSeal{from{opacity:0;transform:scale(.6) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(0)}}
-  @media (prefers-reduced-motion: reduce){.f5p-ov,.f5p-stage,.f5p-seal{animation:none!important}}
 </style>
 </head>
 <body>
 <button class="corner left" id="favBtn" aria-label="Favoriten" title="Favoriten"><span class="ic-inline" data-icon="heart"></span></button>
-<button class="corner right" id="themeToggle" aria-label="Hell/Dunkel" title="Hell / Dunkel">◒</button>
+<button class="corner right" id="themeToggle" aria-label="Hell/Dunkel" title="Hell / Dunkel">&#9682;</button>
 <div class="wrap">
   <header>
     <div class="logo">Seelen<span>raum</span></div>
@@ -994,13 +586,13 @@
     <button data-view="tagebuch">Tagebuch</button>
     <button data-view="weg">Mein Weg</button>
   </nav>
-  <button id="backBtn" onclick="goBack()" class="searchpill" style="display:none;margin:6px 0 0">‹ Zurück</button>
+  <button id="backBtn" onclick="goBack()" class="searchpill" style="display:none;margin:6px 0 0">&#8249; Zurück</button>
   <div id="app"></div>
-  <footer>Seelenraum · Mitglieder-Bereich &nbsp;·&nbsp; <a class="reset" onclick="openSettings()">Einstellungen</a></footer>
+  <footer>Seelenraum &middot; Mitglieder-Bereich &nbsp;&middot;&nbsp; <a class="reset" onclick="openSettings()">Einstellungen</a></footer>
 </div>
 <div id="companionHost"></div>
-<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nach oben">↑</button>
-<div id="klangBar"><span id="klangName"></span><button onclick="stopKlang()">✕ Stop</button></div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nach oben">&#8593;</button>
+<div id="klangBar"><span id="klangName"></span><button onclick="stopKlang()">&#10005; Stop</button></div>
 <div class="tabbar" id="tabbar">
   <button data-view="heute" class="active"><span class="ico" data-icon="sun"></span>Heute</button>
   <button data-view="impulse"><span class="ico" data-icon="spark"></span>Impulse</button>
@@ -1346,41 +938,22 @@ const JOURNAL_PROMPTS=[
 let tbPromptIdx=Math.floor((heute-new Date(heute.getFullYear(),0,0))/86400000)%JOURNAL_PROMPTS.length;
 let tbDraft="";
 function tbNewPrompt(){const el=document.getElementById('tbText');if(el)tbDraft=el.value;tbPromptIdx=(tbPromptIdx+1)%JOURNAL_PROMPTS.length;render('tagebuch');}
-let tbFilter="alle",tbSearch="";
-function tbSearchIn(v){tbSearch=v;render('tagebuch');const el=document.getElementById('tbSearch');if(el){el.focus();try{el.setSelectionRange(el.value.length,el.value.length);}catch(e){}}}
-function tbMode(){return store.get("tbMode","impuls");}
-function setTbMode(m){const el=document.getElementById('tbText');if(el)tbDraft=el.value;store.set("tbMode",m);render('tagebuch');}
-function setTbFilter(f){tbFilter=f;render('tagebuch');}
-function tbCountTxt(v){const w=(String(v||"").trim().match(/\S+/g)||[]).length;return w===0?"":w+(w===1?" Wort":" Wörter");}
-function tbSaveDraft(v){tbDraft=v;const c=document.getElementById('tbCount');if(c)c.textContent=tbCountTxt(v);}
-function saveFreeEntry(){const el=document.getElementById('tbText');if(!el||!el.value.trim()){toast("Schreib zuerst etwas ✦");return;}state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:(tbMode()==='frei'?null:JOURNAL_PROMPTS[tbPromptIdx]),text:el.value.trim()});store.set("freejournal",state.freejournal);tbDraft="";markPractice("Eintrag gespeichert ✦");render('tagebuch');}
+function tbSaveDraft(v){tbDraft=v;}
+function saveFreeEntry(){const el=document.getElementById('tbText');if(!el||!el.value.trim()){toast("Schreib zuerst etwas ✦");return;}state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:JOURNAL_PROMPTS[tbPromptIdx],text:el.value.trim()});store.set("freejournal",state.freejournal);tbDraft="";markPractice("Eintrag gespeichert ✦");render('tagebuch');}
 function deleteFreeEntry(id){if(!confirm("Diesen Eintrag löschen?"))return;state.freejournal=state.freejournal.filter(e=>e.id!==id);store.set("freejournal",state.freejournal);render('tagebuch');}
 function viewTagebuch(){
   const impEntries=Object.keys(state.journal).map(id=>({kind:'imp',id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp);
   const freeEntries=(state.freejournal||[]).map(e=>({kind:'free',id:e.id,text:e.text,ts:e.ts,prompt:e.prompt}));
-  let entries=[...impEntries,...freeEntries].sort((a,b)=>b.ts-a.ts);
+  const entries=[...impEntries,...freeEntries].sort((a,b)=>b.ts-a.ts);
   const total=entries.length;
-  const mode=tbMode();
-  if(tbFilter==='imp')entries=entries.filter(e=>e.kind==='imp');
-  else if(tbFilter==='frei')entries=entries.filter(e=>e.kind==='free');
-  if(tbSearch.trim()){const q=tbSearch.trim().toLowerCase();entries=entries.filter(e=>(e.text||'').toLowerCase().includes(q)||(e.imp&&(e.imp.titel+' '+e.imp.thema).toLowerCase().includes(q))||(e.prompt||'').toLowerCase().includes(q));}
   let html=`<div class="view sec-praxis"><div class="hero hero-tagebuch"><div class="ornament"></div><div class="he">Nur für dich</div><h2>Tagebuch</h2><p>${total} ${total===1?'Eintrag':'Einträge'} · lokal & privat gespeichert</p></div>`;
-  html+=`<div class="card" id="tbCard">`;
-  html+=`<div class="style-chips" style="justify-content:flex-start;margin-bottom:16px"><button class="${mode==='impuls'?'active':''}" onclick="setTbMode('impuls')">✧ Mit Impuls</button><button class="${mode==='frei'?'active':''}" onclick="setTbMode('frei')">Frei schreiben</button></div>`;
-  if(mode==='impuls'){html+=`<div class="block-label">Schreibimpuls</div><div style="font-style:italic;color:var(--accent-deep);font-size:16px;margin-bottom:4px">${JOURNAL_PROMPTS[tbPromptIdx]}</div><button class="ie" style="margin-bottom:10px" onclick="tbNewPrompt()">anderer Impuls ↻</button>`;}
-  html+=`<textarea class="journal" id="tbText" style="min-height:${mode==='frei'?'180':'88'}px" placeholder="${mode==='frei'?'Dein Raum. Keine Vorgaben – schreib einfach, was da ist …':'Schreib frei, was in dir aufkommt …'}" oninput="tbSaveDraft(this.value)">${escHtml(tbDraft)}</textarea>`;
-  html+=`<div class="tb-meta"><span id="tbCount">${tbCountTxt(tbDraft)}</span><span>${heute.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'})}</span></div>`;
-  html+=`<div class="actions"><button class="btn gold" onclick="saveFreeEntry()">Eintrag speichern ✦</button></div></div>`;
+  html+=`<div class="card"><div class="block-label">Schreibimpuls</div><div style="font-style:italic;color:var(--accent-deep);font-size:16px;margin-bottom:4px">${JOURNAL_PROMPTS[tbPromptIdx]}</div><button class="ie" style="margin-bottom:10px" onclick="tbNewPrompt()">anderer Impuls ↻</button><textarea class="journal" id="tbText" placeholder="Schreib frei, was in dir aufkommt …" oninput="tbSaveDraft(this.value)">${escHtml(tbDraft)}</textarea><div class="actions"><button class="btn gold" onclick="saveFreeEntry()">Eintrag speichern ✦</button></div></div>`;
   html+=`<div class="section-title" style="margin-top:18px">Deine Einträge</div>`;
-  if(total>3)html+=`<input class="search" id="tbSearch" placeholder="Einträge durchsuchen …" value="${escAttr(tbSearch)}" oninput="tbSearchIn(this.value)">`;
-  if(total>0)html+=`<div class="style-chips" style="margin:2px 0 6px"><button class="${tbFilter==='alle'?'active':''}" onclick="setTbFilter('alle')">Alle</button><button class="${tbFilter==='imp'?'active':''}" onclick="setTbFilter('imp')">Zu Impulsen</button><button class="${tbFilter==='frei'?'active':''}" onclick="setTbFilter('frei')">Eigene</button></div>`;
-  if(!total)html+=`<div class="empty">${mode==='frei'?'Noch keine Einträge.<br>Dies ist dein stiller Ort. Der erste Satz darf klein sein.':'Noch keine Einträge.<br>Schreib oben zu einem Impuls – oder notiere bei einem Tages-Impuls etwas im Tagebuch-Feld.'}</div>`;
-  else if(!entries.length)html+=`<div class="empty">In dieser Ansicht ist nichts – wechsle oben den Filter.</div>`;
+  if(!total)html+=`<div class="empty">Noch keine Einträge.<br>Schreib oben zu einem Impuls – oder notiere bei einem Tages-Impuls etwas im Tagebuch-Feld.</div>`;
   else html+=entries.map(e=>e.kind==='imp'
     ?`<div class="jentry"><div class="je-top"><span class="je-theme">${e.imp.thema}</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div><h3>${e.imp.titel}</h3><div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">„${e.imp.affirmation}"</div><div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="openImpuls('${e.id}')">öffnen</button> &nbsp; <button class="je-del" onclick="deleteJournal('${e.id}')">löschen</button></div>`
     :`<div class="jentry"><div class="je-top"><span class="je-theme">Eigener Eintrag</span><span class="je-date">${new Date(e.ts).toLocaleDateString('de-DE')}</span></div>${e.prompt?`<div style="font-style:italic;color:var(--ink-soft);font-size:14px;margin-bottom:8px">${e.prompt}</div>`:''}<div class="je-text">${escHtml(e.text)}</div><button class="je-del" onclick="deleteFreeEntry('${e.id}')">löschen</button></div>`
   ).join('');
-  if(total>0)html+=`<div class="actions" style="margin-top:14px"><button class="btn" onclick="exportJournal()">Alle Einträge exportieren ⇩</button><button class="btn gold" onclick="f5pJahrbuch()">✦ Seelen-Jahrbuch</button></div>`;
   return html+`</div>`;}
 function milestonesHtml(){const d=state.days.length,st=computeLongest(state.days),notes=Object.keys(state.journal).length+(state.freejournal?state.freejournal.length:0),rd=REISEN.filter(r=>(state.journey[r.id]||0)>=r.tage.length).length,fav=state.favs.length;
   const M=[{on:d>=1,i:"✦",n:"Erster Tag"},{on:d>=3,i:"✦",n:"3 Tage"},{on:st>=7,i:"✶",n:"7 Tage Serie"},{on:st>=14,i:"✷",n:"14 Tage Serie"},{on:d>=30,i:"❂",n:"30 Praxis-Tage"},{on:d>=100,i:"☀",n:"100 Tage"},{on:notes>=1,i:"✎",n:"Erstes Tagebuch"},{on:notes>=10,i:"❖",n:"10 Einträge"},{on:rd>=1,i:"➶",n:"Erste Reise"},{on:fav>=10,i:"♥",n:"10 Favoriten"}];
@@ -1550,9 +1123,9 @@ function drawShareCard(aff,thema,style){const s=SHARE_STYLES[style]||SHARE_STYLE
   const g=x.createLinearGradient(0,0,W,H);s.bg.forEach(b=>g.addColorStop(b[0],b[1]));x.fillStyle=g;x.fillRect(0,0,W,H);
   const rg=x.createRadialGradient(W*0.5,H*0.30,40,W*0.5,H*0.30,540);rg.addColorStop(0,s.glow);rg.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=rg;x.fillRect(0,0,W,H);
   x.strokeStyle=s.r1;x.lineWidth=4;x.beginPath();x.arc(W/2,300,72,0,Math.PI*2);x.stroke();x.strokeStyle=s.r2;x.lineWidth=2;x.beginPath();x.arc(W/2,300,46,0,Math.PI*2);x.stroke();
-  drawSpaced(x,"SEELENRAUM",W/2,470,8,"600 30px 'DM Sans'",s.brand);drawSpaced(x,thema.toUpperCase(),W/2,520,5,"600 22px 'DM Sans'",s.theme);
-  x.font="italic 58px 'Instrument Serif'";x.fillStyle=s.aff;x.textAlign="center";x.textBaseline="middle";const lines=wrapText(x,"„"+aff+"\"",W-200);const lineH=82;let sy=770-(lines.length-1)*lineH/2;lines.forEach((ln,i)=>x.fillText(ln,W/2,sy+i*lineH));
-  drawSpaced(x,"deine tägliche Praxis",W/2,H-96,3,"italic 28px 'Instrument Serif'",s.foot);return c.toDataURL("image/png");}
+  drawSpaced(x,"SEELENRAUM",W/2,470,8,"30px Georgia",s.brand);drawSpaced(x,thema.toUpperCase(),W/2,520,5,"22px Arial",s.theme);
+  x.font="italic 56px Georgia";x.fillStyle=s.aff;x.textAlign="center";x.textBaseline="middle";const lines=wrapText(x,"„"+aff+"\"",W-200);const lineH=82;let sy=770-(lines.length-1)*lineH/2;lines.forEach((ln,i)=>x.fillText(ln,W/2,sy+i*lineH));
+  drawSpaced(x,"deine tägliche Praxis",W/2,H-96,3,"26px Georgia",s.foot);return c.toDataURL("image/png");}
 let shareURL=null,shareAff="",shareThema="",shareStyle="hell";
 function openShareImage(aff,thema){shareAff=aff;shareThema=thema;shareStyle="hell";shareURL=drawShareCard(aff,thema,"hell");
   let canFileShare=false;try{canFileShare=!!(navigator.canShare&&navigator.canShare({files:[new File([new Blob([""],{type:"image/png"})],"a.png",{type:"image/png"})]}));}catch(e){canFileShare=false;}
@@ -1894,12 +1467,9 @@ function openSettings(){const bd=store.get("birthdate","");const ov=document.cre
   document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
 function saveSettings(){const n=document.getElementById('setName'),b=document.getElementById('setBd');if(n)state.name=n.value.trim();store.set("name",state.name);if(b&&b.value)store.set("birthdate",b.value);const ov=document.querySelector('.overlay');if(ov)ov.remove();updateHeader();toast("Gespeichert ✦");render('heute');}
 function toggleThemeBtn(){const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";store.set("theme",cur);applyTheme(cur);}
-function exportJournal(){
-  const impE=Object.keys(state.journal).map(id=>({text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp);
-  const freeE=(state.freejournal||[]).map(e=>({text:e.text,ts:e.ts,prompt:e.prompt}));
-  const entries=[...impE,...freeE].sort((a,b)=>b.ts-a.ts);
+function exportJournal(){const entries=Object.keys(state.journal).map(id=>({id,text:state.journal[id].text,ts:state.journal[id].ts,imp:INHALTE.find(i=>i.id===id)})).filter(e=>e.imp).sort((a,b)=>b.ts-a.ts);
   if(!entries.length){toast("Noch keine Einträge");return;}
-  let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+(e.imp?("  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\""):(e.prompt?("  —  "+e.prompt):"  —  Freier Eintrag"))+"\n"+e.text+"\n\n";});
+  let txt="MEIN SEELENRAUM-TAGEBUCH\n\n";entries.forEach(e=>{txt+=new Date(e.ts).toLocaleDateString('de-DE')+"  —  "+e.imp.titel+"\n„"+e.imp.affirmation+"\"\n"+e.text+"\n\n";});
   const a=document.createElement('a');a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(txt);a.download="seelenraum-tagebuch.txt";document.body.appendChild(a);a.click();a.remove();toast("Tagebuch exportiert ✦");}
 /* ===== Nach-oben-Button ===== */
 /* ===== CHINESISCHE TIERZEICHEN ===== */
@@ -2093,16 +1663,11 @@ function initCarousels(scope){(scope||document).querySelectorAll('.carousel3d').
 /* ===== Scroll-Reveal ===== */
 let _revObserver=null;
 function revealObserver(){if(_revObserver)return _revObserver;if(!('IntersectionObserver' in window))return null;_revObserver=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');_revObserver.unobserve(en.target);}});},{threshold:0.08,rootMargin:"0px 0px -40px 0px"});return _revObserver;}
-function applyReveal(scope){const root=scope||document.getElementById('app');if(!root)return;const ob=revealObserver();const els=root.querySelectorAll('.hero,.card,.lib-item,.journey,.jentry,.stat,.section-title,.banner,.intention,.sound,.zsign,.draw-card,.heat');els.forEach(function(el,i){if(el.classList.contains('reveal'))return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*55,420)+'ms';if(ob)ob.observe(el);else el.classList.add('in');});}
+function applyReveal(scope){const root=scope||document.getElementById('app');if(!root)return;const ob=revealObserver();const els=root.querySelectorAll('.card,.lib-item,.journey,.jentry,.stat,.section-title,.banner,.intention');els.forEach(function(el,i){if(el.classList.contains('reveal'))return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*55,420)+'ms';if(ob)ob.observe(el);else el.classList.add('in');});}
 /* ===== Spirituelle Symbole (Hintergrund) ===== */
 function initCosmosBg(){if(document.getElementById('cosmosBg'))return;const syms=['✴','✦','⚛','☽','✨','ॐ','✪','◯','☸','✧'];const bg=document.createElement('div');bg.id='cosmosBg';let html='';for(let i=0;i<18;i++){const s=syms[i%syms.length];const left=Math.random()*100;const dur=18+Math.random()*26;const delay=-Math.random()*44;const size=14+Math.random()*30;html+=`<span style="left:${left}%;bottom:-12vh;font-size:${size}px;animation-duration:${dur}s;animation-delay:${delay}s">${s}</span>`;}bg.innerHTML=html;document.body.insertBefore(bg,document.body.firstChild);}
 /* ===== Parallax (Hero-Ornament) ===== */
-function initParallax(){window.addEventListener('scroll',function(){const y=window.scrollY;const els=document.querySelectorAll('#app .ornament');for(let i=0;i<els.length;i++)els[i].style.transform='translateY('+(y*0.12).toFixed(1)+'px)';
-  const arts=document.querySelectorAll('#app .detail-art');for(let j=0;j<arts.length;j++){const r=arts[j].getBoundingClientRect();arts[j].style.transform='translateY('+((r.top-200)*-0.05).toFixed(1)+'px)';}},{passive:true});}
-/* ===== Scroll-Fortschritt (Gold-Linie oben) ===== */
-function initScrollProgress(){if(document.getElementById('scrollProg'))return;const bar=document.createElement('div');bar.id='scrollProg';document.body.appendChild(bar);
-  let ticking=false;const upd=function(){const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?Math.min(100,(window.scrollY/h)*100):0;bar.style.width=p.toFixed(2)+'%';ticking=false;};
-  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(upd);ticking=true;}},{passive:true});upd();}
+function initParallax(){window.addEventListener('scroll',function(){const y=window.scrollY;const els=document.querySelectorAll('#app .ornament');for(let i=0;i<els.length;i++)els[i].style.transform='translateY('+(y*0.12).toFixed(1)+'px)';},{passive:true});}
 /* ===== Sanftes Einblenden ===== */
 function animEnter(){const a=document.getElementById('app');if(!a)return;a.classList.remove('app-enter');void a.offsetWidth;a.classList.add('app-enter');makeAccordions(a);}
 function makeAccordions(scope){if(!scope)return;scope.querySelectorAll('.card').forEach(function(card){if(card._acc)return;const labels=card.querySelectorAll(':scope > .block-label');if(labels.length<4)return;card._acc=true;const hint=document.createElement('div');hint.className='acc-hint';hint.textContent='tippe einen Abschnitt zum Auf- und Zuklappen';card.insertBefore(hint,labels[0]);labels.forEach(function(lab,i){lab.classList.add('acc-h');if(i===0)lab.classList.add('acc-first');const body=lab.nextElementSibling;const hasBody=body&&!body.classList.contains('block-label')&&!body.classList.contains('actions');if(hasBody)body.classList.add('acc-b');if(i>0){lab.classList.add('collapsed');if(hasBody)body.classList.add('acc-hidden');}});});}
@@ -2132,7 +1697,6 @@ const ICONS={
  wand:'<path d="M4.5 19.5 14 10"/><path d="M18 3.8l.7 1.7 1.7.7-1.7.7-.7 1.7-.7-1.7-1.7-.7 1.7-.7z"/><path d="M14.5 9.5l1 1"/>',
  heart:'<path d="M12 20.4s-7.2-4.7-7.2-9.4A3.9 3.9 0 0 1 12 8.1a3.9 3.9 0 0 1 7.2 2.9c0 4.7-7.2 9.4-7.2 9.4z"/>',
  search:'<circle cx="11" cy="11" r="6"/><path d="M15.6 15.6 20 20"/>',
- palette:'<path d="M12 3a9 9 0 0 0 0 18c1.3 0 2-.8 2-1.9 0-1.2-1-1.6-1-2.6 0-.8.7-1.4 1.5-1.4H17a4 4 0 0 0 4-4c0-4.6-4-8.1-9-8.1z"/><circle cx="7.5" cy="11" r="1"/><circle cx="12" cy="7.6" r="1"/><circle cx="16.5" cy="11" r="1"/>',
  lantern:'<path d="M12 2.4v2"/><path d="M12 19.6v2"/><ellipse cx="12" cy="12" rx="5.6" ry="7.2"/><path d="M6.6 8h10.8M6.6 16h10.8"/><path d="M12 4.8c-2.6 0-3.4 7.2 0 7.2s2.6-7.2 0-7.2z" opacity=".5"/>',
  cards:'<rect x="6" y="6.5" width="8.4" height="12" rx="1.5" transform="rotate(-9 10.2 12.5)"/><rect x="9.6" y="5.5" width="8.4" height="12" rx="1.5" transform="rotate(9 13.8 11.5)"/><path d="M13.8 9l.7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z"/>'
 };
@@ -2140,16 +1704,16 @@ function icon(n){return '<svg class="ic-svg" viewBox="0 0 24 24" fill="none" str
 function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(e){e.innerHTML=icon(e.getAttribute('data-icon'));});}
 
 /* ===== ZUGRIFF (Stripe-Abo-Check via Cloudflare Worker) ===== */
-const GATE_URL = "";
+const GATE_URL = "https://spring-sound-7125.service-vpstore.workers.dev";
 const GATE_DAYS = 1;
 function gateState(){const g=store.get("access",null);if(!g||!g.email)return "locked";if(Date.now()-(g.ts||0) > GATE_DAYS*86400000)return "recheck";return "ok";}
 function startGate(){ if(!GATE_URL){ onboard(); return; } const st=gateState(); if(st==="ok"){ onboard(); return; } if(st==="recheck"){ const g=store.get("access",null); gateVerify(g.email,true); return; } showGate(); }
 function showGate(msg){ if(document.getElementById('gateOv'))return; const ov=document.createElement('div');ov.className='overlay';ov.id='gateOv';
-  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen zur\u00fcck</h2><p>Gib die E-Mail ein, mit der du dein Abo abgeschlossen hast.</p><input id="gateEmail" type="email" placeholder="deine@email.de" autocomplete="email"><div class="save-hint" id="gateMsg" style="color:var(--gold);min-height:18px">${msg||''}</div><button class="btn gold" onclick="gateSubmit()">Freischalten</button><p style="font-size:12px;color:var(--ink-fade);margin-top:10px">Noch kein Abo? <a href="index.html" style="color:var(--accent)">Hier Mitglied werden</a></p></div>`;
+  ov.innerHTML=`<div class="modal"><div class="logo" style="font-size:24px">Seelen<span>raum</span></div><h2>Willkommen zur\u00fcck</h2><p>Gib die E-Mail ein, mit der du dein Abo abgeschlossen hast, oder deinen Zugangscode.</p><input id="gateEmail" type="text" placeholder="deine@email.de oder Zugangscode" autocomplete="off"><div class="save-hint" id="gateMsg" style="color:var(--gold);min-height:18px">${msg||''}</div><button class="btn gold" onclick="gateSubmit()">Freischalten</button><p style="font-size:12px;color:var(--ink-fade);margin-top:10px">Noch kein Abo? <a href="index.html" style="color:var(--accent)">Hier Mitglied werden</a></p></div>`;
   document.body.appendChild(ov);setTimeout(()=>{const e=document.getElementById('gateEmail');if(e)e.focus();},80);
   const inp=document.getElementById('gateEmail'); if(inp)inp.addEventListener('keydown',function(ev){if(ev.key==='Enter')gateSubmit();}); }
 function gateMsg(t){const m=document.getElementById('gateMsg');if(m)m.textContent=t;}
-function gateSubmit(){const e=document.getElementById('gateEmail');const email=(e?e.value:'').trim();if(!email||email.indexOf('@')<0){gateMsg("Bitte g\u00fcltige E-Mail eingeben");return;}gateMsg("Pr\u00fcfe \u2026");gateVerify(email,false);}
+function gateSubmit(){const e=document.getElementById('gateEmail');const email=(e?e.value:'').trim();if(!email){gateMsg("Bitte E-Mail oder Zugangscode eingeben");return;}gateMsg("Pr\u00fcfe \u2026");gateVerify(email,false);}
 async function gateVerify(email,silent){
   try{ const r=await fetch(GATE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})}); const d=await r.json();
     if(d&&d.access){ store.set("access",{email:email.toLowerCase(),ts:Date.now()}); const o=document.getElementById('gateOv'); if(o)o.remove(); if(!document.getElementById('app').innerHTML.trim()) onboard(); }
@@ -2273,7 +1837,7 @@ function chooseCompanion(id){store.set("companion",id);const o=document.getEleme
 
 /* ===== ROUTER ===== */
 let current='heute';let _hist=[],_goingBack=false;function goBack(){if(_hist.length){_goingBack=true;render(_hist.pop());}}
-function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','china','orakel','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview','chinaview','traumdeutung','schattenarbeit','inneres-kind','tarot','affirmationen','reinigung','intuition','dankbarkeit','vergebung','selbstliebe','akasha','seelenplan','bereichview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg'||v==='mandala')return 'weg';if(v==='heute')return 'heute';return '';}
+function tabFor(v){if(['meditationen','atem','rituale','klang','reisen','praxis','medplay','ritualview','reise'].includes(v))return 'praxis';if(['impulse','neu','detail'].includes(v))return 'impulse';if(['kosmos','mond','astro','num','mani','chakra','kristalle','engel','tier','wissen','china','orakel','signview','methodview','chakraview','mondphase','kristallview','engelview','tierview','wissenview','chinaview','traumdeutung','schattenarbeit','inneres-kind','tarot','affirmationen','reinigung','intuition','dankbarkeit','vergebung','selbstliebe','akasha','seelenplan','bereichview'].includes(v))return 'kosmos';if(v==='tagebuch')return 'tagebuch';if(v==='weg')return 'weg';if(v==='heute')return 'heute';return '';}
 function render(view){
   const prevView=current;const prevScroll=window.scrollY;
   if(view!==prevView){if(_goingBack)_goingBack=false;else{_hist.push(prevView);if(_hist.length>60)_hist.shift();}}
@@ -2282,7 +1846,7 @@ function render(view){
   /* Klang darf bereichsübergreifend weiterspielen */
   current=view;const tb=tabFor(view);
   document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.view===tb));
-  const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen,china:viewChina,orakel:viewOrakel,mandala:(typeof viewMandala==='function'?viewMandala:viewHeute)}[view];
+  const v={heute:viewHeute,neu:viewNeu,impulse:viewImpulse,praxis:viewPraxis,meditationen:viewMeditationen,atem:viewAtem,rituale:viewRituale,klang:viewKlang,mond:viewMond,reisen:viewReisen,tagebuch:viewTagebuch,weg:viewWeg,favoriten:viewFavoriten,kosmos:viewKosmos,astro:viewAstro,num:viewNum,mani:viewMani,chakra:viewChakra,kristalle:viewKristalle,engel:viewEngel,tier:viewTier,wissen:viewWissen,china:viewChina,orakel:viewOrakel}[view];
   document.getElementById('app').innerHTML=v?v():(NEUE_BEREICHE[view]?viewBereich(view):viewHeute());companionOnRender(view);
   initCarousels(document.getElementById('app'));
   var _bb=document.getElementById('backBtn');if(_bb)_bb.style.display=_hist.length?'inline-flex':'none';
@@ -2296,19 +1860,8 @@ document.querySelectorAll('.nav-top button,.tabbar button').forEach(b=>b.addEven
 document.addEventListener('keydown',function(e){if(e.key==='Enter'){const a=document.activeElement;if(a&&a.classList&&(a.classList.contains('lib-item')||a.classList.contains('sound')||a.classList.contains('mood')||a.classList.contains('draw-back')||a.classList.contains('rstep')||a.classList.contains('zsign'))){e.preventDefault();a.click();}}});
 (function(){const f=document.getElementById('favBtn');if(f)f.addEventListener('click',()=>render('favoriten'));})();
 /* ===== Theme / Install / Onboarding ===== */
-const THEMES=[
- {id:"licht",name:"Tageslicht",sub:"warmes Cremeweiß",sw:["#f7f2ea","#b08d57","#8a76a8"]},
- {id:"rose",name:"Morgenröte",sub:"sanftes Rosé",sw:["#f8efe9","#c08552","#bd7a86"]},
- {id:"nacht",name:"Mondnacht",sub:"tiefes Violett",sw:["#16111e","#d8b87e","#c4b0e2"]},
- {id:"kosmos",name:"Sternenmeer",sub:"kosmisches Indigo",sw:["#0c1022","#cdb78a","#7e9ad6"]}
-];
-function applyTheme(t){const map={light:"licht",dark:"nacht"};t=map[t]||t;if(!THEMES.find(x=>x.id===t))t="licht";document.documentElement.setAttribute("data-theme",t);const b=document.getElementById("themeToggle");if(b)b.innerHTML=icon('palette');return t;}
-function setTheme(id){const t=applyTheme(id);store.set("theme",t);const o=document.getElementById('themeOv');if(o)o.remove();const th=THEMES.find(x=>x.id===t);if(th)toast("Design: "+th.name+" ✦");}
-function showThemePicker(){if(document.getElementById('themeOv'))return;const cur=document.documentElement.getAttribute('data-theme');
-  const ov=document.createElement('div');ov.className='overlay';ov.id='themeOv';
-  ov.innerHTML=`<div class="modal" style="max-width:440px"><div class="logo" style="font-size:22px">Seelen<span>raum</span></div><h2 style="font-size:24px">Wähle dein Design</h2><p>Vier handverlesene Stimmungen für deinen Raum.</p><div class="theme-grid">`+THEMES.map(t=>`<button class="theme-card${t.id===cur?' sel':''}" onclick="setTheme('${t.id}')"><span class="theme-sw">${t.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</span><span class="theme-nm">${t.name}</span><span class="theme-tg">${t.sub}</span></button>`).join('')+`</div><button class="skip" onclick="closeOverlay(this)">schließen</button></div>`;
-  document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});}
-(function initTheme(){let t=store.get("theme",null);if(!t)t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"nacht":"licht";applyTheme(t);const btn=document.getElementById("themeToggle");if(btn){btn.setAttribute("title","Design wählen");btn.setAttribute("aria-label","Design wählen");btn.addEventListener("click",showThemePicker);}})();
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);const b=document.getElementById("themeToggle");if(b)b.innerHTML=t==="dark"?icon('sun'):icon('moon');}
+(function initTheme(){let t=store.get("theme",null);if(!t)t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";applyTheme(t);const btn=document.getElementById("themeToggle");if(btn)btn.addEventListener("click",()=>{const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";store.set("theme",cur);applyTheme(cur);});})();
 let deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const b=document.getElementById('installBanner');if(b)b.style.display='flex';});
 (function(){const btn=document.getElementById('installBtn');if(btn)btn.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();try{await deferredPrompt.userChoice;}catch(e){}deferredPrompt=null;const b=document.getElementById('installBanner');if(b)b.style.display='none';});})();
@@ -2319,7 +1872,7 @@ function onboard(){if(store.get("onboarded",false)){updateHeader();render('heute
   document.body.appendChild(ov);window._ov=ov;setTimeout(()=>{const el=document.getElementById('nameIn');if(el)el.focus();},100);}
 function finishOnboard(){const el=document.getElementById('nameIn');if(el&&el.value.trim()){state.name=el.value.trim();store.set("name",state.name);}const bd=document.getElementById('bdIn2');if(bd&&bd.value)store.set("birthdate",bd.value);const it=document.getElementById('intIn');if(it&&it.value.trim()){state.intention={text:it.value.trim(),week:weekKey};store.set("intention",state.intention);}store.set("onboarded",true);if(window._ov)window._ov.remove();updateHeader();render('heute');}
 function resetAll(){if(confirm("Alle deine Daten (Name, Tagebuch, Stimmung, Streak, Favoriten, Reisen) zurücksetzen?")){["name","favs","streak","lastDone","journey","journal","moods","days","intention","birthdate","birthYear","freejournal","notes","access","companion","onboarded","theme"].forEach(k=>localStorage.removeItem("sr_"+k));location.reload();}}
-fillIcons();initCosmosBg();initParallax();initScrollProgress();startGate();
+fillIcons();initCosmosBg();initParallax();startGate();
 </script>
 <script id="fable5-enhance">
 /* ============================================================
@@ -2331,7 +1884,7 @@ fillIcons();initCosmosBg();initParallax();initScrollProgress();startGate();
 var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var FINE=window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-/* --- Scroll-Reveal v2: mehr Elemente, native Transitions bleiben erhalten --- */
+/* ---------- 1) Scroll-Reveal v2: mehr Elemente, native Transitions bleiben erhalten ---------- */
 window.applyReveal=function(scope){
   var root=scope||document.getElementById('app');if(!root)return;
   var ob=revealObserver();
@@ -2346,7 +1899,7 @@ window.applyReveal=function(scope){
   });
 };
 
-/* --- Toast v2 --- */
+/* ---------- 2) Toast v2: Verlauf, Feder-Einflug ---------- */
 window.toast=function(msg){
   var old=document.querySelector('.f5-toast');if(old)old.remove();
   var t=document.createElement('div');t.className='f5-toast';t.setAttribute('role','status');t.textContent=msg;
@@ -2355,7 +1908,7 @@ window.toast=function(msg){
   setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},400);},1800);
 };
 
-/* --- Ripple --- */
+/* ---------- 3) Ripple auf allen tappbaren Flächen ---------- */
 document.addEventListener('pointerdown',function(e){
   if(REDUCED)return;
   var el=e.target.closest&&e.target.closest('.btn,.tile,.sound,.zsign,.mood,.kt-item,.tabbar button,.nav-top button,.filters button,.style-chips button,.banner button,.install-banner button,.comp-pick');
@@ -2367,7 +1920,7 @@ document.addEventListener('pointerdown',function(e){
   el.appendChild(s);setTimeout(function(){s.remove();},600);
 },{passive:true});
 
-/* --- 3D-Tilt (Desktop) --- */
+/* ---------- 4) 3D-Tilt für Karten (nur Desktop, nur mit Maus) ---------- */
 if(FINE&&!REDUCED){
   var tiltSel='.orakel-card,.flip3d,.draw-card,.c3d-item.center .c3d-card';
   document.addEventListener('pointerover',function(e){
@@ -2389,7 +1942,7 @@ if(FINE&&!REDUCED){
   });
 }
 
-/* --- Count-Up für Statistik-Zahlen --- */
+/* ---------- 5) Count-Up für Statistik-Zahlen ---------- */
 function f5CountUp(root){
   if(REDUCED)return;
   (root||document).querySelectorAll('.stat .num').forEach(function(el){
@@ -2406,7 +1959,7 @@ function f5CountUp(root){
   });
 }
 
-/* --- Sparkle-Burst bei Abschlüssen --- */
+/* ---------- 6) Sparkle-Burst bei Abschlüssen ---------- */
 function f5Burst(){
   if(REDUCED)return;
   var syms=['✦','✧','✨','·'];
@@ -2431,16 +1984,34 @@ function f5Burst(){
 var _mp=window.markPractice;window.markPractice=function(msg){_mp(msg);f5Burst();};
 var _md=window.markDone;window.markDone=function(msg){_md(msg);f5Burst();};
 
-/* --- Theme-Wechsel weich überblenden + Browserleisten-Farbe --- */
+/* ---------- 7) Theme-Wechsel weich überblenden ---------- */
 var _at=window.applyTheme;window.applyTheme=function(t){
   var h=document.documentElement;h.classList.add('f5-theme-anim');
   _at(t);
-  requestAnimationFrame(function(){
-    var bg=getComputedStyle(document.body).backgroundColor;
-    if(bg&&bg!=='rgba(0, 0, 0, 0)')document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',bg);});
-  });
   clearTimeout(window._f5tt);window._f5tt=setTimeout(function(){h.classList.remove('f5-theme-anim');},600);
 };
+
+/* ---------- 8) Render-Hook: Count-Up nach jedem Ansichtswechsel ---------- */
+var _render=window.render;window.render=function(v){
+  _render(v);
+  f5CountUp(document.getElementById('app'));
+};
+f5CountUp(document.getElementById('app'));
+})();
+/* ============================================================
+   STUFE 2 — View-Transitions, Tab-Pille, Equalizer, Parallax
+   ============================================================ */
+(function(){
+"use strict";
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var FINE=window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* --- Scroll-Fortschrittsbalken --- */
+var pb=document.createElement('div');pb.className='f5-progressbar';document.body.appendChild(pb);
+var _pbTick=false;
+function updPb(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;
+  pb.style.transform='scaleX('+(max>0?(window.scrollY/max).toFixed(4):0)+')';_pbTick=false;}
+window.addEventListener('scroll',function(){if(!_pbTick){_pbTick=true;requestAnimationFrame(updPb);}},{passive:true});
 
 /* --- Gleitende Tab-Pille --- */
 var tb=document.getElementById('tabbar'),pill=null;
@@ -2473,18 +2044,13 @@ var _ukb=window.updateKlangBar;window.updateKlangBar=function(){_ukb();
 var _r=window.render;
 window.render=function(v){
   var changed=false;try{changed=(v!==current);}catch(e){}
-  var go=function(){_r(v);f5CountUp(document.getElementById('app'));updPill();heroDots();setTimeout(updPill,400);};
+  var go=function(){_r(v);updPill();heroDots();};
   if(changed&&!REDUCED&&navigator.vibrate){try{navigator.vibrate(6);}catch(e){}}
-  if(changed&&!REDUCED&&document.startViewTransition){
-    try{var _vt=document.startViewTransition(go);
-      if(_vt){if(_vt.finished&&_vt.finished.catch)_vt.finished.catch(function(){});
-        if(_vt.ready&&_vt.ready.catch)_vt.ready.catch(function(){});
-        if(_vt.updateCallbackDone&&_vt.updateCallbackDone.catch)_vt.updateCallbackDone.catch(function(){});}
-    }catch(e){go();}}
+  if(changed&&!REDUCED&&document.startViewTransition){try{document.startViewTransition(go);}catch(e){go();}}
   else go();
 };
 
-/* --- Maus-Parallax für kosmische Symbole (Desktop) --- */
+/* --- Maus-Parallax für die kosmischen Symbole (Desktop) --- */
 if(FINE&&!REDUCED){
   var bg=document.getElementById('cosmosBg'),_pTick=false,_mx=0,_my=0;
   document.addEventListener('pointermove',function(e){
@@ -2494,372 +2060,14 @@ if(FINE&&!REDUCED){
   },{passive:true});
 }
 
-/* --- Fokus-Schreiben: beim Schreiben tritt alles andere zurück --- */
-document.addEventListener('focusin',function(e){
-  if(e.target&&e.target.classList&&e.target.classList.contains('journal'))document.body.classList.add('f5-write');
-});
-document.addEventListener('focusout',function(e){
-  if(e.target&&e.target.classList&&e.target.classList.contains('journal'))
-    setTimeout(function(){var a=document.activeElement;
-      if(!a||!a.classList||!a.classList.contains('journal'))document.body.classList.remove('f5-write');},120);
-});
-
-/* --- Sternschnuppen: selten, leise, nur ohne Reduced-Motion --- */
-if(!REDUCED){(function shoot(){
-  setTimeout(function(){
-    if(document.hidden){shoot();return;}
-    var s=document.createElement('span');s.className='f5-shoot';
-    s.style.left=(25+Math.random()*55)+'%';s.style.top=(8+Math.random()*30)+'%';
-    document.body.appendChild(s);
-    try{s.animate([
-      {transform:'translate(0,0) rotate(150deg)',opacity:0},
-      {opacity:.9,offset:.15},
-      {transform:'translate(-260px,150px) rotate(150deg)',opacity:0}
-    ],{duration:1300,easing:'ease-out'});}catch(e){}
-    setTimeout(function(){s.remove();},1400);
-    shoot();
-  },16000+Math.random()*20000);
-})();}
+/* --- Theme-Color der Browserleiste mitwechseln --- */
+var _at2=window.applyTheme;window.applyTheme=function(t){_at2(t);
+  document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){
+    m.setAttribute('content',t==='dark'?'#1b1722':'#f4ede7');});};
 
 /* --- Initial --- */
-f5CountUp(document.getElementById('app'));updPill();heroDots();
-})();
-/* ============================================================
-   STUFE 5 — Persönlicher Faden: Weitermachen, Wochen-Rückblick
-   ============================================================ */
-(function(){
-"use strict";
-var LABELS={meditationen:'Meditationen',atem:'Atempausen',rituale:'Rituale',klang:'Klangraum',reisen:'Reisen',mond:'Mondkalender',astro:'Astrologie',num:'Numerologie',mani:'Manifestation',chakra:'Chakren',kristalle:'Kristalle',engel:'Engelszahlen',tier:'Krafttiere',wissen:'Wissen',china:'Chinesische Tierzeichen',orakel:'Orakel',tagebuch:'Tagebuch',impulse:'Impulse'};
-function week(){
-  var out={days:0,entries:0,moods:[]};var now=Date.now();
-  for(var i=0;i<7;i++){var d=new Date();d.setDate(d.getDate()-i);var k=d.toISOString().slice(0,10);
-    if(state.days&&state.days.indexOf(k)>=0)out.days++;
-    if(state.moods&&state.moods[k]!==undefined)out.moods.push(state.moods[k]);}
-  var cnt=0;
-  Object.keys(state.journal||{}).forEach(function(id){if(now-state.journal[id].ts<7*86400000)cnt++;});
-  (state.freejournal||[]).forEach(function(e){if(now-e.ts<7*86400000)cnt++;});
-  out.entries=cnt;return out;
-}
-function decorate(v){
-  var app=document.getElementById('app');if(!app)return;
-  if(LABELS[v])store.set('lastSection',v);
-  var view=app.querySelector('.view')||app;
-  if(v==='heute'){
-    var last=store.get('lastSection',null);
-    if(last&&LABELS[last]&&!document.getElementById('f5Resume')){
-      var el=document.createElement('div');el.id='f5Resume';el.className='f5-resume';
-      el.innerHTML='<span><span class="fr-l">Weitermachen</span><br>'+LABELS[last]+'</span><span style="color:var(--accent-deep);font-size:20px">→</span>';
-      el.addEventListener('click',function(){render(last);});
-      var ref=view.children[1]||null;view.insertBefore(el,ref);
-    }
-  }
-  if(v==='weg'&&!document.getElementById('f5Week')){
-    var w=week();
-    var moodTxt=w.moods.length?(function(){var a=w.moods.reduce(function(x,y){return x+y;},0)/w.moods.length;return a>=3?'hell ☀':a>=1.8?'gemischt ☁':'sanft & leise ☾';})():'–';
-    var c=document.createElement('div');c.id='f5Week';c.className='card';
-    c.innerHTML='<div class="block-label">Deine letzte Woche</div><div class="f5-week-row">'
-      +'<div class="f5-week-item"><div class="f5-week-num">'+w.days+'</div><div class="f5-week-lbl">Praxis-Tage</div></div>'
-      +'<div class="f5-week-item"><div class="f5-week-num">'+w.entries+'</div><div class="f5-week-lbl">Einträge</div></div>'
-      +'<div class="f5-week-item"><div class="f5-week-num" style="font-size:18px;line-height:1.7">'+moodTxt+'</div><div class="f5-week-lbl">Stimmung</div></div></div>';
-    var hero=view.querySelector('.hero');
-    if(hero&&hero.parentNode)hero.parentNode.insertBefore(c,hero.nextSibling);
-    else view.insertBefore(c,view.children[1]||null);
-  }
-}
-var _r5=window.render;window.render=function(v){_r5(v);
-  var run=function(){try{decorate(v);}catch(e){}};
-  run();setTimeout(run,150);setTimeout(run,550);};
-document.addEventListener('input',function(e){
-  if(e.target&&e.target.id==='tbText'){
-    var card=e.target.closest('.card');if(!card)return;
-    var b=card.querySelector('.btn.gold');if(b)b.classList.toggle('f5-ready',e.target.value.trim().length>0);
-  }
-});
-try{decorate(current);}catch(e){}
-})();
-/* ============================================================
-   PREMIUM — Seelen-Mandala · Abendtor · Seelen-Jahrbuch
-   ============================================================ */
-(function(){
-"use strict";
-var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- Seed & Zufall (deterministisch aus Name+Geburtsdatum) ---------- */
-function f5pSeed(){var n=(state.name||'Seele').trim().toLowerCase();var b=store.get('birthdate','1990-01-01');var s=n+'|'+b;
-  var h=1779033703^s.length;for(var i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19;}return h>>>0;}
-function f5pRng(seed){var a=seed;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-window.f5pLifeNum=function(){var bd=store.get('birthdate','');var dig=(bd||'').replace(/[^0-9]/g,'');
-  if(!dig)return 7;var s=dig.split('').reduce(function(a,b){return a+parseInt(b,10);},0);
-  return (typeof reduceNum==='function')?reduceNum(s):((s-1)%9)+1;};
-
-var F5P_PAL=[
- {bg1:'#241f3d',bg2:'#0e0c1c',line:'#cdb9ee',glow:'rgba(170,140,235,.8)',gold:'#e8c98f',soft:'rgba(205,185,238,.30)'},
- {bg1:'#1e2a35',bg2:'#0a1016',line:'#bfe3da',glow:'rgba(120,210,190,.7)',gold:'#e8c98f',soft:'rgba(190,225,215,.28)'},
- {bg1:'#2f1f33',bg2:'#140a16',line:'#eec7dd',glow:'rgba(230,150,200,.65)',gold:'#f0d3a0',soft:'rgba(238,199,221,.28)'},
- {bg1:'#26203f',bg2:'#0d0b1a',line:'#c9c2f2',glow:'rgba(150,140,240,.75)',gold:'#ffd9a0',soft:'rgba(200,192,242,.28)'},
- {bg1:'#332714',bg2:'#150f06',line:'#f2ddb0',glow:'rgba(240,200,120,.7)',gold:'#f6e2b8',soft:'rgba(242,221,176,.28)'}];
-
-/* ---------- Der Mandala-Maler ---------- */
-function f5pPetal(x,r0,r1,hw){x.beginPath();x.moveTo(r0,0);
-  x.bezierCurveTo(r0+(r1-r0)*.30,-hw,r0+(r1-r0)*.72,-hw,r1,0);
-  x.bezierCurveTo(r0+(r1-r0)*.72,hw,r0+(r1-r0)*.30,hw,r0,0);x.closePath();}
-function f5pDraw(x,S,opts){
-  opts=opts||{};var seed=f5pSeed();var R=f5pRng(seed);
-  var pal=F5P_PAL[seed%F5P_PAL.length];
-  var p=[8,10,12,14,16][Math.floor(R()*5)];
-  var rot0=R()*Math.PI;var life=f5pLifeNum();var starN=Math.max(5,Math.min(12,life+3));
-  var cx=S/2,cy=S/2;
-  if(!opts.noBg){var g=x.createRadialGradient(cx,cy*0.8,S*0.05,cx,cy,S*0.75);
-    g.addColorStop(0,pal.bg1);g.addColorStop(1,pal.bg2);
-    x.fillStyle=g;x.fillRect(0,0,S,S);
-    for(var st=0;st<80;st++){x.globalAlpha=0.12+R()*0.5;x.fillStyle='#fff';
-      var sx=R()*S,sy=R()*S,sr=R()*S*0.0022+S*0.0006;
-      x.beginPath();x.arc(sx,sy,sr,0,7);x.fill();}
-    x.globalAlpha=1;}
-  x.save();x.translate(cx,cy);
-  x.lineWidth=Math.max(1,S*0.0022);x.shadowColor=pal.glow;x.shadowBlur=S*0.02;
-  /* Außenring + Gradmarken */
-  x.strokeStyle=pal.line;x.globalAlpha=.9;
-  x.beginPath();x.arc(0,0,S*0.455,0,7);x.stroke();
-  x.globalAlpha=.5;x.beginPath();x.arc(0,0,S*0.435,0,7);x.stroke();
-  x.globalAlpha=.85;
-  for(var t=0;t<p*3;t++){var a=rot0+t*2*Math.PI/(p*3);
-    x.save();x.rotate(a);x.beginPath();x.moveTo(S*0.437,0);x.lineTo(S*0.453,0);x.stroke();x.restore();}
-  /* Punktkranz */
-  for(var d=0;d<p*2;d++){var ad=rot0+d*Math.PI/p;
-    x.save();x.rotate(ad);x.fillStyle=(d%2?pal.gold:pal.line);
-    x.beginPath();x.arc(S*0.478,0,S*(d%2?0.007:0.0045),0,7);x.fill();x.restore();}
-  /* Drei Blütenkränze */
-  var rings=[[S*0.245,S*0.425,S*0.052,0,.95],[S*0.16,S*0.315,S*0.045,Math.PI/p,.7],[S*0.09,S*0.215,S*0.035,0,.55]];
-  rings.forEach(function(rg,ri){
-    for(var i=0;i<p;i++){x.save();x.rotate(rot0+rg[3]+i*2*Math.PI/p);
-      f5pPetal(x,rg[0],rg[1],rg[2]);
-      x.globalAlpha=rg[4]*0.16;x.fillStyle=ri===1?pal.gold:pal.line;x.fill();
-      x.globalAlpha=rg[4];x.strokeStyle=ri===1?pal.gold:pal.line;x.stroke();x.restore();}});
-  /* Innerer Stern (Lebenszahl) */
-  x.globalAlpha=.95;x.strokeStyle=pal.gold;x.beginPath();
-  for(var sN=0;sN<=starN*2;sN++){var ra=(sN%2===0)?S*0.135:S*0.062;
-    var aa=rot0+Math.PI/2+sN*Math.PI/starN;
-    var px=Math.cos(aa)*ra,py=Math.sin(aa)*ra;
-    if(sN===0)x.moveTo(px,py);else x.lineTo(px,py);}
-  x.closePath();x.stroke();
-  x.globalAlpha=.12;x.fillStyle=pal.gold;x.fill();x.globalAlpha=1;
-  /* Zentrum: Mondsichel oder Sonnenkern */
-  var moon=(seed%2===0);
-  if(moon){x.fillStyle=pal.line;x.beginPath();x.arc(0,0,S*0.040,0,7);x.fill();
-    x.fillStyle=pal.bg2;x.beginPath();x.arc(S*0.016,-S*0.008,S*0.034,0,7);x.fill();}
-  else{var sg=x.createRadialGradient(0,0,0,0,0,S*0.045);
-    sg.addColorStop(0,'#fff');sg.addColorStop(1,pal.gold);
-    x.fillStyle=sg;x.beginPath();x.arc(0,0,S*0.036,0,7);x.fill();
-    for(var ry=0;ry<8;ry++){x.save();x.rotate(rot0+ry*Math.PI/4);
-      x.strokeStyle=pal.gold;x.beginPath();x.moveTo(S*0.048,0);x.lineTo(S*0.062,0);x.stroke();x.restore();}}
-  x.restore();
-  return pal;}
-function f5pPaint(id,S){var c=document.getElementById(id);if(!c)return;
-  var x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);f5pDraw(x,c.width);}
-
-/* ---------- Mandala-Ansicht ---------- */
-window.viewMandala=function(){
-  var name=(state.name||'').trim();var bd=store.get('birthdate','');
-  var html='<div class="view sec-kosmos"><div class="hero hero-mandala"><div class="ornament"></div><div class="he">Nur einmal im Universum</div><h2>Dein Seelen-Mandala</h2><p>aus deinem Namen und Geburtsdatum gewoben</p></div>';
-  if(!bd){html+='<div class="card" style="text-align:center"><p style="color:var(--ink-soft);margin-bottom:14px">Dein Mandala entsteht aus deinem Namen und deinem Geburtsdatum. Trag beides in den Einstellungen ein – dann webt Seelenraum dein persönliches Zeichen.</p><div class="actions" style="justify-content:center"><button class="btn solid" onclick="openSettings()">Einstellungen öffnen</button></div></div>';}
-  else{html+='<div class="card" style="text-align:center"><canvas id="f5pCanvas" width="720" height="720" style="width:100%;max-width:420px;border-radius:24px;box-shadow:var(--shadow)"></canvas>'
-    +'<div class="tb-meta" style="justify-content:center;margin-top:10px"><span>'+escHtml(name||'Deine Seele')+' · Lebenszahl '+f5pLifeNum()+'</span></div>'
-    +'<div class="actions"><button class="btn solid" onclick="f5pWallpaper()">Handy-Hintergrund ⇩</button><button class="btn" onclick="f5pSquare()">Bild speichern ⇩</button></div>'
-    +'<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--ink-fade);letter-spacing:.5px;margin-top:10px">Kein Zufall: dieselben Daten ergeben für immer genau dieses Mandala. Es ist deins.</p></div>';
-    html+='<div class="card erkl"><div class="block-label">Was du siehst</div><div>Die Blütenkränze tragen die Schwingung deines Namens, der innere Stern folgt deiner Lebenszahl, der Kern zeigt deine Nachtseite oder dein Sonnenlicht. Nutze es als Fokuspunkt in der Meditation – oder trage es als Sperrbildschirm bei dir.</div></div>';}
-  return html+'</div>';};
-
-function f5pDl(canvas,fname){var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=fname;document.body.appendChild(a);a.click();a.remove();toast('Gespeichert ✦');}
-window.f5pWallpaper=function(){
-  var W=1170,H=2532,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext('2d');
-  var seed=f5pSeed(),R=f5pRng(seed^99),pal=F5P_PAL[seed%F5P_PAL.length];
-  var g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,pal.bg1);g.addColorStop(1,pal.bg2);
-  x.fillStyle=g;x.fillRect(0,0,W,H);
-  for(var i=0;i<170;i++){x.globalAlpha=0.1+R()*0.55;x.fillStyle='#fff';
-    x.beginPath();x.arc(R()*W,R()*H,R()*2.1+0.5,0,7);x.fill();}
-  x.globalAlpha=1;
-  var m=document.createElement('canvas');m.width=m.height=1040;f5pDraw(m.getContext('2d'),1040,{noBg:true});
-  x.drawImage(m,(W-1040)/2,H*0.185);
-  var name=(state.name||'').trim();
-  x.textAlign='center';x.fillStyle=pal.line;x.globalAlpha=.9;
-  x.font='64px "Instrument Serif", Georgia, serif';
-  if(name)x.fillText(name,W/2,H*0.70);
-  x.globalAlpha=.55;x.font='28px Arial';
-  var brand='S E E L E N R A U M';x.fillText(brand,W/2,H*0.93);
-  f5pDl(c,'seelen-mandala-wallpaper.png');};
-window.f5pSquare=function(){
-  var S=2048,c=document.createElement('canvas');c.width=c.height=S;
-  f5pDraw(c.getContext('2d'),S);f5pDl(c,'seelen-mandala.png');};
-
-/* ---------- Seelen-Jahrbuch ---------- */
-window.f5pJahrbuch=function(){
-  var impE=Object.keys(state.journal).map(function(id){var e=state.journal[id];var imp=INHALTE.find(function(i){return i.id===id;});return imp?{text:e.text,ts:e.ts,titel:imp.titel,thema:imp.thema,aff:imp.affirmation}:null;}).filter(Boolean);
-  var freeE=(state.freejournal||[]).map(function(e){return {text:e.text,ts:e.ts,titel:e.prompt||'Freier Eintrag',thema:e.prompt?'Impuls':'Eigener Eintrag',aff:null};});
-  var entries=impE.concat(freeE).sort(function(a,b){return a.ts-b.ts;});
-  var favs=(state.favs||[]).map(function(id){return INHALTE.find(function(i){return i.id===id;});}).filter(Boolean);
-  var days=(state.days||[]).length;var longest=(typeof computeLongest==='function')?computeLongest(state.days||[]):0;
-  var name=(state.name||'').trim();var jahr=heute.getFullYear();
-  var mnd='';
-  if(store.get('birthdate','')){var mc=document.createElement('canvas');mc.width=mc.height=900;f5pDraw(mc.getContext('2d'),900);mnd=mc.toDataURL('image/png');}
-  var moodDots='';var mk=Object.keys(state.moods||{}).sort();
-  var MC=['#8a94c8','#9d89c2','#c2a14e','#8fc1a0','#7fa98c'];
-  mk.forEach(function(k){var v=Math.max(0,Math.min(4,state.moods[k]));moodDots+='<span class="md" style="background:'+MC[v]+'" title="'+k+'"></span>';});
-  function fd(ts){return new Date(ts).toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});}
-  var doc='<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Mein Seelenraum · Jahrbuch</title><style>'
-   +'@page{size:A4;margin:16mm}body{font-family:Georgia,serif;color:#3b333f;line-height:1.7;margin:0}'
-   +'.cover{height:95vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;page-break-after:always}'
-   +'.cover img{width:62mm;border-radius:50%;box-shadow:0 8px 40px rgba(80,60,120,.3);margin-bottom:10mm}'
-   +'.brand{font-size:11px;letter-spacing:6px;color:#b08d57;font-family:Arial}.cover h1{font-weight:normal;font-size:34px;margin:6mm 0 2mm}'
-   +'.cover .sub{font-style:italic;color:#6f6678}'
-   +'h2{font-weight:normal;font-size:24px;border-bottom:1px solid #ece2d9;padding-bottom:3mm;margin:12mm 0 6mm;color:#6f5d8e}'
-   +'.stats{display:flex;gap:8mm;text-align:center;margin:8mm 0}.stats div{flex:1;border:1px solid #ece2d9;border-radius:4mm;padding:6mm 2mm}'
-   +'.stats b{display:block;font-size:26px;color:#6f5d8e;font-weight:normal}.stats span{font-family:Arial;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#9a90a2}'
-   +'.md{display:inline-block;width:9px;height:9px;border-radius:50%;margin:1.5px}'
-   +'.entry{margin:0 0 8mm;padding:5mm 6mm;border:1px solid #ece2d9;border-radius:4mm;page-break-inside:avoid}'
-   +'.entry .d{font-family:Arial;font-size:10px;letter-spacing:1px;color:#9a90a2}'
-   +'.entry h3{font-weight:normal;font-size:16px;margin:1mm 0}.entry .a{font-style:italic;color:#8a76a8;font-size:13px;margin-bottom:2mm}'
-   +'.entry p{white-space:pre-wrap;margin:0;font-size:13.5px}'
-   +'.fav{font-style:italic;color:#6f5d8e;margin:3mm 0;font-size:15px}.fav small{display:block;font-style:normal;font-family:Arial;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#b08d57;margin-bottom:1mm}'
-   +'.fin{text-align:center;margin-top:16mm;page-break-inside:avoid}.fin img{width:34mm;border-radius:50%;margin-bottom:4mm}'
-   +'.noprint{position:fixed;top:10px;right:10px;font-family:Arial;padding:12px 22px;background:#8a76a8;color:#fff;border:none;border-radius:30px;cursor:pointer;font-size:14px}'
-   +'@media print{.noprint{display:none}}'
-   +'</style></head><body>'
-   +'<button class="noprint" onclick="window.print()">Drucken / Als PDF sichern</button>'
-   +'<div class="cover">'+(mnd?'<img src="'+mnd+'">':'')+'<div class="brand">S E E L E N R A U M</div><h1>'+(name?escHtml(name)+'s ':'Mein ')+'Seelen-Jahrbuch</h1><div class="sub">'+jahr+' · eine Sammlung deiner Rückkehr zu dir</div></div>'
-   +'<h2>Dein Weg in Zahlen</h2><div class="stats"><div><b>'+days+'</b><span>Praxis-Tage</span></div><div><b>'+longest+'</b><span>Längste Serie</span></div><div><b>'+entries.length+'</b><span>Einträge</span></div><div><b>'+favs.length+'</b><span>Herzens-Impulse</span></div></div>'
-   +(moodDots?'<h2>Deine Stimmungs-Landschaft</h2><div>'+moodDots+'</div>':'')
-   +(favs.length?'<h2>Worte, die dich getragen haben</h2>'+favs.map(function(f){return '<div class="fav"><small>'+escHtml(f.thema)+'</small>„'+escHtml(f.affirmation)+'"</div>';}).join(''):'')
-   +(entries.length?'<h2>Deine Einträge</h2>'+entries.map(function(e){return '<div class="entry"><div class="d">'+fd(e.ts)+' · '+escHtml(e.thema)+'</div><h3>'+escHtml(e.titel)+'</h3>'+(e.aff?'<div class="a">„'+escHtml(e.aff)+'"</div>':'')+'<p>'+escHtml(e.text)+'</p></div>';}).join(''):'<h2>Deine Einträge</h2><p style="color:#9a90a2;font-style:italic">Dieses Buch wartet noch auf deine Worte.</p>')
-   +'<div class="fin">'+(mnd?'<img src="'+mnd+'">':'')+'<div class="brand">S E E L E N R A U M</div><p style="font-style:italic;color:#6f6678">Was du hier liest, hast du dir selbst geschenkt.<br>Kehre wieder. ✦</p></div>'
-   +'</body></html>';
-  var win=window.open('about:blank','_blank');
-  if(!win){toast('Bitte Pop-ups für diese Seite erlauben');return;}
-  win.document.write(doc);win.document.close();};
-
-/* ---------- Abendtor ---------- */
-var f5pT=null;
-function f5pClearT(){if(f5pT){clearTimeout(f5pT);f5pT=null;}}
-function f5pStage(){return document.getElementById('f5pStage');}
-window.closeAbendtor=function(){f5pClearT();var o=document.getElementById('f5pOv');
-  if(o){o.style.transition='opacity .6s';o.style.opacity='0';setTimeout(function(){o.remove();},600);}};
-window.openAbendtor=function(){
-  if(document.getElementById('f5pOv'))return;
-  var ov=document.createElement('div');ov.id='f5pOv';ov.className='f5p-ov';
-  ov.innerHTML='<button class="f5p-x" onclick="closeAbendtor()" aria-label="Schließen">✕</button><div class="f5p-stage" id="f5pStage"></div>';
-  document.body.appendChild(ov);f5pStep(0);};
-window.f5pStep=function(n){
-  f5pClearT();var st=f5pStage();if(!st)return;
-  if(n===0){st.innerHTML='<div class="f5p-he">Abendtor</div><h2>Der Tag neigt sich.</h2><p>Drei ruhige Minuten, um ihn in Würde zu schließen.<br>Nur du und die Nacht.</p><button class="f5p-btn" onclick="f5pStep(1)">Eintreten ✦</button>';}
-  else if(n===1){st.innerHTML='<div class="f5p-he">Erster Schritt</div><h2>Atme mit dem Licht</h2><div class="f5p-orb" id="f5pOrb"></div><div class="f5p-word" id="f5pWord">Bereit …</div><button class="f5p-btn ghost" onclick="f5pStep(2)">Weiter</button>';
-    var cyc=0;var breathe=function(){var orb=document.getElementById('f5pOrb'),w=document.getElementById('f5pWord');if(!orb)return;
-      if(cyc>=3){f5pStep(2);return;}
-      w.textContent='Einatmen …';orb.style.transition='transform 4s ease-in-out, box-shadow 4s ease-in-out';orb.style.transform='scale(1.45)';orb.style.boxShadow='0 0 110px rgba(150,125,225,.8)';
-      f5pT=setTimeout(function(){var o2=document.getElementById('f5pOrb'),w2=document.getElementById('f5pWord');if(!o2)return;
-        w2.textContent='Ausatmen …';o2.style.transition='transform 6s ease-in-out, box-shadow 6s ease-in-out';o2.style.transform='scale(1)';o2.style.boxShadow='0 0 70px rgba(150,125,225,.5)';
-        cyc++;f5pT=setTimeout(breathe,6200);},4200);};
-    f5pT=setTimeout(breathe,900);}
-  else if(n===2){st.innerHTML='<div class="f5p-he">Zweiter Schritt</div><h2>Was darfst du heute ablegen?</h2><p style="font-size:13px;color:#9d93b8">Es wird nirgends gespeichert. Es darf einfach gehen.</p><input class="f5p-in" id="f5pRel" maxlength="120" placeholder="ein Gedanke, eine Sorge, ein Name …"><button class="f5p-btn" onclick="f5pRelease()">Loslassen</button><button class="f5p-skip" onclick="f5pStep(3)">nichts heute – weiter</button>';
-    setTimeout(function(){var el=document.getElementById('f5pRel');if(el)el.focus();},150);}
-  else if(n===3){st.innerHTML='<div class="f5p-he">Dritter Schritt</div><h2>Wofür bist du still dankbar?</h2><p style="font-size:13px;color:#9d93b8">Dieser Satz wandert in dein Tagebuch.</p><input class="f5p-in" id="f5pThx" maxlength="160" placeholder="heute bin ich dankbar für …"><button class="f5p-btn" onclick="f5pThanks()">Bewahren ✦</button><button class="f5p-skip" onclick="f5pStep(4)">überspringen</button>';
-    setTimeout(function(){var el=document.getElementById('f5pThx');if(el)el.focus();},150);}
-  else if(n===4){
-    store.set('lastAbendtor',todayKey);
-    var chip=document.getElementById('f5pAbend');if(chip)chip.remove();
-    st.innerHTML='<div class="f5p-he">Das Tor schließt sich</div><h2>Die Nacht gehört dir.</h2><canvas class="f5p-seal" id="f5pSeal" width="360" height="360" style="width:180px;height:180px"></canvas><p>Gut gemacht. Was heute war, darf ruhen.<br>Morgen beginnt weich.</p><button class="f5p-btn" onclick="closeAbendtor()">Gute Nacht ✦</button>';
-    var sc=document.getElementById('f5pSeal');if(sc)f5pDraw(sc.getContext('2d'),360);
-    try{markPractice('Abend geschlossen ✦');}catch(e){}}
-};
-window.f5pRelease=function(){
-  var el=document.getElementById('f5pRel');var v=el?el.value.trim():'';
-  if(!v){f5pStep(3);return;}
-  var r=el.getBoundingClientRect();
-  var fl=document.createElement('div');fl.className='f5p-release';fl.textContent=v;
-  fl.style.left='50%';fl.style.top=r.top+'px';fl.style.transform='translateX(-50%)';
-  document.body.appendChild(fl);el.value='';el.style.opacity='.3';
-  try{fl.animate([
-    {transform:'translateX(-50%) translateY(0)',opacity:1,letterSpacing:'0px',filter:'blur(0)'},
-    {transform:'translateX(-50%) translateY(-150px)',opacity:0,letterSpacing:'12px',filter:'blur(3px)'}
-  ],{duration:REDUCED?10:2400,easing:'ease-out',fill:'forwards'});}catch(e){}
-  if(!REDUCED)for(var i=0;i<16;i++)(function(i){setTimeout(function(){
-    var s=document.createElement('span');s.className='f5-spark';s.textContent=['✦','✧','·'][i%3];
-    s.style.left=(window.innerWidth/2+(Math.random()*160-80))+'px';
-    s.style.top=(r.top-Math.random()*120)+'px';s.style.color='#cdb9ee';
-    document.body.appendChild(s);
-    try{s.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-60px)'}],{duration:900,easing:'ease-out',fill:'forwards'});}catch(e){}
-    setTimeout(function(){s.remove();},1000);},i*90);})(i);
-  setTimeout(function(){fl.remove();f5pStep(3);},REDUCED?150:2300);};
-window.f5pThanks=function(){
-  var el=document.getElementById('f5pThx');var v=el?el.value.trim():'';
-  if(v){state.freejournal=state.freejournal||[];
-    state.freejournal.push({id:'fj'+Date.now(),ts:Date.now(),prompt:'Abendtor · Dankbarkeit',text:v});
-    store.set('freejournal',state.freejournal);}
-  f5pStep(4);};
-
-/* ---------- Einstiege: Heute-Chip (abends) + Mein-Weg-Karte ---------- */
-function f5pDecorate(v){
-  var app=document.getElementById('app');if(!app)return;
-  var view=app.querySelector('.view')||app;
-  if(v==='heute'){
-    var done=store.get('lastAbendtor','')===todayKey;
-    var evening=new Date().getHours()>=17;
-    if(evening&&!done&&!document.getElementById('f5pAbend')){
-      var el=document.createElement('div');el.id='f5pAbend';el.className='f5p-chip';
-      el.innerHTML='<span><span class="fc-l">Abendritual</span><br>☾ Das Abendtor ist geöffnet</span><span style="font-size:20px;color:#d8b87e">→</span>';
-      el.addEventListener('click',openAbendtor);
-      view.insertBefore(el,view.children[1]||null);}
-  }
-  if(v==='weg'&&!document.getElementById('f5pWeg')&&store.get('birthdate','')){
-    var c=document.createElement('div');c.id='f5pWeg';c.className='card';c.style.cssText='display:flex;align-items:center;gap:18px;cursor:pointer';
-    c.innerHTML='<canvas id="f5pMini" width="220" height="220" style="width:86px;height:86px;border-radius:50%;flex:none;box-shadow:var(--shadow-sm)"></canvas><div style="flex:1"><div class="block-label" style="margin:0 0 2px">Dein Seelen-Mandala</div><div style="font-size:15px;color:var(--ink-soft)">Dein persönliches Zeichen – als Wallpaper &amp; Meditations-Fokus.</div></div><span style="font-size:20px;color:var(--accent-deep)">→</span>';
-    c.addEventListener('click',function(){render('mandala');});
-    var wk=document.getElementById('f5Week');
-    if(wk&&wk.parentNode)wk.parentNode.insertBefore(c,wk.nextSibling);
-    else view.insertBefore(c,view.children[1]||null);
-    var mini=document.getElementById('f5pMini');if(mini)f5pDraw(mini.getContext('2d'),220);}
-  if(v==='mandala')f5pPaint('f5pCanvas');
-}
-var _rp=window.render;window.render=function(v){_rp(v);
-  var run=function(){try{f5pDecorate(v);}catch(e){}};
-  run();setTimeout(run,150);setTimeout(run,550);};
-
-/* ---------- Seelen-Sicherung: Export / Import (Datenverlust-Schutz) ---------- */
-window.f5pBackup=function(){
-  var data={};for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
-    if(k&&k.indexOf('sr_')===0)data[k]=localStorage.getItem(k);}
-  var blob=new Blob([JSON.stringify({app:'seelenraum',version:1,ts:Date.now(),data:data},null,1)],{type:'application/json'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='seelenraum-sicherung-'+todayKey+'.json';document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},400);
-  toast('Sicherung gespeichert ✦');};
-window.f5pRestoreFile=function(inp){
-  var f=inp.files&&inp.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(){try{
-    var j=JSON.parse(r.result);
-    if(!j||j.app!=='seelenraum'||!j.data){toast('Keine gültige Sicherung');return;}
-    if(!confirm('Sicherung einspielen? Deine aktuellen Daten auf diesem Gerät werden dabei ersetzt.'))return;
-    Object.keys(j.data).forEach(function(k){if(k.indexOf('sr_')===0)localStorage.setItem(k,j.data[k]);});
-    location.reload();
-  }catch(e){toast('Datei konnte nicht gelesen werden');}};
-  r.readAsText(f);};
-var _os=window.openSettings;window.openSettings=function(){_os();
-  setTimeout(function(){
-    var m=document.querySelector('.overlay .modal');
-    if(!m||document.getElementById('f5pBk'))return;
-    var d=document.createElement('div');d.id='f5pBk';
-    d.innerHTML='<div style="border-top:1px solid var(--line);margin:16px 0 12px"></div>'
-      +'<div class="block-label" style="margin:0 0 8px">Seelen-Sicherung</div>'
-      +'<div style="font-size:13px;color:var(--ink-soft);margin-bottom:10px">Dein Tagebuch lebt nur auf diesem Gerät. Sichere es regelmäßig als Datei – und spiele es auf einem neuen Gerät wieder ein.</div>'
-      +'<button class="btn" style="width:100%;margin-bottom:8px" onclick="f5pBackup()">Sicherung herunterladen ⇩</button>'
-      +'<label class="btn" style="width:100%;display:block;box-sizing:border-box;cursor:pointer;text-align:center">Sicherung einspielen ⇪<input type="file" accept="application/json,.json" style="display:none" onchange="f5pRestoreFile(this)"></label>';
-    m.appendChild(d);
-  },80);};
-
-try{f5pDecorate(current);}catch(e){}
+updPb();updPill();heroDots();
 })();
 </script>
-
-
-
-</body></html>
+</body>
+</html>
