@@ -165,6 +165,7 @@
       <a href="#vorschau" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Vorschau</a>
       <a href="#preise" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Preise</a>
       <a href="#faq" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Fragen</a>
+      <a href="#" onclick="openMemberLogin(event)" style="font-size:13.5px;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.02em">Login</a>
       <a href="#preise" style="font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--night2);background:var(--gold-l);padding:10px 20px;border-radius:999px;text-decoration:none" style-hover="background:#e7caa0">Mitglied werden</a>
     </nav>
   </header>
@@ -183,6 +184,7 @@
         <a href="#vorschau" style="display:inline-flex;align-items:center;font-size:14.5px;font-weight:500;letter-spacing:.02em;color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:16px 30px;text-decoration:none;transition:all .25s cubic-bezier(.16,1,.3,1)" style-hover="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.7)">Erst hineinspüren</a>
       </div>
       <div style="margin-top:30px;font-size:12.5px;letter-spacing:.06em;color:rgba(255,255,255,.6)">Jeden Monat neu &nbsp;·&nbsp; Jederzeit kündbar &nbsp;·&nbsp; Handy &amp; Computer</div>
+      <div style="margin-top:14px;font-size:12.5px;letter-spacing:.02em;color:rgba(255,255,255,.55)">Schon Mitglied oder Zugangscode erhalten? <a href="#" onclick="openMemberLogin(event)" style="color:var(--gold-l);text-decoration:underline">Hier einloggen</a></div>
     </div>
   </section>
 
@@ -569,5 +571,51 @@ class Component extends DCLogic {
     }
   },true);
 })();
+</script>
+<script>
+/* Mitglieder-Login (E-Mail oder Zugangscode) -> Weiterleitung zur App */
+var SR_GATE_URL = "https://spring-sound-7125.service-vpstore.workers.dev";
+function openMemberLogin(e){
+  if(e && e.preventDefault) e.preventDefault();
+  if(document.getElementById('srLoginOv')) return;
+  var ov=document.createElement('div');
+  ov.id='srLoginOv';
+  ov.style.cssText="position:fixed;inset:0;background:rgba(10,7,16,.68);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999";
+  ov.innerHTML = '<div style="background:#1a1426;border:1px solid rgba(255,255,255,.12);border-radius:22px;max-width:420px;width:100%;padding:34px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);font-family:\'DM Sans\',system-ui,-apple-system,sans-serif">'
+    + '<div style="font-size:14px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#fff;margin-bottom:14px">Seelen<span style="color:#d8b87e">raum</span></div>'
+    + '<h2 style="font-family:\'Instrument Serif\',Georgia,serif;font-weight:400;font-size:26px;color:#fff;margin:0 0 10px">Willkommen zurück</h2>'
+    + '<p style="color:rgba(255,255,255,.7);font-size:14.5px;margin:0 0 18px;line-height:1.5">Gib die E-Mail ein, mit der du dein Abo abgeschlossen hast, oder deinen Zugangscode.</p>'
+    + '<input id="srLoginInput" type="text" placeholder="deine@email.de oder Zugangscode" autocomplete="off" style="width:100%;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:15px;margin-bottom:10px;font-family:inherit;text-align:center;box-sizing:border-box">'
+    + '<div id="srLoginMsg" style="color:#d8b87e;font-size:13px;min-height:18px;margin-bottom:10px"></div>'
+    + '<button onclick="submitMemberLogin()" style="width:100%;font-size:14.5px;font-weight:600;letter-spacing:.02em;color:#120d1c;background:#d8b87e;border:none;border-radius:999px;padding:14px;cursor:pointer">Freischalten</button>'
+    + '<button onclick="document.getElementById(\'srLoginOv\').remove()" style="margin-top:14px;background:none;border:none;color:rgba(255,255,255,.5);font-size:13px;cursor:pointer;font-family:inherit">Abbrechen</button>'
+    + '</div>';
+  document.body.appendChild(ov);
+  ov.addEventListener('click', function(ev){ if(ev.target===ov) ov.remove(); });
+  setTimeout(function(){
+    var inp=document.getElementById('srLoginInput');
+    if(inp){ inp.focus(); inp.addEventListener('keydown', function(k){ if(k.key==='Enter') submitMemberLogin(); }); }
+  },80);
+}
+function srLoginMsg(t){ var m=document.getElementById('srLoginMsg'); if(m) m.textContent=t; }
+async function submitMemberLogin(){
+  var inp=document.getElementById('srLoginInput');
+  var val=(inp?inp.value:'').trim();
+  if(!val){ srLoginMsg('Bitte E-Mail oder Zugangscode eingeben'); return; }
+  srLoginMsg('Prüfe …');
+  try{
+    var r = await fetch(SR_GATE_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: val})});
+    var d = await r.json();
+    if(d && d.access){
+      localStorage.setItem('sr_access', JSON.stringify({email: val.toLowerCase(), ts: Date.now()}));
+      srLoginMsg('Willkommen! Du wirst weitergeleitet …');
+      setTimeout(function(){ window.location.href = 'seelenraum-app.html'; }, 500);
+    } else {
+      srLoginMsg('Kein aktives Abo oder ungültiger Code gefunden.');
+    }
+  } catch(err){
+    srLoginMsg('Verbindungsfehler – bitte nochmal versuchen.');
+  }
+}
 </script>
 </body></html>
